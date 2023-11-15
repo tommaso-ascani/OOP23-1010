@@ -6,14 +6,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.GameView">
    <children>
-      <Button id="buttonPlay" fx:id="buttonPlay" layoutX="263.0" layoutY="243.0" mnemonicParsing="false" text="Button" />
+      <Button id="testPlay" fx:id="testPlay" layoutX="263.0" layoutY="243.0" mnemonicParsing="false" text="Button" onMouseClicked="#switchToHome" />
       <Label id="titleLabel" fx:id="titleLabel" layoutX="291.0" layoutY="156.0" text="Label" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.0" />
       <Button id="buttonShop" fx:id="buttonShop" layoutX="451.0" layoutY="243.0" mnemonicParsing="false" text="Button" />
       <ImageView id="imageSettings" fx:id="imageSettings" fitHeight="42.0" fitWidth="42.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="imageButton" />
    </children>
    <stylesheets>
-      <URL value="@../styles/HomeViewStyle.css" />
+      <URL value="@../styles/GameViewStyle.css" />
    </stylesheets>
 </AnchorPane>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
+   <children>
+      <ImageView id="imageSettings" fx:id="imageSettings" fitHeight="63.0" fitWidth="63.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
+         <image>
+            <Image url="@../img/SettingsButton.png" />
+         </image></ImageView>
+      <ImageView id="imagePlay" fx:id="imagePlay" fitHeight="63.0" fitWidth="63.0" layoutX="259.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" styleClass="imagePlay">
+         <image>
+            <Image url="@../img/PlayButton.png" />
+         </image>
+      </ImageView>
+      <ImageView id="imageShop" fx:id="imageShop" fitHeight="63.0" fitWidth="63.0" layoutX="451.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" styleClass="imageShop">
+         <image>
+            <Image url="@../img/ShopButton.png" />
+         </image>
+      </ImageView>
+      <ImageView id="imageQuit" fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" layoutX="353.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit">
+         <image>
+            <Image url="@../img/QuitButton.png" />
+         </image>
+      </ImageView>
+      <ImageView id="imageTitle" fx:id="imageTitle" fitHeight="63.0" fitWidth="235.0" layoutX="284.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" styleClass="imageTitle">
+         <image>
+            <Image url="@../img/TitleLabel.png" />
+         </image>
+      </ImageView>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/HomeViewStyle.css" />
+   </stylesheets>
+</AnchorPane>
