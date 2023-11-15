@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.ShopView">
+   <children>
+      <Button id="buttonIndietro" fx:id="buttonIndietro" layoutX="571.0" layoutY="437.0" mnemonicParsing="false" text="Indietro" onMouseClicked="#switchToHomeView"/>
+      <Button id="buttonCompra" fx:id="buttonCompra" layoutX="304.0" layoutY="437.0" mnemonicParsing="false" text="Compra" />
+   </children>
+</AnchorPane>
