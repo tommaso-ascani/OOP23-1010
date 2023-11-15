@@ -2,6 +2,9 @@ package oop23_1010.utils;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,6 +17,8 @@ public class JsonUtils {
     }
 
     public static void saveData(final String filePath) throws IOException{
+        // TO-DO non crea la cartella config se non esiste
+        Files.createDirectories(Paths.get(DATA_PATH));
         try (FileWriter file = new FileWriter(DATA_PATH + filePath + ".json")) {
             JSONObject json1 = new JSONObject();
             JSONObject json2 = new JSONObject();
