@@ -9,23 +9,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.SettingsView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.SettingsView">
    <children>
-      <Button layoutX="252.0" layoutY="334.0" mnemonicParsing="false" text="Applica" AnchorPane.leftAnchor="268.0" />
-      <Button layoutX="436.0" layoutY="334.0" mnemonicParsing="false" text="Indietro" AnchorPane.rightAnchor="268.0" />
-      <Slider blockIncrement="2.0" layoutX="384.0" layoutY="204.0" prefHeight="39.0" prefWidth="223.0" snapToTicks="true" AnchorPane.topAnchor="204.0">
+      <Button id="buttonApplica" fx:id="buttonApplica" layoutX="252.0" layoutY="334.0" mnemonicParsing="false" text="Applica" AnchorPane.leftAnchor="268.0" />
+      <Button id="buttonIndietro" fx:id="buttonIndietro" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" AnchorPane.rightAnchor="268.0" />
+      <Slider blockIncrement="2.0" layoutX="469.0" layoutY="204.0" prefHeight="39.0" prefWidth="223.0" snapToTicks="true" AnchorPane.rightAnchor="268.0">
          <cursor>
             <Cursor fx:constant="H_RESIZE" />
          </cursor>
       </Slider>
-      <Label layoutX="171.0" layoutY="171.0" text="Master Volume" AnchorPane.topAnchor="215.0" />
-      <Label layoutX="332.0" layoutY="64.0" text="SETTINGS" textAlignment="CENTER">
+      <Label layoutX="205.0" layoutY="215.0" text="Master Volume" AnchorPane.leftAnchor="200.0" />
+      <Label layoutX="428.0" layoutY="63.0" text="SETTINGS" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="607.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="775.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0">
          <image>
             <Image url="@../img/NoAudioButton.png" />
          </image>

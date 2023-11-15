@@ -6,13 +6,15 @@ public enum ViewType {
 
     SETTINGS("SettingsView"),
 
+    SHOP("ShopView"),
+
     GAME("GameView");
 
     private static final String PREFIX = "layouts/";
     private static final String EXTENSION = ".fxml";
     private String file;
-    
-    ViewType(final String s){
+
+    ViewType(final String s) {
         this.file = s;
     }
 

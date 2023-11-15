@@ -51,9 +51,9 @@ public class ViewSwitcher {
         stage.getScene().getStylesheets().clear();
         View view = loader.getController();
 
-        stage.setMinHeight(600);
-        stage.setMinWidth(600);
-        
+        stage.setMinHeight(540);
+        stage.setMinWidth(960);
+
         view.setStage(stage);
         stage.setScene(newScene);
         return view;
