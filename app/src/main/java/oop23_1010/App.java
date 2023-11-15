@@ -6,5 +6,6 @@ import oop23_1010.controllers.Startup;
 public class App {    
     public static void main(String[] args) {
         Application.launch(Startup.class, args);
+        // JsonUtils tommaso = new JsonUtils();
     }
 }

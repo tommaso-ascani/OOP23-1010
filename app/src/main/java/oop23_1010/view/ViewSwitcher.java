@@ -3,7 +3,6 @@ package oop23_1010.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 import oop23_1010.controllers.Controller;
@@ -70,9 +69,6 @@ public class ViewSwitcher {
         currentView.setController(this.mainController);
         currentView.setStage(stage);
         currentView.init();
-        // TO-DO Change img path to general img class loader
-        stage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("img/icon.jpg")));
-        stage.setTitle("1010!");
         stage.show();
     }
 }
