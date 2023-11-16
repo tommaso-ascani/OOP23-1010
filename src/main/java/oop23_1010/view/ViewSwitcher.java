@@ -40,6 +40,7 @@ public class ViewSwitcher {
 
         try {
             root = loader.load();
+            System.out.println("corretto LOADER");
         } catch (IOException e) {
             e.printStackTrace();
         }

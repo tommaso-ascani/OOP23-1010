@@ -12,11 +12,11 @@ public class JsonUtils {
 
     private static final String DATA_PATH = "src/main/resources/config/";
 
-    public static void loadData(){
+    public static void loadData() {
 
     }
 
-    public static void saveData(final String filePath) throws IOException{
+    public static void saveData(final String filePath) throws IOException {
         // TO-DO non crea la cartella config se non esiste
         Files.createDirectories(Paths.get(DATA_PATH));
         try (FileWriter file = new FileWriter(DATA_PATH + filePath + ".json")) {
