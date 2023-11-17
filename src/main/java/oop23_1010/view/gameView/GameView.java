@@ -4,59 +4,75 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import oop23_1010.view.ViewImpl;
 
 public class GameView extends ViewImpl {
 
     private int gridSize;
 
-    @FXML
-    private VBox underVBox;
+    private int gridPaneWidthHeight;
+
+    private int gridCellSize;
+
+    private final int GAP_GRID_PANE = 5;
 
     @FXML
-    private AnchorPane upAPane;
+    private BorderPane mainPane;
 
     @FXML
-    private AnchorPane leftAPane;
+    private Pane leftPane;
 
     @FXML
     private GridPane gridPane;
 
     @FXML
-    private AnchorPane rightAPane;
+    private Pane rightPane;
 
     @FXML
-    private AnchorPane bottomAPane;
+    private Pane bottomPane;
 
     @FXML
-    private HBox hbox;
+    private Pane upperPane;
 
     @Override
     public void init() {
         this.gridSize = HomeView.getGridSize();
-        this.underVBox.setStyle("-fx-background-color: black");
-        this.gridPane.setStyle("-fx-vgap: 5; -fx-hgap: 5");
+        if (this.gridSize > 15) {
+            this.gridCellSize = 20;
+        } else {
+            this.gridCellSize = 25;
+        }
+
+        this.gridPane.setStyle("-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE);
         for (int ColumnIndex = 0; ColumnIndex < this.gridSize; ColumnIndex++) {
             for (int RowIndex = 0; RowIndex < this.gridSize; RowIndex++) {
                 AnchorPane aPane = new AnchorPane();
-                aPane.setPrefHeight(25);
-                aPane.setPrefWidth(25);
+                aPane.setPrefHeight(gridCellSize);
+                aPane.setPrefWidth(gridCellSize);
                 aPane.setStyle(
                         "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
 
                 this.gridPane.add(aPane, ColumnIndex, RowIndex);
             }
         }
-        AnchorPane.setTopAnchor(this.underVBox, 20.0);
         ObservableList<Node> nodi = this.gridPane.getChildren();
+        this.gridPaneWidthHeight = (this.gridSize * gridCellSize) + (this.gridSize - 1) * GAP_GRID_PANE;
+        this.upperPane.setPrefSize(1280, ((720 - this.gridPaneWidthHeight) / 2));
+        this.upperPane.setStyle("-fx-background-color: green");
+        this.bottomPane.setPrefSize(1280, ((720 - this.gridPaneWidthHeight) / 2));
+        this.bottomPane.setStyle("-fx-background-color: blue");
+        this.leftPane.setPrefSize(((1280 - this.gridPaneWidthHeight) / 2), 720);
+        this.leftPane.setStyle("-fx-background-color: yellow");
+        this.rightPane.setPrefSize(((1280 - this.gridPaneWidthHeight) / 2), 720);
+        this.rightPane.setStyle("-fx-background-color: red");
+
+        this.gridPane.relocate((((960 - this.gridPaneWidthHeight) / 2)),
+                (((540 - this.gridPaneWidthHeight) / 2)));
+
         System.out.println(nodi.size());
-        // for (Node node : nodi) {
-        // System.out.println(GridPane.getRowIndex(node));
-        // System.out.println(GridPane.getColumnIndex(node));
-        // node.setStyle("-fx-background-color: brown;");
-        // }
+        System.out.println(this.gridPaneWidthHeight);
     }
 }

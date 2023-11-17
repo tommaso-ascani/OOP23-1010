@@ -40,7 +40,6 @@ public class ViewSwitcher {
 
         try {
             root = loader.load();
-            System.out.println("corretto LOADER");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,8 +50,8 @@ public class ViewSwitcher {
         stage.getScene().getStylesheets().clear();
         View view = loader.getController();
 
-        stage.setMinHeight(540);
-        stage.setMinWidth(960);
+        stage.setMinHeight(720);
+        stage.setMinWidth(1280);
 
         view.setStage(stage);
         stage.setScene(newScene);

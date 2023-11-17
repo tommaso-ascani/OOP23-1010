@@ -3,6 +3,7 @@ package oop23_1010.view.gameView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
@@ -23,8 +24,12 @@ public class HomeView extends ViewImpl {
     @FXML
     private Slider sliderGridWidth;
 
+    @FXML
+    private AnchorPane mainPane;
+
     @Override
     public void init() {
+        this.mainPane.setPrefSize(960, 540);
         this.sliderGridWidth.setValue(10);
         this.sliderGridWidth.setMin(5);
         this.sliderGridWidth.setMax(20);

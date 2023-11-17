@@ -7,34 +7,34 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
+<AnchorPane id="mainPane" fx:id="mainPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
    <children>
       <ImageView id="imageSettings" fx:id="imageSettings" fitHeight="63.0" fitWidth="63.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#switchToSettingsView" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
          <image>
             <Image url="@../img/SettingsButton.png" />
          </image></ImageView>
-      <ImageView id="imagePlay" fx:id="imagePlay" fitHeight="63.0" fitWidth="63.0" layoutX="316.0" layoutY="252.0" onMouseClicked="#switchToPlayView" pickOnBounds="true" preserveRatio="true" styleClass="imagePlay">
+      <ImageView id="imagePlay" fx:id="imagePlay" fitHeight="63.0" fitWidth="63.0" layoutX="494.0" layoutY="312.0" onMouseClicked="#switchToPlayView" pickOnBounds="true" preserveRatio="true" styleClass="imagePlay">
          <image>
             <Image url="@../img/PlayButton.png" />
          </image>
       </ImageView>
-      <ImageView id="imageShop" fx:id="imageShop" fitHeight="63.0" fitWidth="63.0" layoutX="580.0" layoutY="252.0" onMouseClicked="#switchToShopView" pickOnBounds="true" preserveRatio="true" styleClass="imageShop">
+      <ImageView id="imageShop" fx:id="imageShop" fitHeight="63.0" fitWidth="63.0" layoutX="724.0" layoutY="312.0" onMouseClicked="#switchToShopView" pickOnBounds="true" preserveRatio="true" styleClass="imageShop">
          <image>
             <Image url="@../img/ShopButton.png" />
          </image>
       </ImageView>
-      <ImageView id="imageQuit" fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" layoutX="580.0" layoutY="348.0" onMouseClicked="#closeGame" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit">
+      <ImageView id="imageQuit" fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" layoutX="1203.0" layoutY="14.0" onMouseClicked="#closeGame" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit">
          <image>
             <Image url="@../img/QuitButton.png" />
          </image>
       </ImageView>
-      <ImageView id="imageTitle" fx:id="imageTitle" fitHeight="63.0" fitWidth="235.0" layoutX="382.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true" styleClass="imageTitle" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="379.5465087890625">
+      <ImageView id="imageTitle" fx:id="imageTitle" fitHeight="93.0" fitWidth="293.0" layoutX="494.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" styleClass="imageTitle" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="493.0">
          <image>
             <Image url="@../img/TitleLabel.png" />
          </image>
       </ImageView>
-      <Slider id="sliderGridWidth" fx:id="sliderGridWidth" layoutX="278.0" layoutY="380.0" snapToTicks="true" />
-      <Label layoutX="135.0" layoutY="379.0" text="Grandezza della griglia:" />
+      <Slider id="sliderGridWidth" fx:id="sliderGridWidth" layoutX="654.0" layoutY="448.0" snapToTicks="true" />
+      <Label layoutX="495.0" layoutY="447.0" text="Grandezza della griglia:" />
    </children>
    <stylesheets>
       <URL value="@../styles/HomeViewStyle.css" />
