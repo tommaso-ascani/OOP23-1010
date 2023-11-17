@@ -1,39 +1,33 @@
 package oop23_1010.utils;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class JsonUtils {
 
     private static final String DATA_PATH = "src/main/resources/config/";
 
-    public static void loadData() {
+    public static final String MATCH_SCORE = "matchScore";
+    public static final String MATCH_ON_GOING = "matchOnGoing";
 
+    public static Object loadData(String data) throws IOException {
+        String file = Files.readString(Paths.get(DATA_PATH + "match.json"));
+        JSONObject json = new JSONObject(file);
+        return json.get(data);
     }
 
-    public static void saveData(final String filePath) throws IOException {
-        // TO-DO non crea la cartella config se non esiste
+    public static void saveMatchData(final boolean matchOnGoing, final int matchScore) throws IOException {
+        // Create directory if doesn't exist
         Files.createDirectories(Paths.get(DATA_PATH));
-        try (FileWriter file = new FileWriter(DATA_PATH + filePath + ".json")) {
-            JSONObject json1 = new JSONObject();
-            JSONObject json2 = new JSONObject();
 
-            json1.put("prova1", "ciao1");
-            json1.put("prova1", "ciao1");
+        // Write match data as a json
+        JSONObject matchData = new JSONObject();
+        
+        matchData.put("matchOnGoing", matchOnGoing);
+        matchData.put("matchScore", matchScore);
 
-            json2.put("salto", json2);
-
-            JSONArray array = new JSONArray();
-            array.put(json2);
-
-            // file.write(array.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Files.writeString(Paths.get(DATA_PATH + "match.json"), matchData.toString(1));
     }
 }
