@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
@@ -16,7 +16,11 @@
       <Pane id="bottomPane" fx:id="bottomPane" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
-      <Pane id="upperPane" fx:id="upperPane" BorderPane.alignment="CENTER" />
+      <Pane id="upperPane" fx:id="upperPane" BorderPane.alignment="CENTER">
+         <children>
+            <Label id="labelCoin" fx:id="labelCoin" layoutX="812.0" text="Coins:" />
+            <Label id="labelScore" fx:id="labelScore" layoutX="562.0" text="Score:" />
+         </children></Pane>
    </top>
    <center>
       <GridPane id="gridPane" fx:id="gridPane" BorderPane.alignment="CENTER" />

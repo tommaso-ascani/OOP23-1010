@@ -3,6 +3,7 @@ package oop23_1010.view.gameView;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -37,6 +38,12 @@ public class GameView extends ViewImpl {
     @FXML
     private Pane upperPane;
 
+    @FXML
+    private Label labelCoin;
+
+    @FXML
+    private Label labelScore;
+
     @Override
     public void init() {
         this.gridSize = HomeView.getGridSize();
@@ -46,7 +53,9 @@ public class GameView extends ViewImpl {
             this.gridCellSize = 25;
         }
 
-        this.gridPane.setStyle("-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE);
+        this.gridPane.setStyle(
+                "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE
+                        + "; -fx-background-color: black; -fx-border-insets: 5; -fx-border-width: 5; -fx-border-color: black;");
         for (int ColumnIndex = 0; ColumnIndex < this.gridSize; ColumnIndex++) {
             for (int RowIndex = 0; RowIndex < this.gridSize; RowIndex++) {
                 AnchorPane aPane = new AnchorPane();
