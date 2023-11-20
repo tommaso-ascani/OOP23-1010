@@ -14,8 +14,8 @@ public enum ViewType {
     private static final String EXTENSION = ".fxml";
     private String file;
 
-    ViewType(final String s) {
-        this.file = s;
+    ViewType(final String string) {
+        this.file = string;
     }
 
     public String getPath() {
