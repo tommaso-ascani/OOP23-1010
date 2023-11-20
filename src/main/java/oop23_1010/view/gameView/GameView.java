@@ -1,15 +1,23 @@
 package oop23_1010.view.gameView;
 
+import com.github.javafaker.Color;
+
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -90,12 +98,13 @@ public class GameView extends ViewImpl {
                 aPane.setPrefWidth(gridCellSize);
                 aPane.setStyle(
                         "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
-                // aPane.setOnDragEntered(new EventHandler<Event>() {
-                // @Override
-                // public void handle(Event event) {
-                // System.out.println("event.getSource()");
-                // }
-                // });
+
+                // Bounds boundsInScene = aPane.localToScene(aPane.getBoundsInLocal());
+                // System.out.println("Min x: " + boundsInScene.getMinX());
+                // System.out.println("Min y: " + boundsInScene.getMinY());
+                // System.out.println("Max x: " + boundsInScene.getMaxX());
+                // System.out.println("Max y: " + boundsInScene.getMaxY());
+                // System.out.println(" ");
                 this.gridPane.add(aPane, ColumnIndex, RowIndex);
             }
         }
@@ -156,5 +165,14 @@ public class GameView extends ViewImpl {
                 this.downRightSpawn);
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
+
+        for (Node a : this.gridPane.getChildren()) {
+            Bounds boundsInScene = a.localToScene(a.getBoundsInLocal());
+            System.out.println("Min x: " + boundsInScene.getMinX());
+            System.out.println("Min y: " + boundsInScene.getMinY());
+            System.out.println("Max x: " + boundsInScene.getMaxX());
+            System.out.println("Max y: " + boundsInScene.getMaxY());
+            System.out.println(" ");
+        }
     }
 }
