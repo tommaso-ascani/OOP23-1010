@@ -52,6 +52,7 @@ public class ViewSwitcher {
 
         stage.setMinHeight(720);
         stage.setMinWidth(1280);
+        stage.setResizable(false);
 
         view.setStage(stage);
         stage.setScene(newScene);
