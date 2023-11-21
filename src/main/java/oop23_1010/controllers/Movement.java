@@ -20,8 +20,6 @@ public class Movement {
         node.setOnMousePressed(e -> {
             startX = e.getSceneX() - node.getTranslateX();
             startY = e.getSceneY() - node.getTranslateY();
-
-            System.out.println(node.getScene().getRoot().getChildrenUnmodifiable().get(0));
         });
 
         node.setOnMouseDragged(e -> {

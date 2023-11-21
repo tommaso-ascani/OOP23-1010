@@ -7,9 +7,9 @@ import javafx.scene.shape.Path;
 import oop23_1010.controllers.Movement;
 
 public class BlockGenerator {
-    
+
     public static Path generateBlock(BlockType type, int gridCellSize) {
-        switch(type) {
+        switch (type) {
             case BLOCK_1x1:
                 return classicBlock(1, 1, gridCellSize, "peru");
             case BLOCK_1x2:
@@ -49,7 +49,7 @@ public class BlockGenerator {
             case BLOCK_L_TOP_RIGHT_3X3:
                 break;
             default:
-                break;        
+                break;
         }
         return null;
     }
@@ -60,18 +60,20 @@ public class BlockGenerator {
         Integer x;
         Integer y;
 
-        for (x=0; x<width; x++) {
-            for (y=0; y<height; y++) {
+        for (x = 0; x < width; x++) {
+            for (y = 0; y < height; y++) {
                 path.getElements().addAll(
-                    new MoveTo((x*(gridCellSize+3)) + gridCellSize, (y*(gridCellSize+3)) + gridCellSize),
+                        new MoveTo((x * (gridCellSize + 3)) + gridCellSize, (y * (gridCellSize + 3)) + gridCellSize),
 
-                    new LineTo((x*(gridCellSize+3)) + gridCellSize, (y*(gridCellSize+3)) + gridCellSize*2),
-                    new LineTo((x*(gridCellSize+3)) + gridCellSize*2, (y*(gridCellSize+3)) + gridCellSize*2),
-                    new LineTo((x*(gridCellSize+3)) + gridCellSize*2, (y*(gridCellSize+3)) + gridCellSize),
-                    new LineTo((x*(gridCellSize+3)) + gridCellSize, (y*(gridCellSize+3)) + gridCellSize),
+                        new LineTo((x * (gridCellSize + 3)) + gridCellSize,
+                                (y * (gridCellSize + 3)) + gridCellSize * 2),
+                        new LineTo((x * (gridCellSize + 3)) + gridCellSize * 2,
+                                (y * (gridCellSize + 3)) + gridCellSize * 2),
+                        new LineTo((x * (gridCellSize + 3)) + gridCellSize * 2,
+                                (y * (gridCellSize + 3)) + gridCellSize),
+                        new LineTo((x * (gridCellSize + 3)) + gridCellSize, (y * (gridCellSize + 3)) + gridCellSize),
 
-                    new ClosePath()
-                );
+                        new ClosePath());
             }
         }
         path.setStyle("-fx-fill: " + color);

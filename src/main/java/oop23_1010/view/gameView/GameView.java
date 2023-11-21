@@ -1,13 +1,16 @@
 package oop23_1010.view.gameView;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Path;
 import oop23_1010.utils.BlockGenerator;
 import oop23_1010.utils.BlockType;
 import oop23_1010.view.ViewImpl;
@@ -58,8 +61,6 @@ public class GameView extends ViewImpl {
     @FXML
     private Label labelScore;
 
-    // private BlockFactory FB;
-
     @Override
     public void init() {
         this.gridSize = HomeView.getGridSize();
@@ -86,9 +87,6 @@ public class GameView extends ViewImpl {
                 aPane.setStyle(
                         "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
 
-                aPane.setOnMouseReleased(e -> {
-
-                });
                 this.gridPane.add(aPane, ColumnIndex, RowIndex);
             }
         }
@@ -132,23 +130,32 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        this.upLeftSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_2x1, gridCellSize));
+        Path block1 = BlockGenerator.generateBlock(BlockType.BLOCK_2x1, gridCellSize);
+
+        this.upLeftSpawn.getChildren().addAll(block1);
         this.upRightSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_1x3, gridCellSize));
         this.downRightSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_2x2, gridCellSize));
         this.downLeftSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_1x5, gridCellSize));
 
         Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
                 this.downRightSpawn);
+
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
 
-        // for (Node a : this.gridPane.getChildren()) {
-        // Bounds boundsInScene = a.localToScene(a.getBoundsInLocal());
-        // System.out.println("Min x: " + boundsInScene.getMinX());
-        // System.out.println("Min y: " + boundsInScene.getMinY());
-        // System.out.println("Max x: " + boundsInScene.getMaxX());
-        // System.out.println("Max y: " + boundsInScene.getMaxY());
-        // System.out.println(" ");
-        // }
+        block1.setOnMouseReleased(e -> {
+            Bounds boundsInScene = block1.localToScene(block1.getBoundsInLocal());
+            for (Node node : this.gridPane.getChildren()) {
+                if ((node.localToScene(node.getBoundsInLocal()).getMaxX() > boundsInScene.getMinX()
+                        && boundsInScene.getMinX() > node.localToScene(node.getBoundsInLocal()).getMinX()) &&
+                        (node.localToScene(node.getBoundsInLocal()).getMaxY() > boundsInScene.getMinY()
+                                && boundsInScene.getMinY() > node.localToScene(node.getBoundsInLocal()).getMinY())) {
+
+                    System.out.println("ooooooooooo");
+                    node.setStyle("-fx-background-color: orange");
+                }
+            }
+        });
+
     }
 }
