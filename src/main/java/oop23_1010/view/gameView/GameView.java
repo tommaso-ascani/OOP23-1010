@@ -85,6 +85,10 @@ public class GameView extends ViewImpl {
                 aPane.setPrefWidth(gridCellSize);
                 aPane.setStyle(
                         "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
+
+                aPane.setOnMouseReleased(e -> {
+
+                });
                 this.gridPane.add(aPane, ColumnIndex, RowIndex);
             }
         }
@@ -132,19 +136,19 @@ public class GameView extends ViewImpl {
         this.upRightSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_1x3, gridCellSize));
         this.downRightSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_2x2, gridCellSize));
         this.downLeftSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_1x5, gridCellSize));
-        
+
         Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
                 this.downRightSpawn);
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
 
         // for (Node a : this.gridPane.getChildren()) {
-        //     Bounds boundsInScene = a.localToScene(a.getBoundsInLocal());
-        //     System.out.println("Min x: " + boundsInScene.getMinX());
-        //     System.out.println("Min y: " + boundsInScene.getMinY());
-        //     System.out.println("Max x: " + boundsInScene.getMaxX());
-        //     System.out.println("Max y: " + boundsInScene.getMaxY());
-        //     System.out.println(" ");
+        // Bounds boundsInScene = a.localToScene(a.getBoundsInLocal());
+        // System.out.println("Min x: " + boundsInScene.getMinX());
+        // System.out.println("Min y: " + boundsInScene.getMinY());
+        // System.out.println("Max x: " + boundsInScene.getMaxX());
+        // System.out.println("Max y: " + boundsInScene.getMaxY());
+        // System.out.println(" ");
         // }
     }
 }
