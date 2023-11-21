@@ -1,7 +1,6 @@
 package oop23_1010.controllers;
 
 import javafx.geometry.Bounds;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 
 public class Movement {

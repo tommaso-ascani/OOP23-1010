@@ -1,10 +1,7 @@
 package oop23_1010.utils;
 
 import java.util.ArrayList;
-
-import javafx.scene.paint.Color;
 import javafx.scene.shape.ClosePath;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
