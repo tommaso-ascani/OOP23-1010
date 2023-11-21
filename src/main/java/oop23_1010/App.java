@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        // Application.launch(Startup.class, args);
-        BlockGenerator.generateBlock(BlockType.BLOCK_1x5);
+        Application.launch(Startup.class, args);
+        // BlockGenerator.generateBlock(BlockType.BLOCK_1x5);
     }
 }

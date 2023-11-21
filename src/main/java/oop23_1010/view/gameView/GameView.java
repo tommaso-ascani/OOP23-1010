@@ -1,17 +1,15 @@
 package oop23_1010.view.gameView;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import oop23_1010.controllers.Movement;
-import oop23_1010.utils.BlockFactory;
+import oop23_1010.utils.BlockGenerator;
+import oop23_1010.utils.BlockType;
 import oop23_1010.view.ViewImpl;
 
 public class GameView extends ViewImpl {
@@ -60,7 +58,7 @@ public class GameView extends ViewImpl {
     @FXML
     private Label labelScore;
 
-    private BlockFactory FB;
+    // private BlockFactory FB;
 
     @Override
     public void init() {
@@ -130,25 +128,23 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        this.FB = new BlockFactory(this.gridCellSize, this.gridPaneWidthHeight);
-        Movement.makeDraggable(this.FB.getPath());
-
-        System.out.println("grid size in px: " + this.gridPaneWidthHeight);
-
-        this.upLeftSpawn.getChildren().addAll(this.FB.getPath());
-
+        this.upLeftSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_2x1, gridCellSize));
+        this.upRightSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_1x3, gridCellSize));
+        this.downRightSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_2x2, gridCellSize));
+        this.downLeftSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_1x5, gridCellSize));
+        
         Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
                 this.downRightSpawn);
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
 
-        for (Node a : this.gridPane.getChildren()) {
-            Bounds boundsInScene = a.localToScene(a.getBoundsInLocal());
-            System.out.println("Min x: " + boundsInScene.getMinX());
-            System.out.println("Min y: " + boundsInScene.getMinY());
-            System.out.println("Max x: " + boundsInScene.getMaxX());
-            System.out.println("Max y: " + boundsInScene.getMaxY());
-            System.out.println(" ");
-        }
+        // for (Node a : this.gridPane.getChildren()) {
+        //     Bounds boundsInScene = a.localToScene(a.getBoundsInLocal());
+        //     System.out.println("Min x: " + boundsInScene.getMinX());
+        //     System.out.println("Min y: " + boundsInScene.getMinY());
+        //     System.out.println("Max x: " + boundsInScene.getMaxX());
+        //     System.out.println("Max y: " + boundsInScene.getMaxY());
+        //     System.out.println(" ");
+        // }
     }
 }
