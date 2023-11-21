@@ -8,9 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
+import oop23_1010.utils.Block;
 import oop23_1010.utils.BlockGenerator;
 import oop23_1010.utils.BlockType;
 import oop23_1010.view.ViewImpl;
@@ -130,12 +132,15 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        Path block1 = BlockGenerator.generateBlock(BlockType.BLOCK_2x1, gridCellSize);
+        Block block1 = BlockGenerator.generateBlock(BlockType.BLOCK_2x1, gridCellSize);
+        Block block2 = BlockGenerator.generateBlock(BlockType.BLOCK_1x3, gridCellSize);
+        Block block3 = BlockGenerator.generateBlock(BlockType.BLOCK_2x2, gridCellSize);
+        Block block4 = BlockGenerator.generateBlock(BlockType.BLOCK_1x5, gridCellSize);
 
         this.upLeftSpawn.getChildren().addAll(block1);
-        this.upRightSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_1x3, gridCellSize));
-        this.downRightSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_2x2, gridCellSize));
-        this.downLeftSpawn.getChildren().addAll(BlockGenerator.generateBlock(BlockType.BLOCK_1x5, gridCellSize));
+        this.upRightSpawn.getChildren().addAll(block2);
+        this.downRightSpawn.getChildren().addAll(block3);
+        this.downLeftSpawn.getChildren().addAll(block4);
 
         Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
                 this.downRightSpawn);
@@ -144,17 +149,66 @@ public class GameView extends ViewImpl {
         this.getStage().show();
 
         block1.setOnMouseReleased(e -> {
-            Bounds boundsInScene = block1.localToScene(block1.getBoundsInLocal());
-            for (Node node : this.gridPane.getChildren()) {
-                if ((node.localToScene(node.getBoundsInLocal()).getMaxX() > boundsInScene.getMinX()
-                        && boundsInScene.getMinX() > node.localToScene(node.getBoundsInLocal()).getMinX()) &&
-                        (node.localToScene(node.getBoundsInLocal()).getMaxY() > boundsInScene.getMinY()
-                                && boundsInScene.getMinY() > node.localToScene(node.getBoundsInLocal()).getMinY())) {
+            Node node = this.getNodeIfUpLeftCornerInGrid(block1);
+            if (this.getNodeIfUpLeftCornerInGrid(block1) != null) {
+                switch (block1.getBlockType()) {
+                    case BLOCK_2x1:
+                        node.setStyle("-fx-background-color: gold");
+                        int row = GridPane.getRowIndex(node);
+                        int column = GridPane.getColumnIndex(node);
+                        System.out.println(this.gridPane.getCellBounds(column, row));
+                        System.out.println("next " + this.gridPane.getCellBounds(column + 1, row));
+                        // Node nextNode = this.getNodeInGrid(this.gridPane.getCellBounds(column + 1,
+                        // row));
+                        // if (this.getNodeInGrid(this.gridPane.getCellBounds(column + 1, row)) != null)
+                        // {
 
-                    node.setStyle("-fx-background-color: orange");
+                        // }
+                        for (Node a : this.gridPane.getChildren()) {
+
+                        }
+
+                        break;
+
+                    default:
+                        break;
                 }
             }
         });
 
     }
+
+    public void paintCell(Node node, Path block) {
+
+    }
+
+    public Node getNodeIfUpLeftCornerInGrid(Path block) {
+        Bounds boundsInScene = block.localToScene(block.getBoundsInLocal());
+        for (Node node : this.gridPane.getChildren()) {
+            if ((node.localToScene(node.getBoundsInLocal()).getMaxX() > boundsInScene.getMinX()
+                    && boundsInScene.getMinX() > node.localToScene(node.getBoundsInLocal()).getMinX()) &&
+                    (node.localToScene(node.getBoundsInLocal()).getMaxY() > boundsInScene.getMinY()
+                            && boundsInScene.getMinY() > node.localToScene(node.getBoundsInLocal()).getMinY())) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    // public Node getNodeInGrid(Bounds bounds) {
+    // Bounds boundsInScene = bounds.localToScene(bounds.getBoundsInLocal());
+    // for (Node node : this.gridPane.getChildren()) {
+    // if ((node.localToScene(node.getBoundsInLocal()).getMaxX() >
+    // boundsInScene.getMinX()
+    // && boundsInScene.getMinX() >
+    // node.localToScene(node.getBoundsInLocal()).getMinX()) &&
+    // (node.localToScene(node.getBoundsInLocal()).getMaxY() >
+    // boundsInScene.getMinY()
+    // && boundsInScene.getMinY() >
+    // node.localToScene(node.getBoundsInLocal()).getMinY())) {
+    // return node;
+    // }
+    // }
+    // return null;
+    // }
 }
