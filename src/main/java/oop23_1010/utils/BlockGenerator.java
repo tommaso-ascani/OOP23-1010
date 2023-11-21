@@ -11,27 +11,27 @@ public class BlockGenerator {
     public static Path generateBlock(BlockType type, int gridCellSize) {
         switch(type) {
             case BLOCK_1x1:
-                return classicBlock(1, 1, gridCellSize);
+                return classicBlock(1, 1, gridCellSize, "peru");
             case BLOCK_1x2:
-                return classicBlock(1, 2, gridCellSize);
+                return classicBlock(1, 2, gridCellSize, "gold");
             case BLOCK_1x3:
-                return classicBlock(1, 3, gridCellSize);
+                return classicBlock(1, 3, gridCellSize, "darkorange");
             case BLOCK_1x4:
-                return classicBlock(1, 4, gridCellSize);
+                return classicBlock(1, 4, gridCellSize, "lightcoral");
             case BLOCK_1x5:
-                return classicBlock(1, 5, gridCellSize);
+                return classicBlock(1, 5, gridCellSize, "firebrick");
             case BLOCK_2x1:
-                return classicBlock(2, 1, gridCellSize);
+                return classicBlock(2, 1, gridCellSize, "gold");
             case BLOCK_2x2:
-                return classicBlock(2, 2, gridCellSize);
+                return classicBlock(2, 2, gridCellSize, "chartreuse");
             case BLOCK_3x1:
-                return classicBlock(3, 1, gridCellSize);
+                return classicBlock(3, 1, gridCellSize, "darkorange");
             case BLOCK_3x3:
-                return classicBlock(3, 3, gridCellSize);
+                return classicBlock(3, 3, gridCellSize, "dodgerblue");
             case BLOCK_4x1:
-                return classicBlock(4, 1, gridCellSize);
+                return classicBlock(4, 1, gridCellSize, "lightcoral");
             case BLOCK_5x1:
-                break;
+                return classicBlock(5, 1, gridCellSize, "firebrick");
             case BLOCK_L_BOTTOM_LEFT_2x2:
                 break;
             case BLOCK_L_BOTTOM_LEFT_3X3:
@@ -54,7 +54,7 @@ public class BlockGenerator {
         return null;
     }
 
-    private static Path classicBlock(int width, int height, int gridCellSize) {
+    private static Path classicBlock(int width, int height, int gridCellSize, String color) {
         Path path = new Path();
 
         Integer x;
@@ -63,19 +63,18 @@ public class BlockGenerator {
         for (x=0; x<width; x++) {
             for (y=0; y<height; y++) {
                 path.getElements().addAll(
-                    new MoveTo(10+(x*30), 10+(y*30)),
+                    new MoveTo((x*(gridCellSize+3)) + gridCellSize, (y*(gridCellSize+3)) + gridCellSize),
 
-                    new LineTo(10+(x*30), 30+(y*30)),
-                    new LineTo(30+(x*30), 30+(y*30)),
-                    new LineTo(30+(x*30), 10+(y*30)),
-                    new LineTo(10+(x*30), 10+(y*30)),
+                    new LineTo((x*(gridCellSize+3)) + gridCellSize, (y*(gridCellSize+3)) + gridCellSize*2),
+                    new LineTo((x*(gridCellSize+3)) + gridCellSize*2, (y*(gridCellSize+3)) + gridCellSize*2),
+                    new LineTo((x*(gridCellSize+3)) + gridCellSize*2, (y*(gridCellSize+3)) + gridCellSize),
+                    new LineTo((x*(gridCellSize+3)) + gridCellSize, (y*(gridCellSize+3)) + gridCellSize),
 
                     new ClosePath()
                 );
             }
         }
-
-        path.setStyle("-fx-fill: aqua; -fx-stroke-width: 3");
+        path.setStyle("-fx-fill: " + color);
         Movement.makeDraggable(path);
         return path;
     }
