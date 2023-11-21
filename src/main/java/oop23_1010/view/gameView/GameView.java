@@ -93,13 +93,13 @@ public class GameView extends ViewImpl {
 
         this.gridPaneWidthHeight = (this.gridSize * gridCellSize) + (this.gridSize - 1) * GAP_GRID_PANE;
         this.upperPane.setPrefSize(1280, ((720 - this.gridPaneWidthHeight) / 2));
-        this.upperPane.setStyle("-fx-background-color: green");
+        // this.upperPane.setStyle("-fx-background-color: green");
 
         this.bottomPane.setPrefSize(1280, ((720 - this.gridPaneWidthHeight) / 2));
-        this.bottomPane.setStyle("-fx-background-color: blue");
+        // this.bottomPane.setStyle("-fx-background-color: blue");
 
         this.leftPane.setPrefSize(((1280 - this.gridPaneWidthHeight) / 2), 720);
-        this.leftPane.setStyle("-fx-background-color: yellow");
+        // this.leftPane.setStyle("-fx-background-color: yellow");
 
         this.upLeftSpawn.setPrefSize(260, 260);
         this.upLeftSpawn.relocate((((1280 - this.gridPaneWidthHeight) / 2) - 260) / 2, (720 - 260 - 260 - 50) / 2);
@@ -111,7 +111,7 @@ public class GameView extends ViewImpl {
         this.downLeftSpawn.setStyle("-fx-border-width: 5; -fx-border-color: black; -fx-border-radius: 10");
 
         this.rightPane.setPrefSize(((1280 - this.gridPaneWidthHeight) / 2), 720);
-        this.rightPane.setStyle("-fx-background-color: red");
+        // this.rightPane.setStyle("-fx-background-color: red");
 
         this.upRightSpawn.setPrefSize(260, 260);
         this.upRightSpawn.relocate((1280 - 260) - (((1280 - this.gridPaneWidthHeight) / 2) - 260) / 2,
@@ -151,7 +151,6 @@ public class GameView extends ViewImpl {
                         (node.localToScene(node.getBoundsInLocal()).getMaxY() > boundsInScene.getMinY()
                                 && boundsInScene.getMinY() > node.localToScene(node.getBoundsInLocal()).getMinY())) {
 
-                    System.out.println("ooooooooooo");
                     node.setStyle("-fx-background-color: orange");
                 }
             }
