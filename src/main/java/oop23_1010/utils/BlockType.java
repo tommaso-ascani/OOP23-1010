@@ -24,11 +24,5 @@ public enum BlockType {
     BLOCK_L_BOTTOM_LEFT_3X3,
     BLOCK_L_TOP_LEFT_3X3,
     BLOCK_L_TOP_RIGHT_3X3,
-    BLOCK_L_BOTTOM_RIGHT_3X3,
-
-    // Block position
-    TOP_LEFT,
-    BOTTOM_LEFT,
-    TOP_RIGHT,
-    BOTTOM_RIGHT;
+    BLOCK_L_BOTTOM_RIGHT_3X3;
 }
