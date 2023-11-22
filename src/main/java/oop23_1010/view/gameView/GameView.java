@@ -1,5 +1,6 @@
 package oop23_1010.view.gameView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -13,12 +14,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
+import javafx.util.Pair;
 import oop23_1010.utils.BlockType;
 import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
+import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ShapeBlock;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
+import oop23_1010.view.ViewType;
 
 public class GameView extends ViewImpl {
 
@@ -79,8 +83,8 @@ public class GameView extends ViewImpl {
 
         this.setObjectLocation();
 
-        this.labelCoin.setText("Coin: 200");
-        System.out.println("label coin lenght in px: " + this.labelCoin.getWidth());
+        this.labelCoin.setText("Coin:200");
+        this.labelScore.setText("Score:200");
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
@@ -102,11 +106,47 @@ public class GameView extends ViewImpl {
                 this.pausePane.getPrefWidth()) / 2),
                 ((ViewSwitcher.getWindowHeight() - this.pausePane.getPrefHeight()) / 2));
 
-        Button buttonIndietro = new Button("Indietro");
-        buttonIndietro.setPrefSize(80, 40);
-        buttonIndietro.relocate(this.pausePane.getPrefWidth() / 2, this.pausePane.getPrefHeight() / 2);
-        buttonIndietro.setOnMouseClicked(e -> {
-            System.out.println("gioco");
+        Button buttonRiprendi = new Button("Riprendi");
+        Button buttonRicomincia = new Button("Ricomincia");
+        Button buttonMenu = new Button("Menu");
+        Pane dialogPane = new Pane();
+        dialogPane.setVisible(false);
+        Button dialogYes = new Button("Si, ricomincia");
+        Button dialogNo = new Button("No, indietro");
+
+        dialogPane.getChildren().addAll(dialogYes, dialogNo);
+
+        this.pausePane.getChildren().addAll(buttonRiprendi, buttonRicomincia, buttonMenu, dialogPane);
+
+        buttonRiprendi.setPrefSize(80, 40);
+        buttonRicomincia.setPrefSize(80, 40);
+        buttonMenu.setPrefSize(80, 40);
+        dialogPane.setPrefSize(300, 200);
+        dialogYes.setPrefSize(80, 30);
+        dialogNo.setPrefSize(80, 30);
+
+        buttonRiprendi.relocate((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2,
+                (this.pausePane.getPrefHeight() - 40) / 2);
+        buttonRicomincia.relocate(((this.pausePane.getPrefWidth() - 80) / 2),
+                (this.pausePane.getPrefHeight() - 40) / 2);
+        buttonMenu.relocate(
+                this.pausePane.getPrefWidth() - 80 - ((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2),
+                (this.pausePane.getPrefHeight() - 40) / 2);
+
+        System.out.println(dialogYes.getWidth());
+        System.out.println(dialogYes.getHeight());
+        dialogPane.relocate((this.pausePane.getPrefWidth() - 300) / 2, (this.pausePane.getPrefHeight() - 200) / 2);
+
+        dialogYes.relocate((dialogPane.getPrefWidth() - dialogYes.getWidth() - dialogNo.getWidth()) / 2,
+                (dialogPane.getPrefHeight() - dialogYes.getHeight()) / 2);
+        dialogNo.relocate(
+                (dialogPane.getPrefWidth() - dialogNo.getWidth()
+                        - ((dialogPane.getPrefWidth() - dialogYes.getWidth() - dialogNo.getWidth() - 40)) / 2),
+                (dialogPane.getPrefHeight() - dialogYes.getHeight()) / 2);
+
+        dialogPane.setStyle("-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+
+        buttonRiprendi.setOnMouseClicked(e -> {
             this.pausePane.setVisible(false);
             this.upLeftSpawn.setVisible(true);
             this.downLeftSpawn.setVisible(true);
@@ -115,8 +155,29 @@ public class GameView extends ViewImpl {
             this.labelCoin.setVisible(true);
             this.labelScore.setVisible(true);
         });
-        ;
-        this.pausePane.getChildren().add(buttonIndietro);
+
+        buttonRicomincia.setOnMouseClicked(e -> {
+            dialogPane.setVisible(true);
+        });
+
+        dialogYes.setOnMouseClicked(e -> {
+            ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
+        });
+
+        dialogNo.setOnMouseClicked(e -> {
+            dialogPane.setVisible(false);
+        });
+
+        buttonMenu.setOnMouseClicked(e -> {
+            try {
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.labelScore.getText()));
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, this.gridSize));
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
 
         Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
                 this.downRightSpawn, this.pausePane);
@@ -136,8 +197,8 @@ public class GameView extends ViewImpl {
             GridBlock node = (GridBlock) this.getNodeIfUpLeftCornerInGrid(block);
             if (this.getNodeIfUpLeftCornerInGrid(block) != null) {
 
-                Integer targetX = node.getGridX()+1;
-                Integer targetY = node.getGridY()+1;
+                Integer targetX = node.getGridX() + 1;
+                Integer targetY = node.getGridY() + 1;
 
                 Integer remainsX = block.getWidth();
                 Integer remainsY = block.getHeight();
@@ -145,14 +206,14 @@ public class GameView extends ViewImpl {
                 ArrayList<GridBlock> toFill = new ArrayList<>();
 
                 for (GridBlock a : this.grid) {
-                    if (a.getGridX()+1 == targetX && a.getGridY()+1 == targetY && a.getFill() == false) {
+                    if (a.getGridX() + 1 == targetX && a.getGridY() + 1 == targetY && a.getFill() == false) {
                         toFill.add(a);
 
-                        if (remainsY>1) {                            
+                        if (remainsY > 1) {
                             targetY++;
                             remainsY--;
-                        } else if (remainsX>1){
-                            targetY = node.getGridY()+1;
+                        } else if (remainsX > 1) {
+                            targetY = node.getGridY() + 1;
                             remainsY = block.getHeight();
 
                             targetX++;
@@ -176,7 +237,7 @@ public class GameView extends ViewImpl {
                 block.returnToStart();
             }
             controlIfLinesCompleted();
-        });        
+        });
     }
 
     private Boolean checkIfPlaceable(ShapeBlock block) {
@@ -191,9 +252,9 @@ public class GameView extends ViewImpl {
             System.out.println(block.getWidth());
             System.out.println(block.getHeight());
 
-            if(!a.getFill()) {
-                for(int y=a.getGridY(); y < block.getHeight()+a.getGridY(); y++){
-                    for(int x=a.getGridX(); x < block.getWidth()+a.getGridX(); x++){
+            if (!a.getFill()) {
+                for (int y = a.getGridY(); y < block.getHeight() + a.getGridY(); y++) {
+                    for (int x = a.getGridX(); x < block.getWidth() + a.getGridX(); x++) {
                         if (grid.getRightBlock(a, targetX).getFill()) {
                             break;
                         }

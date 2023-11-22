@@ -22,8 +22,8 @@
    <top>
       <Pane id="upperPane" fx:id="upperPane">
          <children>
-            <Label id="labelCoin" fx:id="labelCoin" text="Coins:" />
-            <Label id="labelScore" fx:id="labelScore" text="Score:" />
+            <Label id="labelCoin" fx:id="labelCoin"/>
+            <Label id="labelScore" fx:id="labelScore" />
             <ImageView id="imagePause" fx:id="imagePause" fitHeight="60.0" fitWidth="60.0" layoutX="1190.0" layoutY="17.0" onMouseClicked="#switchToPauseView" pickOnBounds="true" preserveRatio="true" styleClass="imagePause">
                <image>
                   <Image url="@../img/PauseButton.png" />

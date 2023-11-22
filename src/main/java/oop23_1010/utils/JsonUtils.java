@@ -12,6 +12,7 @@ public class JsonUtils {
 
     public static final String MATCH_SCORE = "matchScore";
     public static final String MATCH_ON_GOING = "matchOnGoing";
+    public static final String GRID_SIZE = "gridSize";
 
     public static Object loadData(String data) throws IOException {
         // Read file
@@ -42,7 +43,8 @@ public class JsonUtils {
         // Create local variable
         JSONObject json;
 
-        if(Files.exists(Paths.get(DATA_PATH + "match.json")) && Files.readAllBytes(Paths.get(DATA_PATH + "match.json")).length > 0){
+        if (Files.exists(Paths.get(DATA_PATH + "match.json"))
+                && Files.readAllBytes(Paths.get(DATA_PATH + "match.json")).length > 0) {
             // Get json element if exists
             json = loadDatas();
         } else {
@@ -62,7 +64,7 @@ public class JsonUtils {
         // Add new element
         json.remove(data);
 
-        if(json.isEmpty()){
+        if (json.isEmpty()) {
             // Delete json file if is empty
             flushJson();
         } else {
@@ -71,7 +73,7 @@ public class JsonUtils {
         }
     }
 
-    public static void flushJson() throws IOException{
+    public static void flushJson() throws IOException {
         // Delete json file
         Files.delete(Paths.get(DATA_PATH + "match.json"));
     }
