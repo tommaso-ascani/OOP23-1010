@@ -13,6 +13,9 @@ public class ViewSwitcher {
     private View currentView;
     private Controller mainController = new Controller();
 
+    private static final int WINDOW_WIDTH = 1280;
+    private static final int WINDOW_HEIGHT = 720;
+
     /**
      * This method is used to get the current instance of the ViewSwitcher.
      * It use the singleton pattern.
@@ -50,8 +53,8 @@ public class ViewSwitcher {
         stage.getScene().getStylesheets().clear();
         View view = loader.getController();
 
-        stage.setMinHeight(720);
-        stage.setMinWidth(1280);
+        stage.setHeight(WINDOW_HEIGHT);
+        stage.setWidth(WINDOW_WIDTH);
         stage.setResizable(false);
 
         view.setStage(stage);
@@ -71,5 +74,13 @@ public class ViewSwitcher {
         currentView.setStage(stage);
         currentView.init();
         stage.show();
+    }
+
+    public static int getWindowWidth() {
+        return WINDOW_WIDTH;
+    }
+
+    public static int getWindowHeight() {
+        return WINDOW_HEIGHT;
     }
 }
