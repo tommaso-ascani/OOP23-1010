@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
 import oop23_1010.utils.BlockType;
+import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
 import oop23_1010.utils.ShapeBlock;
 import oop23_1010.view.ViewImpl;
@@ -23,7 +24,7 @@ public class GameView extends ViewImpl {
 
     private int gridSize;
     public int gridCellSize;
-    private ArrayList<GridBlock> grid = new ArrayList<>();
+    public GameGrid<GridBlock> grid = new GameGrid<>(gridSize);
 
     private static final int GAP_GRID_PANE = 5;
     private static final int SPAWN_PANELS_WIDTH = 260;
@@ -82,10 +83,10 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_5x1, upLeftSpawn, this);
-        ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_5x1, upRightSpawn, this);
+        ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_3x3, upLeftSpawn, this);
+        ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_3x3, upRightSpawn, this);
         ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_1x5, downRightSpawn, this);
-        ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_1x5, downLeftSpawn, this);
+        ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_5x1, downLeftSpawn, this);
 
         this.setBlockReadyToBePlaced(block1);
         this.setBlockReadyToBePlaced(block2);
@@ -119,13 +120,12 @@ public class GameView extends ViewImpl {
      * @param block
      */
     public void setBlockReadyToBePlaced(ShapeBlock block) {
-
         block.setOnMouseReleased(e -> {
             GridBlock node = (GridBlock) this.getNodeIfUpLeftCornerInGrid(block);
             if (this.getNodeIfUpLeftCornerInGrid(block) != null) {
 
-                Integer targetX = node.getGridX();
-                Integer targetY = node.getGridY();
+                Integer targetX = node.getGridX()+1;
+                Integer targetY = node.getGridY()+1;
 
                 Integer remainsX = block.getWidth();
                 Integer remainsY = block.getHeight();
@@ -133,21 +133,18 @@ public class GameView extends ViewImpl {
                 ArrayList<GridBlock> toFill = new ArrayList<>();
 
                 for (GridBlock a : this.grid) {
-
-                    if (a.getGridX() == targetX && a.getGridY() == targetY && a.getFill() == false) {
+                    if (a.getGridX()+1 == targetX && a.getGridY()+1 == targetY && a.getFill() == false) {
                         toFill.add(a);
-                        if (remainsX > 1) {
+
+                        if (remainsY>1) {                            
+                            targetY++;
+                            remainsY--;
+                        } else if (remainsX>1){
+                            targetY = node.getGridY()+1;
+                            remainsY = block.getHeight();
 
                             targetX++;
                             remainsX--;
-
-                        } else if (remainsY > 1) {
-
-                            targetX = node.getGridX();
-                            remainsX = block.getWidth();
-
-                            targetY++;
-                            remainsY--;
                         }
                     }
                 }
@@ -163,9 +160,39 @@ public class GameView extends ViewImpl {
                     block.returnToStart();
                 }
 
+            } else {
+                block.returnToStart();
             }
             controlIfLinesCompleted();
-        });
+        });        
+    }
+
+    private Boolean checkIfPlaceable(ShapeBlock block) {
+
+        Integer targetX = 0;
+        Integer targetY = 0;
+
+        for (GridBlock a : grid) {
+
+            System.out.println(a.getGridX());
+            System.out.println(a.getGridY());
+            System.out.println(block.getWidth());
+            System.out.println(block.getHeight());
+
+            if(!a.getFill()) {
+                for(int y=a.getGridY(); y < block.getHeight()+a.getGridY(); y++){
+                    for(int x=a.getGridX(); x < block.getWidth()+a.getGridX(); x++){
+                        if (grid.getRightBlock(a, targetX).getFill()) {
+                            break;
+                        }
+                        targetX++;
+                    }
+                    targetX = 0;
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     private void controlIfLinesCompleted() {
