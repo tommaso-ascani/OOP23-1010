@@ -23,9 +23,11 @@ public class ShapeBlock extends Path {
     private Double startX;
     private Double startY;
 
+    private BlocksAvailable<ShapeBlock> blocksAvalaible;
+
     // Constuctor
 
-    public ShapeBlock(BlockType type, Pane pane, GameView view){
+    public ShapeBlock(BlockType type, Pane pane, GameView view, BlocksAvailable<ShapeBlock> blocksAvalaible){
 
         Bounds boundsInScene = this.localToScene(this.getBoundsInLocal());
 
@@ -35,6 +37,7 @@ public class ShapeBlock extends Path {
         this.type = type;
         this.view = view;
         this.pane = pane;
+        this.blocksAvalaible = blocksAvalaible;
 
         switch (type) {
             case BLOCK_1x1:
@@ -165,6 +168,7 @@ public class ShapeBlock extends Path {
         
         this.setStyle("-fx-fill: " + this.color);
         this.setAccessibleText(this.color);
+        this.blocksAvalaible.add(this);
         Movement.makeDraggable(this);
     }
 

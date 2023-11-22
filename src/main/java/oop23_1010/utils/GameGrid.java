@@ -53,5 +53,13 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         }
         return null;
     }
-    
+
+    public GridBlock getElement(Integer x, Integer y) {
+        for (GridBlock elem : this) {
+            if(elem.getGridX() == x && elem.getGridY() == y){
+                return elem;
+            }
+        }
+        return null;
+    }
 }

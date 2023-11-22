@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
 import javafx.util.Pair;
 import oop23_1010.utils.BlockType;
+import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
 import oop23_1010.utils.JsonUtils;
@@ -29,12 +30,11 @@ public class GameView extends ViewImpl {
     private int gridSize;
     public int gridCellSize;
     public GameGrid<GridBlock> grid = new GameGrid<>(gridSize);
+    public BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
     private static final int GAP_GRID_PANE = 5;
     private static final int SPAWN_PANELS_WIDTH = 260;
     private static final int GAP_BETWEEN_SPAWN_PANELS = 40;
-    private static final int PAUSE_PANEL_WIDTH = 180;
-    private static final int PAUSE_PANEL_HEIGHT = 650;
 
     @FXML
     private BorderPane mainPane;
@@ -88,10 +88,10 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_3x3, upLeftSpawn, this);
-        ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_3x3, upRightSpawn, this);
-        ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_1x5, downRightSpawn, this);
-        ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_5x1, downLeftSpawn, this);
+        ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
+        ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_2x2, upRightSpawn, this, blocksAvalaible);
+        ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_4x1, downLeftSpawn, this, blocksAvalaible);
+        ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_1x3, downRightSpawn, this, blocksAvalaible);
 
         this.setBlockReadyToBePlaced(block1);
         this.setBlockReadyToBePlaced(block2);
@@ -197,27 +197,21 @@ public class GameView extends ViewImpl {
             GridBlock node = (GridBlock) this.getNodeIfUpLeftCornerInGrid(block);
             if (this.getNodeIfUpLeftCornerInGrid(block) != null) {
 
-                Integer targetX = node.getGridX() + 1;
-                Integer targetY = node.getGridY() + 1;
-
-                Integer remainsX = block.getWidth();
-                Integer remainsY = block.getHeight();
+                Integer targetX = node.getGridX();
+                Integer targetY = node.getGridY();
 
                 ArrayList<GridBlock> toFill = new ArrayList<>();
 
-                for (GridBlock a : this.grid) {
-                    if (a.getGridX() + 1 == targetX && a.getGridY() + 1 == targetY && a.getFill() == false) {
-                        toFill.add(a);
-
-                        if (remainsY > 1) {
-                            targetY++;
-                            remainsY--;
-                        } else if (remainsX > 1) {
-                            targetY = node.getGridY() + 1;
-                            remainsY = block.getHeight();
-
-                            targetX++;
-                            remainsX--;
+                toFill.clear();
+                for(int y=targetY; y<targetY+block.getHeight(); y++){
+                    if(y >= gridSize){break;}
+                    for(int x=targetX; x<targetX+block.getWidth(); x++){
+                        if(x >= gridSize){break;}
+                        if(!grid.getElement(x, y).getFill()){
+                            toFill.add(grid.getElement(x, y));
+                        }else{
+                            toFill.clear();
+                            break;
                         }
                     }
                 }
@@ -237,35 +231,14 @@ public class GameView extends ViewImpl {
                 block.returnToStart();
             }
             controlIfLinesCompleted();
-        });
-    }
-
-    private Boolean checkIfPlaceable(ShapeBlock block) {
-
-        Integer targetX = 0;
-        Integer targetY = 0;
-
-        for (GridBlock a : grid) {
-
-            System.out.println(a.getGridX());
-            System.out.println(a.getGridY());
-            System.out.println(block.getWidth());
-            System.out.println(block.getHeight());
-
-            if (!a.getFill()) {
-                for (int y = a.getGridY(); y < block.getHeight() + a.getGridY(); y++) {
-                    for (int x = a.getGridX(); x < block.getWidth() + a.getGridX(); x++) {
-                        if (grid.getRightBlock(a, targetX).getFill()) {
-                            break;
-                        }
-                        targetX++;
-                    }
-                    targetX = 0;
-                }
-                return true;
+            blocksAvalaible.remove(block);
+            // grid.getRightBlock(node, 2).setStyle("-fx-background-color: black");
+            try {                
+                blocksAvalaible.checkIfBlocksCanBePlaced(grid, this.gridSize);
+            } catch (Exception error) {
+                System.out.println(error);
             }
-        }
-        return false;
+        });        
     }
 
     private void controlIfLinesCompleted() {
@@ -338,8 +311,8 @@ public class GameView extends ViewImpl {
      * GridPane, the ArrayList<GridBlock> grid
      */
     public void createGridCells() {
-        for (int ColumnIndex = 0; ColumnIndex < this.gridSize; ColumnIndex++) {
-            for (int RowIndex = 0; RowIndex < this.gridSize; RowIndex++) {
+        for (int RowIndex = 0; RowIndex < this.gridSize; RowIndex++) {
+            for (int ColumnIndex = 0; ColumnIndex < this.gridSize; ColumnIndex++) {
                 GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, false);
 
                 aPane.setPrefHeight(gridCellSize);
