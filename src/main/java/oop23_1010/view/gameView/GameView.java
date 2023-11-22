@@ -82,6 +82,7 @@ public class GameView extends ViewImpl {
         this.gridPane.setStyle(
                 "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE
                         + "; -fx-background-color: black; -fx-border-insets: 5; -fx-border-width: 5; -fx-border-color: black;");
+        
         for (int ColumnIndex = 0; ColumnIndex < this.gridSize; ColumnIndex++) {
             for (int RowIndex = 0; RowIndex < this.gridSize; RowIndex++) {
                 GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, false);
@@ -130,10 +131,10 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_1x3, upLeftSpawn, this);
-        ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_2x1, upRightSpawn, this);
-        ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_3x3, downRightSpawn, this);
-        ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_5x1, downLeftSpawn, this);
+        ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_5x1, upLeftSpawn, this);
+        ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_5x1, upRightSpawn, this);
+        ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_1x5, downRightSpawn, this);
+        ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_1x5, downLeftSpawn, this);
 
         this.setBlockReadyToBePlaced(block1);
         this.setBlockReadyToBePlaced(block2);
@@ -163,34 +164,81 @@ public class GameView extends ViewImpl {
 
                 for (GridBlock a : this.grid) {
 
-                    if(a.getGridX() == targetX && a.getGridY() == targetY && a.getFill() == false) {
+                    if (a.getGridX() == targetX && a.getGridY() == targetY && a.getFill() == false) {
                         toFill.add(a);
-                        if(remainsY>1) {
-                            targetY++;
-                            remainsY--;
-                        }else if(remainsX>1){
-                            targetY = node.getGridY();
-                            remainsY = block.getHeight();
+                        if (remainsX>1) {
 
                             targetX++;
                             remainsX--;
+
+                        } else if (remainsY>1){
+
+                            targetX = node.getGridX();
+                            remainsX = block.getWidth();
+
+                            targetY++;
+                            remainsY--;
                         }
                     }
                 }
 
-                if(toFill.size() == block.getWidth()*block.getHeight()) {
+                if (toFill.size() == block.getWidth()*block.getHeight()) {
                     for (GridBlock x : toFill) {
                         x.setFill(true);
                         x.setStyle("-fx-background-color: " + block.getColor());
+                        Pane pane = block.getPane();
+                        pane.getChildren().remove(block);
                     }
-                    Pane temp = block.getPane();
-                    temp.getChildren().remove(block);
                 } else {
                     block.returnToStart();
                 }
 
             }
+            controlIfLinesCompleted();
         });        
+    }
+
+    private void controlIfLinesCompleted() {
+
+        ArrayList<GridBlock> line;
+
+        // Control if there are full rows
+        
+        for(int y=0; y < gridSize; y++){
+            for(int x=0; x < gridSize; x++){
+                line = new ArrayList<>();
+                for (GridBlock a : this.grid) {
+                    if(a.getGridY() == x && a.getFill()) {
+                        line.add(a);
+                    }
+                }
+                if (line.size() == gridSize){
+                    for (GridBlock a : line) {
+                        a.setFill(false);
+                        a.setStyle("-fx-background-color: white");
+                    } 
+                }
+            }
+        }
+
+        // Control if there are full columns
+
+        for(int y=0; y < gridSize; y++){
+            for(int x=0; x < gridSize; x++){
+                line = new ArrayList<>();
+                for (GridBlock a : this.grid) {
+                    if(a.getGridX() == x && a.getFill()) {
+                        line.add(a);
+                    }
+                }
+                if (line.size() == gridSize){
+                    for (GridBlock a : line) {
+                        a.setFill(false);
+                        a.setStyle("-fx-background-color: white");
+                    } 
+                }
+            }
+        }
     }
 
     public Node getNodeIfUpLeftCornerInGrid(Path block) {
