@@ -29,7 +29,8 @@ public class GameView extends ViewImpl {
     private static final int GAP_GRID_PANE = 5;
     private static final int SPAWN_PANELS_WIDTH = 260;
     private static final int GAP_BETWEEN_SPAWN_PANELS = 40;
-    private static final int PAUSE_PANEL_WIDTH = 400;
+    private static final int PAUSE_PANEL_WIDTH = 180;
+    private static final int PAUSE_PANEL_HEIGHT = 650;
 
     @FXML
     private BorderPane mainPane;
@@ -93,18 +94,29 @@ public class GameView extends ViewImpl {
         this.setBlockReadyToBePlaced(block3);
         this.setBlockReadyToBePlaced(block4);
 
-        this.pausePane.setVisible(true);
-        this.pausePane.setPrefSize(GameView.PAUSE_PANEL_WIDTH, GameView.PAUSE_PANEL_WIDTH);
+        this.pausePane.setVisible(false);
+        this.pausePane.setPrefSize(ViewSwitcher.getWindowWidth() / 1.5, ViewSwitcher.getWindowHeight() / 1.5);
         this.pausePane.setStyle(
-                "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3;");
-        this.pausePane.relocate((ViewSwitcher.getWindowWidth() - GameView.PAUSE_PANEL_WIDTH) / 2,
-                (ViewSwitcher.getWindowHeight() - GameView.PAUSE_PANEL_WIDTH) / 2);
-        this.pausePane.setOnMousePressed(e -> {
-            System.out.println("pause panel");
+                "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+        this.pausePane.relocate(((ViewSwitcher.getWindowWidth() -
+                this.pausePane.getPrefWidth()) / 2),
+                ((ViewSwitcher.getWindowHeight() - this.pausePane.getPrefHeight()) / 2));
+
+        Button buttonIndietro = new Button("Indietro");
+        buttonIndietro.setPrefSize(80, 40);
+        buttonIndietro.relocate(this.pausePane.getPrefWidth() / 2, this.pausePane.getPrefHeight() / 2);
+        buttonIndietro.setOnMouseClicked(e -> {
+            System.out.println("gioco");
             this.pausePane.setVisible(false);
-            this.mainPane.setVisible(true);
             this.upLeftSpawn.setVisible(true);
+            this.downLeftSpawn.setVisible(true);
+            this.upRightSpawn.setVisible(true);
+            this.downRightSpawn.setVisible(true);
+            this.labelCoin.setVisible(true);
+            this.labelScore.setVisible(true);
         });
+        ;
+        this.pausePane.getChildren().add(buttonIndietro);
 
         Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
                 this.downRightSpawn, this.pausePane);
@@ -365,9 +377,12 @@ public class GameView extends ViewImpl {
     }
 
     public void switchToPauseView() {
-        System.out.println("pausa");
         this.pausePane.setVisible(true);
-        this.mainPane.setVisible(false);
         this.upLeftSpawn.setVisible(false);
+        this.downLeftSpawn.setVisible(false);
+        this.upRightSpawn.setVisible(false);
+        this.downRightSpawn.setVisible(false);
+        this.labelCoin.setVisible(false);
+        this.labelScore.setVisible(false);
     }
 }
