@@ -1,5 +1,6 @@
 package oop23_1010.utils;
 
+import javafx.geometry.Bounds;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
@@ -8,7 +9,7 @@ import javafx.scene.shape.Path;
 import oop23_1010.controllers.Movement;
 import oop23_1010.view.gameView.GameView;
 
-public class RandomItem extends Path {
+public class ShapeBlock extends Path {
 
     private BlockType type;
     private GameView view;
@@ -19,9 +20,17 @@ public class RandomItem extends Path {
 
     private String color;
 
+    private Double startX;
+    private Double startY;
+
     // Constuctor
 
-    public RandomItem(BlockType type, Pane pane, GameView view){
+    public ShapeBlock(BlockType type, Pane pane, GameView view){
+
+        Bounds boundsInScene = this.localToScene(this.getBoundsInLocal());
+
+        this.startX = boundsInScene.getMinX();
+        this.startY = boundsInScene.getMinY();
 
         this.type = type;
         this.view = view;
@@ -129,7 +138,9 @@ public class RandomItem extends Path {
         return this.color;
     }
 
-    // Methods
+    // -------- Methods --------
+
+    // Generate new shape that can be placed on the grid
 
     public void generateBlock() {
         Integer x;
@@ -156,5 +167,11 @@ public class RandomItem extends Path {
         this.setAccessibleText(this.color);
         Movement.makeDraggable(this);
     }
-    
+
+    // Reposition the item to start when it's not possibile to place it
+
+    public void returnToStart() {
+        this.setTranslateX(this.startX);
+        this.setTranslateY(this.startY);
+    }
 }

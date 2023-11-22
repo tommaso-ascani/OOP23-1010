@@ -11,9 +11,10 @@ public class GridBlock extends AnchorPane {
 
     // Constuctor
 
-    public GridBlock(Integer x, Integer y){
+    public GridBlock(Integer x, Integer y, Boolean isFilled){
         this.x = x;
         this.y = y;
+        this.isFilled = isFilled;
     }
 
     // Setter

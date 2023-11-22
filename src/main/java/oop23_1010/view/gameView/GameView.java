@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
 import oop23_1010.utils.BlockType;
 import oop23_1010.utils.GridBlock;
-import oop23_1010.utils.RandomItem;
+import oop23_1010.utils.ShapeBlock;
 import oop23_1010.view.ViewImpl;
 
 public class GameView extends ViewImpl {
@@ -63,7 +63,9 @@ public class GameView extends ViewImpl {
 
     @Override
     public void init() {
+        
         this.gridSize = HomeView.getGridSize();
+
         if (this.gridSize == 5) {
             gridCellSize = 45;
         }
@@ -76,12 +78,13 @@ public class GameView extends ViewImpl {
         if (this.gridSize == 20) {
             gridCellSize = 25;
         }
+
         this.gridPane.setStyle(
                 "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE
                         + "; -fx-background-color: black; -fx-border-insets: 5; -fx-border-width: 5; -fx-border-color: black;");
         for (int ColumnIndex = 0; ColumnIndex < this.gridSize; ColumnIndex++) {
             for (int RowIndex = 0; RowIndex < this.gridSize; RowIndex++) {
-                GridBlock aPane = new GridBlock(ColumnIndex, RowIndex);
+                GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, false);
 
                 aPane.setPrefHeight(gridCellSize);
                 aPane.setPrefWidth(gridCellSize);
@@ -94,13 +97,10 @@ public class GameView extends ViewImpl {
 
         this.gridPaneWidthHeight = (this.gridSize * gridCellSize) + (this.gridSize - 1) * GAP_GRID_PANE;
         this.upperPane.setPrefSize(1280, ((720 - this.gridPaneWidthHeight) / 2));
-        this.upperPane.setStyle("-fx-background-color: green");
 
         this.bottomPane.setPrefSize(1280, ((720 - this.gridPaneWidthHeight) / 2));
-        this.bottomPane.setStyle("-fx-background-color: blue");
 
         this.leftPane.setPrefSize(((1280 - this.gridPaneWidthHeight) / 2), 720);
-        this.leftPane.setStyle("-fx-background-color: yellow");
 
         this.upLeftSpawn.setPrefSize(260, 260);
         this.upLeftSpawn.relocate((((1280 - this.gridPaneWidthHeight) / 2) - 260) / 2, (720 - 260 - 260 - 50) / 2);
@@ -112,7 +112,6 @@ public class GameView extends ViewImpl {
         this.downLeftSpawn.setStyle("-fx-border-width: 5; -fx-border-color: black; -fx-border-radius: 10");
 
         this.rightPane.setPrefSize(((1280 - this.gridPaneWidthHeight) / 2), 720);
-        this.rightPane.setStyle("-fx-background-color: red");
 
         this.upRightSpawn.setPrefSize(260, 260);
         this.upRightSpawn.relocate((1280 - 260) - (((1280 - this.gridPaneWidthHeight) / 2) - 260) / 2,
@@ -131,10 +130,10 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        RandomItem block1 = new RandomItem(BlockType.BLOCK_1x3, upLeftSpawn, this);
-        RandomItem block2 = new RandomItem(BlockType.BLOCK_2x1, upRightSpawn, this);
-        RandomItem block3 = new RandomItem(BlockType.BLOCK_3x3, downRightSpawn, this);
-        RandomItem block4 = new RandomItem(BlockType.BLOCK_5x1, downLeftSpawn, this);
+        ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_1x3, upLeftSpawn, this);
+        ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_2x1, upRightSpawn, this);
+        ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_3x3, downRightSpawn, this);
+        ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_5x1, downLeftSpawn, this);
 
         this.setBlockReadyToBePlaced(block1);
         this.setBlockReadyToBePlaced(block2);
@@ -148,7 +147,7 @@ public class GameView extends ViewImpl {
         this.getStage().show();
     }
 
-    public void setBlockReadyToBePlaced(RandomItem block) {
+    public void setBlockReadyToBePlaced(ShapeBlock block) {
 
         block.setOnMouseReleased(e -> {
             GridBlock node = (GridBlock) this.getNodeIfUpLeftCornerInGrid(block);
@@ -160,10 +159,12 @@ public class GameView extends ViewImpl {
                 Integer remainsX = block.getWidth();
                 Integer remainsY = block.getHeight();
 
+                ArrayList<GridBlock> toFill = new ArrayList<>();
+
                 for (GridBlock a : this.grid) {
 
-                    if(a.getGridX() == targetX && a.getGridY() == targetY) {
-                        a.setStyle("-fx-background-color: " + block.getColor());
+                    if(a.getGridX() == targetX && a.getGridY() == targetY && a.getFill() == false) {
+                        toFill.add(a);
                         if(remainsY>1) {
                             targetY++;
                             remainsY--;
@@ -176,8 +177,18 @@ public class GameView extends ViewImpl {
                         }
                     }
                 }
-                Pane temp = block.getPane();
-                temp.getChildren().remove(block);
+
+                if(toFill.size() == block.getWidth()*block.getHeight()) {
+                    for (GridBlock x : toFill) {
+                        x.setFill(true);
+                        x.setStyle("-fx-background-color: " + block.getColor());
+                    }
+                    Pane temp = block.getPane();
+                    temp.getChildren().remove(block);
+                } else {
+                    block.returnToStart();
+                }
+
             }
         });        
     }
