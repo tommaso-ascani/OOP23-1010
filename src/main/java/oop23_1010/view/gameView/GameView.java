@@ -199,10 +199,6 @@ public class GameView extends ViewImpl {
 
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
-
-        System.out.println(ViewType.HOME.getPath());
-
-        this.mainLoop();
     }
 
     public void mainLoop() {
