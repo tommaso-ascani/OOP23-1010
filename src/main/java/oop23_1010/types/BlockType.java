@@ -1,4 +1,4 @@
-package oop23_1010.utils;
+package oop23_1010.types;
 
 public enum BlockType {
 

@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
 import javafx.util.Pair;
-import oop23_1010.utils.BlockType;
+import oop23_1010.types.BlockType;
 import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
@@ -88,15 +88,7 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
-        ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_2x2, upRightSpawn, this, blocksAvalaible);
-        ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_4x1, downLeftSpawn, this, blocksAvalaible);
-        ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_1x3, downRightSpawn, this, blocksAvalaible);
-
-        this.setBlockReadyToBePlaced(block1);
-        this.setBlockReadyToBePlaced(block2);
-        this.setBlockReadyToBePlaced(block3);
-        this.setBlockReadyToBePlaced(block4);
+        createNewPuzzles();
 
         this.pausePane.setVisible(false);
         this.pausePane.setPrefSize(ViewSwitcher.getWindowWidth() / 1.5, ViewSwitcher.getWindowHeight() / 1.5);
@@ -174,7 +166,6 @@ public class GameView extends ViewImpl {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, this.gridSize));
             } catch (IOException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         });
@@ -236,12 +227,10 @@ public class GameView extends ViewImpl {
             }
             controlIfLinesCompleted();
             blocksAvalaible.remove(block);
-            // grid.getRightBlock(node, 2).setStyle("-fx-background-color: black");
-            try {
-                blocksAvalaible.checkIfBlocksCanBePlaced(grid, this.gridSize);
-            } catch (Exception error) {
-                System.out.println(error);
+            if (blocksAvalaible.size() == 0) {
+                createNewPuzzles();
             }
+            // blocksAvalaible.checkIfBlocksCanBePlaced(grid, this.gridSize);
         });
     }
 
@@ -422,5 +411,29 @@ public class GameView extends ViewImpl {
         this.downRightSpawn.setVisible(false);
         this.labelCoin.setVisible(false);
         this.labelScore.setVisible(false);
+    }
+
+    public void createNewPuzzles() {
+        ShapeBlock block;
+        for (int x=1; x<=4; x++) {
+            switch(x){
+                case 1:
+                    block = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
+                    break;
+                case 2:
+                    block = new ShapeBlock(BlockType.BLOCK_1x5, upRightSpawn, this, blocksAvalaible);
+                    break;
+                case 3:
+                    block = new ShapeBlock(BlockType.BLOCK_1x5, downLeftSpawn, this, blocksAvalaible);
+                    break;
+                case 4:
+                    block = new ShapeBlock(BlockType.BLOCK_1x5, downRightSpawn, this, blocksAvalaible);
+                    break;
+                default:
+                    block = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
+                    break;
+            }
+            this.setBlockReadyToBePlaced(block);
+        }
     }
 }
