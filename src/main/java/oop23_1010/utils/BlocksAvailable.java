@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 public class BlocksAvailable<E> extends ArrayList<ShapeBlock>{
 
-    public void checkIfBlocksCanBePlaced(GameGrid<GridBlock> grid, Integer gridsize) {
+    public Boolean checkIfBlocksCanBePlaced(GameGrid<GridBlock> grid, Integer gridsize) {
 
         Integer targetX;
         Integer targetY;
         ArrayList<GridBlock> toFill = new ArrayList<>();
 
         for (ShapeBlock block : this) {
-            System.out.println("Checking: " + block.getType());
             for (GridBlock elem : grid) {
 
                 targetX = elem.getGridX();
@@ -36,11 +35,9 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock>{
             }
             
             if (toFill.size() == block.getWidth() * block.getHeight()) {
-                System.out.println(block.getType() + ": " + true);
-            } else {
-                System.out.println(block.getType() + ": " + false);
+                return true;
             }
-            System.out.println(" ");
         }
+        return false;
     }    
 }

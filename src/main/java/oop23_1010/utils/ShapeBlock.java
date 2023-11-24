@@ -96,22 +96,22 @@ public class ShapeBlock extends Path {
                 this.height = 1;
                 this.color = "firebrick";
                 break;
-            case BLOCK_L_BOTTOM_LEFT_2x2:
-                break;
-            case BLOCK_L_BOTTOM_LEFT_3X3:
-                break;
-            case BLOCK_L_BOTTOM_RIGHT_2x2:
-                break;
-            case BLOCK_L_BOTTOM_RIGHT_3X3:
-                break;
-            case BLOCK_L_TOP_LEFT_2x2:
-                break;
-            case BLOCK_L_TOP_LEFT_3X3:
-                break;
-            case BLOCK_L_TOP_RIGHT_2x2:
-                break;
-            case BLOCK_L_TOP_RIGHT_3X3:
-                break;
+            // case BLOCK_L_BOTTOM_LEFT_2x2:
+            //     break;
+            // case BLOCK_L_BOTTOM_LEFT_3X3:
+            //     break;
+            // case BLOCK_L_BOTTOM_RIGHT_2x2:
+            //     break;
+            // case BLOCK_L_BOTTOM_RIGHT_3X3:
+            //     break;
+            // case BLOCK_L_TOP_LEFT_2x2:
+            //     break;
+            // case BLOCK_L_TOP_LEFT_3X3:
+            //     break;
+            // case BLOCK_L_TOP_RIGHT_2x2:
+            //     break;
+            // case BLOCK_L_TOP_RIGHT_3X3:
+            //     break;
             default:
                 break;
         }

@@ -20,6 +20,7 @@ import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
 import oop23_1010.utils.JsonUtils;
+import oop23_1010.utils.Randomizer;
 import oop23_1010.utils.ShapeBlock;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
@@ -126,8 +127,6 @@ public class GameView extends ViewImpl {
                 this.pausePane.getPrefWidth() - 80 - ((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2),
                 (this.pausePane.getPrefHeight() - 40) / 2);
 
-        System.out.println(dialogYes.getWidth());
-        System.out.println(dialogYes.getHeight());
         dialogPane.relocate((this.pausePane.getPrefWidth() - 300) / 2, (this.pausePane.getPrefHeight() - 200) / 2);
 
         dialogYes.relocate((dialogPane.getPrefWidth() - dialogYes.getWidth() - dialogNo.getWidth()) / 2,
@@ -242,6 +241,8 @@ public class GameView extends ViewImpl {
                         Pane pane = block.getPane();
                         pane.getChildren().remove(block);
                     }
+                    controlIfLinesCompleted();
+                    blocksAvalaible.remove(block);
                 } else {
                     block.returnToStart();
                 }
@@ -249,12 +250,12 @@ public class GameView extends ViewImpl {
             } else {
                 block.returnToStart();
             }
-            controlIfLinesCompleted();
-            blocksAvalaible.remove(block);
             if (blocksAvalaible.size() == 0) {
                 createNewPuzzles();
             }
-            // blocksAvalaible.checkIfBlocksCanBePlaced(grid, this.gridSize);
+            if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, this.gridSize)){
+                System.out.println("Game Over!");
+            }
         });
     }
 
@@ -438,23 +439,29 @@ public class GameView extends ViewImpl {
     }
 
     public void createNewPuzzles() {
+
         ShapeBlock block;
-        for (int x = 1; x <= 4; x++) {
-            switch (x) {
+        BlockType type;
+
+        for (int x=1; x<=4; x++) {
+
+            type = Randomizer.getRandomPuzzle();
+
+            switch(x){
                 case 1:
-                    block = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, upLeftSpawn, this, blocksAvalaible);
                     break;
                 case 2:
-                    block = new ShapeBlock(BlockType.BLOCK_1x5, upRightSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, upRightSpawn, this, blocksAvalaible);
                     break;
                 case 3:
-                    block = new ShapeBlock(BlockType.BLOCK_1x5, downLeftSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, downLeftSpawn, this, blocksAvalaible);
                     break;
                 case 4:
-                    block = new ShapeBlock(BlockType.BLOCK_1x5, downRightSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, downRightSpawn, this, blocksAvalaible);
                     break;
                 default:
-                    block = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, upLeftSpawn, this, blocksAvalaible);
                     break;
             }
             this.setBlockReadyToBePlaced(block);
