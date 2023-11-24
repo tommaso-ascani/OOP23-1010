@@ -31,6 +31,7 @@ public class GameView extends ViewImpl {
     public int gridCellSize;
     public GameGrid<GridBlock> grid = new GameGrid<>(gridSize);
     public BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
+    private int piecesToPlace;
 
     private static final int GAP_GRID_PANE = 5;
     private static final int SPAWN_PANELS_WIDTH = 260;
@@ -59,7 +60,7 @@ public class GameView extends ViewImpl {
 
     @Override
     public void init() {
-
+        this.piecesToPlace = 4;
         this.gridSize = HomeView.getGridSize();
 
         if (this.gridSize == 5) {
@@ -165,6 +166,9 @@ public class GameView extends ViewImpl {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.labelScore.getText()));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, this.gridSize));
+                for (GridBlock gridBlock : this.grid) {
+
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -175,6 +179,26 @@ public class GameView extends ViewImpl {
 
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
+
+        System.out.println(ViewType.HOME.getPath());
+
+        this.mainLoop();
+    }
+
+    public void mainLoop() {
+        while (true) {
+            if (this.piecesToPlace == 0) {
+                ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
+                ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_2x2, upRightSpawn, this, blocksAvalaible);
+                ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_4x1, downLeftSpawn, this, blocksAvalaible);
+                ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_1x3, downRightSpawn, this, blocksAvalaible);
+
+                this.setBlockReadyToBePlaced(block1);
+                this.setBlockReadyToBePlaced(block2);
+                this.setBlockReadyToBePlaced(block3);
+                this.setBlockReadyToBePlaced(block4);
+            }
+        }
     }
 
     /**
@@ -415,8 +439,8 @@ public class GameView extends ViewImpl {
 
     public void createNewPuzzles() {
         ShapeBlock block;
-        for (int x=1; x<=4; x++) {
-            switch(x){
+        for (int x = 1; x <= 4; x++) {
+            switch (x) {
                 case 1:
                     block = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
                     break;
