@@ -1,11 +1,9 @@
 package oop23_1010.view;
 
 import javafx.stage.Stage;
-import oop23_1010.controllers.Controller;
 
-public abstract class ViewImpl implements View{
+public abstract class ViewImpl implements View {
     private Stage currentStage;
-    private Controller controller;
 
     /**
      * Method to get the current stage.
@@ -28,22 +26,6 @@ public abstract class ViewImpl implements View{
             System.exit(0);
         });
         this.currentStage = stageToSet;
-    }
-
-    /**
-     * {@inheritDoc}}
-     */
-    @Override
-    public void setController(final Controller controllerToAttach) {
-        this.controller = controllerToAttach;
-    }
-
-    /**
-     * {@inheritDoc}}
-     */
-    @Override
-    public Controller getController() {
-        return this.controller;
     }
 
     /**

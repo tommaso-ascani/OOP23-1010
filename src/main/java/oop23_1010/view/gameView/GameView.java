@@ -203,13 +203,17 @@ public class GameView extends ViewImpl {
                 ArrayList<GridBlock> toFill = new ArrayList<>();
 
                 toFill.clear();
-                for(int y=targetY; y<targetY+block.getHeight(); y++){
-                    if(y >= gridSize){break;}
-                    for(int x=targetX; x<targetX+block.getWidth(); x++){
-                        if(x >= gridSize){break;}
-                        if(!grid.getElement(x, y).getFill()){
+                for (int y = targetY; y < targetY + block.getHeight(); y++) {
+                    if (y >= gridSize) {
+                        break;
+                    }
+                    for (int x = targetX; x < targetX + block.getWidth(); x++) {
+                        if (x >= gridSize) {
+                            break;
+                        }
+                        if (!grid.getElement(x, y).getFill()) {
                             toFill.add(grid.getElement(x, y));
-                        }else{
+                        } else {
                             toFill.clear();
                             break;
                         }
@@ -233,12 +237,12 @@ public class GameView extends ViewImpl {
             controlIfLinesCompleted();
             blocksAvalaible.remove(block);
             // grid.getRightBlock(node, 2).setStyle("-fx-background-color: black");
-            try {                
+            try {
                 blocksAvalaible.checkIfBlocksCanBePlaced(grid, this.gridSize);
             } catch (Exception error) {
                 System.out.println(error);
             }
-        });        
+        });
     }
 
     private void controlIfLinesCompleted() {

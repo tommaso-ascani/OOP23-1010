@@ -5,13 +5,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import oop23_1010.controllers.Controller;
 
 public class ViewSwitcher {
 
     private static ViewSwitcher instance;
     private View currentView;
-    private Controller mainController = new Controller();
 
     private static final int WINDOW_WIDTH = 1280;
     private static final int WINDOW_HEIGHT = 720;
@@ -70,7 +68,6 @@ public class ViewSwitcher {
      */
     public void switchView(final Stage stage, final ViewType type) {
         currentView = this.loadStyle(stage, type);
-        currentView.setController(this.mainController);
         currentView.setStage(stage);
         currentView.init();
         stage.show();
