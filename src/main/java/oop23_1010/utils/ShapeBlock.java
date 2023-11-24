@@ -8,6 +8,7 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import oop23_1010.controllers.Movement;
 import oop23_1010.types.BlockType;
+import oop23_1010.types.ColorType;
 import oop23_1010.view.gameView.GameView;
 
 public class ShapeBlock extends Path {
@@ -19,7 +20,7 @@ public class ShapeBlock extends Path {
     private Integer width;
     private Integer height;
 
-    private String color;
+    private ColorType color;
 
     private Double startX;
     private Double startY;
@@ -28,7 +29,7 @@ public class ShapeBlock extends Path {
 
     // Constuctor
 
-    public ShapeBlock(BlockType type, Pane pane, GameView view, BlocksAvailable<ShapeBlock> blocksAvalaible){
+    public ShapeBlock(BlockType type, Pane pane, GameView view, BlocksAvailable<ShapeBlock> blocksAvalaible) {
 
         Bounds boundsInScene = this.localToScene(this.getBoundsInLocal());
 
@@ -44,57 +45,57 @@ public class ShapeBlock extends Path {
             case BLOCK_1x1:
                 this.width = 1;
                 this.height = 1;
-                this.color = "peru";
+                this.color = ColorType.PERU;
                 break;
             case BLOCK_1x2:
                 this.width = 1;
                 this.height = 2;
-                this.color = "gold";
-                break;        
+                this.color = ColorType.GOLD;
+                break;
             case BLOCK_1x3:
                 this.width = 1;
                 this.height = 3;
-                this.color = "darkorange";
+                this.color = ColorType.DARKORANGE;
                 break;
             case BLOCK_1x4:
                 this.width = 1;
                 this.height = 4;
-                this.color = "lightcoral";
+                this.color = ColorType.LIGHTCORAL;
                 break;
             case BLOCK_1x5:
                 this.width = 1;
                 this.height = 5;
-                this.color = "firebrick";
+                this.color = ColorType.FIREBRICK;
                 break;
             case BLOCK_2x1:
                 this.width = 2;
                 this.height = 1;
-                this.color = "gold";
+                this.color = ColorType.GOLD;
                 break;
             case BLOCK_2x2:
                 this.width = 2;
                 this.height = 2;
-                this.color = "chartreuse";
+                this.color = ColorType.CHARTREUSE;
                 break;
             case BLOCK_3x1:
                 this.width = 3;
                 this.height = 1;
-                this.color = "darkorange";
+                this.color = ColorType.DARKORANGE;
                 break;
             case BLOCK_3x3:
                 this.width = 3;
                 this.height = 3;
-                this.color = "dodgerblue";
+                this.color = ColorType.DARKORANGE;
                 break;
             case BLOCK_4x1:
                 this.width = 4;
                 this.height = 1;
-                this.color = "lightcoral";
+                this.color = ColorType.LIGHTCORAL;
                 break;
             case BLOCK_5x1:
                 this.width = 5;
                 this.height = 1;
-                this.color = "firebrick";
+                this.color = ColorType.FIREBRICK;
                 break;
             // case BLOCK_L_BOTTOM_LEFT_2x2:
             //     break;
@@ -138,7 +139,7 @@ public class ShapeBlock extends Path {
         return this.height;
     }
 
-    public String getColor() {
+    public ColorType getColor() {
         return this.color;
     }
 
@@ -153,7 +154,8 @@ public class ShapeBlock extends Path {
         for (x = 0; x < this.width; x++) {
             for (y = 0; y < this.height; y++) {
                 this.getElements().addAll(
-                        new MoveTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize, (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize),
+                        new MoveTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize,
+                                (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize),
 
                         new LineTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize,
                                 (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize * 2),
@@ -161,14 +163,15 @@ public class ShapeBlock extends Path {
                                 (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize * 2),
                         new LineTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize * 2,
                                 (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize),
-                        new LineTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize, (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize),
+                        new LineTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize,
+                                (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize),
 
                         new ClosePath());
             }
         }
-        
+
         this.setStyle("-fx-fill: " + this.color);
-        this.setAccessibleText(this.color);
+        this.setAccessibleText(this.color.getColor());
         this.blocksAvalaible.add(this);
         Movement.makeDraggable(this);
     }

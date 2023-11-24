@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javafx.util.Pair;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.google.gson.JsonArray;
 
 public class JsonUtils {
 
@@ -21,6 +25,15 @@ public class JsonUtils {
         JSONObject json = new JSONObject(file);
         // Return json given data
         return json.get(data);
+    }
+
+    public static JSONArray loadGriglia(String data) throws IOException {
+        // Read file
+        String file = Files.readString(Paths.get(DATA_PATH + "match.json"));
+        // Create new JSONObject with file data
+        JSONObject json = new JSONObject(file);
+        // Return jsonArray of the grid's cells occupied
+        return (JSONArray) json.get(data);
     }
 
     public static JSONObject loadDatas() throws IOException {

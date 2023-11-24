@@ -1,26 +1,27 @@
 package oop23_1010.utils;
 
 import javafx.scene.layout.AnchorPane;
+import oop23_1010.types.ColorType;
 
 public class GridBlock extends AnchorPane {
 
     private Integer x;
     private Integer y;
 
-    private Boolean isFilled;
+    private ColorType color;
 
     // Constuctor
 
-    public GridBlock(Integer x, Integer y, Boolean isFilled) {
+    public GridBlock(Integer x, Integer y, ColorType color) {
         this.x = x;
         this.y = y;
-        this.isFilled = isFilled;
+        this.color = color;
     }
 
     // Setter
 
-    public void setFill(Boolean state) {
-        this.isFilled = state;
+    public void setFill(ColorType state) {
+        this.color = state;
     }
 
     // Getter
@@ -33,7 +34,7 @@ public class GridBlock extends AnchorPane {
         return this.y;
     }
 
-    public Boolean getFill() {
-        return this.isFilled;
+    public ColorType getFill() {
+        return this.color;
     }
 }

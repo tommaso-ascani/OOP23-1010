@@ -11,6 +11,7 @@ import oop23_1010.view.ViewType;
 public class HomeView extends ViewImpl {
 
     private static int gridSize;
+    private static boolean mathcOnGoing;
 
     @FXML
     private ImageView imageSettings;

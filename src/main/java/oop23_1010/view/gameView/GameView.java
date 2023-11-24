@@ -2,6 +2,12 @@ package oop23_1010.view.gameView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
@@ -165,9 +171,24 @@ public class GameView extends ViewImpl {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.labelScore.getText()));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, this.gridSize));
+                JSONArray blocksArray = new JSONArray();
                 for (GridBlock gridBlock : this.grid) {
-
+                    JSONObject block = new JSONObject();
+                    if (gridBlock.getFill() != null) {
+                        block.put("X", gridBlock.getGridX());
+                        block.put("Y", gridBlock.getGridY());
+                        block.put("color", gridBlock.getFill().getColor());
+                        blocksArray.put(block);
+                    }
                 }
+                JsonUtils.addElement(new Pair<String, Object>("Griglia", blocksArray));
+                JSONArray a = JsonUtils.loadGriglia("Griglia");
+                for (int i = 0; i < a.length(); i++) {
+                    System.out.println(a.getJSONObject(i).get("color"));
+                    System.out.println(a.getJSONObject(i).get("X"));
+                    System.out.println(a.getJSONObject(i).get("Y"));
+                }
+
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -185,19 +206,7 @@ public class GameView extends ViewImpl {
     }
 
     public void mainLoop() {
-        while (true) {
-            if (this.piecesToPlace == 0) {
-                ShapeBlock block1 = new ShapeBlock(BlockType.BLOCK_1x5, upLeftSpawn, this, blocksAvalaible);
-                ShapeBlock block2 = new ShapeBlock(BlockType.BLOCK_2x2, upRightSpawn, this, blocksAvalaible);
-                ShapeBlock block3 = new ShapeBlock(BlockType.BLOCK_4x1, downLeftSpawn, this, blocksAvalaible);
-                ShapeBlock block4 = new ShapeBlock(BlockType.BLOCK_1x3, downRightSpawn, this, blocksAvalaible);
 
-                this.setBlockReadyToBePlaced(block1);
-                this.setBlockReadyToBePlaced(block2);
-                this.setBlockReadyToBePlaced(block3);
-                this.setBlockReadyToBePlaced(block4);
-            }
-        }
     }
 
     /**
@@ -225,7 +234,7 @@ public class GameView extends ViewImpl {
                         if (x >= gridSize) {
                             break;
                         }
-                        if (!grid.getElement(x, y).getFill()) {
+                        if (grid.getElement(x, y).getFill() == null) {
                             toFill.add(grid.getElement(x, y));
                         } else {
                             toFill.clear();
@@ -236,7 +245,7 @@ public class GameView extends ViewImpl {
 
                 if (toFill.size() == block.getWidth() * block.getHeight()) {
                     for (GridBlock x : toFill) {
-                        x.setFill(true);
+                        x.setFill(block.getColor());
                         x.setStyle("-fx-background-color: " + block.getColor());
                         Pane pane = block.getPane();
                         pane.getChildren().remove(block);
@@ -269,13 +278,13 @@ public class GameView extends ViewImpl {
             for (int x = 0; x < gridSize; x++) {
                 line = new ArrayList<>();
                 for (GridBlock a : this.grid) {
-                    if (a.getGridY() == x && a.getFill()) {
+                    if (a.getGridY() == x && a.getFill() != null) {
                         line.add(a);
                     }
                 }
                 if (line.size() == gridSize) {
                     for (GridBlock a : line) {
-                        a.setFill(false);
+                        a.setFill(null);
                         a.setStyle("-fx-background-color: white");
                     }
                 }
@@ -288,13 +297,13 @@ public class GameView extends ViewImpl {
             for (int x = 0; x < gridSize; x++) {
                 line = new ArrayList<>();
                 for (GridBlock a : this.grid) {
-                    if (a.getGridX() == x && a.getFill()) {
+                    if (a.getGridX() == x && a.getFill() != null) {
                         line.add(a);
                     }
                 }
                 if (line.size() == gridSize) {
                     for (GridBlock a : line) {
-                        a.setFill(false);
+                        a.setFill(null);
                         a.setStyle("-fx-background-color: white");
                     }
                 }
@@ -331,7 +340,7 @@ public class GameView extends ViewImpl {
     public void createGridCells() {
         for (int RowIndex = 0; RowIndex < this.gridSize; RowIndex++) {
             for (int ColumnIndex = 0; ColumnIndex < this.gridSize; ColumnIndex++) {
-                GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, false);
+                GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null);
 
                 aPane.setPrefHeight(gridCellSize);
                 aPane.setPrefWidth(gridCellSize);
