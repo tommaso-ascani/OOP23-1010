@@ -36,7 +36,7 @@ import oop23_1010.view.ViewType;
 public class GameView extends ViewImpl {
 
     public int gridCellSize;
-    private static GameGrid<GridBlock> grid;
+    private GameGrid<GridBlock> grid;
     public BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
     public Integer score = 0;
@@ -69,9 +69,15 @@ public class GameView extends ViewImpl {
     @Override
     public void init() {
 
+        grid = new GameGrid<>(HomeView.getGridSize());
+
         try {
             if (JsonUtils.jsonMatchExist()) {
+
+                this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE);
+
                 JSONArray a = JsonUtils.loadGrid(JsonUtils.GRID_COMPOSITION);
+
                 for (int i = 0; i < a.length(); i++) {
                     ColorType color;
                     if (a.getJSONObject(i).get("color").equals("null")) {
@@ -86,8 +92,6 @@ public class GameView extends ViewImpl {
                     grid.add(aPane);
                 }
                 JsonUtils.flushJson();
-            } else {
-                grid = new GameGrid<>(HomeView.getGridSize());
             }
         } catch (JSONException | IOException e) {
             // TODO Auto-generated catch block
@@ -195,11 +199,13 @@ public class GameView extends ViewImpl {
 
         buttonMenu.setOnMouseClicked(e -> {
             try {
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.labelScore.getText()));
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.score));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()));
+
                 JSONArray blocksArray = new JSONArray();
-                for (GridBlock gridBlock : GameView.grid) {
+
+                for (GridBlock gridBlock : this.grid) {
                     JSONObject block = new JSONObject();
                     block.put("X", gridBlock.getGridX());
                     block.put("Y", gridBlock.getGridY());
@@ -211,10 +217,13 @@ public class GameView extends ViewImpl {
 
                     blocksArray.put(block);
                 }
+
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray));
+
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
         });
 
@@ -363,8 +372,9 @@ public class GameView extends ViewImpl {
      * GridPane, the ArrayList<GridBlock> grid
      */
     public void createGridCells() {
-        if (!GameView.grid.isEmpty()) {
-            for (GridBlock gridBlock : GameView.grid) {
+        if (!this.grid.isEmpty()) {
+            System.out.println("ECCOMI");
+            for (GridBlock gridBlock : this.grid) {
                 gridBlock.setPrefHeight(gridCellSize);
                 gridBlock.setPrefWidth(gridCellSize);
                 if (gridBlock.getFill() == null) {
@@ -388,7 +398,7 @@ public class GameView extends ViewImpl {
                     aPane.setStyle(
                             "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
 
-                    GameView.grid.add(aPane);
+                    this.grid.add(aPane);
                     this.gridPane.add(aPane, ColumnIndex, RowIndex);
                 }
             }
