@@ -89,4 +89,14 @@ public class JsonUtils {
         // Delete json file
         Files.delete(Paths.get(DATA_PATH + "match.json"));
     }
+
+    public static Boolean jsonMatchExist() throws IOException {
+        // Check if exist some match data to load
+        if (Files.exists(Paths.get(DATA_PATH + "match.json"))
+                && Files.readAllBytes(Paths.get(DATA_PATH + "match.json")).length > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

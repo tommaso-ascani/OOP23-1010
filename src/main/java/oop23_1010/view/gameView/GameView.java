@@ -34,7 +34,7 @@ import oop23_1010.view.ViewType;
 public class GameView extends ViewImpl {
 
     public int gridCellSize;
-    private static GameGrid<GridBlock> grid = new GameGrid<>(HomeView.getGridSize());
+    private static GameGrid<GridBlock> grid;
     public BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
     public Integer score = 0;
@@ -67,20 +67,20 @@ public class GameView extends ViewImpl {
     @Override
     public void init() {
 
-        if (HomeView.getGridSize() == 5) {
+        grid = new GameGrid<>(HomeView.getGridSize());
+
+        if (grid.getGridSize() == 5) {
             gridCellSize = 45;
         }
-        if (HomeView.getGridSize() == 10) {
+        if (grid.getGridSize() == 10) {
             gridCellSize = 35;
         }
-        if (HomeView.getGridSize() == 15) {
+        if (grid.getGridSize() == 15) {
             gridCellSize = 30;
         }
-        if (HomeView.getGridSize() == 20) {
+        if (grid.getGridSize() == 20) {
             gridCellSize = 25;
         }
-
-        grid = new GameGrid<>(HomeView.getGridSize());
 
         this.createGridCells();
 
@@ -188,7 +188,7 @@ public class GameView extends ViewImpl {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.labelScore.getText()));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, HomeView.getGridSize()));
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()));
                 JSONArray blocksArray = new JSONArray();
                 for (GridBlock gridBlock : GameView.grid) {
                     JSONObject block = new JSONObject();
@@ -238,11 +238,11 @@ public class GameView extends ViewImpl {
 
                 toFill.clear();
                 for (int y = targetY; y < targetY + block.getHeight(); y++) {
-                    if (y >= HomeView.getGridSize()) {
+                    if (y >= grid.getGridSize()) {
                         break;
                     }
                     for (int x = targetX; x < targetX + block.getWidth(); x++) {
-                        if (x >= HomeView.getGridSize()) {
+                        if (x >= grid.getGridSize()) {
                             break;
                         }
                         if (grid.getElement(x, y).getFill() == null) {
@@ -276,7 +276,7 @@ public class GameView extends ViewImpl {
             if (blocksAvalaible.size() == 0) {
                 createNewPuzzles();
             }
-            if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, HomeView.getGridSize())) {
+            if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
                 System.out.println("Game Over!");
             }
         });
@@ -288,15 +288,15 @@ public class GameView extends ViewImpl {
 
         // Control if there are full rows
 
-        for (int y = 0; y < HomeView.getGridSize(); y++) {
-            for (int x = 0; x < HomeView.getGridSize(); x++) {
+        for (int y = 0; y < grid.getGridSize(); y++) {
+            for (int x = 0; x < grid.getGridSize(); x++) {
                 line = new ArrayList<>();
-                for (GridBlock a : this.grid) {
+                for (GridBlock a : grid) {
                     if (a.getGridY() == x && a.getFill() != null) {
                         line.add(a);
                     }
                 }
-                if (line.size() == HomeView.getGridSize()) {
+                if (line.size() == grid.getGridSize()) {
                     for (GridBlock a : line) {
                         this.score++;
                         a.setFill(null);
@@ -308,15 +308,15 @@ public class GameView extends ViewImpl {
 
         // Control if there are full columns
 
-        for (int y = 0; y < HomeView.getGridSize(); y++) {
-            for (int x = 0; x < HomeView.getGridSize(); x++) {
+        for (int y = 0; y < grid.getGridSize(); y++) {
+            for (int x = 0; x < grid.getGridSize(); x++) {
                 line = new ArrayList<>();
-                for (GridBlock a : this.grid) {
+                for (GridBlock a : grid) {
                     if (a.getGridX() == x && a.getFill() != null) {
                         line.add(a);
                     }
                 }
-                if (line.size() == HomeView.getGridSize()) {
+                if (line.size() == grid.getGridSize()) {
                     for (GridBlock a : line) {
                         this.score++;
                         a.setFill(null);
@@ -371,9 +371,8 @@ public class GameView extends ViewImpl {
                 this.gridPane.add(gridBlock, gridBlock.getGridX(), gridBlock.getGridY());
             }
         } else {
-            System.out.println("GameView.grid is vuota");
-            for (int RowIndex = 0; RowIndex < HomeView.getGridSize(); RowIndex++) {
-                for (int ColumnIndex = 0; ColumnIndex < HomeView.getGridSize(); ColumnIndex++) {
+            for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
+                for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
                     GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null);
 
                     aPane.setPrefHeight(gridCellSize);
@@ -469,7 +468,7 @@ public class GameView extends ViewImpl {
      * @return the width of the GridPane
      */
     public int getGridWidth() {
-        int gridWidth = (HomeView.getGridSize() * gridCellSize) + (HomeView.getGridSize() - 1) * GAP_GRID_PANE;
+        int gridWidth = (grid.getGridSize() * gridCellSize) + (grid.getGridSize() - 1) * GAP_GRID_PANE;
         return gridWidth;
     }
 
