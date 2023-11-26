@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
 import javafx.util.Pair;
 import oop23_1010.types.BlockType;
+import oop23_1010.types.ColorType;
 import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
@@ -67,7 +69,30 @@ public class GameView extends ViewImpl {
     @Override
     public void init() {
 
-        grid = new GameGrid<>(HomeView.getGridSize());
+        try {
+            if (JsonUtils.jsonMatchExist()) {
+                JSONArray a = JsonUtils.loadGrid(JsonUtils.GRID_COMPOSITION);
+                for (int i = 0; i < a.length(); i++) {
+                    ColorType color;
+                    if (a.getJSONObject(i).get("color").equals("null")) {
+                        color = null;
+                    } else {
+                        color = ColorType.get((String) a.getJSONObject(i).get("color"));
+                    }
+                    GridBlock aPane = new GridBlock((Integer) a.getJSONObject(i).get("X"),
+                            (Integer) a.getJSONObject(i).get("Y"),
+                            color);
+
+                    grid.add(aPane);
+                }
+                JsonUtils.flushJson();
+            } else {
+                grid = new GameGrid<>(HomeView.getGridSize());
+            }
+        } catch (JSONException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         if (grid.getGridSize() == 5) {
             gridCellSize = 45;
@@ -89,22 +114,6 @@ public class GameView extends ViewImpl {
         this.setPanelsStyle();
 
         this.setObjectLocation();
-
-        try {
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, false));
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, null));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, false));
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, null));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
         this.labelCoin.setFont(new Font(null, 30));
         this.labelCoin.setText("Coin: TO-DO");
@@ -355,7 +364,6 @@ public class GameView extends ViewImpl {
      */
     public void createGridCells() {
         if (!GameView.grid.isEmpty()) {
-            System.out.println("GameView.grid is full");
             for (GridBlock gridBlock : GameView.grid) {
                 gridBlock.setPrefHeight(gridCellSize);
                 gridBlock.setPrefWidth(gridCellSize);
@@ -510,9 +518,5 @@ public class GameView extends ViewImpl {
             }
             this.setBlockReadyToBePlaced(block);
         }
-    }
-
-    public static void setGrid(GameGrid<GridBlock> gridLoaded) {
-        GameView.grid = gridLoaded;
     }
 }

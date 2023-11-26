@@ -26,7 +26,7 @@ public class JsonUtils {
         return json.get(data);
     }
 
-    public static JSONArray loadGriglia(String data) throws IOException {
+    public static JSONArray loadGrid(String data) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + "match.json"));
         // Create new JSONObject with file data
