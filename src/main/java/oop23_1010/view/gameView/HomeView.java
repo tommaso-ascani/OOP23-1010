@@ -11,7 +11,6 @@ import oop23_1010.view.ViewType;
 public class HomeView extends ViewImpl {
 
     private static int gridSize;
-    private static boolean mathcOnGoing;
 
     @FXML
     private ImageView imageSettings;
@@ -51,10 +50,6 @@ public class HomeView extends ViewImpl {
     public void switchToPlayView() {
         HomeView.gridSize = (int) this.sliderGridWidth.getValue();
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
-    }
-
-    public void closeGame() {
-
     }
 
     public static int getGridSize() {

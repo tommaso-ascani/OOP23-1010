@@ -62,4 +62,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         }
         return null;
     }
+
+    public Integer getGridSize(){
+        return this.gridSize;
+    }
 }
