@@ -1,9 +1,12 @@
 package oop23_1010.view.gameView;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
@@ -22,6 +25,12 @@ public class HomeView extends ViewImpl {
     private ImageView imageQuit;
 
     @FXML
+    private ImageView imageResume;
+
+    @FXML
+    private ImageView imagePlay;
+
+    @FXML
     private Slider sliderGridWidth;
 
     @FXML
@@ -37,6 +46,21 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setMajorTickUnit(5);
         this.sliderGridWidth.setMinorTickCount(0);
         this.sliderGridWidth.setSnapToTicks(true);
+
+        // In this try catch we control if there is a saved match and if true, load the
+        // saved grid in GridLoaded
+        try {
+            if (JsonUtils.jsonMatchExist()) {
+                System.out.println("cesta");
+                this.imagePlay.setDisable(true);
+                this.sliderGridWidth.setDisable(true);
+            } else {
+                System.out.println("non ce sta");
+                this.imageResume.setDisable(true);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void switchToSettingsView() {
