@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
+import javafx.scene.text.Font;
 import javafx.util.Pair;
 import oop23_1010.types.BlockType;
 import oop23_1010.utils.BlocksAvailable;
@@ -32,13 +33,15 @@ import oop23_1010.view.ViewType;
 
 public class GameView extends ViewImpl {
 
-    public int gridCellSize;
+    public Integer gridCellSize;
     public GameGrid<GridBlock> grid;
     public BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
-    private static final int GAP_GRID_PANE = 5;
-    private static final int SPAWN_PANELS_WIDTH = 260;
-    private static final int GAP_BETWEEN_SPAWN_PANELS = 40;
+    public Integer score = 0;
+
+    private static final Integer GAP_GRID_PANE = 5;
+    private static final Integer SPAWN_PANELS_WIDTH = 260;
+    private static final Integer GAP_BETWEEN_SPAWN_PANELS = 40;
 
     @FXML
     private BorderPane mainPane;
@@ -87,8 +90,11 @@ public class GameView extends ViewImpl {
 
         this.setObjectLocation();
 
-        this.labelCoin.setText("Coin:200");
-        this.labelScore.setText("Score:200");
+        this.labelCoin.setFont(new Font(null, 30));
+        this.labelCoin.setText("Coin: TO-DO");
+
+        this.labelScore.setFont(new Font(null, 30));
+        this.labelScore.setText("Score: " + this.score);
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
@@ -241,9 +247,12 @@ public class GameView extends ViewImpl {
                         x.setStyle("-fx-background-color: " + block.getColor());
                         Pane pane = block.getPane();
                         pane.getChildren().remove(block);
+                        this.score++;
                     }
                     controlIfLinesCompleted();
                     blocksAvalaible.remove(block);
+
+                    this.labelScore.setText("Score: " + this.score);
                 } else {
                     block.returnToStart();
                 }
@@ -276,6 +285,7 @@ public class GameView extends ViewImpl {
                 }
                 if (line.size() == grid.getGridSize()) {
                     for (GridBlock a : line) {
+                        this.score++;
                         a.setFill(null);
                         a.setStyle("-fx-background-color: white");
                     }
@@ -295,6 +305,7 @@ public class GameView extends ViewImpl {
                 }
                 if (line.size() == grid.getGridSize()) {
                     for (GridBlock a : line) {
+                        this.score++;
                         a.setFill(null);
                         a.setStyle("-fx-background-color: white");
                     }
