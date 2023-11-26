@@ -15,6 +15,7 @@ public class JsonUtils {
     public static final String MATCH_SCORE = "matchScore";
     public static final String MATCH_ON_GOING = "matchOnGoing";
     public static final String GRID_SIZE = "gridSize";
+    public static final String GRID_COMPOSITION = "Grid";
 
     public static Object loadData(String data) throws IOException {
         // Read file

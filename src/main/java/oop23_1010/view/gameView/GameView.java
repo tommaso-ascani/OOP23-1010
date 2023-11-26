@@ -33,8 +33,8 @@ import oop23_1010.view.ViewType;
 
 public class GameView extends ViewImpl {
 
-    public Integer gridCellSize;
-    public GameGrid<GridBlock> grid;
+    public int gridCellSize;
+    private static GameGrid<GridBlock> grid = new GameGrid<>(HomeView.getGridSize());
     public BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
     public Integer score = 0;
@@ -89,6 +89,22 @@ public class GameView extends ViewImpl {
         this.setPanelsStyle();
 
         this.setObjectLocation();
+
+        try {
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, false));
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, null));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, false));
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, null));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         this.labelCoin.setFont(new Font(null, 30));
         this.labelCoin.setText("Coin: TO-DO");
@@ -172,28 +188,25 @@ public class GameView extends ViewImpl {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.labelScore.getText()));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()));
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, HomeView.getGridSize()));
                 JSONArray blocksArray = new JSONArray();
-                for (GridBlock gridBlock : this.grid) {
+                for (GridBlock gridBlock : GameView.grid) {
                     JSONObject block = new JSONObject();
+                    block.put("X", gridBlock.getGridX());
+                    block.put("Y", gridBlock.getGridY());
                     if (gridBlock.getFill() != null) {
-                        block.put("X", gridBlock.getGridX());
-                        block.put("Y", gridBlock.getGridY());
                         block.put("color", gridBlock.getFill().getColor());
-                        blocksArray.put(block);
+                    } else {
+                        block.put("color", "null");
                     }
-                }
-                JsonUtils.addElement(new Pair<String, Object>("Griglia", blocksArray));
-                JSONArray a = JsonUtils.loadGriglia("Griglia");
-                for (int i = 0; i < a.length(); i++) {
-                    System.out.println(a.getJSONObject(i).get("color"));
-                    System.out.println(a.getJSONObject(i).get("X"));
-                    System.out.println(a.getJSONObject(i).get("Y"));
-                }
 
+                    blocksArray.put(block);
+                }
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+            ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
         });
 
         Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
@@ -225,11 +238,11 @@ public class GameView extends ViewImpl {
 
                 toFill.clear();
                 for (int y = targetY; y < targetY + block.getHeight(); y++) {
-                    if (y >= grid.getGridSize()) {
+                    if (y >= HomeView.getGridSize()) {
                         break;
                     }
                     for (int x = targetX; x < targetX + block.getWidth(); x++) {
-                        if (x >= grid.getGridSize()) {
+                        if (x >= HomeView.getGridSize()) {
                             break;
                         }
                         if (grid.getElement(x, y).getFill() == null) {
@@ -263,7 +276,7 @@ public class GameView extends ViewImpl {
             if (blocksAvalaible.size() == 0) {
                 createNewPuzzles();
             }
-            if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())){
+            if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, HomeView.getGridSize())) {
                 System.out.println("Game Over!");
             }
         });
@@ -275,15 +288,15 @@ public class GameView extends ViewImpl {
 
         // Control if there are full rows
 
-        for (int y = 0; y < grid.getGridSize(); y++) {
-            for (int x = 0; x < grid.getGridSize(); x++) {
+        for (int y = 0; y < HomeView.getGridSize(); y++) {
+            for (int x = 0; x < HomeView.getGridSize(); x++) {
                 line = new ArrayList<>();
                 for (GridBlock a : this.grid) {
                     if (a.getGridY() == x && a.getFill() != null) {
                         line.add(a);
                     }
                 }
-                if (line.size() == grid.getGridSize()) {
+                if (line.size() == HomeView.getGridSize()) {
                     for (GridBlock a : line) {
                         this.score++;
                         a.setFill(null);
@@ -295,15 +308,15 @@ public class GameView extends ViewImpl {
 
         // Control if there are full columns
 
-        for (int y = 0; y < grid.getGridSize(); y++) {
-            for (int x = 0; x < grid.getGridSize(); x++) {
+        for (int y = 0; y < HomeView.getGridSize(); y++) {
+            for (int x = 0; x < HomeView.getGridSize(); x++) {
                 line = new ArrayList<>();
                 for (GridBlock a : this.grid) {
                     if (a.getGridX() == x && a.getFill() != null) {
                         line.add(a);
                     }
                 }
-                if (line.size() == grid.getGridSize()) {
+                if (line.size() == HomeView.getGridSize()) {
                     for (GridBlock a : line) {
                         this.score++;
                         a.setFill(null);
@@ -341,19 +354,39 @@ public class GameView extends ViewImpl {
      * GridPane, the ArrayList<GridBlock> grid
      */
     public void createGridCells() {
-        for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
-            for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
-                GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null);
+        if (!GameView.grid.isEmpty()) {
+            System.out.println("GameView.grid is full");
+            for (GridBlock gridBlock : GameView.grid) {
+                gridBlock.setPrefHeight(gridCellSize);
+                gridBlock.setPrefWidth(gridCellSize);
+                if (gridBlock.getFill() == null) {
+                    gridBlock.setStyle(
+                            "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
+                } else {
+                    gridBlock.setStyle(
+                            "-fx-background-color: " + gridBlock.getFill().getColor()
+                                    + "; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
+                }
 
-                aPane.setPrefHeight(gridCellSize);
-                aPane.setPrefWidth(gridCellSize);
-                aPane.setStyle(
-                        "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
+                this.gridPane.add(gridBlock, gridBlock.getGridX(), gridBlock.getGridY());
+            }
+        } else {
+            System.out.println("GameView.grid is vuota");
+            for (int RowIndex = 0; RowIndex < HomeView.getGridSize(); RowIndex++) {
+                for (int ColumnIndex = 0; ColumnIndex < HomeView.getGridSize(); ColumnIndex++) {
+                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null);
 
-                this.grid.add(aPane);
-                this.gridPane.add(aPane, ColumnIndex, RowIndex);
+                    aPane.setPrefHeight(gridCellSize);
+                    aPane.setPrefWidth(gridCellSize);
+                    aPane.setStyle(
+                            "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
+
+                    GameView.grid.add(aPane);
+                    this.gridPane.add(aPane, ColumnIndex, RowIndex);
+                }
             }
         }
+
     }
 
     /**
@@ -436,7 +469,7 @@ public class GameView extends ViewImpl {
      * @return the width of the GridPane
      */
     public int getGridWidth() {
-        int gridWidth = (grid.getGridSize() * gridCellSize) + (grid.getGridSize() - 1) * GAP_GRID_PANE;
+        int gridWidth = (HomeView.getGridSize() * gridCellSize) + (HomeView.getGridSize() - 1) * GAP_GRID_PANE;
         return gridWidth;
     }
 
@@ -455,11 +488,11 @@ public class GameView extends ViewImpl {
         ShapeBlock block;
         BlockType type;
 
-        for (int x=1; x<=4; x++) {
+        for (int x = 1; x <= 4; x++) {
 
             type = Randomizer.getRandomPuzzle();
 
-            switch(x){
+            switch (x) {
                 case 1:
                     block = new ShapeBlock(type, upLeftSpawn, this, blocksAvalaible);
                     break;
@@ -478,5 +511,9 @@ public class GameView extends ViewImpl {
             }
             this.setBlockReadyToBePlaced(block);
         }
+    }
+
+    public static void setGrid(GameGrid<GridBlock> gridLoaded) {
+        GameView.grid = gridLoaded;
     }
 }

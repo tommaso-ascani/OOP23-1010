@@ -27,4 +27,13 @@ public enum ColorType {
     public String getColor() {
         return this.color;
     }
+
+    public static ColorType get(String str) {
+        for (ColorType colortype : ColorType.values()) {
+            if (colortype.getColor().equals(str)) {
+                return colortype;
+            }
+        }
+        return null;
+    }
 }
