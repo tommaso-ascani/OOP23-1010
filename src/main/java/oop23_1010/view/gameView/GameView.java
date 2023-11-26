@@ -69,10 +69,10 @@ public class GameView extends ViewImpl {
     @Override
     public void init() {
 
-        grid = new GameGrid<>(HomeView.getGridSize());
-
         try {
             if (JsonUtils.jsonMatchExist()) {
+
+                grid = new GameGrid<>((Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE));
 
                 this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE);
 
@@ -92,6 +92,8 @@ public class GameView extends ViewImpl {
                     grid.add(aPane);
                 }
                 JsonUtils.flushJson();
+            } else {
+                grid = new GameGrid<>(HomeView.getGridSize());
             }
         } catch (JSONException | IOException e) {
             // TODO Auto-generated catch block
