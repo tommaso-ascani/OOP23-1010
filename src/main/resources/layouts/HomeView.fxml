@@ -12,7 +12,8 @@
       <ImageView id="imageSettings" fx:id="imageSettings" fitHeight="63.0" fitWidth="63.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#switchToSettingsView" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
          <image>
             <Image url="@../img/SettingsButton.png" />
-         </image></ImageView>
+         </image>
+      </ImageView>
       <ImageView id="imagePlay" fx:id="imagePlay" fitHeight="63.0" fitWidth="63.0" layoutX="494.0" layoutY="312.0" onMouseClicked="#switchToPlayView" pickOnBounds="true" preserveRatio="true" styleClass="imagePlay">
          <image>
             <Image url="@../img/PlayButton.png" />
@@ -23,7 +24,7 @@
             <Image url="@../img/ShopButton.png" />
          </image>
       </ImageView>
-      <ImageView id="imageQuit" fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" layoutX="1203.0" layoutY="14.0" onMouseClicked="#closeGame" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit">
+      <ImageView id="imageQuit" fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" layoutX="1203.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit">
          <image>
             <Image url="@../img/QuitButton.png" />
          </image>

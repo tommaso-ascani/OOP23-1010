@@ -8,8 +8,6 @@ import javafx.util.Pair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.gson.JsonArray;
-
 public class JsonUtils {
 
     private static final String DATA_PATH = "src/main/resources/config/";

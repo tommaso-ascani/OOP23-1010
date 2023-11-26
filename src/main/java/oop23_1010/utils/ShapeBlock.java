@@ -85,7 +85,7 @@ public class ShapeBlock extends Path {
             case BLOCK_3x3:
                 this.width = 3;
                 this.height = 3;
-                this.color = ColorType.DARKORANGE;
+                this.color = ColorType.DODGERBLUE;
                 break;
             case BLOCK_4x1:
                 this.width = 4;
