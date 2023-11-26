@@ -51,12 +51,13 @@ public class HomeView extends ViewImpl {
         // saved grid in GridLoaded
         try {
             if (JsonUtils.jsonMatchExist()) {
-                System.out.println("cesta");
                 this.imagePlay.setDisable(true);
+                this.imagePlay.setOpacity(0.4);
                 this.sliderGridWidth.setDisable(true);
+                this.sliderGridWidth.setOpacity(0.4);
             } else {
-                System.out.println("non ce sta");
                 this.imageResume.setDisable(true);
+                this.imageResume.setOpacity(0.4);
             }
         } catch (IOException e) {
             e.printStackTrace();
