@@ -26,15 +26,17 @@ public class ShapeBlock extends Path {
 
     private BlocksAvailable<ShapeBlock> blocksAvalaible;
 
+    private Bounds bounds;
+
     // Constuctor
 
     public ShapeBlock(BlockType type, Pane pane, GameGrid<GridBlock> grid,
             BlocksAvailable<ShapeBlock> blocksAvalaible) {
 
-        Bounds boundsInScene = this.localToScene(this.getBoundsInLocal());
+        this.bounds = this.localToScene(this.getBoundsInLocal());
 
-        this.startX = boundsInScene.getMinX();
-        this.startY = boundsInScene.getMinY();
+        this.startX = this.bounds.getMinX();
+        this.startY = this.bounds.getMinY();
 
         this.type = type;
         this.grid = grid;
@@ -141,6 +143,18 @@ public class ShapeBlock extends Path {
 
     public ColorType getColor() {
         return this.color;
+    }
+
+    public Integer getTriggerX() {
+        this.bounds = this.localToScene(this.getBoundsInLocal());
+        Double tempX = this.bounds.getMinX();
+        return tempX.intValue() + (grid.getGridCellSize()/2);
+    }
+
+    public Integer getTriggerY() {
+        this.bounds = this.localToScene(this.getBoundsInLocal());
+        Double tempY = this.bounds.getMinY();
+        return tempY.intValue() + (grid.getGridCellSize()/2);
     }
 
     // -------- Methods --------

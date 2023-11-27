@@ -1,5 +1,6 @@
 package oop23_1010.utils;
 
+import javafx.geometry.Bounds;
 import javafx.scene.layout.AnchorPane;
 import oop23_1010.types.ColorType;
 
@@ -9,6 +10,8 @@ public class GridBlock extends AnchorPane {
     private Integer y;
 
     private ColorType color;
+
+    private Bounds bounds;
 
     // Constuctor
 
@@ -36,5 +39,25 @@ public class GridBlock extends AnchorPane {
 
     public ColorType getFill() {
         return this.color;
+    }
+
+    public Double getMinX() {
+        bounds = this.localToScene(this.getBoundsInLocal());
+        return bounds.getMinX();
+    }
+
+    public Double getMinY() {
+        bounds = this.localToScene(this.getBoundsInLocal());
+        return bounds.getMinY();
+    }
+
+    public Double getMaxX() {
+        bounds = this.localToScene(this.getBoundsInLocal());
+        return bounds.getMaxX();
+    }
+
+    public Double getMaxY() {
+        bounds = this.localToScene(this.getBoundsInLocal());
+        return bounds.getMaxY();
     }
 }

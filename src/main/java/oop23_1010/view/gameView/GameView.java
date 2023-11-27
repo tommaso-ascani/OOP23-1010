@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -19,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
 import javafx.util.Pair;
 import oop23_1010.types.BlockType;
@@ -388,8 +386,10 @@ public class GameView extends ViewImpl {
      */
     public void setBlockReadyToBePlaced(ShapeBlock block) {
         block.setOnMouseReleased(e -> {
-            GridBlock node = (GridBlock) this.getNodeIfUpLeftCornerInGrid(block);
-            if (this.getNodeIfUpLeftCornerInGrid(block) != null) {
+
+            GridBlock node = (GridBlock) this.getNodeIfTriggered(block);
+
+            if (this.getNodeIfTriggered(block) != null) {
 
                 Integer targetX = node.getGridX();
                 Integer targetY = node.getGridY();
@@ -500,16 +500,12 @@ public class GameView extends ViewImpl {
      * @param block the block to check the up-left corner
      * @return the node where the corner is
      */
-    public Node getNodeIfUpLeftCornerInGrid(Path block) {
-
-        Bounds boundsInScene = block.localToScene(block.getBoundsInLocal());
-        for (Node node : this.gridPane.getChildren()) {
-            if ((node.localToScene(node.getBoundsInLocal()).getMaxX() > boundsInScene.getMinX()
-                    && boundsInScene.getMinX() > node.localToScene(node.getBoundsInLocal()).getMinX()) &&
-                    (node.localToScene(node.getBoundsInLocal()).getMaxY() > boundsInScene.getMinY()
-                            && boundsInScene.getMinY() > node.localToScene(node.getBoundsInLocal()).getMinY())) {
+    public Node getNodeIfTriggered(ShapeBlock block) {
+        for (GridBlock node : this.grid) {
+            if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()) &&
+                (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
                 return node;
-            }
+            }            
         }
         return null;
     }
