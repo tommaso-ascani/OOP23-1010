@@ -47,8 +47,9 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setMinorTickCount(0);
         this.sliderGridWidth.setSnapToTicks(true);
 
-        // In this try catch we control if there is a saved match and if true, load the
-        // saved grid in GridLoaded
+        // In this try catch we control if there is a json file with saved data and if
+        // true, make the play button and the slider disable, if false make de resume
+        // button disable
         try {
             if (JsonUtils.jsonMatchExist()) {
                 this.imagePlay.setDisable(true);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class GameGrid<E> extends ArrayList<GridBlock> {
 
     private Integer gridSize;
+    private Integer gridCellSize;
 
     public GameGrid(Integer gridSize) {
         this.gridSize = gridSize;
@@ -14,7 +15,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
 
     public GridBlock getUpBlock(GridBlock block, Integer offset) {
         for (GridBlock x : this) {
-            if (block.getGridX() == x.getGridX() && block.getGridY()-offset == x.getGridY()) {
+            if (block.getGridX() == x.getGridX() && block.getGridY() - offset == x.getGridY()) {
                 return x;
             }
         }
@@ -25,29 +26,29 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
 
     public GridBlock getDownBlock(GridBlock block, Integer offset) {
         for (GridBlock x : this) {
-            if (block.getGridX() == x.getGridX() && block.getGridY()+offset == x.getGridY()) {
+            if (block.getGridX() == x.getGridX() && block.getGridY() + offset == x.getGridY()) {
                 return x;
             }
         }
         return null;
     }
-    
+
     // Get right block
 
     public GridBlock getRightBlock(GridBlock block, Integer offset) {
         for (GridBlock x : this) {
-            if (block.getGridX()+offset == x.getGridX() && block.getGridY() == x.getGridY()) {
+            if (block.getGridX() + offset == x.getGridX() && block.getGridY() == x.getGridY()) {
                 return x;
             }
         }
         return null;
     }
-    
+
     // Get left block
 
     public GridBlock getLeftBlock(GridBlock block, Integer offset) {
         for (GridBlock x : this) {
-            if (block.getGridX()-offset == x.getGridX() && block.getGridY() == x.getGridY()) {
+            if (block.getGridX() - offset == x.getGridX() && block.getGridY() == x.getGridY()) {
                 return x;
             }
         }
@@ -56,14 +57,22 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
 
     public GridBlock getElement(Integer x, Integer y) {
         for (GridBlock elem : this) {
-            if(elem.getGridX() == x && elem.getGridY() == y){
+            if (elem.getGridX() == x && elem.getGridY() == y) {
                 return elem;
             }
         }
         return null;
     }
 
-    public Integer getGridSize(){
+    public Integer getGridSize() {
         return this.gridSize;
+    }
+
+    public void setGridCellSize(Integer cellSize) {
+        this.gridCellSize = cellSize;
+    }
+
+    public Integer getGridCellSize() {
+        return this.gridCellSize;
     }
 }

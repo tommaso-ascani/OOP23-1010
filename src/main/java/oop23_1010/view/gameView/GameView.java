@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Pair;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.ColorType;
@@ -35,7 +37,6 @@ import oop23_1010.view.ViewType;
 
 public class GameView extends ViewImpl {
 
-    public int gridCellSize;
     private GameGrid<GridBlock> grid;
     public BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
@@ -96,21 +97,20 @@ public class GameView extends ViewImpl {
                 grid = new GameGrid<>(HomeView.getGridSize());
             }
         } catch (JSONException | IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         if (grid.getGridSize() == 5) {
-            gridCellSize = 45;
+            grid.setGridCellSize(45);
         }
         if (grid.getGridSize() == 10) {
-            gridCellSize = 35;
+            grid.setGridCellSize(35);
         }
         if (grid.getGridSize() == 15) {
-            gridCellSize = 30;
+            grid.setGridCellSize(30);
         }
         if (grid.getGridSize() == 20) {
-            gridCellSize = 25;
+            grid.setGridCellSize(25);
         }
 
         this.createGridCells();
@@ -129,8 +129,22 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
 
-        createNewPuzzles();
+        this.createNewPuzzles();
 
+        this.createPausePane();
+
+        Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
+                this.downRightSpawn, this.pausePane);
+
+        this.getStage().setScene(new Scene(gruppo));
+        this.getStage().show();
+    }
+
+    /*
+     * Instantiate the pause pane and all the sub-object, like button and pane, and
+     * set size, style, position and text of all
+     */
+    public void createPausePane() {
         this.pausePane.setVisible(false);
         this.pausePane.setPrefSize(ViewSwitcher.getWindowWidth() / 1.5, ViewSwitcher.getWindowHeight() / 1.5);
         this.pausePane.setStyle(
@@ -143,20 +157,21 @@ public class GameView extends ViewImpl {
         Button buttonRicomincia = new Button("Ricomincia");
         Button buttonMenu = new Button("Menu");
         Pane dialogPane = new Pane();
-        dialogPane.setVisible(false);
         Button dialogYes = new Button("Si, ricomincia");
         Button dialogNo = new Button("No, indietro");
-
-        dialogPane.getChildren().addAll(dialogYes, dialogNo);
-
-        this.pausePane.getChildren().addAll(buttonRiprendi, buttonRicomincia, buttonMenu, dialogPane);
+        Label dialogLabel1 = new Label("Ricominciare?");
+        Label dialogLabel2 = new Label("(La partita corrente verra' sovrascritta)");
 
         buttonRiprendi.setPrefSize(80, 40);
         buttonRicomincia.setPrefSize(80, 40);
         buttonMenu.setPrefSize(80, 40);
         dialogPane.setPrefSize(300, 200);
-        dialogYes.setPrefSize(80, 30);
-        dialogNo.setPrefSize(80, 30);
+        dialogYes.setPrefSize(90, 30);
+        dialogNo.setPrefSize(90, 30);
+        dialogLabel1.setPrefSize(80, 30);
+        dialogLabel2.setPrefSize(300, 30);
+        dialogLabel1.setAlignment(Pos.BASELINE_CENTER);
+        dialogLabel2.setAlignment(Pos.BASELINE_CENTER);
 
         buttonRiprendi.relocate((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2,
                 (this.pausePane.getPrefHeight() - 40) / 2);
@@ -168,38 +183,94 @@ public class GameView extends ViewImpl {
 
         dialogPane.relocate((this.pausePane.getPrefWidth() - 300) / 2, (this.pausePane.getPrefHeight() - 200) / 2);
 
-        dialogYes.relocate((dialogPane.getPrefWidth() - dialogYes.getWidth() - dialogNo.getWidth()) / 2,
-                (dialogPane.getPrefHeight() - dialogYes.getHeight()) / 2);
+        dialogYes.relocate((dialogPane.getPrefWidth() - dialogYes.getPrefWidth() - dialogNo.getPrefWidth()) / 3,
+                (dialogPane.getPrefHeight() - dialogYes.getPrefHeight()) / 1.4);
         dialogNo.relocate(
-                (dialogPane.getPrefWidth() - dialogNo.getWidth()
-                        - ((dialogPane.getPrefWidth() - dialogYes.getWidth() - dialogNo.getWidth() - 40)) / 2),
-                (dialogPane.getPrefHeight() - dialogYes.getHeight()) / 2);
+                (dialogPane.getPrefWidth() - dialogNo.getPrefWidth()
+                        - ((dialogPane.getPrefWidth() - dialogYes.getPrefWidth() - dialogNo.getPrefWidth() - 40)) / 2),
+                (dialogPane.getPrefHeight() - dialogYes.getPrefHeight()) / 1.4);
 
+        dialogLabel1.relocate((dialogPane.getPrefWidth() - dialogLabel1.getPrefWidth()) / 2,
+                (dialogPane.getPrefHeight() - dialogNo.getPrefHeight()) / 5);
+
+        dialogLabel2.relocate((dialogPane.getPrefWidth() - dialogLabel2.getPrefWidth()) / 2, 60);
+
+        dialogPane.setVisible(false);
         dialogPane.setStyle("-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
 
-        buttonRiprendi.setOnMouseClicked(e -> {
+        dialogPane.getChildren().addAll(dialogYes, dialogNo, dialogLabel1, dialogLabel2);
+        this.pausePane.getChildren().addAll(buttonRiprendi, buttonRicomincia, buttonMenu, dialogPane);
+
+        this.setListenersPausePane(buttonMenu, buttonRiprendi, buttonRicomincia, dialogYes, dialogNo, dialogPane);
+
+    }
+
+    /**
+     * This method is used to set the listeners to the various button in the pause
+     * menu
+     * 
+     * @param btnMenu    the menu button
+     * @param btnResume  the resunme button
+     * @param btnRestart the restart button
+     * @param btnDialogY the dialog yes button
+     * @param btnDialogN the dialog no button
+     * @param dialogPane the dialog pane
+     */
+    private void setListenersPausePane(Button btnMenu, Button btnResume, Button btnRestart, Button btnDialogY,
+            Button btnDialogN, Pane dialogPane) {
+        btnResume.setOnMouseClicked(e -> {
             this.pausePane.setVisible(false);
-            this.upLeftSpawn.setVisible(true);
-            this.downLeftSpawn.setVisible(true);
-            this.upRightSpawn.setVisible(true);
-            this.downRightSpawn.setVisible(true);
-            this.labelCoin.setVisible(true);
-            this.labelScore.setVisible(true);
+
+            this.upLeftSpawn.setDisable(false);
+            this.upLeftSpawn.setOpacity(1);
+
+            this.downLeftSpawn.setDisable(false);
+            this.downLeftSpawn.setOpacity(1);
+
+            this.upRightSpawn.setDisable(false);
+            this.upRightSpawn.setOpacity(1);
+
+            this.downRightSpawn.setDisable(false);
+            this.downRightSpawn.setOpacity(1);
+
+            this.labelCoin.setDisable(false);
+            this.labelCoin.setOpacity(1);
+
+            this.labelScore.setDisable(false);
+            this.labelScore.setOpacity(1);
         });
 
-        buttonRicomincia.setOnMouseClicked(e -> {
+        btnRestart.setOnMouseClicked(e -> {
             dialogPane.setVisible(true);
+
+            btnMenu.setDisable(true);
+            btnMenu.setOpacity(0.5);
+
+            btnRestart.setDisable(true);
+            btnRestart.setOpacity(0.5);
+
+            btnResume.setDisable(true);
+            btnResume.setOpacity(0.5);
         });
 
-        dialogYes.setOnMouseClicked(e -> {
+        btnDialogY.setOnMouseClicked(e -> {
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
         });
 
-        dialogNo.setOnMouseClicked(e -> {
+        btnDialogN.setOnMouseClicked(e -> {
             dialogPane.setVisible(false);
+
+            btnMenu.setDisable(false);
+            btnMenu.setOpacity(1);
+
+            btnRestart.setDisable(false);
+            btnRestart.setOpacity(1);
+
+            btnResume.setDisable(false);
+            btnResume.setOpacity(1);
         });
 
-        buttonMenu.setOnMouseClicked(e -> {
+        btnMenu.setOnMouseClicked(e -> {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.score));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
@@ -228,21 +299,11 @@ public class GameView extends ViewImpl {
 
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
         });
-
-        Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
-                this.downRightSpawn, this.pausePane);
-
-        this.getStage().setScene(new Scene(gruppo));
-        this.getStage().show();
-    }
-
-    public void mainLoop() {
-
     }
 
     /**
      * This method is used to set the listener when the mouse is released on the
-     * block
+     * blocks
      * 
      * @param block
      */
@@ -302,6 +363,10 @@ public class GameView extends ViewImpl {
         });
     }
 
+    /*
+     * This method is used to check if any columns or rows are completed and, in
+     * case, removes them.
+     */
     private void controlIfLinesCompleted() {
 
         ArrayList<GridBlock> line;
@@ -370,15 +435,16 @@ public class GameView extends ViewImpl {
     }
 
     /**
-     * Creation of GridBlocks, add them to GridPane and to the reference of
-     * GridPane, the ArrayList<GridBlock> grid
+     * This methos is used to check if the grid is empty, then copy it in the
+     * griPane to resume a game, or not, then create the panes and add them empty in
+     * the gridPane
      */
     public void createGridCells() {
+        // Check if grid is full
         if (!this.grid.isEmpty()) {
-            System.out.println("ECCOMI");
             for (GridBlock gridBlock : this.grid) {
-                gridBlock.setPrefHeight(gridCellSize);
-                gridBlock.setPrefWidth(gridCellSize);
+                gridBlock.setPrefHeight(grid.getGridCellSize());
+                gridBlock.setPrefWidth(grid.getGridCellSize());
                 if (gridBlock.getFill() == null) {
                     gridBlock.setStyle(
                             "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
@@ -390,13 +456,14 @@ public class GameView extends ViewImpl {
 
                 this.gridPane.add(gridBlock, gridBlock.getGridX(), gridBlock.getGridY());
             }
+            // then the grid is empty so create panes
         } else {
             for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
                 for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
                     GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null);
 
-                    aPane.setPrefHeight(gridCellSize);
-                    aPane.setPrefWidth(gridCellSize);
+                    aPane.setPrefHeight(grid.getGridCellSize());
+                    aPane.setPrefWidth(grid.getGridCellSize());
                     aPane.setStyle(
                             "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
 
@@ -409,7 +476,7 @@ public class GameView extends ViewImpl {
     }
 
     /**
-     * This method is used to set the various final preference sizes of all the
+     * This method is used to set the various final preference sizes of all the main
      * panels in the view
      */
     public void setPanelsPrefSizes() {
@@ -428,7 +495,7 @@ public class GameView extends ViewImpl {
     }
 
     /**
-     * This method is used to set the style of the panels
+     * This method is used to set the style of the main panels
      */
     public void setPanelsStyle() {
         String SpawnPanlesStyle = "-fx-border-width: 5; -fx-border-color: black; -fx-border-radius: 10";
@@ -488,20 +555,39 @@ public class GameView extends ViewImpl {
      * @return the width of the GridPane
      */
     public int getGridWidth() {
-        int gridWidth = (grid.getGridSize() * gridCellSize) + (grid.getGridSize() - 1) * GAP_GRID_PANE;
+        int gridWidth = (grid.getGridSize() * grid.getGridCellSize()) + (grid.getGridSize() - 1) * GAP_GRID_PANE;
         return gridWidth;
     }
 
+    /*
+     * This methos is the listeners attached to the pause button and display the
+     * pause menu and disable the game view
+     */
     public void switchToPauseView() {
         this.pausePane.setVisible(true);
-        this.upLeftSpawn.setVisible(false);
-        this.downLeftSpawn.setVisible(false);
-        this.upRightSpawn.setVisible(false);
-        this.downRightSpawn.setVisible(false);
-        this.labelCoin.setVisible(false);
-        this.labelScore.setVisible(false);
+
+        this.upLeftSpawn.setDisable(true);
+        this.upLeftSpawn.setOpacity(0.5);
+
+        this.downLeftSpawn.setDisable(true);
+        this.downLeftSpawn.setOpacity(0.5);
+
+        this.upRightSpawn.setDisable(true);
+        this.upRightSpawn.setOpacity(0.5);
+
+        this.downRightSpawn.setDisable(true);
+        this.downRightSpawn.setOpacity(0.5);
+
+        this.labelCoin.setDisable(true);
+        this.labelCoin.setOpacity(0.5);
+
+        this.labelScore.setDisable(true);
+        this.labelScore.setOpacity(0.5);
     }
 
+    /*
+     * This method is used to create random instances of blocks to play with
+     */
     public void createNewPuzzles() {
 
         ShapeBlock block;
@@ -513,19 +599,19 @@ public class GameView extends ViewImpl {
 
             switch (x) {
                 case 1:
-                    block = new ShapeBlock(type, upLeftSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, upLeftSpawn, this.grid, blocksAvalaible);
                     break;
                 case 2:
-                    block = new ShapeBlock(type, upRightSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, upRightSpawn, this.grid, blocksAvalaible);
                     break;
                 case 3:
-                    block = new ShapeBlock(type, downLeftSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, downLeftSpawn, this.grid, blocksAvalaible);
                     break;
                 case 4:
-                    block = new ShapeBlock(type, downRightSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, downRightSpawn, this.grid, blocksAvalaible);
                     break;
                 default:
-                    block = new ShapeBlock(type, upLeftSpawn, this, blocksAvalaible);
+                    block = new ShapeBlock(type, upLeftSpawn, this.grid, blocksAvalaible);
                     break;
             }
             this.setBlockReadyToBePlaced(block);

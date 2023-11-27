@@ -9,12 +9,11 @@ import javafx.scene.shape.Path;
 import oop23_1010.controllers.Movement;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.ColorType;
-import oop23_1010.view.gameView.GameView;
 
 public class ShapeBlock extends Path {
 
     private BlockType type;
-    private GameView view;
+    private GameGrid<GridBlock> grid;
     private Pane pane;
 
     private Integer width;
@@ -29,7 +28,8 @@ public class ShapeBlock extends Path {
 
     // Constuctor
 
-    public ShapeBlock(BlockType type, Pane pane, GameView view, BlocksAvailable<ShapeBlock> blocksAvalaible) {
+    public ShapeBlock(BlockType type, Pane pane, GameGrid<GridBlock> grid,
+            BlocksAvailable<ShapeBlock> blocksAvalaible) {
 
         Bounds boundsInScene = this.localToScene(this.getBoundsInLocal());
 
@@ -37,7 +37,7 @@ public class ShapeBlock extends Path {
         this.startY = boundsInScene.getMinY();
 
         this.type = type;
-        this.view = view;
+        this.grid = grid;
         this.pane = pane;
         this.blocksAvalaible = blocksAvalaible;
 
@@ -98,21 +98,21 @@ public class ShapeBlock extends Path {
                 this.color = ColorType.FIREBRICK;
                 break;
             // case BLOCK_L_BOTTOM_LEFT_2x2:
-            //     break;
+            // break;
             // case BLOCK_L_BOTTOM_LEFT_3X3:
-            //     break;
+            // break;
             // case BLOCK_L_BOTTOM_RIGHT_2x2:
-            //     break;
+            // break;
             // case BLOCK_L_BOTTOM_RIGHT_3X3:
-            //     break;
+            // break;
             // case BLOCK_L_TOP_LEFT_2x2:
-            //     break;
+            // break;
             // case BLOCK_L_TOP_LEFT_3X3:
-            //     break;
+            // break;
             // case BLOCK_L_TOP_RIGHT_2x2:
-            //     break;
+            // break;
             // case BLOCK_L_TOP_RIGHT_3X3:
-            //     break;
+            // break;
             default:
                 break;
         }
@@ -154,17 +154,17 @@ public class ShapeBlock extends Path {
         for (x = 0; x < this.width; x++) {
             for (y = 0; y < this.height; y++) {
                 this.getElements().addAll(
-                        new MoveTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize,
-                                (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize),
+                        new MoveTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize(),
+                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize()),
 
-                        new LineTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize,
-                                (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize * 2),
-                        new LineTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize * 2,
-                                (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize * 2),
-                        new LineTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize * 2,
-                                (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize),
-                        new LineTo((x * (this.view.gridCellSize + 3)) + this.view.gridCellSize,
-                                (y * (this.view.gridCellSize + 3)) + this.view.gridCellSize),
+                        new LineTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize(),
+                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize() * 2),
+                        new LineTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize() * 2,
+                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize() * 2),
+                        new LineTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize() * 2,
+                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize()),
+                        new LineTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize(),
+                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize()),
 
                         new ClosePath());
             }
