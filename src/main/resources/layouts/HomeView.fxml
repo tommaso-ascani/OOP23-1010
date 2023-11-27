@@ -36,13 +36,10 @@
       </ImageView>
       <Slider id="sliderGridWidth" fx:id="sliderGridWidth" layoutX="654.0" layoutY="448.0" snapToTicks="true" />
       <Label layoutX="495.0" layoutY="447.0" text="Grandezza della griglia:" />
-      <ImageView id="imageResume" fx:id="imageResume" fitHeight="60.0" fitWidth="60.0" layoutX="528.0" layoutY="318.0" onMouseClicked="#switchToPlayView" pickOnBounds="true" preserveRatio="true" styleClass="imageResume">
+      <ImageView id="imageResume" fx:id="imageResume" fitHeight="60.0" fitWidth="60.0" layoutX="528.0" layoutY="318.0" onMouseClicked="#createDialogResume" pickOnBounds="true" preserveRatio="true" styleClass="imageResume">
          <image>
             <Image url="@../img/ResumeButton.png" />
          </image>
       </ImageView>
    </children>
-   <stylesheets>
-      <URL value="@../styles/HomeViewStyle.css" />
-   </stylesheets>
 </AnchorPane>

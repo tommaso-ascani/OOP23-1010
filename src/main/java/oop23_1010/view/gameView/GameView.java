@@ -21,7 +21,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Pair;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.ColorType;
@@ -153,25 +152,39 @@ public class GameView extends ViewImpl {
                 this.pausePane.getPrefWidth()) / 2),
                 ((ViewSwitcher.getWindowHeight() - this.pausePane.getPrefHeight()) / 2));
 
-        Button buttonRiprendi = new Button("Riprendi");
-        Button buttonRicomincia = new Button("Ricomincia");
+        Button buttonRiprendi = new Button("Resume");
+        Button buttonRicomincia = new Button("Restart");
         Button buttonMenu = new Button("Menu");
-        Pane dialogPane = new Pane();
-        Button dialogYes = new Button("Si, ricomincia");
-        Button dialogNo = new Button("No, indietro");
-        Label dialogLabel1 = new Label("Ricominciare?");
-        Label dialogLabel2 = new Label("(La partita corrente verra' sovrascritta)");
+        Pane dialogPaneRestart = new Pane();
+        Button dialogRestartYes = new Button("Yes");
+        Button dialogRestartNo = new Button("No");
+        Label dialogRestartLabel1 = new Label("Restart?");
+        Label dialogRestartLabel2 = new Label("(The current game will be overwritten)");
+        Pane dialogPaneMenu = new Pane();
+        Button dialogMenuYes = new Button("Save and quit");
+        Button dialogMenuNo = new Button("Quit");
+        Button dialogMenuBack = new Button("Back");
+        Label dialogMenuLabel1 = new Label("Quit and go to main menu?");
+        Label dialogMenuLabel2 = new Label("(Choose whether to save the game)");
 
         buttonRiprendi.setPrefSize(80, 40);
         buttonRicomincia.setPrefSize(80, 40);
         buttonMenu.setPrefSize(80, 40);
-        dialogPane.setPrefSize(300, 200);
-        dialogYes.setPrefSize(90, 30);
-        dialogNo.setPrefSize(90, 30);
-        dialogLabel1.setPrefSize(80, 30);
-        dialogLabel2.setPrefSize(300, 30);
-        dialogLabel1.setAlignment(Pos.BASELINE_CENTER);
-        dialogLabel2.setAlignment(Pos.BASELINE_CENTER);
+        dialogPaneRestart.setPrefSize(300, 200);
+        dialogRestartYes.setPrefSize(90, 30);
+        dialogRestartNo.setPrefSize(90, 30);
+        dialogRestartLabel1.setPrefSize(80, 30);
+        dialogRestartLabel2.setPrefSize(300, 30);
+        dialogRestartLabel1.setAlignment(Pos.BASELINE_CENTER);
+        dialogRestartLabel2.setAlignment(Pos.BASELINE_CENTER);
+        dialogPaneMenu.setPrefSize(300, 200);
+        dialogMenuYes.setPrefSize(90, 30);
+        dialogMenuNo.setPrefSize(90, 30);
+        dialogMenuBack.setPrefSize(90, 30);
+        dialogMenuLabel1.setPrefSize(300, 30);
+        dialogMenuLabel2.setPrefSize(300, 30);
+        dialogMenuLabel1.setAlignment(Pos.BASELINE_CENTER);
+        dialogMenuLabel2.setAlignment(Pos.BASELINE_CENTER);
 
         buttonRiprendi.relocate((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2,
                 (this.pausePane.getPrefHeight() - 40) / 2);
@@ -181,27 +194,62 @@ public class GameView extends ViewImpl {
                 this.pausePane.getPrefWidth() - 80 - ((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2),
                 (this.pausePane.getPrefHeight() - 40) / 2);
 
-        dialogPane.relocate((this.pausePane.getPrefWidth() - 300) / 2, (this.pausePane.getPrefHeight() - 200) / 2);
+        dialogPaneRestart.relocate((this.pausePane.getPrefWidth() - dialogPaneRestart.getPrefWidth()) / 2,
+                (this.pausePane.getPrefHeight() - dialogPaneRestart.getPrefHeight()) / 2);
 
-        dialogYes.relocate((dialogPane.getPrefWidth() - dialogYes.getPrefWidth() - dialogNo.getPrefWidth()) / 3,
-                (dialogPane.getPrefHeight() - dialogYes.getPrefHeight()) / 1.4);
-        dialogNo.relocate(
-                (dialogPane.getPrefWidth() - dialogNo.getPrefWidth()
-                        - ((dialogPane.getPrefWidth() - dialogYes.getPrefWidth() - dialogNo.getPrefWidth() - 40)) / 2),
-                (dialogPane.getPrefHeight() - dialogYes.getPrefHeight()) / 1.4);
+        dialogRestartYes.relocate(
+                (dialogPaneRestart.getPrefWidth() - dialogRestartYes.getPrefWidth() - dialogRestartNo.getPrefWidth())
+                        / 3,
+                (dialogPaneRestart.getPrefHeight() - dialogRestartYes.getPrefHeight()) / 1.4);
+        dialogRestartNo.relocate(
+                (dialogPaneRestart.getPrefWidth() - dialogRestartNo.getPrefWidth()
+                        - ((dialogPaneRestart.getPrefWidth() - dialogRestartYes.getPrefWidth()
+                                - dialogRestartNo.getPrefWidth() - 40)) / 2),
+                (dialogPaneRestart.getPrefHeight() - dialogRestartYes.getPrefHeight()) / 1.4);
 
-        dialogLabel1.relocate((dialogPane.getPrefWidth() - dialogLabel1.getPrefWidth()) / 2,
-                (dialogPane.getPrefHeight() - dialogNo.getPrefHeight()) / 5);
+        dialogRestartLabel1.relocate((dialogPaneRestart.getPrefWidth() - dialogRestartLabel1.getPrefWidth()) / 2,
+                (dialogPaneRestart.getPrefHeight() - dialogRestartNo.getPrefHeight()) / 5);
 
-        dialogLabel2.relocate((dialogPane.getPrefWidth() - dialogLabel2.getPrefWidth()) / 2, 60);
+        dialogRestartLabel2.relocate((dialogPaneRestart.getPrefWidth() - dialogRestartLabel2.getPrefWidth()) / 2, 60);
 
-        dialogPane.setVisible(false);
-        dialogPane.setStyle("-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+        dialogPaneMenu.relocate((this.pausePane.getPrefWidth() - dialogPaneRestart.getPrefWidth()) / 2,
+                (this.pausePane.getPrefHeight() - dialogPaneRestart.getPrefHeight()) / 2);
 
-        dialogPane.getChildren().addAll(dialogYes, dialogNo, dialogLabel1, dialogLabel2);
-        this.pausePane.getChildren().addAll(buttonRiprendi, buttonRicomincia, buttonMenu, dialogPane);
+        dialogMenuYes.relocate(
+                (dialogPaneRestart.getPrefWidth() - dialogRestartYes.getPrefWidth() - dialogRestartNo.getPrefWidth())
+                        / 3,
+                (dialogPaneRestart.getPrefHeight() - dialogRestartYes.getPrefHeight()) / 1.5);
 
-        this.setListenersPausePane(buttonMenu, buttonRiprendi, buttonRicomincia, dialogYes, dialogNo, dialogPane);
+        dialogMenuNo.relocate(
+                (dialogPaneRestart.getPrefWidth() - dialogRestartNo.getPrefWidth()
+                        - ((dialogPaneRestart.getPrefWidth() - dialogRestartYes.getPrefWidth()
+                                - dialogRestartNo.getPrefWidth() - 40)) / 2),
+                (dialogPaneRestart.getPrefHeight() - dialogRestartYes.getPrefHeight()) / 1.5);
+
+        dialogMenuBack
+                .relocate(
+                        (dialogPaneMenu.getPrefWidth() - dialogMenuBack.getPrefWidth()) / 2,
+                        (dialogPaneMenu.getPrefHeight() - dialogMenuYes.getPrefHeight()) / 1.1);
+
+        dialogMenuLabel1.relocate((dialogPaneMenu.getPrefWidth() - dialogMenuLabel1.getPrefWidth()) / 2,
+                (dialogPaneMenu.getPrefHeight() - dialogRestartNo.getPrefHeight()) / 5);
+
+        dialogMenuLabel2.relocate((dialogPaneMenu.getPrefWidth() - dialogMenuLabel2.getPrefWidth()) / 2, 60);
+
+        dialogPaneRestart.setVisible(false);
+        dialogPaneMenu.setVisible(false);
+        dialogPaneRestart.setStyle("-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+        dialogPaneMenu.setStyle("-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+
+        dialogPaneRestart.getChildren().addAll(dialogRestartYes, dialogRestartNo, dialogRestartLabel1,
+                dialogRestartLabel2);
+        dialogPaneMenu.getChildren().addAll(dialogMenuYes, dialogMenuNo, dialogMenuBack, dialogMenuLabel1,
+                dialogMenuLabel2);
+        this.pausePane.getChildren().addAll(buttonRiprendi, buttonRicomincia, buttonMenu, dialogPaneRestart,
+                dialogPaneMenu);
+
+        this.setListenersPausePane(buttonMenu, buttonRiprendi, buttonRicomincia, dialogRestartYes, dialogRestartNo,
+                dialogPaneRestart, dialogMenuBack, dialogMenuYes, dialogMenuNo, dialogPaneMenu);
 
     }
 
@@ -217,7 +265,8 @@ public class GameView extends ViewImpl {
      * @param dialogPane the dialog pane
      */
     private void setListenersPausePane(Button btnMenu, Button btnResume, Button btnRestart, Button btnDialogY,
-            Button btnDialogN, Pane dialogPane) {
+            Button btnDialogN, Pane dialogPane, Button btnMenuBack, Button btnMenuY, Button btnMenuN,
+            Pane dialogPaneMenu) {
         btnResume.setOnMouseClicked(e -> {
             this.pausePane.setVisible(false);
 
@@ -271,6 +320,36 @@ public class GameView extends ViewImpl {
         });
 
         btnMenu.setOnMouseClicked(e -> {
+            dialogPaneMenu.setVisible(true);
+
+            btnMenu.setDisable(true);
+            btnMenu.setOpacity(0.5);
+
+            btnRestart.setDisable(true);
+            btnRestart.setOpacity(0.5);
+
+            btnResume.setDisable(true);
+            btnResume.setOpacity(0.5);
+        });
+
+        btnMenuBack.setOnMouseClicked(e -> {
+            dialogPaneMenu.setVisible(false);
+
+            btnMenu.setDisable(false);
+            btnMenu.setOpacity(1);
+
+            btnRestart.setDisable(false);
+            btnRestart.setOpacity(1);
+
+            btnResume.setDisable(false);
+            btnResume.setOpacity(1);
+        });
+
+        btnMenuN.setOnMouseClicked(e -> {
+            ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
+        });
+
+        btnMenuY.setOnMouseClicked(e -> {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.score));
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
@@ -359,6 +438,7 @@ public class GameView extends ViewImpl {
             }
             if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
                 System.out.println("Game Over!");
+                // TODO GAME OVER VIEW
             }
         });
     }

@@ -3,9 +3,13 @@ package oop23_1010.view.gameView;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
@@ -47,7 +51,7 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setMinorTickCount(0);
         this.sliderGridWidth.setSnapToTicks(true);
 
-        // In this try catch we control if there is a json file with saved data and if
+        // In this try/catch we control if there is a json file with saved data and if
         // true, make the play button and the slider disable, if false make de resume
         // button disable
         try {
@@ -65,17 +69,111 @@ public class HomeView extends ViewImpl {
         }
     }
 
+    /*
+     * This method is used to switch view to the setting view
+     */
     public void switchToSettingsView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.SETTINGS);
     }
 
+    /*
+     * This method is used to switch view to the shop view
+     */
     public void switchToShopView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.SHOP);
     }
 
+    /*
+     * This method is used to switch view to the geme view and setting the grid size
+     * if is a new game
+     */
     public void switchToPlayView() {
         HomeView.gridSize = (int) this.sliderGridWidth.getValue();
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
+    }
+
+    /*
+     * This method is used to create and positionize all nodes in the dialog pane
+     * for resume a game
+     */
+    public void createDialogResume() {
+        Pane dialogPaneResume = new Pane();
+        Button dialogResumeYes = new Button("Resume the game");
+        Button dialogResumeDelete = new Button("Delete the game");
+        Button dialogResumeBack = new Button("Back");
+        Label dialogResumeLabel1 = new Label("What do you want to do?");
+
+        dialogResumeLabel1.setAlignment(Pos.BASELINE_CENTER);
+        dialogPaneResume.setStyle(
+                "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+
+        dialogPaneResume.setPrefSize(300, 200);
+        dialogResumeYes.setPrefSize(120, 30);
+        dialogResumeDelete.setPrefSize(120, 30);
+        dialogResumeBack.setPrefSize(90, 30);
+        dialogResumeLabel1.setPrefSize(300, 30);
+
+        dialogPaneResume.relocate((this.mainPane.getPrefWidth() - dialogPaneResume.getPrefWidth()) / 2,
+                (this.mainPane.getPrefHeight() - dialogPaneResume.getPrefHeight()) / 2);
+
+        dialogResumeYes.relocate(
+                (dialogPaneResume.getPrefWidth() - dialogResumeYes.getPrefWidth() - dialogResumeDelete.getPrefWidth())
+                        / 3,
+                (dialogPaneResume.getPrefHeight() - dialogResumeYes.getPrefHeight()) / 1.5);
+
+        dialogResumeDelete.relocate((dialogPaneResume.getPrefWidth() - dialogResumeDelete.getPrefWidth()
+                - ((dialogPaneResume.getPrefWidth() - dialogResumeYes.getPrefWidth()
+                        - dialogResumeDelete.getPrefWidth() - 40)) / 2),
+                (dialogPaneResume.getPrefHeight() - dialogResumeYes.getPrefHeight()) / 1.5);
+
+        dialogResumeBack.relocate((dialogPaneResume.getPrefWidth() - dialogResumeBack.getPrefWidth()) / 2,
+                (dialogPaneResume.getPrefHeight() - dialogResumeBack.getPrefHeight()) / 1.1);
+
+        dialogResumeLabel1.relocate((dialogPaneResume.getPrefWidth() - dialogResumeLabel1.getPrefWidth()) / 2,
+                (dialogPaneResume.getPrefHeight() - dialogResumeBack.getPrefHeight()) / 5);
+
+        dialogPaneResume.getChildren().addAll(dialogResumeBack, dialogResumeDelete, dialogResumeLabel1,
+                dialogResumeYes);
+
+        this.mainPane.getChildren().add(dialogPaneResume);
+
+        dialogPaneResume.setVisible(true);
+
+        this.setListenersResumePane(dialogResumeBack, dialogResumeDelete, dialogResumeYes, dialogPaneResume);
+    }
+
+    /**
+     * This method is used to set the listeners to all the buttons in the dialog
+     * resume pane
+     * 
+     * @param btnBack    the back button
+     * @param btnDelete  the delete button
+     * @param btnResume  the resume button
+     * @param paneResume the dialog resume pane
+     */
+    private void setListenersResumePane(Button btnBack, Button btnDelete, Button btnResume, Pane paneResume) {
+        btnBack.setOnMouseClicked(e -> {
+            paneResume.setVisible(false);
+        });
+
+        btnDelete.setOnMouseClicked(e -> {
+            try {
+                JsonUtils.flushJson();
+                paneResume.setVisible(false);
+                this.imageResume.setDisable(true);
+                this.imageResume.setOpacity(0.4);
+                this.imagePlay.setDisable(false);
+                this.imagePlay.setOpacity(1);
+                this.sliderGridWidth.setDisable(false);
+                this.sliderGridWidth.setOpacity(1);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+
+        btnResume.setOnMouseClicked(e -> {
+            this.switchToPlayView();
+        });
     }
 
     public static int getGridSize() {
