@@ -6,9 +6,11 @@ import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.stage.Window;
 import oop23_1010.controllers.Movement;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.ColorType;
+import oop23_1010.view.ViewSwitcher;
 
 public class ShapeBlock extends Path {
 
@@ -18,6 +20,9 @@ public class ShapeBlock extends Path {
 
     private Integer width;
     private Integer height;
+
+    private Double widthPx;
+    private Double heigthPx;
 
     private ColorType color;
 
@@ -34,10 +39,6 @@ public class ShapeBlock extends Path {
             BlocksAvailable<ShapeBlock> blocksAvalaible) {
 
         this.bounds = this.localToScene(this.getBoundsInLocal());
-
-        this.startX = this.bounds.getMinX();
-        this.startY = this.bounds.getMinY();
-
         this.type = type;
         this.grid = grid;
         this.pane = pane;
@@ -148,13 +149,13 @@ public class ShapeBlock extends Path {
     public Integer getTriggerX() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
         Double tempX = this.bounds.getMinX();
-        return tempX.intValue() + (grid.getGridCellSize()/2);
+        return tempX.intValue() + (grid.getGridCellSize() / 2);
     }
 
     public Integer getTriggerY() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
         Double tempY = this.bounds.getMinY();
-        return tempY.intValue() + (grid.getGridCellSize()/2);
+        return tempY.intValue() + (grid.getGridCellSize() / 2);
     }
 
     // -------- Methods --------
@@ -184,6 +185,14 @@ public class ShapeBlock extends Path {
             }
         }
 
+        this.widthPx = this.getBoundsInParent().getMaxX() - this.getBoundsInParent().getMinX();
+        this.heigthPx = this.getBoundsInParent().getMaxY() - this.getBoundsInParent().getMinY();
+
+        this.startX = (this.pane.getPrefWidth() - this.widthPx) / 2;
+        this.startY = (this.pane.getPrefHeight() - this.heigthPx) / 2;
+
+        this.relocate(this.startX, this.startY);
+
         this.setStyle("-fx-fill: " + this.color);
         this.setAccessibleText(this.color.getColor());
         this.blocksAvalaible.add(this);
@@ -193,7 +202,7 @@ public class ShapeBlock extends Path {
     // Reposition the item to start when it's not possibile to place it
 
     public void returnToStart() {
-        this.setTranslateX(this.startX);
-        this.setTranslateY(this.startY);
+        this.setTranslateX(0);
+        this.setTranslateY(0);
     }
 }

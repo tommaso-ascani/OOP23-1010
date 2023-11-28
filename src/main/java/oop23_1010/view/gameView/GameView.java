@@ -22,7 +22,6 @@ import javafx.scene.text.Font;
 import javafx.util.Pair;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.ColorType;
-import oop23_1010.types.GameStateType;
 import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
@@ -41,7 +40,7 @@ public class GameView extends ViewImpl {
     public Integer score = 0;
 
     private static final Integer GAP_GRID_PANE = 5;
-    private static final Integer SPAWN_PANELS_WIDTH = 260;
+    private static Integer spawnPanelsWidth;
     private static final Integer GAP_BETWEEN_SPAWN_PANELS = 40;
 
     @FXML
@@ -73,6 +72,21 @@ public class GameView extends ViewImpl {
 
                 grid = new GameGrid<>((Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE));
 
+                if (grid.getGridSize() == 5) {
+                    grid.setGridCellSize(45);
+                }
+                if (grid.getGridSize() == 10) {
+                    grid.setGridCellSize(35);
+                }
+                if (grid.getGridSize() == 15) {
+                    grid.setGridCellSize(30);
+                }
+                if (grid.getGridSize() == 20) {
+                    grid.setGridCellSize(25);
+                }
+
+                GameView.spawnPanelsWidth = 7 * grid.getGridCellSize();
+
                 this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE);
 
                 JSONArray a = JsonUtils.loadGrid(JsonUtils.GRID_COMPOSITION);
@@ -93,22 +107,24 @@ public class GameView extends ViewImpl {
                 JsonUtils.flushJson();
             } else {
                 grid = new GameGrid<>(HomeView.getGridSize());
+
+                if (grid.getGridSize() == 5) {
+                    grid.setGridCellSize(45);
+                }
+                if (grid.getGridSize() == 10) {
+                    grid.setGridCellSize(35);
+                }
+                if (grid.getGridSize() == 15) {
+                    grid.setGridCellSize(30);
+                }
+                if (grid.getGridSize() == 20) {
+                    grid.setGridCellSize(25);
+                }
+
+                GameView.spawnPanelsWidth = 7 * grid.getGridCellSize();
             }
         } catch (JSONException | IOException e) {
             e.printStackTrace();
-        }
-
-        if (grid.getGridSize() == 5) {
-            grid.setGridCellSize(45);
-        }
-        if (grid.getGridSize() == 10) {
-            grid.setGridCellSize(35);
-        }
-        if (grid.getGridSize() == 15) {
-            grid.setGridCellSize(30);
-        }
-        if (grid.getGridSize() == 20) {
-            grid.setGridCellSize(25);
         }
 
         this.createGridCells();
@@ -125,7 +141,10 @@ public class GameView extends ViewImpl {
         this.labelScore.setFont(new Font(null, 30));
         this.labelScore.setText("Score: " + this.score);
 
-        this.labelScore.relocate(700, ((720 - 260 - 260 - 50) / 2) - 40);
+        this.labelScore.relocate(100, this.upperPane.getBoundsInLocal().getMaxY());
+
+        // System.err.println(this.gridPane.getBoundsInLocal().getMinX());
+        // System.err.println(this.gridPane.getBoundsInLocal().getMinY());
 
         this.createNewPuzzles();
 
@@ -136,6 +155,9 @@ public class GameView extends ViewImpl {
 
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
+
+        System.err.println(this.labelScore.getMaxHeight());
+        System.err.println(this.gridPane.getLayoutY());
     }
 
     /*
@@ -438,8 +460,6 @@ public class GameView extends ViewImpl {
                 createNewPuzzles();
             }
             if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
-                System.out.println("Game Over!");
-                // TODO GAME OVER VIEW
                 this.createGameOverPane();
                 this.gameOverPane.setVisible(true);
             }
@@ -633,10 +653,10 @@ public class GameView extends ViewImpl {
                 ViewSwitcher.getWindowHeight());
         this.rightPane.setPrefSize(((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2),
                 ViewSwitcher.getWindowHeight());
-        this.upLeftSpawn.setPrefSize(GameView.SPAWN_PANELS_WIDTH, GameView.SPAWN_PANELS_WIDTH);
-        this.downLeftSpawn.setPrefSize(GameView.SPAWN_PANELS_WIDTH, GameView.SPAWN_PANELS_WIDTH);
-        this.upRightSpawn.setPrefSize(GameView.SPAWN_PANELS_WIDTH, GameView.SPAWN_PANELS_WIDTH);
-        this.downRightSpawn.setPrefSize(GameView.SPAWN_PANELS_WIDTH, GameView.SPAWN_PANELS_WIDTH);
+        this.upLeftSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
+        this.downLeftSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
+        this.upRightSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
+        this.downRightSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
     }
 
     /**
@@ -662,34 +682,34 @@ public class GameView extends ViewImpl {
      */
     public void setObjectLocation() {
         this.upLeftSpawn.relocate(
-                (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.SPAWN_PANELS_WIDTH) / 2,
-                (ViewSwitcher.getWindowHeight() - GameView.SPAWN_PANELS_WIDTH - GameView.SPAWN_PANELS_WIDTH
+                (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
+                (ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2);
         this.downLeftSpawn.relocate(
-                (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.SPAWN_PANELS_WIDTH) / 2,
-                ViewSwitcher.getWindowHeight() - GameView.SPAWN_PANELS_WIDTH - (ViewSwitcher.getWindowHeight()
-                        - GameView.SPAWN_PANELS_WIDTH - GameView.SPAWN_PANELS_WIDTH - GameView.GAP_BETWEEN_SPAWN_PANELS)
+                (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
+                ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - (ViewSwitcher.getWindowHeight()
+                        - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
         this.upRightSpawn.relocate(
-                (ViewSwitcher.getWindowWidth() - GameView.SPAWN_PANELS_WIDTH)
-                        - (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.SPAWN_PANELS_WIDTH)
+                (ViewSwitcher.getWindowWidth() - GameView.spawnPanelsWidth)
+                        - (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth)
                                 / 2,
-                (ViewSwitcher.getWindowHeight() - GameView.SPAWN_PANELS_WIDTH - GameView.SPAWN_PANELS_WIDTH
+                (ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2);
         this.downRightSpawn.relocate(
-                (ViewSwitcher.getWindowWidth() - GameView.SPAWN_PANELS_WIDTH)
-                        - (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.SPAWN_PANELS_WIDTH)
+                (ViewSwitcher.getWindowWidth() - GameView.spawnPanelsWidth)
+                        - (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth)
                                 / 2,
-                ViewSwitcher.getWindowHeight() - GameView.SPAWN_PANELS_WIDTH - (ViewSwitcher.getWindowHeight()
-                        - GameView.SPAWN_PANELS_WIDTH - GameView.SPAWN_PANELS_WIDTH - GameView.GAP_BETWEEN_SPAWN_PANELS)
+                ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - (ViewSwitcher.getWindowHeight()
+                        - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
 
         this.labelCoin.relocate((((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2)),
-                ((ViewSwitcher.getWindowHeight() - GameView.SPAWN_PANELS_WIDTH - GameView.SPAWN_PANELS_WIDTH
+                ((ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2)
                         - 40);
         this.labelScore.relocate(700,
-                ((ViewSwitcher.getWindowHeight() - GameView.SPAWN_PANELS_WIDTH - GameView.SPAWN_PANELS_WIDTH
+                ((ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2)
                         - 40);
     }
