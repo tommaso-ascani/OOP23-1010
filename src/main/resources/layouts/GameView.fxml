@@ -46,4 +46,5 @@
    <Pane id="upRightSpawn" fx:id="upRightSpawn" />
    <Pane id="downRightSpawn" fx:id="downRightSpawn" />
    <Pane id="pausePane" fx:id="pausePane" />
+   <Pane id="gameOverPane" fx:id="gameOverPane" />
 </BorderPane>

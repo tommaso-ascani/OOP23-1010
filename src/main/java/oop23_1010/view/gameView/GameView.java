@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.util.Pair;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.ColorType;
+import oop23_1010.types.GameStateType;
 import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
@@ -56,7 +57,7 @@ public class GameView extends ViewImpl {
     private Pane rightPane, upRightSpawn, downRightSpawn;
 
     @FXML
-    private Pane bottomPane, upperPane, pausePane;
+    private Pane bottomPane, upperPane, pausePane, gameOverPane;
 
     @FXML
     private Label labelCoin, labelScore;
@@ -131,7 +132,7 @@ public class GameView extends ViewImpl {
         this.createPausePane();
 
         Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
-                this.downRightSpawn, this.pausePane);
+                this.downRightSpawn, this.pausePane, this.gameOverPane);
 
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
@@ -439,7 +440,75 @@ public class GameView extends ViewImpl {
             if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
                 System.out.println("Game Over!");
                 // TODO GAME OVER VIEW
+                this.createGameOverPane();
+                this.gameOverPane.setVisible(true);
             }
+        });
+    }
+
+    /*
+     * This method is used to create and instantiate the game over pane and all its
+     * sub-nodes
+     */
+    private void createGameOverPane() {
+
+        this.gameOverPane.setVisible(false);
+
+        this.gameOverPane.setStyle(
+                "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+
+        this.gameOverPane.setPrefSize(400, 300);
+
+        this.gameOverPane.relocate((ViewSwitcher.getWindowWidth() - gameOverPane.getPrefWidth()) / 2,
+                (ViewSwitcher.getWindowHeight() - gameOverPane.getPrefHeight()) / 2);
+
+        Button buttonBackToMenu = new Button("Back to menu");
+        Label labelScore = new Label(this.labelScore.getText());
+        Label labelGameOver = new Label("GAME OVER");
+
+        labelScore.setFont(new Font(null, 30));
+        labelScore.setPrefSize(gameOverPane.getPrefWidth(), 40);
+        labelScore.setAlignment(Pos.BASELINE_CENTER);
+
+        labelGameOver.setFont(new Font(null, 50));
+        labelGameOver.setPrefSize(gameOverPane.getPrefWidth(), 50);
+        labelGameOver.setAlignment(Pos.BASELINE_CENTER);
+
+        labelScore.relocate(0, (gameOverPane.getPrefHeight() - labelScore.getPrefHeight()) / 2.7);
+        labelGameOver.relocate(0, (gameOverPane.getPrefHeight() - labelScore.getPrefHeight()) / 7);
+        buttonBackToMenu.setPrefSize(100, 40);
+        buttonBackToMenu.relocate((gameOverPane.getPrefWidth() - buttonBackToMenu.getPrefWidth()) / 2,
+                (gameOverPane.getPrefHeight() - buttonBackToMenu.getPrefHeight()) / 1.5);
+
+        this.gameOverPane.getChildren().addAll(buttonBackToMenu, labelScore, labelGameOver);
+
+        this.setListenersGameOverPane(buttonBackToMenu);
+
+        this.imagePause.setDisable(true);
+        this.imagePause.setOpacity(0.5);
+
+        this.upLeftSpawn.setDisable(true);
+        this.upLeftSpawn.setOpacity(0.5);
+
+        this.downLeftSpawn.setDisable(true);
+        this.downLeftSpawn.setOpacity(0.5);
+
+        this.upRightSpawn.setDisable(true);
+        this.upRightSpawn.setOpacity(0.5);
+
+        this.downRightSpawn.setDisable(true);
+        this.downRightSpawn.setOpacity(0.5);
+
+        this.labelCoin.setDisable(true);
+        this.labelCoin.setOpacity(0.5);
+
+        this.labelScore.setDisable(true);
+        this.labelScore.setOpacity(0.5);
+    }
+
+    private void setListenersGameOverPane(Button buttonBackToMenu) {
+        buttonBackToMenu.setOnMouseClicked(e -> {
+            ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
         });
     }
 
@@ -503,9 +572,9 @@ public class GameView extends ViewImpl {
     public Node getNodeIfTriggered(ShapeBlock block) {
         for (GridBlock node : this.grid) {
             if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()) &&
-                (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
+                    (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
                 return node;
-            }            
+            }
         }
         return null;
     }
