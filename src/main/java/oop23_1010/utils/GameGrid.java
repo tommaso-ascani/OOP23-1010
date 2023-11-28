@@ -75,4 +75,103 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     public Integer getGridCellSize() {
         return this.gridCellSize;
     }
+
+    /**
+     * Control if there are some lines (rows or columns) that are full,
+     * and then remove them
+     * 
+     * @param score
+     * @return
+     */
+    public Integer controlIfLinesCompleted(Integer score) {
+
+        Integer scoreMultiplier = 1;
+
+        for (ArrayList<GridBlock> line : getNumFullLines()) {
+            for (GridBlock block : line) {
+                block.setStyle("-fx-background-color: white");
+                block.setFill(null);
+            }
+            score = score + (line.size() * scoreMultiplier);
+            scoreMultiplier++;
+        }
+        
+        return score;
+    }
+
+    /**
+     * Return the group of lines (rows or columns) that are full
+     * 
+     * @return
+     */
+    public ArrayList<ArrayList<GridBlock>> getNumFullLines() {
+
+        ArrayList<ArrayList<GridBlock>> lines = new ArrayList<>();
+
+        for (int y = 0; y < this.getGridSize(); y++) {
+            if(this.isFull(getRow(y))) {
+                lines.add(getRow(y));
+            }
+        }
+
+        for (int x = 0; x < this.getGridSize(); x++) {
+            if(this.isFull(getColumn(x))) {
+                lines.add(getColumn(x));
+            }
+        }
+
+        return lines;
+    }
+
+    /**
+     * Return a boolean that indicates if the line (row or column) is full
+     * 
+     * @param list
+     * @return
+     */
+    public Boolean isFull(ArrayList<GridBlock> list) {
+
+        for (GridBlock block : list) {
+            if(block.getFill() == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Return the row at the passed index
+     * 
+     * @param index
+     * @return
+     */
+    public ArrayList<GridBlock> getRow(Integer index) {
+
+        ArrayList<GridBlock> row = new ArrayList<>();
+
+        for (GridBlock block : this) {
+            if (block.getGridY() == index) {
+                row.add(block);
+            }
+        }
+        return row;
+    }
+
+    /**
+     * Return the column at the passed index
+     * 
+     * @param index
+     * @return
+     */
+    public ArrayList<GridBlock> getColumn(Integer index) {
+
+        ArrayList<GridBlock> column = new ArrayList<>();
+
+        for (GridBlock block : this) {
+            if (block.getGridX() == index) {
+                column.add(block);
+            }
+        }
+        return column;
+    }
 }

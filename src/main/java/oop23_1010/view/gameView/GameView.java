@@ -445,7 +445,7 @@ public class GameView extends ViewImpl {
                         pane.getChildren().remove(block);
                         this.score++;
                     }
-                    controlIfLinesCompleted();
+                    this.score = grid.controlIfLinesCompleted(this.score);
                     blocksAvalaible.remove(block);
 
                     this.labelScore.setText("Score: " + this.score);
@@ -530,55 +530,6 @@ public class GameView extends ViewImpl {
         buttonBackToMenu.setOnMouseClicked(e -> {
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
         });
-    }
-
-    /*
-     * This method is used to check if any columns or rows are completed and, in
-     * case, removes them.
-     */
-    private void controlIfLinesCompleted() {
-
-        ArrayList<GridBlock> line;
-
-        // Control if there are full rows
-
-        for (int y = 0; y < grid.getGridSize(); y++) {
-            for (int x = 0; x < grid.getGridSize(); x++) {
-                line = new ArrayList<>();
-                for (GridBlock a : grid) {
-                    if (a.getGridY() == x && a.getFill() != null) {
-                        line.add(a);
-                    }
-                }
-                if (line.size() == grid.getGridSize()) {
-                    for (GridBlock a : line) {
-                        this.score++;
-                        a.setFill(null);
-                        a.setStyle("-fx-background-color: white");
-                    }
-                }
-            }
-        }
-
-        // Control if there are full columns
-
-        for (int y = 0; y < grid.getGridSize(); y++) {
-            for (int x = 0; x < grid.getGridSize(); x++) {
-                line = new ArrayList<>();
-                for (GridBlock a : grid) {
-                    if (a.getGridX() == x && a.getFill() != null) {
-                        line.add(a);
-                    }
-                }
-                if (line.size() == grid.getGridSize()) {
-                    for (GridBlock a : line) {
-                        this.score++;
-                        a.setFill(null);
-                        a.setStyle("-fx-background-color: white");
-                    }
-                }
-            }
-        }
     }
 
     /**
