@@ -68,9 +68,9 @@ public class GameView extends ViewImpl {
     public void init() {
 
         try {
-            if (JsonUtils.jsonMatchExist()) {
+            if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
 
-                grid = new GameGrid<>((Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE));
+                grid = new GameGrid<>((Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE));
 
                 if (grid.getGridSize() == 5) {
                     grid.setGridCellSize(45);
@@ -87,9 +87,9 @@ public class GameView extends ViewImpl {
 
                 GameView.spawnPanelsWidth = 7 * grid.getGridCellSize();
 
-                this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE);
+                this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE,JsonUtils.MATCH_FILE);
 
-                JSONArray a = JsonUtils.loadGrid(JsonUtils.GRID_COMPOSITION);
+                JSONArray a = JsonUtils.loadGrid(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
 
                 for (int i = 0; i < a.length(); i++) {
                     ColorType color;
@@ -104,7 +104,7 @@ public class GameView extends ViewImpl {
 
                     grid.add(aPane);
                 }
-                JsonUtils.flushJson();
+                JsonUtils.flushJson(JsonUtils.MATCH_FILE);
             } else {
                 grid = new GameGrid<>(HomeView.getGridSize());
 
@@ -155,9 +155,6 @@ public class GameView extends ViewImpl {
 
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
-
-        System.err.println(this.labelScore.getMaxHeight());
-        System.err.println(this.gridPane.getLayoutY());
     }
 
     /*
@@ -372,9 +369,22 @@ public class GameView extends ViewImpl {
 
         btnMenuY.setOnMouseClicked(e -> {
             try {
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.score));
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true));
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()));
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.score), JsonUtils.MATCH_FILE);
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true), JsonUtils.MATCH_FILE);
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()), JsonUtils.MATCH_FILE);
+
+                if(JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)){
+                    if (JsonUtils.ifDataExist(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE)) {
+                        Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE);
+                        if (best_score < this.score) {
+                            JsonUtils.addElement(new Pair<String,Object>(String.valueOf(grid.getGridSize()), this.score), JsonUtils.BEST_SCORE_FILE);
+                        }
+                    } else {
+                        JsonUtils.addElement(new Pair<String,Object>(String.valueOf(grid.getGridSize()), this.score), JsonUtils.BEST_SCORE_FILE);
+                    }
+                } else {
+                    JsonUtils.addElement(new Pair<String,Object>(String.valueOf(grid.getGridSize()), this.score), JsonUtils.BEST_SCORE_FILE);
+                }
 
                 JSONArray blocksArray = new JSONArray();
 
@@ -391,7 +401,7 @@ public class GameView extends ViewImpl {
                     blocksArray.put(block);
                 }
 
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray));
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray), JsonUtils.MATCH_FILE);
 
             } catch (IOException e1) {
                 e1.printStackTrace();

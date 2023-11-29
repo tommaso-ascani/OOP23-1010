@@ -2,6 +2,8 @@ package oop23_1010.view.gameView;
 
 import java.io.IOException;
 
+import org.json.JSONObject;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
@@ -40,6 +43,9 @@ public class HomeView extends ViewImpl {
     @FXML
     private AnchorPane mainPane;
 
+    @FXML
+    private Label bestScore;
+
     @Override
     public void init() {
         this.sliderGridWidth.setValue(10);
@@ -51,11 +57,33 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setMinorTickCount(0);
         this.sliderGridWidth.setSnapToTicks(true);
 
+        try {
+            if(JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)){
+                JSONObject best_score = JsonUtils.loadDatas(JsonUtils.BEST_SCORE_FILE);
+
+                Integer padding = 0;
+
+                for (int i=0; i<4; i++) {
+                    if(JsonUtils.ifDataExist(String.valueOf((i+1)*5), JsonUtils.BEST_SCORE_FILE)){
+                        this.bestScore = new Label();
+                        this.bestScore.setPrefSize(200, 10);
+                        this.bestScore.relocate(540, (padding*25)+5);
+                        this.bestScore.setAlignment(Pos.CENTER);
+                        this.bestScore.setText("Best Score on grid " + ((i+1)*5) + " ---> " + String.valueOf(best_score.get(String.valueOf((i+1)*5))));
+                        this.mainPane.getChildren().add(this.bestScore);
+                        padding++;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // In this try/catch we control if there is a json file with saved data and if
         // true, make the play button and the slider disable, if false make de resume
         // button disable
         try {
-            if (JsonUtils.jsonMatchExist()) {
+            if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
                 this.imagePlay.setDisable(true);
                 this.imagePlay.setOpacity(0.4);
                 this.sliderGridWidth.setDisable(true);
@@ -158,7 +186,7 @@ public class HomeView extends ViewImpl {
 
         btnDelete.setOnMouseClicked(e -> {
             try {
-                JsonUtils.flushJson();
+                JsonUtils.flushJson(JsonUtils.MATCH_FILE);
                 paneResume.setVisible(false);
                 this.imageResume.setDisable(true);
                 this.imageResume.setOpacity(0.4);

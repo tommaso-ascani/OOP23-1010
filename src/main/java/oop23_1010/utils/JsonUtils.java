@@ -10,55 +10,73 @@ import org.json.JSONObject;
 
 public class JsonUtils {
 
+    // Paths
+
     private static final String DATA_PATH = "src/main/resources/config/";
+
+    // Files
+
+    public static final String MATCH_FILE = "match";
+    public static final String BEST_SCORE_FILE = "best_score";
+
+    // Match values
 
     public static final String MATCH_SCORE = "matchScore";
     public static final String MATCH_ON_GOING = "matchOnGoing";
     public static final String GRID_SIZE = "gridSize";
     public static final String GRID_COMPOSITION = "grid";
 
-    public static Object loadData(String data) throws IOException {
+    public static Object loadData(String data, String fileName) throws IOException {
         // Read file
-        String file = Files.readString(Paths.get(DATA_PATH + "match.json"));
+        String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
         // Create new JSONObject with file data
         JSONObject json = new JSONObject(file);
         // Return json given data
         return json.get(data);
     }
 
-    public static JSONArray loadGrid(String data) throws IOException {
+    public static Boolean ifDataExist(String data, String fileName) throws IOException {
         // Read file
-        String file = Files.readString(Paths.get(DATA_PATH + "match.json"));
+        String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
+        // Create new JSONObject with file data
+        JSONObject json = new JSONObject(file);
+        // Return true if json given data exist
+        return json.has(data);
+    }
+
+    public static JSONArray loadGrid(String data, String fileName) throws IOException {
+        // Read file
+        String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
         // Create new JSONObject with file data
         JSONObject json = new JSONObject(file);
         // Return jsonArray of the grid's cells occupied
         return (JSONArray) json.get(data);
     }
 
-    public static JSONObject loadDatas() throws IOException {
+    public static JSONObject loadDatas(String fileName) throws IOException {
         // Read file
-        String file = Files.readString(Paths.get(DATA_PATH + "match.json"));
+        String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
         // Create new JSONObject with file data
         JSONObject json = new JSONObject(file);
         // Return all json datas
         return json;
     }
 
-    public static void saveMatchData(JSONObject json) throws IOException {
+    public static void saveMatchData(JSONObject json, String fileName) throws IOException {
         // Create directory if doesn't exist
         Files.createDirectories(Paths.get(DATA_PATH));
         // Write json on file
-        Files.writeString(Paths.get(DATA_PATH + "match.json"), json.toString(1));
+        Files.writeString(Paths.get(DATA_PATH + fileName + ".json"), json.toString(1));
     }
 
-    public static void addElement(Pair<String, Object> temp) throws IOException {
+    public static void addElement(Pair<String, Object> temp, String fileName) throws IOException {
         // Create local variable
         JSONObject json;
 
-        if (Files.exists(Paths.get(DATA_PATH + "match.json"))
-                && Files.readAllBytes(Paths.get(DATA_PATH + "match.json")).length > 0) {
+        if (Files.exists(Paths.get(DATA_PATH + fileName + ".json"))
+                && Files.readAllBytes(Paths.get(DATA_PATH + fileName + ".json")).length > 0) {
             // Get json element if exists
-            json = loadDatas();
+            json = loadDatas(fileName);
         } else {
             // Create new JSONObject if doesn't exist
             json = new JSONObject();
@@ -67,33 +85,33 @@ public class JsonUtils {
         // Add new element
         json.put(temp.getKey(), temp.getValue());
         // Save data
-        saveMatchData(json);
+        saveMatchData(json, fileName);
     }
 
-    public static void removeElement(String data) throws IOException {
+    public static void removeElement(String data, String fileName) throws IOException {
         // Get json element if exists
-        JSONObject json = loadDatas();
+        JSONObject json = loadDatas(fileName);
         // Add new element
         json.remove(data);
 
         if (json.isEmpty()) {
             // Delete json file if is empty
-            flushJson();
+            flushJson(fileName);
         } else {
             // Save data
-            saveMatchData(json);
+            saveMatchData(json, fileName);
         }
     }
 
-    public static void flushJson() throws IOException {
+    public static void flushJson(String fileName) throws IOException {
         // Delete json file
-        Files.delete(Paths.get(DATA_PATH + "match.json"));
+        Files.delete(Paths.get(DATA_PATH + fileName + ".json"));
     }
 
-    public static Boolean jsonMatchExist() throws IOException {
-        // Check if exist some match data to load
-        if (Files.exists(Paths.get(DATA_PATH + "match.json"))
-                && Files.readAllBytes(Paths.get(DATA_PATH + "match.json")).length > 0){
+    public static Boolean jsonExist(String fileName) throws IOException {
+        // Check if exist some data to load
+        if (Files.exists(Paths.get(DATA_PATH + fileName + ".json"))
+                && Files.readAllBytes(Paths.get(DATA_PATH + fileName + ".json")).length > 0){
             return true;
         } else {
             return false;
