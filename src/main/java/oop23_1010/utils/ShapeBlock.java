@@ -6,11 +6,9 @@ import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import javafx.stage.Window;
 import oop23_1010.controllers.Movement;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.ColorType;
-import oop23_1010.view.ViewSwitcher;
 
 public class ShapeBlock extends Path {
 
