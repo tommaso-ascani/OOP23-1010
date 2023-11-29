@@ -20,6 +20,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.util.Pair;
+import oop23_1010.sound.GameSoundSystem;
+import oop23_1010.sound.SoundType;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.ColorType;
 import oop23_1010.utils.BlocksAvailable;
@@ -35,12 +37,12 @@ import oop23_1010.view.ViewType;
 public class GameView extends ViewImpl {
 
     private GameGrid<GridBlock> grid;
-    public BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
+    private BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
-    public Integer score = 0;
+    private Integer score = 0;
 
     private static final Integer GAP_GRID_PANE = 5;
-    private static Integer spawnPanelsWidth;
+    private static Double spawnPanelsWidth;
     private static final Integer GAP_BETWEEN_SPAWN_PANELS = 40;
 
     @FXML
@@ -67,6 +69,10 @@ public class GameView extends ViewImpl {
     @Override
     public void init() {
 
+        GameSoundSystem.getInstance().setMediaPlayer(SoundType.BACKGROUND_01,
+                GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+        GameSoundSystem.getInstance().playMediaPlayer();
+
         try {
             if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
 
@@ -85,7 +91,7 @@ public class GameView extends ViewImpl {
                     grid.setGridCellSize(25);
                 }
 
-                GameView.spawnPanelsWidth = 7 * grid.getGridCellSize();
+                GameView.spawnPanelsWidth = 6.0 * grid.getGridCellSize();
 
                 this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE,JsonUtils.MATCH_FILE);
 
@@ -121,7 +127,7 @@ public class GameView extends ViewImpl {
                     grid.setGridCellSize(25);
                 }
 
-                GameView.spawnPanelsWidth = 7 * grid.getGridCellSize();
+                GameView.spawnPanelsWidth = 6.0 * grid.getGridCellSize();
             }
         } catch (JSONException | IOException e) {
             e.printStackTrace();
@@ -142,9 +148,6 @@ public class GameView extends ViewImpl {
         this.labelScore.setText("Score: " + this.score);
 
         this.labelScore.relocate(100, this.upperPane.getBoundsInLocal().getMaxY());
-
-        // System.err.println(this.gridPane.getBoundsInLocal().getMinX());
-        // System.err.println(this.gridPane.getBoundsInLocal().getMinY());
 
         this.createNewPuzzles();
 
@@ -286,6 +289,9 @@ public class GameView extends ViewImpl {
             Button btnDialogN, Pane dialogPane, Button btnMenuBack, Button btnMenuY, Button btnMenuN,
             Pane dialogPaneMenu) {
         btnResume.setOnMouseClicked(e -> {
+
+            GameSoundSystem.getInstance().resumeMedia();
+
             this.pausePane.setVisible(false);
 
             this.upLeftSpawn.setDisable(false);
@@ -305,6 +311,7 @@ public class GameView extends ViewImpl {
 
             this.labelScore.setDisable(false);
             this.labelScore.setOpacity(1);
+
         });
 
         btnRestart.setOnMouseClicked(e -> {
@@ -456,20 +463,35 @@ public class GameView extends ViewImpl {
                         this.score++;
                     }
                     this.score = grid.controlIfLinesCompleted(this.score);
+                    /*
+                     * TO-DO
+                     */
+                    GameSoundSystem.getInstance().setAudioClip(SoundType.RIGHT_BLOCK_POSITION,
+                            GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+                    GameSoundSystem.getInstance().playAudioClip();
                     blocksAvalaible.remove(block);
 
                     this.labelScore.setText("Score: " + this.score);
                 } else {
+                    GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION,
+                            GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+                    GameSoundSystem.getInstance().playAudioClip();
                     block.returnToStart();
                 }
 
             } else {
+                GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION,
+                        GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+                GameSoundSystem.getInstance().playAudioClip();
                 block.returnToStart();
             }
             if (blocksAvalaible.size() == 0) {
                 createNewPuzzles();
             }
             if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
+                GameSoundSystem.getInstance().setAudioClip(SoundType.GAME_OVER,
+                        GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+                GameSoundSystem.getInstance().playAudioClip();
                 this.createGameOverPane();
                 this.gameOverPane.setVisible(true);
             }
@@ -690,6 +712,9 @@ public class GameView extends ViewImpl {
      * pause menu and disable the game view
      */
     public void switchToPauseView() {
+
+        GameSoundSystem.getInstance().pauseMedia();
+
         this.pausePane.setVisible(true);
 
         this.upLeftSpawn.setDisable(true);

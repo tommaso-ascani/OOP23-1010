@@ -13,7 +13,7 @@
    <children>
       <Button id="buttonApplica" fx:id="buttonApplica" layoutX="252.0" layoutY="334.0" mnemonicParsing="false" text="Applica" AnchorPane.leftAnchor="268.0" />
       <Button id="buttonIndietro" fx:id="buttonIndietro" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" AnchorPane.rightAnchor="268.0" />
-      <Slider blockIncrement="2.0" layoutX="469.0" layoutY="204.0" prefHeight="39.0" prefWidth="223.0" snapToTicks="true" AnchorPane.rightAnchor="268.0">
+      <Slider id="sliderVolume" fx:id="sliderVolume" blockIncrement="2.0" layoutX="469.0" layoutY="204.0" prefHeight="39.0" prefWidth="223.0" snapToTicks="true" AnchorPane.rightAnchor="268.0">
          <cursor>
             <Cursor fx:constant="H_RESIZE" />
          </cursor>
@@ -24,7 +24,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="63.0" fitWidth="63.0" layoutX="775.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0">
+      <ImageView id="imageVolume" fx:id="imageVolume" fitHeight="63.0" fitWidth="63.0" layoutX="775.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0">
          <image>
             <Image url="@../img/NoAudioButton.png" />
          </image>

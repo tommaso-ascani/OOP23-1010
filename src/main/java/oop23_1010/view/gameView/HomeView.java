@@ -47,6 +47,7 @@ public class HomeView extends ViewImpl {
 
     @Override
     public void init() {
+
         this.sliderGridWidth.setValue(10);
         this.sliderGridWidth.setMin(5);
         this.sliderGridWidth.setMax(20);
