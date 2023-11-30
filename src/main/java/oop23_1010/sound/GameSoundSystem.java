@@ -3,6 +3,7 @@ package oop23_1010.sound;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Pair;
 import oop23_1010.utils.JsonUtils;
 import java.io.IOException;
 
@@ -29,6 +30,8 @@ public final class GameSoundSystem {
                 GameSoundSystem.volume = (Double) (((Integer) JsonUtils.loadData(JsonUtils.VOLUME,
                         JsonUtils.SETTINGS_FILE)).doubleValue() / 100.0);
             } else {
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, (GameSoundSystem.MAX_VOLUME * 100.0)),
+                        JsonUtils.SETTINGS_FILE);
                 GameSoundSystem.volume = GameSoundSystem.MAX_VOLUME;
             }
         } catch (IOException e) {
@@ -71,6 +74,14 @@ public final class GameSoundSystem {
 
     public Double getVolume() {
         return GameSoundSystem.volume.doubleValue() * 100.0;
+    }
+
+    public Double getMaxVolume() {
+        return GameSoundSystem.MAX_VOLUME;
+    }
+
+    public Double getMinVolume() {
+        return GameSoundSystem.MIN_VOLUME;
     }
 
 }

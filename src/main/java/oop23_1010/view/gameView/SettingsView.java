@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Pair;
 import oop23_1010.sound.GameSoundSystem;
@@ -19,6 +20,9 @@ public class SettingsView extends ViewImpl {
     private Button buttonIndietro;
 
     @FXML
+    private Button buttonApplica;
+
+    @FXML
     private Slider sliderVolume;
 
     @FXML
@@ -26,6 +30,11 @@ public class SettingsView extends ViewImpl {
 
     @Override
     public void init() {
+        if (GameSoundSystem.getInstance().getVolume() != 0) {
+            this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));
+        } else {
+            this.imageVolume.setImage(new Image("/img/NoAudioButton.png"));
+        }
 
         this.sliderVolume.setValue(GameSoundSystem.getInstance().getVolume());
         this.sliderVolume.setMin(0);
@@ -36,12 +45,20 @@ public class SettingsView extends ViewImpl {
         this.sliderVolume.setMinorTickCount(1);
         this.sliderVolume.setSnapToTicks(true);
 
-        this.sliderVolume.setOnMouseReleased(e -> {
+        this.buttonApplica.setOnMouseClicked(e -> {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, this.sliderVolume.getValue()),
                         JsonUtils.SETTINGS_FILE);
             } catch (IOException e1) {
                 e1.printStackTrace();
+            }
+        });
+
+        this.sliderVolume.setOnMouseReleased(e -> {
+            if (this.sliderVolume.getValue() == 0.0) {
+                this.imageVolume.setImage(new Image("/img/NoAudioButton.png"));
+            } else {
+                this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));
             }
         });
     }
@@ -50,7 +67,14 @@ public class SettingsView extends ViewImpl {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
     }
 
-    public void changeVolume() {
-
+    public void changeVolumeImage() {
+        Double temp = this.sliderVolume.getValue();
+        if (temp.doubleValue() == 0.0) {
+            this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));
+            this.sliderVolume.setValue(100);
+        } else {
+            this.imageVolume.setImage(new Image("/img/NoAudioButton.png"));
+            this.sliderVolume.setValue(0);
+        }
     }
 }
