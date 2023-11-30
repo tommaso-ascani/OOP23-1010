@@ -147,8 +147,6 @@ public class GameView extends ViewImpl {
         this.labelScore.setFont(new Font(null, 30));
         this.labelScore.setText("Score: " + this.score);
 
-        this.labelScore.relocate(100, this.upperPane.getBoundsInLocal().getMaxY());
-
         this.createNewPuzzles();
 
         this.createPausePane();
@@ -652,7 +650,7 @@ public class GameView extends ViewImpl {
         this.upRightSpawn.setStyle(SpawnPanlesStyle);
         this.downRightSpawn.setStyle(SpawnPanlesStyle);
 
-        this.mainPane.setStyle("-fx-background-image: url('img/whiteTheme.jpg')");
+        // this.mainPane.setStyle("-fx-background-image: url('img/whiteTheme.jpg')");
 
         this.gridPane.setStyle(
                 "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE
@@ -687,14 +685,13 @@ public class GameView extends ViewImpl {
                         - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
 
-        this.labelCoin.relocate((((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2)),
+        this.labelCoin.relocate((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2,
                 ((ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
-                        - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2)
-                        - 40);
-        this.labelScore.relocate(700,
+                        - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2) - 40);
+        
+        this.labelScore.relocate(ViewSwitcher.getWindowWidth() / 2,
                 ((ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
-                        - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2)
-                        - 40);
+                        - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2) - 40);
     }
 
     /**
