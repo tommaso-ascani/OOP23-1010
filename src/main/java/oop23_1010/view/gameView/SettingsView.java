@@ -17,10 +17,10 @@ import oop23_1010.view.ViewType;
 public class SettingsView extends ViewImpl {
 
     @FXML
-    private Button buttonIndietro;
+    private Button buttonBack;
 
     @FXML
-    private Button buttonApplica;
+    private Button buttonApply;
 
     @FXML
     private Slider sliderVolume;
@@ -45,7 +45,10 @@ public class SettingsView extends ViewImpl {
         this.sliderVolume.setMinorTickCount(1);
         this.sliderVolume.setSnapToTicks(true);
 
-        this.buttonApplica.setOnMouseClicked(e -> {
+        // Set the listener on the button apply to save the chosen volume in the
+        // settings.json file
+
+        this.buttonApply.setOnMouseClicked(e -> {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, this.sliderVolume.getValue()),
                         JsonUtils.SETTINGS_FILE);
@@ -53,6 +56,8 @@ public class SettingsView extends ViewImpl {
                 e1.printStackTrace();
             }
         });
+
+        // Set the listener on the slider to change the visualized image
 
         this.sliderVolume.setOnMouseReleased(e -> {
             if (this.sliderVolume.getValue() == 0.0) {
@@ -67,6 +72,10 @@ public class SettingsView extends ViewImpl {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
     }
 
+    /*
+     * This method is used to switch automatically from 0 to 100 volume by clicking
+     * on the ImageView
+     */
     public void changeVolumeImage() {
         Double temp = this.sliderVolume.getValue();
         if (temp.doubleValue() == 0.0) {

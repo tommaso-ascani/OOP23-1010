@@ -20,6 +20,9 @@ public final class GameSoundSystem {
     private static final Double MIN_VOLUME = 0.0;
     private static final Double MAX_VOLUME = 1.0;
 
+    /**
+     * @return GameSoundSystem
+     */
     public static GameSoundSystem getInstance() {
         if (GameSoundSystem.instance == null) {
             GameSoundSystem.instance = new GameSoundSystem();
