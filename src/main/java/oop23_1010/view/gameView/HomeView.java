@@ -58,18 +58,19 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setSnapToTicks(true);
 
         try {
-            if(JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)){
+            if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
                 JSONObject best_score = JsonUtils.loadDatas(JsonUtils.BEST_SCORE_FILE);
 
                 Integer padding = 0;
 
-                for (int i=0; i<4; i++) {
-                    if(JsonUtils.ifDataExist(String.valueOf((i+1)*5), JsonUtils.BEST_SCORE_FILE)){
+                for (int i = 0; i < 4; i++) {
+                    if (JsonUtils.ifDataExist(String.valueOf((i + 1) * 5), JsonUtils.BEST_SCORE_FILE)) {
                         this.bestScore = new Label();
                         this.bestScore.setPrefSize(200, 10);
-                        this.bestScore.relocate(540, (padding*25)+5);
+                        this.bestScore.relocate(540, (padding * 25) + 5);
                         this.bestScore.setAlignment(Pos.CENTER);
-                        this.bestScore.setText("Best Score on grid " + ((i+1)*5) + " ---> " + String.valueOf(best_score.get(String.valueOf((i+1)*5))));
+                        this.bestScore.setText("Best Score on grid " + ((i + 1) * 5) + " ---> "
+                                + String.valueOf(best_score.get(String.valueOf((i + 1) * 5))));
                         this.mainPane.getChildren().add(this.bestScore);
                         padding++;
                     }

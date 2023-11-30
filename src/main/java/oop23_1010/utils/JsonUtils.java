@@ -18,6 +18,7 @@ public class JsonUtils {
 
     public static final String MATCH_FILE = "match";
     public static final String BEST_SCORE_FILE = "best_score";
+    public static final String SETTINGS_FILE = "settings";
 
     // Match values
 
@@ -25,6 +26,10 @@ public class JsonUtils {
     public static final String MATCH_ON_GOING = "matchOnGoing";
     public static final String GRID_SIZE = "gridSize";
     public static final String GRID_COMPOSITION = "grid";
+
+    // Settings values
+
+    public static final String VOLUME = "volume";
 
     public static Object loadData(String data, String fileName) throws IOException {
         // Read file
@@ -111,7 +116,7 @@ public class JsonUtils {
     public static Boolean jsonExist(String fileName) throws IOException {
         // Check if exist some data to load
         if (Files.exists(Paths.get(DATA_PATH + fileName + ".json"))
-                && Files.readAllBytes(Paths.get(DATA_PATH + fileName + ".json")).length > 0){
+                && Files.readAllBytes(Paths.get(DATA_PATH + fileName + ".json")).length > 0) {
             return true;
         } else {
             return false;

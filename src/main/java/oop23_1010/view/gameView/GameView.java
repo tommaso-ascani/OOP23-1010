@@ -69,8 +69,7 @@ public class GameView extends ViewImpl {
     @Override
     public void init() {
 
-        GameSoundSystem.getInstance().setMediaPlayer(SoundType.BACKGROUND_01,
-                GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+        GameSoundSystem.getInstance().setMediaPlayer(SoundType.BACKGROUND_01);
         GameSoundSystem.getInstance().playMediaPlayer();
 
         try {
@@ -93,7 +92,7 @@ public class GameView extends ViewImpl {
 
                 GameView.spawnPanelsWidth = 6.0 * grid.getGridCellSize();
 
-                this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE,JsonUtils.MATCH_FILE);
+                this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE);
 
                 JSONArray a = JsonUtils.loadGrid(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
 
@@ -376,19 +375,25 @@ public class GameView extends ViewImpl {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, this.score), JsonUtils.MATCH_FILE);
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true), JsonUtils.MATCH_FILE);
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()), JsonUtils.MATCH_FILE);
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()),
+                        JsonUtils.MATCH_FILE);
 
-                if(JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)){
+                if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
                     if (JsonUtils.ifDataExist(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE)) {
-                        Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE);
+                        Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
+                                JsonUtils.BEST_SCORE_FILE);
                         if (best_score < this.score) {
-                            JsonUtils.addElement(new Pair<String,Object>(String.valueOf(grid.getGridSize()), this.score), JsonUtils.BEST_SCORE_FILE);
+                            JsonUtils.addElement(
+                                    new Pair<String, Object>(String.valueOf(grid.getGridSize()), this.score),
+                                    JsonUtils.BEST_SCORE_FILE);
                         }
                     } else {
-                        JsonUtils.addElement(new Pair<String,Object>(String.valueOf(grid.getGridSize()), this.score), JsonUtils.BEST_SCORE_FILE);
+                        JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), this.score),
+                                JsonUtils.BEST_SCORE_FILE);
                     }
                 } else {
-                    JsonUtils.addElement(new Pair<String,Object>(String.valueOf(grid.getGridSize()), this.score), JsonUtils.BEST_SCORE_FILE);
+                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), this.score),
+                            JsonUtils.BEST_SCORE_FILE);
                 }
 
                 JSONArray blocksArray = new JSONArray();
@@ -406,7 +411,8 @@ public class GameView extends ViewImpl {
                     blocksArray.put(block);
                 }
 
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray), JsonUtils.MATCH_FILE);
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray),
+                        JsonUtils.MATCH_FILE);
 
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -464,22 +470,19 @@ public class GameView extends ViewImpl {
                     /*
                      * TO-DO
                      */
-                    GameSoundSystem.getInstance().setAudioClip(SoundType.RIGHT_BLOCK_POSITION,
-                            GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+                    GameSoundSystem.getInstance().setAudioClip(SoundType.RIGHT_BLOCK_POSITION);
                     GameSoundSystem.getInstance().playAudioClip();
                     blocksAvalaible.remove(block);
 
                     this.labelScore.setText("Score: " + this.score);
                 } else {
-                    GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION,
-                            GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+                    GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION);
                     GameSoundSystem.getInstance().playAudioClip();
                     block.returnToStart();
                 }
 
             } else {
-                GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION,
-                        GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+                GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION);
                 GameSoundSystem.getInstance().playAudioClip();
                 block.returnToStart();
             }
@@ -487,8 +490,7 @@ public class GameView extends ViewImpl {
                 createNewPuzzles();
             }
             if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
-                GameSoundSystem.getInstance().setAudioClip(SoundType.GAME_OVER,
-                        GameSoundSystem.getInstance().getVolumeObject().getVolumeValue());
+                GameSoundSystem.getInstance().setAudioClip(SoundType.GAME_OVER);
                 GameSoundSystem.getInstance().playAudioClip();
                 this.createGameOverPane();
                 this.gameOverPane.setVisible(true);

@@ -1,31 +1,10 @@
 package oop23_1010.sound;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
-import oop23_1010.view.gameView.SettingsView;
-
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.io.File;
+import oop23_1010.utils.JsonUtils;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-import java.util.stream.Stream;
 
 /**
  * Class that represents the game sound system.
@@ -36,71 +15,61 @@ public final class GameSoundSystem {
     private static AudioClip aClip;
     private static Media media;
     private static MediaPlayer player;
-    private static Volume volume;
-    private static MediaPlayer sfxPlayer;
-    private static double masterVolume = 1.0;
+    private static Double volume;
     private static final double MIN_VOLUME = 0.0;
     private static final double MAX_VOLUME = 1.0;
-    // private static final Map<String, Pair<Media, Optional<Duration>>>
-    // SOUND_SYSTEM = loadSounds();
 
     public static GameSoundSystem getInstance() {
-        if (instance == null) {
-            instance = new GameSoundSystem();
-            GameSoundSystem.volume = new Volume();
+        if (GameSoundSystem.instance == null) {
+            GameSoundSystem.instance = new GameSoundSystem();
+        }
+        try {
+            if (JsonUtils.jsonExist(JsonUtils.SETTINGS_FILE)
+                    && JsonUtils.ifDataExist(JsonUtils.VOLUME, JsonUtils.SETTINGS_FILE)) {
+                GameSoundSystem.volume = (Double) JsonUtils.loadData(JsonUtils.VOLUME, JsonUtils.SETTINGS_FILE);
+            } else {
+                GameSoundSystem.volume = GameSoundSystem.MAX_VOLUME;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return instance;
     }
 
-    /**
-     * Plays a short sound effect.
-     * This method is not ideal to play longer audio files, use
-     * {@link GameSoundSystem#playMusic} instead.
-     * This method does not stop any currently played sound.
-     * 
-     * @param sfx the sound effect file name.
-     * @see GameSoundSystem#playSfx(String, Consumer, Consumer)
-     */
-    public void setAudioClip(SoundType sound, Double volume) {
-        aClip = new AudioClip(getClass().getResource(sound.getPath()).toExternalForm());
-        aClip.setVolume(volume);
+    public void setAudioClip(SoundType sound) {
+        GameSoundSystem.aClip = new AudioClip(getClass().getResource(sound.getPath()).toExternalForm());
+        GameSoundSystem.aClip.setVolume(GameSoundSystem.volume);
 
     }
 
     public void playAudioClip() {
-        System.out.println(aClip.getVolume());
-        aClip.play();
+        GameSoundSystem.aClip.play();
     }
 
     public void stopAudioClip() {
-        aClip.stop();
+        GameSoundSystem.aClip.stop();
     }
 
-    public void setMediaPlayer(SoundType music, Double volume) {
-        media = new Media(getClass().getResource(music.getPath()).toExternalForm());
-        player = new MediaPlayer(media);
-        player.setVolume(volume);
+    public void setMediaPlayer(SoundType music) {
+        GameSoundSystem.media = new Media(getClass().getResource(music.getPath()).toExternalForm());
+        GameSoundSystem.player = new MediaPlayer(media);
+        GameSoundSystem.player.setVolume(GameSoundSystem.volume);
     }
 
     public void playMediaPlayer() {
-        System.out.println(player.getVolume());
-        player.play();
+        GameSoundSystem.player.play();
     }
 
     public void pauseMedia() {
-        player.pause();
+        GameSoundSystem.player.pause();
     }
 
     public void resumeMedia() {
-        player.play();
+        GameSoundSystem.player.play();
     }
 
-    public void setVolume(Double volumeVal) {
-        volume.setVolumeValue(volumeVal);
-    }
-
-    public Volume getVolumeObject() {
-        return volume;
+    public Double getVolume() {
+        return GameSoundSystem.volume * 100.0;
     }
 
     // /**

@@ -1,11 +1,14 @@
 package oop23_1010.view.gameView;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
+import javafx.util.Pair;
 import oop23_1010.sound.GameSoundSystem;
-import oop23_1010.sound.Volume;
+import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
@@ -23,7 +26,7 @@ public class SettingsView extends ViewImpl {
 
     @Override
     public void init() {
-        this.sliderVolume.setValue(100);
+        this.sliderVolume.setValue(GameSoundSystem.getInstance().getVolume());
         this.sliderVolume.setMin(0);
         this.sliderVolume.setMax(100);
         this.sliderVolume.setShowTickMarks(true);
@@ -33,7 +36,12 @@ public class SettingsView extends ViewImpl {
         this.sliderVolume.setSnapToTicks(true);
 
         this.sliderVolume.setOnMouseReleased(e -> {
-            GameSoundSystem.getInstance().setVolume(((Double) this.sliderVolume.getValue()) / 100.0);
+            try {
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, this.sliderVolume.getValue() / 100.0),
+                        JsonUtils.SETTINGS_FILE);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         });
     }
 

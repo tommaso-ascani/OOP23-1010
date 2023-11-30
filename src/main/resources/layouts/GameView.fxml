@@ -35,10 +35,10 @@
    <center>
       <GridPane id="gridPane" fx:id="gridPane" BorderPane.alignment="CENTER">
          <columnConstraints>
-            <ColumnConstraints />
+            <ColumnConstraints/>
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints />
+            <RowConstraints/>
          </rowConstraints></GridPane>
    </center>
    <Pane id="upLeftSpawn" fx:id="upLeftSpawn" />
