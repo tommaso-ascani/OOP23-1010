@@ -690,7 +690,7 @@ public class GameView extends ViewImpl {
         this.labelCoin.relocate((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2,
                 ((ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2) - 40);
-        
+
         this.labelScore.relocate(ViewSwitcher.getWindowWidth() / 2,
                 ((ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2) - 40);

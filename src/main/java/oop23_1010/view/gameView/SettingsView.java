@@ -26,6 +26,7 @@ public class SettingsView extends ViewImpl {
 
     @Override
     public void init() {
+
         this.sliderVolume.setValue(GameSoundSystem.getInstance().getVolume());
         this.sliderVolume.setMin(0);
         this.sliderVolume.setMax(100);
@@ -37,7 +38,7 @@ public class SettingsView extends ViewImpl {
 
         this.sliderVolume.setOnMouseReleased(e -> {
             try {
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, this.sliderVolume.getValue() / 100.0),
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, this.sliderVolume.getValue()),
                         JsonUtils.SETTINGS_FILE);
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -47,5 +48,9 @@ public class SettingsView extends ViewImpl {
 
     public void switchToHomeView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
+    }
+
+    public void changeVolume() {
+
     }
 }

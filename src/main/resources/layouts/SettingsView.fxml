@@ -24,7 +24,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView id="imageVolume" fx:id="imageVolume" fitHeight="63.0" fitWidth="63.0" layoutX="775.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0">
+      <ImageView id="imageVolume" fx:id="imageVolume" fitHeight="63.0" fitWidth="63.0" layoutX="775.0" layoutY="192.0" onMouseClicked="#changeVolume" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0">
          <image>
             <Image url="@../img/NoAudioButton.png" />
          </image>
