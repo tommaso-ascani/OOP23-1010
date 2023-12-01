@@ -98,7 +98,6 @@ public class GameView extends ViewImpl {
                 GameView.spawnPanelsWidth = 6.0 * grid.getGridCellSize();
 
                 this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE);
-                this.coins = (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
 
                 JSONArray a = JsonUtils.loadDataArray(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
 
@@ -138,6 +137,12 @@ public class GameView extends ViewImpl {
                 GameView.spawnPanelsWidth = 6.0 * grid.getGridCellSize();
             }
         } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this.coins = (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

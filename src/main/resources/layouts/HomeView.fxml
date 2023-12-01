@@ -36,7 +36,8 @@
          </image>
       </ImageView>
       <Slider id="sliderGridWidth" fx:id="sliderGridWidth" prefHeight="10.0" prefWidth="150.0" snapToTicks="true" />
-      <Label fx:id="sliderLabel" prefHeight="10.0" prefWidth="150.0" text="Grandezza della griglia:" />
+      <Label fx:id="sliderLabel" prefHeight="10.0" prefWidth="150.0" text="Grandezza della griglia: " />
+      <Label fx:id="coinsLabel" prefHeight="10.0" prefWidth="150.0" text="Coins: 0" />
       <ImageView id="imageResume" fx:id="imageResume" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#createDialogResume" pickOnBounds="true" preserveRatio="true" styleClass="imageResume">
          <image>
             <Image url="@../img/ResumeButton.png" />

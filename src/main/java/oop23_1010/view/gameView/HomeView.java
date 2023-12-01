@@ -38,7 +38,8 @@ public class HomeView extends ViewImpl {
 
     @FXML
     private Label bestScore,
-            sliderLabel;
+            sliderLabel,
+            coinsLabel;
 
     @Override
     public void init() {
@@ -52,7 +53,8 @@ public class HomeView extends ViewImpl {
         this.imageResume.relocate((ViewSwitcher.getWindowWidth() / 2) - this.imageResume.getFitWidth() - 75, 350);
         this.sliderLabel.relocate((ViewSwitcher.getWindowWidth() / 2) - this.sliderLabel.getPrefWidth(), 450);
         this.sliderGridWidth.relocate((ViewSwitcher.getWindowWidth() / 2), 450);
-        this.imageShop.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.imageShop.getFitWidth() / 2), 500);
+        this.imageShop.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.imageShop.getFitWidth() / 2), 750);
+        this.coinsLabel.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.coinsLabel.getPrefWidth() / 2), 820);
 
         // Style
         
@@ -66,6 +68,13 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setMajorTickUnit(5);
         this.sliderGridWidth.setMinorTickCount(0);
         this.sliderGridWidth.setSnapToTicks(true);
+
+        this.coinsLabel.setAlignment(Pos.CENTER);
+        try {
+            this.coinsLabel.setText("Coins: " + String.valueOf((Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
