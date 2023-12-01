@@ -18,7 +18,7 @@ public class JsonUtils {
 
     public static final String MATCH_FILE = "match";
     public static final String BEST_SCORE_FILE = "best_score";
-    public static final String SETTINGS_FILE = "settings";
+    public static final String SETTINGS_FILE = "game_data";
 
     // Match values
 
