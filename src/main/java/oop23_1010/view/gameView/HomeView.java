@@ -12,6 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import oop23_1010.controllers.ThemeController;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
@@ -22,12 +23,12 @@ public class HomeView extends ViewImpl {
     private static int gridSize;
 
     @FXML
-    private ImageView   imageSettings, 
-                        imageTitle, 
-                        imageShop, 
-                        imageQuit, 
-                        imageResume, 
-                        imagePlay;
+    private ImageView imageSettings,
+            imageTitle,
+            imageShop,
+            imageQuit,
+            imageResume,
+            imagePlay;
 
     @FXML
     private Slider sliderGridWidth;
@@ -36,8 +37,8 @@ public class HomeView extends ViewImpl {
     private AnchorPane mainPane;
 
     @FXML
-    private Label   bestScore,
-                    sliderLabel;
+    private Label bestScore,
+            sliderLabel;
 
     @Override
     public void init() {
@@ -72,7 +73,9 @@ public class HomeView extends ViewImpl {
                     if (JsonUtils.ifDataExist(String.valueOf((i + 1) * 5), JsonUtils.BEST_SCORE_FILE)) {
                         this.bestScore = new Label();
                         this.bestScore.setPrefSize(200, 10);
-                        this.bestScore.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.bestScore.getPrefWidth() / 2), (padding * 25) + 5);
+                        this.bestScore.relocate(
+                                (ViewSwitcher.getWindowWidth() / 2) - (this.bestScore.getPrefWidth() / 2),
+                                (padding * 25) + 5);
                         this.bestScore.setAlignment(Pos.CENTER);
                         this.bestScore.setText("Best Score on grid " + ((i + 1) * 5) + " ---> "
                                 + String.valueOf(best_score.get(String.valueOf((i + 1) * 5))));
@@ -97,6 +100,15 @@ public class HomeView extends ViewImpl {
             } else {
                 this.imageResume.setDisable(true);
                 this.imageResume.setOpacity(0.4);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if (!JsonUtils.jsonExist(JsonUtils.GAME_DATA_FILE)
+                    || !JsonUtils.ifDataExist(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE)) {
+                ThemeController.saveSkins();
             }
         } catch (IOException e) {
             e.printStackTrace();

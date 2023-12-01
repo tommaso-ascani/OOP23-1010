@@ -2,19 +2,20 @@ package oop23_1010.types;
 
 public enum SkinType {
 
-    LIGHT(  "white", 
-            "lightgrey", 
-            "black", 
-            "black", 
-            "peru", 
-            "chartreuse", 
-            "dodgerblue", 
-            "gold", 
-            "darkorange", 
-            "lightcoral", 
-            "firebrick", 
-            "Light Mode", 
-            0);
+    LIGHT("white",
+            "lightgrey",
+            "black",
+            "black",
+            "peru",
+            "chartreuse",
+            "dodgerblue",
+            "gold",
+            "darkorange",
+            "lightcoral",
+            "firebrick",
+            "Light Mode",
+            0,
+            true);
 
     // DARK("black", "Dark Mode", 15);
 
@@ -33,24 +34,28 @@ public enum SkinType {
     private String color_5x1_1x5;
 
     private String description;
-    private Integer cost;
 
-    SkinType(   String color_background, 
-                String color_grid, 
-                String color_label,
-                String color_icon,
-                String color_1x1,
-                String color_2x2,
-                String color_3x3,
-                String color_2x1_1x2,
-                String color_3x1_1x3,
-                String color_4x1_1x4,
-                String color_5x1_1x5,
-                String description,
-                Integer cost) {
+    public Integer cost;
 
-        this.color_background = color_background; 
-        this.color_grid = color_grid; 
+    private Boolean purchased;
+
+    SkinType(String color_background,
+            String color_grid,
+            String color_label,
+            String color_icon,
+            String color_1x1,
+            String color_2x2,
+            String color_3x3,
+            String color_2x1_1x2,
+            String color_3x1_1x3,
+            String color_4x1_1x4,
+            String color_5x1_1x5,
+            String description,
+            Integer cost,
+            Boolean purchased) {
+
+        this.color_background = color_background;
+        this.color_grid = color_grid;
         this.color_label = color_label;
         this.color_icon = color_icon;
         this.color_1x1 = color_1x1;
@@ -62,6 +67,7 @@ public enum SkinType {
         this.color_5x1_1x5 = color_5x1_1x5;
         this.description = description;
         this.cost = cost;
+        this.purchased = purchased;
     }
 
     // Getter
@@ -116,5 +122,13 @@ public enum SkinType {
 
     public Integer getCost() {
         return this.cost;
+    }
+
+    public Boolean getPurchased() {
+        return purchased;
+    }
+
+    public void setPurchased(Boolean purchased) {
+        this.purchased = purchased;
     }
 }

@@ -3,7 +3,6 @@ package oop23_1010.utils;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import oop23_1010.types.SkinType;
 
 public class ShopSkinItem extends VBox {
@@ -22,9 +21,13 @@ public class ShopSkinItem extends VBox {
 
     private Label costLabel;
 
-    public ShopSkinItem(SkinType skin, Integer pos) {
+    public ShopSkinItem(String skin, Integer pos, Boolean purchased) {
 
-        this.skin = skin;
+        for (SkinType skinType : SkinType.values()) {
+            if (skinType.name().equals(skin)) {
+                this.skin = skinType;
+            }
+        }
 
         this.descriptionPane = new Pane();
         this.costPane = new Pane();
@@ -32,14 +35,7 @@ public class ShopSkinItem extends VBox {
         this.descriptionLabel = new Label(this.skin.getDescription());
 
         this.pos = pos;
-        if (skin == SkinType.LIGHT) {
-            this.purchased = true;
-
-        } else {
-            this.purchased = false;
-            this.descriptionLabel.setTextFill(Paint.valueOf("white"));
-            this.costLabel.setTextFill(Paint.valueOf("white"));
-        }
+        this.purchased = purchased;
 
         this.setStyle(
                 "-fx-background-color: " + this.skin.getColor_background() + "; -fx-border-width: 2; -fx-border-color: yellow");

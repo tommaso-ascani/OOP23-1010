@@ -1,6 +1,9 @@
 package oop23_1010.view.gameView;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -11,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import oop23_1010.types.SkinType;
+import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ShopSkinItem;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
@@ -41,7 +44,6 @@ public class ShopView extends ViewImpl {
 
     @Override
     public void init() {
-
         this.titlePane.setPrefSize(ViewSwitcher.getWindowWidth(), ViewSwitcher.getWindowHeight() / 9);
 
         this.titleLabel.setText("SHOP");
@@ -49,17 +51,25 @@ public class ShopView extends ViewImpl {
         this.titleLabel.setPrefSize(ViewSwitcher.getWindowWidth(), ViewSwitcher.getWindowHeight() / 9);
         this.titleLabel.setAlignment(Pos.BASELINE_CENTER);
 
-        for (SkinType skinType : SkinType.values()) {
-            ShopSkinItem temp = new ShopSkinItem(skinType, skinType.ordinal() + 1);
+        JSONArray a = null;
+        try {
+            a = JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < a.length(); i++) {
+            System.out.println(a.getJSONObject(i));
+            ShopSkinItem temp = new ShopSkinItem(a.getJSONObject(i).getString("name"), i + 1,
+                    (Boolean) a.getJSONObject(i).get("purchased"));
             if (temp.getPurchased()) {
                 temp.getCostLabel().setText("PURCHASED");
             } else {
                 temp.getCostLabel().setText(temp.getSkin().getCost().toString());
             }
+            this.verticalBox.getChildren().add(temp);
             shopList.add(temp);
         }
-
-        this.verticalBox.getChildren().addAll(shopList);
 
         this.verticalBox.setPadding(new Insets(10));
         this.verticalBox.setSpacing(10);
