@@ -17,6 +17,7 @@ public final class GameSoundSystem {
     private static Media media;
     private static MediaPlayer player;
     private static Double volume;
+    private static final Double MIN_VOLUME = 0.0;
     private static final Double MAX_VOLUME = 1.0;
 
     /**
@@ -85,5 +86,4 @@ public final class GameSoundSystem {
     public Double getMinVolume() {
         return GameSoundSystem.MIN_VOLUME;
     }
-
 }
