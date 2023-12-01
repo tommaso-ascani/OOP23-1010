@@ -45,6 +45,7 @@ public class ShopView extends ViewImpl {
 
     @Override
     public void init() {
+        this.loadSkins();
 
         this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
 
@@ -55,23 +56,39 @@ public class ShopView extends ViewImpl {
         this.titleLabel.setPrefSize(ViewSwitcher.getWindowWidth(), ViewSwitcher.getWindowHeight() / 9);
         this.titleLabel.setAlignment(Pos.BASELINE_CENTER);
 
+        this.verticalBox.setPadding(new Insets(10));
+        this.verticalBox.setSpacing(10);
+        this.verticalBox.setPrefSize(ViewSwitcher.getWindowWidth() - 100, 500);
+        this.verticalBox.relocate((ViewSwitcher.getWindowWidth() - this.verticalBox.getPrefWidth()) / 2,
+                (ViewSwitcher.getWindowHeight() - this.verticalBox.getPrefHeight()) / 2);
+
+    }
+
+    public void loadSkins() {
+        this.verticalBox.getChildren().clear();
         JSONArray a = null;
 
         try {
             a = JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
 
             for (int i = 0; i < a.length(); i++) {
-            System.out.println(a.getJSONObject(i));
-            ShopSkinItem temp = new ShopSkinItem(a.getJSONObject(i).getString("name"), i + 1,
-                    (Boolean) a.getJSONObject(i).get("purchased"));
-            if (temp.getPurchased()) {
-                temp.getCostLabel().setText("PURCHASED");
-            } else {
-                temp.getCostLabel().setText(temp.getSkin().getCost().toString());
+                ShopSkinItem temp = new ShopSkinItem(a.getJSONObject(i).getString("name"), i + 1,
+                        (Boolean) a.getJSONObject(i).get("purchased"));
+                if (temp.getPurchased()) {
+                    temp.getCostLabel().setText("PURCHASED");
+                } else {
+                    temp.getCostLabel().setText(temp.getSkin().getCost().toString());
+                    temp.setOnMouseClicked(e -> {
+                        System.out.println("comprato");
+                        temp.getSkin().setPurchased(true);
+                        ThemeController.saveSkins();
+                        this.loadSkins();
+                    });
+                }
+
+                this.verticalBox.getChildren().add(temp);
+                shopList.add(temp);
             }
-            this.verticalBox.getChildren().add(temp);
-            shopList.add(temp);
-        }
         } catch (IOException e) {
             e.printStackTrace();
         }

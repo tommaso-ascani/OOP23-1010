@@ -34,7 +34,7 @@ dependencies {
 
     implementation ("org.json:json:20231013")
 
-    val javaFxVersion = "21"
+    val javaFxVersion = "15"
     for (platform in supportedPlatforms) {
         for (module in javaFXModules) {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")

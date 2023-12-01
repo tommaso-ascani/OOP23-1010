@@ -28,9 +28,7 @@ public final class ThemeController {
             JSONObject skinObject = new JSONObject();
             skinObject.put("name", skin.name());
             skinObject.put("purchased", skin.getPurchased());
-            System.out.println(skinObject.toString());
             temp.put(skinObject);
-            System.out.println(temp.toString());
         }
 
         try {
