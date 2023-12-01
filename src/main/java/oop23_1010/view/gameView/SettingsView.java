@@ -56,7 +56,7 @@ public class SettingsView extends ViewImpl {
         this.buttonApply.setOnMouseClicked(e -> {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, this.sliderVolume.getValue()),
-                        JsonUtils.SETTINGS_FILE);
+                        JsonUtils.GAME_DATA_FILE);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

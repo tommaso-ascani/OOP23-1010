@@ -98,7 +98,7 @@ public class GameView extends ViewImpl {
 
                 this.score = (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE);
 
-                JSONArray a = JsonUtils.loadGrid(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
+                JSONArray a = JsonUtils.loadDataArray(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
 
                 for (int i = 0; i < a.length(); i++) {
                     ColorType color;
@@ -609,7 +609,8 @@ public class GameView extends ViewImpl {
                 gridBlock.setPrefWidth(grid.getGridCellSize());
                 if (gridBlock.getFill() == null) {
                     gridBlock.setStyle(
-                            "-fx-background-color: " + ColorType.GRAY.getColor() + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
+                            "-fx-background-color: " + ColorType.GRAY.getColor()
+                                    + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 } else {
                     gridBlock.setStyle(
                             "-fx-background-color: " + gridBlock.getFill().getColor()
@@ -627,7 +628,8 @@ public class GameView extends ViewImpl {
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());
                     aPane.setStyle(
-                            "-fx-background-color: " + ColorType.GRAY.getColor() + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
+                            "-fx-background-color: " + ColorType.GRAY.getColor()
+                                    + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
 
                     this.grid.add(aPane);
                     this.gridPane.add(aPane, ColumnIndex, RowIndex);
@@ -701,13 +703,7 @@ public class GameView extends ViewImpl {
 
         this.labelScore.relocate(((ViewSwitcher.getWindowWidth() / 3) * 2) - (this.labelScore.getWidth() / 2), 60);
 
-
-
-
-
-        
-
-        this.gridPane.relocate(ViewSwitcher.getWindowWidth() / 2 - (this.gridPane.getWidth() / 2), 
+        this.gridPane.relocate(ViewSwitcher.getWindowWidth() / 2 - (this.gridPane.getWidth() / 2),
                 ViewSwitcher.getWindowHeight() / 2 - (this.gridPane.getHeight() / 2));
 
         this.imagePause.relocate(ViewSwitcher.getWindowWidth() - this.imagePause.getFitHeight() - 15, 15);

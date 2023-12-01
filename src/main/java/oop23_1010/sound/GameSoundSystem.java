@@ -28,13 +28,13 @@ public final class GameSoundSystem {
             GameSoundSystem.instance = new GameSoundSystem();
         }
         try {
-            if (JsonUtils.jsonExist(JsonUtils.SETTINGS_FILE)
-                    && JsonUtils.ifDataExist(JsonUtils.VOLUME, JsonUtils.SETTINGS_FILE)) {
+            if (JsonUtils.jsonExist(JsonUtils.GAME_DATA_FILE)
+                    && JsonUtils.ifDataExist(JsonUtils.VOLUME, JsonUtils.GAME_DATA_FILE)) {
                 GameSoundSystem.volume = (Double) (((Integer) JsonUtils.loadData(JsonUtils.VOLUME,
-                        JsonUtils.SETTINGS_FILE)).doubleValue() / 100.0);
+                        JsonUtils.GAME_DATA_FILE)).doubleValue() / 100.0);
             } else {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, (GameSoundSystem.MAX_VOLUME * 100.0)),
-                        JsonUtils.SETTINGS_FILE);
+                        JsonUtils.GAME_DATA_FILE);
                 GameSoundSystem.volume = GameSoundSystem.MAX_VOLUME;
             }
         } catch (IOException e) {

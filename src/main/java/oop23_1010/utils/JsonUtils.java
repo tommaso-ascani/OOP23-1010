@@ -18,7 +18,7 @@ public class JsonUtils {
 
     public static final String MATCH_FILE = "match";
     public static final String BEST_SCORE_FILE = "best_score";
-    public static final String SETTINGS_FILE = "game_data";
+    public static final String GAME_DATA_FILE = "game_data";
 
     // Match values
 
@@ -27,9 +27,11 @@ public class JsonUtils {
     public static final String GRID_SIZE = "gridSize";
     public static final String GRID_COMPOSITION = "grid";
 
-    // Settings values
+    // Game data values
 
     public static final String VOLUME = "volume";
+    public static final String SELECTED_SKIN = "selectedSkin";
+    public static final String SKINS = "skins";
 
     public static Object loadData(String data, String fileName) throws IOException {
         // Read file
@@ -49,7 +51,7 @@ public class JsonUtils {
         return json.has(data);
     }
 
-    public static JSONArray loadGrid(String data, String fileName) throws IOException {
+    public static JSONArray loadDataArray(String data, String fileName) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
         // Create new JSONObject with file data

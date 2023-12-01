@@ -34,6 +34,7 @@ public class ShopSkinItem extends VBox {
         this.pos = pos;
         if (skin == SkinType.LIGHT) {
             this.purchased = true;
+
         } else {
             this.purchased = false;
             this.descriptionLabel.setTextFill(Paint.valueOf("white"));
