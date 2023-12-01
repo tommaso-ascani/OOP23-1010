@@ -32,6 +32,7 @@ public class JsonUtils {
     public static final String VOLUME = "volume";
     public static final String SELECTED_SKIN = "selectedSkin";
     public static final String SKINS = "skins";
+    public static final String COINS = "coins";
 
     public static Object loadData(String data, String fileName) throws IOException {
         // Read file

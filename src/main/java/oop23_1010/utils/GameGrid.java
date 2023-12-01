@@ -83,20 +83,19 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @param score
      * @return
      */
-    public Integer controlIfLinesCompleted(Integer score) {
+    public Integer controlIfLinesCompleted() {
 
-        Integer scoreMultiplier = 1;
+        Integer lines = 0;
 
         for (ArrayList<GridBlock> line : getNumFullLines()) {
             for (GridBlock block : line) {
                 block.setStyle("-fx-background-color: " + block.getBackground_color());
                 block.setFill(null);
             }
-            score = score + (line.size() * scoreMultiplier);
-            scoreMultiplier++;
+            lines++;
         }
         
-        return score;
+        return lines;
     }
 
     /**
