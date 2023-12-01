@@ -2,14 +2,9 @@ package oop23_1010.controllers;
 
 import oop23_1010.types.SkinType;
 import oop23_1010.utils.JsonUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.json.JSONArray;
-
-import com.google.gson.JsonArray;
-
 import javafx.util.Pair;
 
 public final class ThemeController {

@@ -7,8 +7,8 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import oop23_1010.controllers.Movement;
+import oop23_1010.controllers.ThemeController;
 import oop23_1010.types.BlockType;
-import oop23_1010.types.ColorType;
 
 public class ShapeBlock extends Path {
 
@@ -22,7 +22,7 @@ public class ShapeBlock extends Path {
     private Double widthPx;
     private Double heigthPx;
 
-    private ColorType color;
+    private String color;
 
     private Double startX;
     private Double startY;
@@ -46,74 +46,58 @@ public class ShapeBlock extends Path {
             case BLOCK_1x1:
                 this.width = 1;
                 this.height = 1;
-                this.color = ColorType.PERU;
+                this.color = ThemeController.getSelectedSkin().getColor_1x1();
                 break;
             case BLOCK_1x2:
                 this.width = 1;
                 this.height = 2;
-                this.color = ColorType.GOLD;
+                this.color = ThemeController.getSelectedSkin().getColor_2x1_1x2();
                 break;
             case BLOCK_1x3:
                 this.width = 1;
                 this.height = 3;
-                this.color = ColorType.DARKORANGE;
+                this.color = ThemeController.getSelectedSkin().getColor_3x1_1x3();
                 break;
             case BLOCK_1x4:
                 this.width = 1;
                 this.height = 4;
-                this.color = ColorType.LIGHTCORAL;
+                this.color = ThemeController.getSelectedSkin().getColor_4x1_1x4();
                 break;
             case BLOCK_1x5:
                 this.width = 1;
                 this.height = 5;
-                this.color = ColorType.FIREBRICK;
+                this.color = ThemeController.getSelectedSkin().getColor_5x1_1x5();
                 break;
             case BLOCK_2x1:
                 this.width = 2;
                 this.height = 1;
-                this.color = ColorType.GOLD;
+                this.color = ThemeController.getSelectedSkin().getColor_2x1_1x2();
                 break;
             case BLOCK_2x2:
                 this.width = 2;
                 this.height = 2;
-                this.color = ColorType.CHARTREUSE;
+                this.color = ThemeController.getSelectedSkin().getColor_2x2();
                 break;
             case BLOCK_3x1:
                 this.width = 3;
                 this.height = 1;
-                this.color = ColorType.DARKORANGE;
+                this.color = ThemeController.getSelectedSkin().getColor_3x1_1x3();
                 break;
             case BLOCK_3x3:
                 this.width = 3;
                 this.height = 3;
-                this.color = ColorType.DODGERBLUE;
+                this.color = ThemeController.getSelectedSkin().getColor_3x3();
                 break;
             case BLOCK_4x1:
                 this.width = 4;
                 this.height = 1;
-                this.color = ColorType.LIGHTCORAL;
+                this.color = ThemeController.getSelectedSkin().getColor_4x1_1x4();
                 break;
             case BLOCK_5x1:
                 this.width = 5;
                 this.height = 1;
-                this.color = ColorType.FIREBRICK;
+                this.color = ThemeController.getSelectedSkin().getColor_5x1_1x5();
                 break;
-            // case BLOCK_L_BOTTOM_LEFT_2x2:
-            // break;
-            // case BLOCK_L_BOTTOM_LEFT_3X3:
-            // break;
-            // case BLOCK_L_BOTTOM_RIGHT_2x2:
-            // break;
-            // case BLOCK_L_BOTTOM_RIGHT_3X3:
-            // break;
-            // case BLOCK_L_TOP_LEFT_2x2:
-            // break;
-            // case BLOCK_L_TOP_LEFT_3X3:
-            // break;
-            // case BLOCK_L_TOP_RIGHT_2x2:
-            // break;
-            // case BLOCK_L_TOP_RIGHT_3X3:
-            // break;
             default:
                 break;
         }
@@ -140,7 +124,7 @@ public class ShapeBlock extends Path {
         return this.height;
     }
 
-    public ColorType getColor() {
+    public String getColor() {
         return this.color;
     }
 
@@ -192,7 +176,7 @@ public class ShapeBlock extends Path {
         this.relocate(this.startX, this.startY);
 
         this.setStyle("-fx-fill: " + this.color + "; -fx-stroke-width: 0");
-        this.setAccessibleText(this.color.getColor());
+        this.setAccessibleText(this.color);
         this.blocksAvalaible.add(this);
         Movement.makeDraggable(this);
     }

@@ -42,7 +42,7 @@ public class ShopSkinItem extends VBox {
         }
 
         this.setStyle(
-                "-fx-background-color: " + this.skin.getColor() + "; -fx-border-width: 2; -fx-border-color: yellow");
+                "-fx-background-color: " + this.skin.getColor_background() + "; -fx-border-width: 2; -fx-border-color: yellow");
         this.setPrefHeight(150);
 
         this.descriptionPane.getChildren().add(descriptionLabel);

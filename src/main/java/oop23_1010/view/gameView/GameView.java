@@ -20,10 +20,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.util.Pair;
+import oop23_1010.controllers.ThemeController;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.sound.SoundType;
 import oop23_1010.types.BlockType;
-import oop23_1010.types.ColorType;
 import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
@@ -101,15 +101,18 @@ public class GameView extends ViewImpl {
                 JSONArray a = JsonUtils.loadDataArray(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
 
                 for (int i = 0; i < a.length(); i++) {
-                    ColorType color;
+
+                    String color;
+
                     if (a.getJSONObject(i).get("color").equals("null")) {
                         color = null;
                     } else {
-                        color = ColorType.get((String) a.getJSONObject(i).get("color"));
+                        color = (String) a.getJSONObject(i).get("color");
                     }
+
                     GridBlock aPane = new GridBlock((Integer) a.getJSONObject(i).get("X"),
                             (Integer) a.getJSONObject(i).get("Y"),
-                            color, ColorType.GRAY);
+                            color, ThemeController.getSelectedSkin().getColor_grid());
 
                     grid.add(aPane);
                 }
@@ -417,7 +420,7 @@ public class GameView extends ViewImpl {
                     block.put("X", gridBlock.getGridX());
                     block.put("Y", gridBlock.getGridY());
                     if (gridBlock.getFill() != null) {
-                        block.put("color", gridBlock.getFill().getColor());
+                        block.put("color", gridBlock.getFill());
                     } else {
                         block.put("color", "null");
                     }
@@ -609,11 +612,11 @@ public class GameView extends ViewImpl {
                 gridBlock.setPrefWidth(grid.getGridCellSize());
                 if (gridBlock.getFill() == null) {
                     gridBlock.setStyle(
-                            "-fx-background-color: " + ColorType.GRAY.getColor()
+                            "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_grid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 } else {
                     gridBlock.setStyle(
-                            "-fx-background-color: " + gridBlock.getFill().getColor()
+                            "-fx-background-color: " + gridBlock.getFill()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 }
 
@@ -623,12 +626,12 @@ public class GameView extends ViewImpl {
         } else {
             for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
                 for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
-                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null, ColorType.GRAY);
+                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null, ThemeController.getSelectedSkin().getColor_grid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());
                     aPane.setStyle(
-                            "-fx-background-color: " + ColorType.GRAY.getColor()
+                            "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_grid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
 
                     this.grid.add(aPane);
