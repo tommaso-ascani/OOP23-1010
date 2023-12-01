@@ -54,6 +54,10 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.relocate((ViewSwitcher.getWindowWidth() / 2), 450);
         this.imageShop.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.imageShop.getFitWidth() / 2), 500);
 
+        // Style
+        
+        this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
+
         this.sliderGridWidth.setValue(10);
         this.sliderGridWidth.setMin(5);
         this.sliderGridWidth.setMax(20);

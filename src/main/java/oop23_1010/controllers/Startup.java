@@ -21,7 +21,7 @@ public class Startup extends Application {
             QuitUtils.quit();
         });
 
-        ThemeController.setSelectedSkin(SkinType.LIGHT);
+        ThemeController.setSelectedSkin(SkinType.DARK);
 
         ViewSwitcher.getInstance().switchView(stage, ViewType.HOME);
     }

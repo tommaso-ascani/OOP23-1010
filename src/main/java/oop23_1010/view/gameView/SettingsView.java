@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Pair;
+import oop23_1010.controllers.ThemeController;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.ViewImpl;
@@ -34,6 +35,8 @@ public class SettingsView extends ViewImpl {
 
     @Override
     public void init() {
+
+        this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
 
         if (GameSoundSystem.getInstance().getVolume() != 0) {
             this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));

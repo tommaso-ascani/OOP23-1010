@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import oop23_1010.controllers.ThemeController;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ShopSkinItem;
 import oop23_1010.view.ViewImpl;
@@ -44,6 +45,9 @@ public class ShopView extends ViewImpl {
 
     @Override
     public void init() {
+
+        this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
+
         this.titlePane.setPrefSize(ViewSwitcher.getWindowWidth(), ViewSwitcher.getWindowHeight() / 9);
 
         this.titleLabel.setText("SHOP");
@@ -52,13 +56,11 @@ public class ShopView extends ViewImpl {
         this.titleLabel.setAlignment(Pos.BASELINE_CENTER);
 
         JSONArray a = null;
+
         try {
             a = JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        for (int i = 0; i < a.length(); i++) {
+            for (int i = 0; i < a.length(); i++) {
             System.out.println(a.getJSONObject(i));
             ShopSkinItem temp = new ShopSkinItem(a.getJSONObject(i).getString("name"), i + 1,
                     (Boolean) a.getJSONObject(i).get("purchased"));
@@ -69,6 +71,9 @@ public class ShopView extends ViewImpl {
             }
             this.verticalBox.getChildren().add(temp);
             shopList.add(temp);
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         this.verticalBox.setPadding(new Insets(10));

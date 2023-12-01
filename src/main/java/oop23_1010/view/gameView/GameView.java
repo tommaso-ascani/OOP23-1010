@@ -183,7 +183,7 @@ public class GameView extends ViewImpl {
         this.pausePane.setVisible(false);
         this.pausePane.setPrefSize(ViewSwitcher.getWindowWidth() / 1.5, ViewSwitcher.getWindowHeight() / 1.5);
         this.pausePane.setStyle(
-                "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+                "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
         this.pausePane.relocate(((ViewSwitcher.getWindowWidth() -
                 this.pausePane.getPrefWidth()) / 2),
                 ((ViewSwitcher.getWindowHeight() - this.pausePane.getPrefHeight()) / 2));
@@ -274,8 +274,8 @@ public class GameView extends ViewImpl {
 
         dialogPaneRestart.setVisible(false);
         dialogPaneMenu.setVisible(false);
-        dialogPaneRestart.setStyle("-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
-        dialogPaneMenu.setStyle("-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+        dialogPaneRestart.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
+        dialogPaneMenu.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
 
         dialogPaneRestart.getChildren().addAll(dialogRestartYes, dialogRestartNo, dialogRestartLabel1,
                 dialogRestartLabel2);
@@ -524,7 +524,7 @@ public class GameView extends ViewImpl {
         this.gameOverPane.setVisible(false);
 
         this.gameOverPane.setStyle(
-                "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+                "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
 
         this.gameOverPane.setPrefSize(400, 300);
 
@@ -657,13 +657,15 @@ public class GameView extends ViewImpl {
      * This method is used to set the style of the main panels
      */
     public void setPanelsStyle() {
+
         String SpawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10";
+
         this.upLeftSpawn.setStyle(SpawnPanlesStyle);
         this.downLeftSpawn.setStyle(SpawnPanlesStyle);
         this.upRightSpawn.setStyle(SpawnPanlesStyle);
         this.downRightSpawn.setStyle(SpawnPanlesStyle);
 
-        // this.mainPane.setStyle("-fx-background-image: url('img/whiteTheme.jpg')");
+        this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
 
         this.gridPane.setStyle(
                 "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE
