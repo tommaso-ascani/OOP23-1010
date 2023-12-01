@@ -61,7 +61,7 @@ public class GameView extends ViewImpl {
     private GridPane gridPane;
 
     @FXML
-    private Label labelCoin, labelScore;
+    private Label labelCoin, labelScore, titleCoin, titleScore;
 
     @FXML
     private ImageView imagePause;
@@ -109,7 +109,7 @@ public class GameView extends ViewImpl {
                     }
                     GridBlock aPane = new GridBlock((Integer) a.getJSONObject(i).get("X"),
                             (Integer) a.getJSONObject(i).get("Y"),
-                            color);
+                            color, ColorType.GRAY);
 
                     grid.add(aPane);
                 }
@@ -144,13 +144,21 @@ public class GameView extends ViewImpl {
 
         this.setPanelsStyle();
 
-        this.setObjectLocation();
+        this.titleCoin.setFont(new Font(null, 30));
+        this.titleCoin.setText("Coin");
+        this.titleCoin.setAlignment(Pos.CENTER);
 
         this.labelCoin.setFont(new Font(null, 30));
-        this.labelCoin.setText("Coin: TO-DO");
+        this.labelCoin.setText("TO-DO");
+        this.labelCoin.setAlignment(Pos.CENTER);
+
+        this.titleScore.setFont(new Font(null, 30));
+        this.titleScore.setText("Score");
+        this.titleScore.setAlignment(Pos.CENTER);
 
         this.labelScore.setFont(new Font(null, 30));
-        this.labelScore.setText("Score: " + this.score);
+        this.labelScore.setText(String.valueOf(this.score));
+        this.labelScore.setAlignment(Pos.CENTER);
 
         this.createNewPuzzles();
 
@@ -161,7 +169,7 @@ public class GameView extends ViewImpl {
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
 
-        gridPane.relocate(ViewSwitcher.getWindowWidth() / 2 - (gridPane.getWidth() / 2), ViewSwitcher.getWindowHeight() / 2 - (gridPane.getHeight() / 2));
+        this.setObjectLocation();
     }
 
     /*
@@ -480,7 +488,7 @@ public class GameView extends ViewImpl {
                     GameSoundSystem.getInstance().playAudioClip();
                     blocksAvalaible.remove(block);
 
-                    this.labelScore.setText("Score: " + this.score);
+                    this.labelScore.setText(String.valueOf(this.score));
                 } else {
                     GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION);
                     GameSoundSystem.getInstance().playAudioClip();
@@ -601,11 +609,11 @@ public class GameView extends ViewImpl {
                 gridBlock.setPrefWidth(grid.getGridCellSize());
                 if (gridBlock.getFill() == null) {
                     gridBlock.setStyle(
-                            "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
+                            "-fx-background-color: " + ColorType.GRAY.getColor() + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 } else {
                     gridBlock.setStyle(
                             "-fx-background-color: " + gridBlock.getFill().getColor()
-                                    + "; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
+                                    + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 }
 
                 this.gridPane.add(gridBlock, gridBlock.getGridX(), gridBlock.getGridY());
@@ -614,12 +622,12 @@ public class GameView extends ViewImpl {
         } else {
             for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
                 for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
-                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null);
+                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null, ColorType.GRAY);
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());
                     aPane.setStyle(
-                            "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 3; -fx-border-insets: -2");
+                            "-fx-background-color: " + ColorType.GRAY.getColor() + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
 
                     this.grid.add(aPane);
                     this.gridPane.add(aPane, ColumnIndex, RowIndex);
@@ -644,7 +652,7 @@ public class GameView extends ViewImpl {
      * This method is used to set the style of the main panels
      */
     public void setPanelsStyle() {
-        String SpawnPanlesStyle = "-fx-border-width: 5; -fx-border-color: black; -fx-border-radius: 10";
+        String SpawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10";
         this.upLeftSpawn.setStyle(SpawnPanlesStyle);
         this.downLeftSpawn.setStyle(SpawnPanlesStyle);
         this.upRightSpawn.setStyle(SpawnPanlesStyle);
@@ -654,7 +662,7 @@ public class GameView extends ViewImpl {
 
         this.gridPane.setStyle(
                 "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE
-                        + "; -fx-background-color: black; -fx-border-insets: 5; -fx-border-width: 5; -fx-border-color: black;");
+                        + "; -fx-border-insets: 5; -fx-border-width: 5;");
     }
 
     /**
@@ -685,13 +693,24 @@ public class GameView extends ViewImpl {
                         - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
 
-        this.labelCoin.relocate((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2,
-                ((ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
-                        - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2) - 40);
+        this.titleCoin.relocate(ViewSwitcher.getWindowWidth() / 3 - (this.titleCoin.getWidth() / 2), 20);
 
-        this.labelScore.relocate(ViewSwitcher.getWindowWidth() / 2,
-                ((ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
-                        - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2) - 40);
+        this.labelCoin.relocate(ViewSwitcher.getWindowWidth() / 3 - (this.labelCoin.getWidth() / 2), 60);
+
+        this.titleScore.relocate(((ViewSwitcher.getWindowWidth() / 3) * 2) - (this.titleScore.getWidth() / 2), 20);
+
+        this.labelScore.relocate(((ViewSwitcher.getWindowWidth() / 3) * 2) - (this.labelScore.getWidth() / 2), 60);
+
+
+
+
+
+        
+
+        this.gridPane.relocate(ViewSwitcher.getWindowWidth() / 2 - (this.gridPane.getWidth() / 2), 
+                ViewSwitcher.getWindowHeight() / 2 - (this.gridPane.getHeight() / 2));
+
+        this.imagePause.relocate(ViewSwitcher.getWindowWidth() - this.imagePause.getFitHeight() - 15, 15);
     }
 
     /**

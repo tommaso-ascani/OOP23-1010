@@ -22,5 +22,4 @@ public interface View {
      * @param stageToSet a Stage object which will be attached to the current view.
      */
     void setStage(Stage stageToSet);
-
 }

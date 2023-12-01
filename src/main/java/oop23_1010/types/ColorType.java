@@ -16,7 +16,9 @@ public enum ColorType {
 
     DODGERBLUE("dodgerblue"),
 
-    GREEN("green");
+    GREEN("green"),
+    
+    GRAY("lightgrey");
 
     private String color;
 

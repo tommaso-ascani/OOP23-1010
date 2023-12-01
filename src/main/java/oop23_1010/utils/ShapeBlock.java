@@ -191,7 +191,7 @@ public class ShapeBlock extends Path {
 
         this.relocate(this.startX, this.startY);
 
-        this.setStyle("-fx-fill: " + this.color);
+        this.setStyle("-fx-fill: " + this.color + "; -fx-stroke-width: 0");
         this.setAccessibleText(this.color.getColor());
         this.blocksAvalaible.add(this);
         Movement.makeDraggable(this);

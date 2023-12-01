@@ -10,21 +10,23 @@ public class GridBlock extends AnchorPane {
     private Integer y;
 
     private ColorType color;
+    private ColorType background_color;
 
     private Bounds bounds;
 
     // Constuctor
 
-    public GridBlock(Integer x, Integer y, ColorType color) {
+    public GridBlock(Integer x, Integer y, ColorType color, ColorType background_color) {
         this.x = x;
         this.y = y;
         this.color = color;
+        this.background_color = background_color;
     }
 
     // Setter
 
-    public void setFill(ColorType state) {
-        this.color = state;
+    public void setFill(ColorType color) {
+        this.color = color;
     }
 
     // Getter
@@ -59,5 +61,9 @@ public class GridBlock extends AnchorPane {
     public Double getMaxY() {
         bounds = this.localToScene(this.getBoundsInLocal());
         return bounds.getMaxY();
+    }
+
+    public ColorType getBackground_color() {
+        return background_color;
     }
 }

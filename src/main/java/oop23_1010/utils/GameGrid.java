@@ -89,7 +89,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
 
         for (ArrayList<GridBlock> line : getNumFullLines()) {
             for (GridBlock block : line) {
-                block.setStyle("-fx-background-color: white");
+                block.setStyle("-fx-background-color: " + block.getBackground_color().getColor());
                 block.setFill(null);
             }
             score = score + (line.size() * scoreMultiplier);

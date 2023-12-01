@@ -9,7 +9,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -23,19 +22,12 @@ public class HomeView extends ViewImpl {
     private static int gridSize;
 
     @FXML
-    private ImageView imageSettings;
-
-    @FXML
-    private ImageView imageShop;
-
-    @FXML
-    private ImageView imageQuit;
-
-    @FXML
-    private ImageView imageResume;
-
-    @FXML
-    private ImageView imagePlay;
+    private ImageView   imageSettings, 
+                        imageTitle, 
+                        imageShop, 
+                        imageQuit, 
+                        imageResume, 
+                        imagePlay;
 
     @FXML
     private Slider sliderGridWidth;
@@ -44,21 +36,22 @@ public class HomeView extends ViewImpl {
     private AnchorPane mainPane;
 
     @FXML
-    private Label bestScore;
+    private Label   bestScore,
+                    sliderLabel;
 
     @Override
     public void init() {
 
-        mainPane.setPrefSize(1600, 900);
+        // Object relocate
 
-        Image image1 = new Image("/img/QuitButton.png");
-
-        imageQuit.setFitWidth(20);
-        imageQuit.setFitHeight(20);
-        imageQuit.setPreserveRatio(true);
-        imageQuit.setSmooth(true);
-        imageQuit.setCache(true);
-        imageQuit.setImage(image1);
+        this.imageSettings.relocate(15, 15);
+        this.imageQuit.relocate(ViewSwitcher.getWindowWidth() - this.imageQuit.getFitWidth() - 15, 15);
+        this.imageTitle.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.imageTitle.getFitWidth() / 2), 220);
+        this.imagePlay.relocate((ViewSwitcher.getWindowWidth() / 2) + 75, 350);
+        this.imageResume.relocate((ViewSwitcher.getWindowWidth() / 2) - this.imageResume.getFitWidth() - 75, 350);
+        this.sliderLabel.relocate((ViewSwitcher.getWindowWidth() / 2) - this.sliderLabel.getPrefWidth(), 450);
+        this.sliderGridWidth.relocate((ViewSwitcher.getWindowWidth() / 2), 450);
+        this.imageShop.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.imageShop.getFitWidth() / 2), 500);
 
         this.sliderGridWidth.setValue(10);
         this.sliderGridWidth.setMin(5);
@@ -68,14 +61,6 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setMajorTickUnit(5);
         this.sliderGridWidth.setMinorTickCount(0);
         this.sliderGridWidth.setSnapToTicks(true);
-
-        Label test = new Label();
-        test.setPrefSize(100, 10);
-        test.setAlignment(Pos.CENTER);
-        test.setText("Ciao");
-        test.setStyle("-fx-background-color: black;");
-        this.mainPane.getChildren().add(test);
-        test.relocate(this.getStage().getWidth() - test.getPrefWidth()-15, 0);
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
@@ -87,7 +72,7 @@ public class HomeView extends ViewImpl {
                     if (JsonUtils.ifDataExist(String.valueOf((i + 1) * 5), JsonUtils.BEST_SCORE_FILE)) {
                         this.bestScore = new Label();
                         this.bestScore.setPrefSize(200, 10);
-                        this.bestScore.relocate(540, (padding * 25) + 5);
+                        this.bestScore.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.bestScore.getPrefWidth() / 2), (padding * 25) + 5);
                         this.bestScore.setAlignment(Pos.CENTER);
                         this.bestScore.setText("Best Score on grid " + ((i + 1) * 5) + " ---> "
                                 + String.valueOf(best_score.get(String.valueOf((i + 1) * 5))));
