@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -48,6 +49,17 @@ public class HomeView extends ViewImpl {
     @Override
     public void init() {
 
+        mainPane.setPrefSize(1600, 900);
+
+        Image image1 = new Image("/img/QuitButton.png");
+
+        imageQuit.setFitWidth(20);
+        imageQuit.setFitHeight(20);
+        imageQuit.setPreserveRatio(true);
+        imageQuit.setSmooth(true);
+        imageQuit.setCache(true);
+        imageQuit.setImage(image1);
+
         this.sliderGridWidth.setValue(10);
         this.sliderGridWidth.setMin(5);
         this.sliderGridWidth.setMax(20);
@@ -56,6 +68,14 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setMajorTickUnit(5);
         this.sliderGridWidth.setMinorTickCount(0);
         this.sliderGridWidth.setSnapToTicks(true);
+
+        Label test = new Label();
+        test.setPrefSize(100, 10);
+        test.setAlignment(Pos.CENTER);
+        test.setText("Ciao");
+        test.setStyle("-fx-background-color: black;");
+        this.mainPane.getChildren().add(test);
+        test.relocate(this.getStage().getWidth() - test.getPrefWidth()-15, 0);
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {

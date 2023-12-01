@@ -11,8 +11,8 @@ public class ViewSwitcher {
     private static ViewSwitcher instance;
     private View currentView;
 
-    private static final int WINDOW_WIDTH = 1280;
-    private static final int WINDOW_HEIGHT = 720;
+    private static final int WINDOW_WIDTH = 1600;
+    private static final int WINDOW_HEIGHT = 900;
 
     /**
      * This method is used to get the current instance of the ViewSwitcher.

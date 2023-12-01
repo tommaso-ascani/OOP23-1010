@@ -21,8 +21,6 @@ public abstract class ViewImpl implements View {
      */
     public void setStage(final Stage stageToSet) {
         stageToSet.setOnCloseRequest(event -> {
-            // this.controller.getUserController().saveUsers();
-            // this.controller.getRankController().saveRanks();
             System.exit(0);
         });
         this.currentStage = stageToSet;

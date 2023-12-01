@@ -15,7 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -46,19 +46,19 @@ public class GameView extends ViewImpl {
     private static final Integer GAP_BETWEEN_SPAWN_PANELS = 40;
 
     @FXML
-    private BorderPane mainPane;
+    private AnchorPane mainPane;
 
     @FXML
-    private Pane leftPane, upLeftSpawn, downLeftSpawn;
+    private Pane upLeftSpawn, downLeftSpawn;
+
+    @FXML
+    private Pane upRightSpawn, downRightSpawn;
+
+    @FXML
+    private Pane pausePane, gameOverPane;
 
     @FXML
     private GridPane gridPane;
-
-    @FXML
-    private Pane rightPane, upRightSpawn, downRightSpawn;
-
-    @FXML
-    private Pane bottomPane, upperPane, pausePane, gameOverPane;
 
     @FXML
     private Label labelCoin, labelScore;
@@ -69,8 +69,12 @@ public class GameView extends ViewImpl {
     @Override
     public void init() {
 
+        // -------------------------------- Sound Setup --------------------------------
+
         GameSoundSystem.getInstance().setMediaPlayer(SoundType.BACKGROUND_01);
         GameSoundSystem.getInstance().playMediaPlayer();
+
+        // -------------------------------- Json Setup ---------------------------------
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
@@ -132,6 +136,8 @@ public class GameView extends ViewImpl {
             e.printStackTrace();
         }
 
+        // -------------------------------- View Setup ---------------------------------
+
         this.createGridCells();
 
         this.setPanelsPrefSizes();
@@ -150,11 +156,12 @@ public class GameView extends ViewImpl {
 
         this.createPausePane();
 
-        Group gruppo = new Group(this.mainPane, this.upLeftSpawn, this.downLeftSpawn, this.upRightSpawn,
-                this.downRightSpawn, this.pausePane, this.gameOverPane);
+        Group gruppo = new Group(this.mainPane);
 
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
+
+        gridPane.relocate(ViewSwitcher.getWindowWidth() / 2 - (gridPane.getWidth() / 2), ViewSwitcher.getWindowHeight() / 2 - (gridPane.getHeight() / 2));
     }
 
     /*
@@ -268,7 +275,6 @@ public class GameView extends ViewImpl {
 
         this.setListenersPausePane(buttonMenu, buttonRiprendi, buttonRicomincia, dialogRestartYes, dialogRestartNo,
                 dialogPaneRestart, dialogMenuBack, dialogMenuYes, dialogMenuNo, dialogPaneMenu);
-
     }
 
     /**
@@ -628,14 +634,6 @@ public class GameView extends ViewImpl {
      * panels in the view
      */
     public void setPanelsPrefSizes() {
-        this.upperPane.setPrefSize(ViewSwitcher.getWindowWidth(),
-                ((ViewSwitcher.getWindowHeight() - this.getGridWidth()) / 2));
-        this.bottomPane.setPrefSize(ViewSwitcher.getWindowWidth(),
-                ((ViewSwitcher.getWindowHeight() - this.getGridWidth()) / 2));
-        this.leftPane.setPrefSize(((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2),
-                ViewSwitcher.getWindowHeight());
-        this.rightPane.setPrefSize(((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2),
-                ViewSwitcher.getWindowHeight());
         this.upLeftSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
         this.downLeftSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
         this.upRightSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);

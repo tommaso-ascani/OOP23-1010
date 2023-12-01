@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="mainPane" fx:id="mainPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
+<AnchorPane id="mainPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
    <children>
-      <ImageView id="imageSettings" fx:id="imageSettings" fitHeight="63.0" fitWidth="63.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#switchToSettingsView" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
+      <ImageView id="imageSettings" fx:id="imageSettings" fitHeight="63.0" fitWidth="63.0" layoutX="15.0" layoutY="15.0" onMouseClicked="#switchToSettingsView" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
          <image>
             <Image url="@../img/SettingsButton.png" />
          </image>
@@ -24,11 +23,9 @@
             <Image url="@../img/ShopButton.png" />
          </image>
       </ImageView>
-      <ImageView id="imageQuit" fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" layoutX="1203.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit">
-         <image>
-            <Image url="@../img/QuitButton.png" />
-         </image>
-      </ImageView>
+
+      <ImageView id="imageQuit" fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit" />
+      
       <ImageView id="imageTitle" fx:id="imageTitle" fitHeight="93.0" fitWidth="293.0" layoutX="494.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" styleClass="imageTitle" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="493.0">
          <image>
             <Image url="@../img/TitleLabel.png" />
