@@ -16,13 +16,4 @@ public enum BlockType {
     BLOCK_4x1,
     BLOCK_5x1;
 
-    // BLOCK_L_BOTTOM_LEFT_2x2,
-    // BLOCK_L_TOP_LEFT_2x2,
-    // BLOCK_L_TOP_RIGHT_2x2,
-    // BLOCK_L_BOTTOM_RIGHT_2x2,
-
-    // BLOCK_L_BOTTOM_LEFT_3X3,
-    // BLOCK_L_TOP_LEFT_3X3,
-    // BLOCK_L_TOP_RIGHT_3X3,
-    // BLOCK_L_BOTTOM_RIGHT_3X3;
 }
