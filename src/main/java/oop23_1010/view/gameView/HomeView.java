@@ -164,7 +164,7 @@ public class HomeView extends ViewImpl {
 
         dialogResumeLabel1.setAlignment(Pos.BASELINE_CENTER);
         dialogPaneResume.setStyle(
-                "-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black");
+                "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() +"; -fx-border-width: 2; -fx-border-color: black");
 
         dialogPaneResume.setPrefSize(300, 200);
         dialogResumeYes.setPrefSize(120, 30);
