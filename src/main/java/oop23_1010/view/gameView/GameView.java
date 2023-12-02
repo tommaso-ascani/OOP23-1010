@@ -388,6 +388,11 @@ public class GameView extends ViewImpl {
         });
 
         btnMenuN.setOnMouseClicked(e -> {
+            try {
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, this.coins), JsonUtils.GAME_DATA_FILE);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
         });
 
