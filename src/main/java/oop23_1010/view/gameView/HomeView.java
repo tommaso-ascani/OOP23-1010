@@ -12,6 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.ViewImpl;
@@ -44,6 +45,17 @@ public class HomeView extends ViewImpl {
     @Override
     public void init() {
 
+        // Coins
+
+        try {
+            if(!JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)) {
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, 0), JsonUtils.GAME_DATA_FILE);
+            }
+            this.coinsLabel.setText("Coins: " + String.valueOf((Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // Object relocate
 
         this.imageSettings.relocate(15, 15);
@@ -70,11 +82,6 @@ public class HomeView extends ViewImpl {
         this.sliderGridWidth.setSnapToTicks(true);
 
         this.coinsLabel.setAlignment(Pos.CENTER);
-        try {
-            this.coinsLabel.setText("Coins: " + String.valueOf((Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {

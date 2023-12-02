@@ -77,7 +77,9 @@ public class GameView extends ViewImpl {
 
         // -------------------------------- Json Setup ---------------------------------
 
-        try {
+        try {            
+            this.coins = (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
+
             if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
 
                 grid = new GameGrid<>((Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE));
@@ -137,12 +139,6 @@ public class GameView extends ViewImpl {
                 GameView.spawnPanelsWidth = 6.0 * grid.getGridCellSize();
             }
         } catch (JSONException | IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            this.coins = (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
-        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -403,22 +399,19 @@ public class GameView extends ViewImpl {
 
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, this.coins), JsonUtils.GAME_DATA_FILE);
 
-                if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
-                    if (JsonUtils.ifDataExist(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE)) {
-                        Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
-                                JsonUtils.BEST_SCORE_FILE);
-                        if (best_score < this.score) {
-                            JsonUtils.addElement(
-                                    new Pair<String, Object>(String.valueOf(grid.getGridSize()), this.score),
-                                    JsonUtils.BEST_SCORE_FILE);
-                        }
-                    } else {
-                        JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), this.score),
+                if (JsonUtils.ifDataExist(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE)) {
+                    Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
+                            JsonUtils.BEST_SCORE_FILE);
+                    if (best_score < this.score) {
+                        JsonUtils.addElement(
+                                new Pair<String, Object>(String.valueOf(grid.getGridSize()), this.score),
                                 JsonUtils.BEST_SCORE_FILE);
                     }
                 } else {
-                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), this.score),
+                    if(this.score > 0) {
+                        JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), this.score),
                             JsonUtils.BEST_SCORE_FILE);
+                    }
                 }
 
                 JSONArray blocksArray = new JSONArray();
