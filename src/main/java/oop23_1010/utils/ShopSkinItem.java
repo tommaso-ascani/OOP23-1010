@@ -2,8 +2,6 @@ package oop23_1010.utils;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -39,7 +37,6 @@ public class ShopSkinItem extends VBox {
         this.setPrefHeight(200);
         this.setFillWidth(true);
 
-        // TODO VISUALIZE COLORS
         this.descriptionPane = new Pane();
         this.costPane = new Pane();
         this.viewPane = new HBox();

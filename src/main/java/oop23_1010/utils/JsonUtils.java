@@ -118,7 +118,7 @@ public class JsonUtils {
     }
 
     public static Boolean ifDataExist(String data, String fileName) throws IOException {
-        if(jsonExist(fileName)) {
+        if (jsonExist(fileName)) {
             // Read file
             String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
             // Create new JSONObject with file data

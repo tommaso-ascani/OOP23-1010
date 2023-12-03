@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
+import oop23_1010.types.SkinType;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.ViewImpl;
 import oop23_1010.view.ViewSwitcher;
@@ -45,10 +46,21 @@ public class HomeView extends ViewImpl {
     @Override
     public void init() {
 
-        // Load saved Theme
-
-        // ThemeController.loadSelectedSkin();
-
+        // Load saved Theme and save skins
+        try {
+            if (!JsonUtils.ifDataExist(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE)) {
+                ThemeController.saveSkins();
+            }
+            if (!JsonUtils.ifDataExist(JsonUtils.SELECTED_SKIN, JsonUtils.GAME_DATA_FILE)) {
+                ThemeController.setSelectedSkin(SkinType.LIGHT);
+                ThemeController.saveSelectedSkin();
+                ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
+            }
+            ThemeController.loadSelectedSkin();
+            ThemeController.loadSelectedSkin();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // Coins
 
         try {
@@ -130,13 +142,6 @@ public class HomeView extends ViewImpl {
             e.printStackTrace();
         }
 
-        try {
-            if (!JsonUtils.ifDataExist(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE)) {
-                ThemeController.saveSkins();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /*

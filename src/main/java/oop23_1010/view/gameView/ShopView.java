@@ -82,11 +82,11 @@ public class ShopView extends ViewImpl {
                     String selectedSkin = ThemeController.getSelectedSkin().name();
                     if (!temp.getSkin().name().equals(selectedSkin)) {
                         temp.setOnMouseClicked(e -> {
-                            Label labelBuy = new Label(
+                            Label labelSetSKin = new Label(
                                     "Do you want to set this skin?");
-                            labelBuy.setPrefSize(this.purchasePane.getPrefWidth(), 80);
-                            labelBuy.setAlignment(Pos.BASELINE_CENTER);
-                            labelBuy.setFont(new Font(20));
+                            labelSetSKin.setPrefSize(this.purchasePane.getPrefWidth(), 80);
+                            labelSetSKin.setAlignment(Pos.BASELINE_CENTER);
+                            labelSetSKin.setFont(new Font(20));
 
                             Button buttonSetSkin = new Button();
                             Button buttonBack = new Button();
@@ -112,9 +112,10 @@ public class ShopView extends ViewImpl {
                                 ThemeController.setSelectedSkin(temp.getSkin());
                                 ThemeController.saveSelectedSkin();
                                 this.purchasePane.setVisible(false);
+                                this.purchasePane.getChildren().clear();
                                 ViewSwitcher.getInstance().switchView(getStage(), ViewType.SHOP);
                             });
-                            this.purchasePane.getChildren().addAll(labelBuy, buttonBack, buttonSetSkin);
+                            this.purchasePane.getChildren().addAll(labelSetSKin, buttonBack, buttonSetSkin);
                             this.purchasePane.setVisible(true);
                         });
                         temp.getCostLabel().setText("PURCHASED BUT NOT SELECTED");
@@ -157,6 +158,7 @@ public class ShopView extends ViewImpl {
                         this.purchasePane.setVisible(true);
 
                         buttonBack.setOnMouseClicked(b -> {
+                            labelAlert.setVisible(false);
                             this.purchasePane.setVisible(false);
                         });
 
@@ -171,16 +173,16 @@ public class ShopView extends ViewImpl {
                                             JsonUtils.GAME_DATA_FILE);
                                     ThemeController.saveSkins();
                                     this.loadSkins();
+                                    this.purchasePane.setVisible(false);
                                 } else {
                                     labelAlert.setVisible(true);
                                 }
-                                this.purchasePane.setVisible(false);
+                                labelBuy.setVisible(false);
                             } catch (IOException e1) {
                                 e1.printStackTrace();
                             }
 
                         });
-
                     });
                 }
 
