@@ -43,19 +43,37 @@ public class GameView extends ViewImpl {
     private AnchorPane mainPane;
 
     @FXML
-    private Pane upLeftSpawn, downLeftSpawn;
-
-    @FXML
-    private Pane upRightSpawn, downRightSpawn;
-
-    @FXML
-    private Pane pausePane, gameOverPane;
+    private Pane    upLeftSpawn,
+                    upRightSpawn,
+                    downLeftSpawn,
+                    downRightSpawn,
+                    dialogPaneRestart,
+                    dialogPaneMenu,
+                    pausePane,
+                    gameOverPane;
 
     @FXML
     private GridPane gridPane;
 
     @FXML
-    private Label labelCoin, labelScore, titleCoin, titleScore;
+    private Label   labelCoin, 
+                    labelScore, 
+                    titleCoin, 
+                    titleScore,
+                    dialogRestartLabel1,
+                    dialogRestartLabel2,
+                    dialogMenuLabel1,
+                    dialogMenuLabel2;
+
+    @FXML
+    private Button  buttonRiprendi,
+                    buttonRicomincia,
+                    buttonMenu,
+                    dialogMenuYes,
+                    dialogMenuNo,
+                    dialogMenuBack,
+                    dialogRestartYes,
+                    dialogRestartNo;
 
     @FXML
     private ImageView imagePause;
@@ -117,6 +135,7 @@ public class GameView extends ViewImpl {
      * set size, style, position and text of all
      */
     public void createPausePane() {
+        
         this.pausePane.setVisible(false);
         this.pausePane.setPrefSize(ViewSwitcher.getWindowWidth() / 1.5, ViewSwitcher.getWindowHeight() / 1.5);
         this.pausePane.setStyle(
@@ -124,40 +143,6 @@ public class GameView extends ViewImpl {
         this.pausePane.relocate(((ViewSwitcher.getWindowWidth() -
                 this.pausePane.getPrefWidth()) / 2),
                 ((ViewSwitcher.getWindowHeight() - this.pausePane.getPrefHeight()) / 2));
-
-        Button buttonRiprendi = new Button("Resume");
-        Button buttonRicomincia = new Button("Restart");
-        Button buttonMenu = new Button("Menu");
-        Pane dialogPaneRestart = new Pane();
-        Button dialogRestartYes = new Button("Yes");
-        Button dialogRestartNo = new Button("No");
-        Label dialogRestartLabel1 = new Label("Restart?");
-        Label dialogRestartLabel2 = new Label("(The current game will be overwritten)");
-        Pane dialogPaneMenu = new Pane();
-        Button dialogMenuYes = new Button("Save and quit");
-        Button dialogMenuNo = new Button("Quit");
-        Button dialogMenuBack = new Button("Back");
-        Label dialogMenuLabel1 = new Label("Quit and go to main menu?");
-        Label dialogMenuLabel2 = new Label("(Choose whether to save the game)");
-
-        buttonRiprendi.setPrefSize(80, 40);
-        buttonRicomincia.setPrefSize(80, 40);
-        buttonMenu.setPrefSize(80, 40);
-        dialogPaneRestart.setPrefSize(300, 200);
-        dialogRestartYes.setPrefSize(90, 30);
-        dialogRestartNo.setPrefSize(90, 30);
-        dialogRestartLabel1.setPrefSize(80, 30);
-        dialogRestartLabel2.setPrefSize(300, 30);
-        dialogRestartLabel1.setAlignment(Pos.BASELINE_CENTER);
-        dialogRestartLabel2.setAlignment(Pos.BASELINE_CENTER);
-        dialogPaneMenu.setPrefSize(300, 200);
-        dialogMenuYes.setPrefSize(90, 30);
-        dialogMenuNo.setPrefSize(90, 30);
-        dialogMenuBack.setPrefSize(90, 30);
-        dialogMenuLabel1.setPrefSize(300, 30);
-        dialogMenuLabel2.setPrefSize(300, 30);
-        dialogMenuLabel1.setAlignment(Pos.BASELINE_CENTER);
-        dialogMenuLabel2.setAlignment(Pos.BASELINE_CENTER);
 
         buttonRiprendi.relocate((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2,
                 (this.pausePane.getPrefHeight() - 40) / 2);
@@ -213,13 +198,6 @@ public class GameView extends ViewImpl {
         dialogPaneMenu.setVisible(false);
         dialogPaneRestart.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
         dialogPaneMenu.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
-
-        dialogPaneRestart.getChildren().addAll(dialogRestartYes, dialogRestartNo, dialogRestartLabel1,
-                dialogRestartLabel2);
-        dialogPaneMenu.getChildren().addAll(dialogMenuYes, dialogMenuNo, dialogMenuBack, dialogMenuLabel1,
-                dialogMenuLabel2);
-        this.pausePane.getChildren().addAll(buttonRiprendi, buttonRicomincia, buttonMenu, dialogPaneRestart,
-                dialogPaneMenu);
 
         this.setListenersPausePane(buttonMenu, buttonRiprendi, buttonRicomincia, dialogRestartYes, dialogRestartNo,
                 dialogPaneRestart, dialogMenuBack, dialogMenuYes, dialogMenuNo, dialogPaneMenu);
@@ -636,6 +614,7 @@ public class GameView extends ViewImpl {
         GameSoundSystem.getInstance().pauseMedia();
 
         this.pausePane.setVisible(true);
+        this.pausePane.toFront();
 
         this.upLeftSpawn.setDisable(true);
         this.upLeftSpawn.setOpacity(0.5);

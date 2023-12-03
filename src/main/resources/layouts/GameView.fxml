@@ -1,30 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane id="mainPane" fx:id="mainPane" prefWidth="1600" prefHeight="900" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.GameView">
+
+<AnchorPane fx:id="mainPane" prefWidth="1600" prefHeight="900" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.GameView">
    <children>
-      <Label fx:id="titleCoin" prefWidth="100.0" prefHeight="20.0"/>
-      <Label fx:id="labelCoin" prefWidth="100.0" prefHeight="20.0"/>
-      <Label fx:id="titleScore" prefWidth="100.0" prefHeight="20.0"/>
-      <Label fx:id="labelScore" prefWidth="100.0" prefHeight="20.0"/>
-      <ImageView id="imagePause" fx:id="imagePause" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#switchToPauseView" pickOnBounds="true" preserveRatio="true" styleClass="imagePause">
+      <Label fx:id="titleCoin" prefWidth="100.0" prefHeight="20.0" />
+      <Label fx:id="labelCoin" prefWidth="100.0" prefHeight="20.0" />
+      <Label fx:id="titleScore" prefWidth="100.0" prefHeight="20.0" />
+      <Label fx:id="labelScore" prefWidth="100.0" prefHeight="20.0" />
+
+      <ImageView fx:id="imagePause" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#switchToPauseView" pickOnBounds="true" preserveRatio="true" styleClass="imagePause">
          <image>
             <Image url="@../img/PauseButton.png" />
          </image>
       </ImageView>
-      <GridPane id="gridPane" fx:id="gridPane" />
-      <Pane id="upLeftSpawn" fx:id="upLeftSpawn" />
-      <Pane id="downLeftSpawn" fx:id="downLeftSpawn" />
-      <Pane id="upRightSpawn" fx:id="upRightSpawn" />
-      <Pane id="downRightSpawn" fx:id="downRightSpawn" />
-      <Pane id="pausePane" fx:id="pausePane" />
-      <Pane id="gameOverPane" fx:id="gameOverPane" />
+
+      <GridPane fx:id="gridPane" />
+
+      <Pane fx:id="dialogPaneRestart" prefWidth="300.0" prefHeight="200.0">
+         <children>
+            <Label fx:id="dialogRestartLabel1" prefWidth="80.0" prefHeight="30.0" text="Restart?" alignment="BASELINE_CENTER" />
+            <Label fx:id="dialogRestartLabel2" prefWidth="300.0" prefHeight="30.0" text="(The current game will be overwritten)" alignment="BASELINE_CENTER" />
+            
+            <Button fx:id="dialogRestartYes" prefWidth="90.0" prefHeight="30.0" text="Yes"/>
+            <Button fx:id="dialogRestartNo" prefWidth="90.0" prefHeight="30.0" text="No"/>
+         </children>
+      </Pane>
+      <Pane fx:id="dialogPaneMenu" prefWidth="300.0" prefHeight="200.0">
+         <children>
+            <Label fx:id="dialogMenuLabel1" prefWidth="300.0" prefHeight="30.0" text="Quit and go to main menu?" alignment="BASELINE_CENTER" />
+            <Label fx:id="dialogMenuLabel2" prefWidth="300.0" prefHeight="30.0" text="(Choose whether to save the game)" alignment="BASELINE_CENTER" />
+
+            <Button fx:id="dialogMenuYes" prefWidth="90.0" prefHeight="30.0" text="Save and quit"/>
+            <Button fx:id="dialogMenuNo" prefWidth="90.0" prefHeight="30.0" text="Quit"/>
+            <Button fx:id="dialogMenuBack" prefWidth="90.0" prefHeight="30.0" text="Back"/>
+         </children>
+      </Pane>
+      <Pane fx:id="pausePane">
+         <children>
+            <Button fx:id="buttonRiprendi" prefWidth="80.0" prefHeight="40.0" text="Resume"/>
+            <Button fx:id="buttonRicomincia" prefWidth="80.0" prefHeight="40.0" text="Restart"/>
+            <Button fx:id="buttonMenu" prefWidth="80.0" prefHeight="40.0" text="Menu"/>
+         </children>
+      </Pane>
+      <Pane fx:id="upLeftSpawn" />
+      <Pane fx:id="downLeftSpawn" />
+      <Pane fx:id="upRightSpawn" />
+      <Pane fx:id="downRightSpawn" />
+      <Pane fx:id="gameOverPane" />
    </children>
 </AnchorPane>
