@@ -80,7 +80,9 @@ public class GameView extends ViewImpl {
         try {            
             this.coins = (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
 
-            if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
+            if (JsonUtils.ifDataExist(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE) &&
+                JsonUtils.ifDataExist(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE) &&
+                JsonUtils.ifDataExist(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE)) {
 
                 grid = new GameGrid<>((Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE));
 

@@ -43,19 +43,6 @@ public class JsonUtils {
         return json.get(data);
     }
 
-    public static Boolean ifDataExist(String data, String fileName) throws IOException {
-        if(jsonExist(fileName)) {
-            // Read file
-            String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
-            // Create new JSONObject with file data
-            JSONObject json = new JSONObject(file);
-            // Return true if json given data exist
-            return json.has(data);
-        } else {
-            return false;
-        }
-    }
-
     public static JSONArray loadDataArray(String data, String fileName) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
@@ -125,6 +112,19 @@ public class JsonUtils {
         if (Files.exists(Paths.get(DATA_PATH + fileName + ".json"))
                 && Files.readAllBytes(Paths.get(DATA_PATH + fileName + ".json")).length > 0) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static Boolean ifDataExist(String data, String fileName) throws IOException {
+        if(jsonExist(fileName)) {
+            // Read file
+            String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
+            // Create new JSONObject with file data
+            JSONObject json = new JSONObject(file);
+            // Return true if json given data exist
+            return json.has(data);
         } else {
             return false;
         }

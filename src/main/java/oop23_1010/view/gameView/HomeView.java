@@ -126,8 +126,7 @@ public class HomeView extends ViewImpl {
         }
 
         try {
-            if (!JsonUtils.jsonExist(JsonUtils.GAME_DATA_FILE)
-                    || !JsonUtils.ifDataExist(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE)) {
+            if (!JsonUtils.ifDataExist(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE)) {
                 ThemeController.saveSkins();
             }
         } catch (IOException e) {

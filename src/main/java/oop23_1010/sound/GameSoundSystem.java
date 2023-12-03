@@ -28,8 +28,7 @@ public final class GameSoundSystem {
             GameSoundSystem.instance = new GameSoundSystem();
         }
         try {
-            if (JsonUtils.jsonExist(JsonUtils.GAME_DATA_FILE)
-                    && JsonUtils.ifDataExist(JsonUtils.VOLUME, JsonUtils.GAME_DATA_FILE)) {
+            if (JsonUtils.ifDataExist(JsonUtils.VOLUME, JsonUtils.GAME_DATA_FILE)) {
                 GameSoundSystem.volume = (Double) (((Integer) JsonUtils.loadData(JsonUtils.VOLUME,
                         JsonUtils.GAME_DATA_FILE)).doubleValue() / 100.0);
             } else {
