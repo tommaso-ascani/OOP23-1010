@@ -78,7 +78,7 @@ public class DataUtils {
     public static Integer loadCoins(){
         try {
             if (JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)){
-                return (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.MATCH_FILE);
+                return (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
             }
         } catch (IOException e) {
             System.err.println("Error on coins loading!");
