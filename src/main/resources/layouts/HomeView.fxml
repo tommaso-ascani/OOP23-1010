@@ -6,39 +6,39 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="mainPane" fx:id="mainPane" prefWidth="1600" prefHeight="900" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
+<AnchorPane fx:id="mainPane" prefWidth="1600" prefHeight="900" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
    <children>
-      <ImageView id="imageSettings" fx:id="imageSettings" fitHeight="63.0" fitWidth="63.0" onMouseClicked="#switchToSettingsView" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
+      <ImageView fx:id="imageSettings" fitHeight="63.0" fitWidth="63.0" onMouseClicked="#switchToSettingsView" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
          <image>
             <Image url="@../img/SettingsButton.png" />
          </image>
       </ImageView>
-      <ImageView id="imagePlay" fx:id="imagePlay" fitHeight="73.0" fitWidth="73.0" onMouseClicked="#switchToPlayView" pickOnBounds="true" preserveRatio="true" styleClass="imagePlay">
+      <ImageView fx:id="imagePlay" fitHeight="73.0" fitWidth="73.0" onMouseClicked="#switchToPlayView" pickOnBounds="true" preserveRatio="true" styleClass="imagePlay">
          <image>
             <Image url="@../img/PlayButton.png" />
          </image>
       </ImageView>
-      <ImageView id="imageShop" fx:id="imageShop" fitHeight="63.0" fitWidth="63.0" onMouseClicked="#switchToShopView" pickOnBounds="true" preserveRatio="true" styleClass="imageShop">
+      <ImageView fx:id="imageShop" fitHeight="63.0" fitWidth="63.0" onMouseClicked="#switchToShopView" pickOnBounds="true" preserveRatio="true" styleClass="imageShop">
          <image>
             <Image url="@../img/ShopButton.png" />
          </image>
       </ImageView>
 
-      <ImageView id="imageQuit" fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit" >
+      <ImageView fx:id="imageQuit" fitHeight="63.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit" >
          <image>
             <Image url="@../img/QuitButton.png" />
          </image>
       </ImageView>
       
-      <ImageView id="imageTitle" fx:id="imageTitle" fitHeight="93.0" fitWidth="293.0" pickOnBounds="true" preserveRatio="true" styleClass="imageTitle" >
+      <ImageView fx:id="imageTitle" fitHeight="93.0" fitWidth="293.0" pickOnBounds="true" preserveRatio="true" styleClass="imageTitle" >
          <image>
             <Image url="@../img/TitleLabel.png" />
          </image>
       </ImageView>
-      <Slider id="sliderGridWidth" fx:id="sliderGridWidth" prefHeight="10.0" prefWidth="150.0" snapToTicks="true" />
+      <Slider fx:id="sliderGridWidth" prefHeight="10.0" prefWidth="150.0" snapToTicks="true" />
       <Label fx:id="sliderLabel" prefHeight="10.0" prefWidth="150.0" text="Grandezza della griglia: " />
       <Label fx:id="coinsLabel" prefHeight="10.0" prefWidth="150.0" text="Coins: 0" />
-      <ImageView id="imageResume" fx:id="imageResume" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#createDialogResume" pickOnBounds="true" preserveRatio="true" styleClass="imageResume">
+      <ImageView fx:id="imageResume" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#createDialogResume" pickOnBounds="true" preserveRatio="true" styleClass="imageResume">
          <image>
             <Image url="@../img/ResumeButton.png" />
          </image>

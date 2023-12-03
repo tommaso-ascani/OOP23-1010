@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" fx:id="mainPane" prefWidth="1600" prefHeight="900" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.SettingsView">
+<AnchorPane fx:id="mainPane" prefWidth="1600" prefHeight="900" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.SettingsView">
    <children>
-      <Button id="buttonApply" fx:id="buttonApply" layoutX="252.0" layoutY="334.0" mnemonicParsing="false" text="Applica" AnchorPane.leftAnchor="268.0" />
-      <Button id="buttonBack" fx:id="buttonBack" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" AnchorPane.rightAnchor="268.0" />
-      <Slider id="sliderVolume" fx:id="sliderVolume" blockIncrement="2.0" layoutX="469.0" layoutY="204.0" prefHeight="39.0" prefWidth="223.0" snapToTicks="true" AnchorPane.rightAnchor="268.0">
+      <Button fx:id="buttonApply" layoutX="252.0" layoutY="334.0" mnemonicParsing="false" text="Applica" AnchorPane.leftAnchor="268.0" />
+      <Button fx:id="buttonBack" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" AnchorPane.rightAnchor="268.0" />
+      <Slider fx:id="sliderVolume" blockIncrement="2.0" layoutX="469.0" layoutY="204.0" prefHeight="39.0" prefWidth="223.0" snapToTicks="true" AnchorPane.rightAnchor="268.0">
          <cursor>
             <Cursor fx:constant="H_RESIZE" />
          </cursor>
@@ -24,7 +24,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView id="imageVolume" fx:id="imageVolume" fitHeight="63.0" fitWidth="63.0" layoutX="775.0" layoutY="192.0" onMouseClicked="#changeVolumeImage" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0">
+      <ImageView fx:id="imageVolume" fitHeight="63.0" fitWidth="63.0" layoutX="775.0" layoutY="192.0" onMouseClicked="#changeVolumeImage" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0">
       </ImageView>
    </children>
 </AnchorPane>
