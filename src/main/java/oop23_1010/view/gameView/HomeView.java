@@ -45,13 +45,18 @@ public class HomeView extends ViewImpl {
     @Override
     public void init() {
 
+        // Load saved Theme
+
+        // ThemeController.loadSelectedSkin();
+
         // Coins
 
         try {
-            if(!JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)) {
+            if (!JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)) {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, 0), JsonUtils.GAME_DATA_FILE);
             }
-            this.coinsLabel.setText("Coins: " + String.valueOf((Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)));
+            this.coinsLabel.setText("Coins: "
+                    + String.valueOf((Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,7 +74,7 @@ public class HomeView extends ViewImpl {
         this.coinsLabel.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.coinsLabel.getPrefWidth() / 2), 820);
 
         // Style
-        
+
         this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
 
         this.sliderGridWidth.setValue(10);
@@ -170,7 +175,8 @@ public class HomeView extends ViewImpl {
 
         dialogResumeLabel1.setAlignment(Pos.BASELINE_CENTER);
         dialogPaneResume.setStyle(
-                "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() +"; -fx-border-width: 2; -fx-border-color: black");
+                "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background()
+                        + "; -fx-border-width: 2; -fx-border-color: black");
 
         dialogPaneResume.setPrefSize(300, 200);
         dialogResumeYes.setPrefSize(120, 30);

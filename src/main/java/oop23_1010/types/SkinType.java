@@ -2,7 +2,7 @@ package oop23_1010.types;
 
 public enum SkinType {
 
-    LIGHT(  "white",
+    LIGHT("white",
             "darkgrey",
             "peru",
             "chartreuse",
@@ -15,7 +15,7 @@ public enum SkinType {
             0,
             true),
 
-    DARK(  "#303030",
+    DARK("#303030",
             "darkgrey",
             "peru",
             "chartreuse",
@@ -25,7 +25,7 @@ public enum SkinType {
             "lightcoral",
             "firebrick",
             "Dark Mode",
-            0,
+            10,
             false);
 
     // Colors
@@ -46,20 +46,20 @@ public enum SkinType {
 
     private Boolean purchased;
 
-    SkinType(   String color_background, 
-                String color_grid,
-                String color_1x1,
-                String color_2x2,
-                String color_3x3,
-                String color_2x1_1x2,
-                String color_3x1_1x3,
-                String color_4x1_1x4,
-                String color_5x1_1x5,
-                String description,
-                Integer cost,
-                Boolean purchased) {
+    SkinType(String color_background,
+            String color_grid,
+            String color_1x1,
+            String color_2x2,
+            String color_3x3,
+            String color_2x1_1x2,
+            String color_3x1_1x3,
+            String color_4x1_1x4,
+            String color_5x1_1x5,
+            String description,
+            Integer cost,
+            Boolean purchased) {
 
-        this.color_background = color_background; 
+        this.color_background = color_background;
         this.color_grid = color_grid;
         this.color_1x1 = color_1x1;
         this.color_2x2 = color_2x2;

@@ -20,6 +20,28 @@ public final class ThemeController {
         return selectedSkin;
     }
 
+    public static void saveSelectedSkin() {
+        try {
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_SKIN, selectedSkin),
+                    JsonUtils.GAME_DATA_FILE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadSelectedSkin() {
+        try {
+            String selecSkin = (String) JsonUtils.loadData(JsonUtils.SELECTED_SKIN, JsonUtils.GAME_DATA_FILE);
+            for (SkinType skinType : SkinType.values()) {
+                if (skinType.name().equals(selecSkin)) {
+                    selectedSkin = skinType;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void saveSkins() {
 
         JSONArray temp = new JSONArray();

@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ShopSkinItem;
@@ -33,7 +34,7 @@ public class ShopView extends ViewImpl {
     private Button buttonPurchase;
 
     @FXML
-    private Pane titlePane;
+    private Pane titlePane, purchasePane;
 
     @FXML
     private Label titleLabel;
@@ -45,6 +46,7 @@ public class ShopView extends ViewImpl {
 
     @Override
     public void init() {
+
         this.loadSkins();
 
         this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
@@ -62,6 +64,7 @@ public class ShopView extends ViewImpl {
         this.verticalBox.relocate((ViewSwitcher.getWindowWidth() - this.verticalBox.getPrefWidth()) / 2,
                 (ViewSwitcher.getWindowHeight() - this.verticalBox.getPrefHeight()) / 2);
 
+        this.createPurchasePane();
     }
 
     public void loadSkins() {
@@ -75,14 +78,109 @@ public class ShopView extends ViewImpl {
                 ShopSkinItem temp = new ShopSkinItem(a.getJSONObject(i).getString("name"), i + 1,
                         (Boolean) a.getJSONObject(i).get("purchased"));
                 if (temp.getPurchased()) {
-                    temp.getCostLabel().setText("PURCHASED");
+
+                    String selectedSkin = ThemeController.getSelectedSkin().name();
+                    if (!temp.getSkin().name().equals(selectedSkin)) {
+                        temp.setOnMouseClicked(e -> {
+                            Label labelBuy = new Label(
+                                    "Do you want to set this skin?");
+                            labelBuy.setPrefSize(this.purchasePane.getPrefWidth(), 80);
+                            labelBuy.setAlignment(Pos.BASELINE_CENTER);
+                            labelBuy.setFont(new Font(20));
+
+                            Button buttonSetSkin = new Button();
+                            Button buttonBack = new Button();
+                            buttonSetSkin.setText("Set");
+                            buttonBack.setText("Back");
+                            buttonSetSkin.setPrefSize(80, 30);
+                            buttonBack.setPrefSize(80, 30);
+                            buttonSetSkin.relocate(
+                                    (this.purchasePane.getPrefWidth() - buttonBack.getPrefWidth()
+                                            - buttonSetSkin.getPrefWidth()) / 3,
+                                    this.purchasePane.getPrefHeight() / 1.5);
+                            buttonBack.relocate(
+                                    this.purchasePane.getPrefWidth() - buttonBack.getPrefWidth()
+                                            - ((this.purchasePane.getPrefWidth() - buttonBack.getPrefWidth()
+                                                    - buttonSetSkin.getPrefWidth()) / 3),
+                                    this.purchasePane.getPrefHeight() / 1.5);
+
+                            buttonBack.setOnMouseClicked(b -> {
+                                this.purchasePane.setVisible(false);
+                            });
+
+                            buttonSetSkin.setOnMouseClicked(b -> {
+                                ThemeController.setSelectedSkin(temp.getSkin());
+                                ThemeController.saveSelectedSkin();
+                                this.purchasePane.setVisible(false);
+                                ViewSwitcher.getInstance().switchView(getStage(), ViewType.SHOP);
+                            });
+                            this.purchasePane.getChildren().addAll(labelBuy, buttonBack, buttonSetSkin);
+                            this.purchasePane.setVisible(true);
+                        });
+                        temp.getCostLabel().setText("PURCHASED BUT NOT SELECTED");
+                    } else {
+                        temp.getCostLabel().setText("PURCHASED AND SELECTED");
+                    }
                 } else {
                     temp.getCostLabel().setText(temp.getSkin().getCost().toString());
                     temp.setOnMouseClicked(e -> {
-                        System.out.println("comprato");
-                        temp.getSkin().setPurchased(true);
-                        ThemeController.saveSkins();
-                        this.loadSkins();
+                        Label labelBuy = new Label(
+                                "Do you want to buy this item for " + temp.getSkin().getCost() + " coins?");
+                        labelBuy.setPrefSize(this.purchasePane.getPrefWidth(), 80);
+                        labelBuy.setAlignment(Pos.BASELINE_CENTER);
+                        labelBuy.setFont(new Font(20));
+
+                        Label labelAlert = new Label("YOU CANNOT AFFORD THIS ITEM!");
+                        labelAlert.setPrefSize(this.purchasePane.getPrefWidth(), 80);
+                        labelAlert.setAlignment(Pos.BASELINE_CENTER);
+                        labelAlert.setFont(new Font(20));
+                        labelAlert.setStyle("-fx-text-fill: red");
+                        labelAlert.relocate(0, this.purchasePane.getPrefHeight() / 3);
+                        labelAlert.setVisible(false);
+
+                        Button buttonPurchase = new Button();
+                        Button buttonBack = new Button();
+                        buttonPurchase.setText("Buy");
+                        buttonBack.setText("Back");
+                        buttonPurchase.setPrefSize(80, 30);
+                        buttonBack.setPrefSize(80, 30);
+                        buttonPurchase.relocate(
+                                (this.purchasePane.getPrefWidth() - buttonBack.getPrefWidth()
+                                        - buttonPurchase.getPrefWidth()) / 3,
+                                this.purchasePane.getPrefHeight() / 1.5);
+                        buttonBack.relocate(
+                                this.purchasePane.getPrefWidth() - buttonBack.getPrefWidth()
+                                        - ((this.purchasePane.getPrefWidth() - buttonBack.getPrefWidth()
+                                                - buttonPurchase.getPrefWidth()) / 3),
+                                this.purchasePane.getPrefHeight() / 1.5);
+                        this.purchasePane.getChildren().addAll(labelBuy, labelAlert, buttonBack, buttonPurchase);
+                        this.purchasePane.setVisible(true);
+
+                        buttonBack.setOnMouseClicked(b -> {
+                            this.purchasePane.setVisible(false);
+                        });
+
+                        buttonPurchase.setOnMouseClicked(b -> {
+                            Integer coinAmount;
+                            try {
+                                coinAmount = (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
+                                if (coinAmount >= temp.getSkin().getCost()) {
+                                    coinAmount = coinAmount - temp.getSkin().getCost();
+                                    temp.getSkin().setPurchased(true);
+                                    JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, coinAmount),
+                                            JsonUtils.GAME_DATA_FILE);
+                                    ThemeController.saveSkins();
+                                    this.loadSkins();
+                                } else {
+                                    labelAlert.setVisible(true);
+                                }
+                                this.purchasePane.setVisible(false);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+
+                        });
+
                     });
                 }
 
@@ -103,5 +201,14 @@ public class ShopView extends ViewImpl {
 
     public void switchToHomeView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
+    }
+
+    public void createPurchasePane() {
+        this.purchasePane.setVisible(false);
+        this.purchasePane.setPrefSize(ViewSwitcher.getWindowWidth() / 4, ViewSwitcher.getWindowHeight() / 4);
+        this.purchasePane.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-background-color: "
+                + ThemeController.getSelectedSkin().getColor_background());
+        this.purchasePane.relocate((ViewSwitcher.getWindowWidth() - this.purchasePane.getPrefWidth()) / 2,
+                (ViewSwitcher.getWindowHeight() - this.purchasePane.getPrefHeight()) / 2);
     }
 }

@@ -6,15 +6,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="mainPane" fx:id="mainPane" prefWidth="1600" prefHeight="900" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.ShopView">
+<AnchorPane id="mainPane" fx:id="mainPane" prefHeight="900" prefWidth="1600" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.ShopView">
    <children>
       <Pane id="titlePane" fx:id="titlePane" prefHeight="200.0" prefWidth="200.0">
          <children>
             <Label id="titleLabel" fx:id="titleLabel" />
-         </children></Pane>
-      <VBox id="verticalBox" fx:id="verticalBox"/>
-      <Button id="buttonBack" fx:id="buttonBack" layoutX="571.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" />
-      <Button id="buttonPurchase" fx:id="buttonPurchase" layoutX="304.0" layoutY="437.0" mnemonicParsing="false" text="Compra" />
+         </children>
+      </Pane>
+      <VBox id="verticalBox" fx:id="verticalBox" />
+      <Button id="buttonBack" fx:id="buttonBack" layoutX="773.0" layoutY="732.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" />
+      <Pane id="purchasePane" fx:id="purchasePane" />
    </children>
 </AnchorPane>
