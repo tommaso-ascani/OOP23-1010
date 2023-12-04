@@ -26,7 +26,7 @@ public class ShopThemeItem extends VBox {
 
     private Label costLabel;
 
-    public ShopThemeItem(String skin, Integer pos, Boolean purchased, Double windowWidth) {
+    public ShopThemeItem(String skin, Boolean purchased, Double windowWidth) {
 
         for (ThemeType skinType : ThemeType.values()) {
             if (skinType.name().equals(skin)) {
@@ -97,7 +97,6 @@ public class ShopThemeItem extends VBox {
             pane.setPrefWidth(this.viewPane.getPrefWidth() / 9);
             this.viewPane.getChildren().add(pane);
         }
-        this.pos = pos;
         this.purchased = purchased;
 
         this.setStyle(

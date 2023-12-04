@@ -5,16 +5,38 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.ShopView">
    <children>
       <Pane fx:id="titlePane" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Label fx:id="titleLabel" />
+            <Label fx:id="titleLabel" text="SHOP" alignment="BASELINE_CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <VBox fx:id="verticalBox" />
-      <Button fx:id="buttonBack" layoutX="773.0" layoutY="732.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" />
-      <Pane fx:id="purchasePane" />
+      <Button fx:id="buttonBackToHome" layoutX="773.0" layoutY="732.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" />
+      <Pane fx:id="purchasePane" visible="false" prefHeight="250.0" prefWidth="400.0">
+         <children>
+            <Label fx:id="questionLabel" alignment="BASELINE_CENTER" prefHeight="80.0" prefWidth="400.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelAlert" alignment="BASELINE_CENTER" text="YOU CANNOT AFFORD THIS ITEM!" visible="false" prefHeight="80.0" prefWidth="400.0" layoutX="0" layoutY="83">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="buttonConfirm" prefHeight="30.0" prefWidth="80.0" layoutX="80.0" layoutY="166">
+            </Button>
+            <Button fx:id="buttonBack" prefHeight="30.0" prefWidth="80.0" layoutX="240.0" layoutY="166"> 
+            </Button>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
