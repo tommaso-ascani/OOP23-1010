@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oop23_1010.view.gameView.HomeView">
    <children>
       <ImageView fx:id="imageSettings" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#switchToSettingsView" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
          <image>
