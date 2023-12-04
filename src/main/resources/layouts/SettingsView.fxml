@@ -21,7 +21,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="imageVolume" fitHeight="63.0" fitWidth="63.0" layoutX="775.0" layoutY="192.0" onMouseClicked="#changeVolumeImage" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0">
-      </ImageView>
+      <ImageView fx:id="imageVolume" fitHeight="50.0" fitWidth="50.0" layoutX="790.0" layoutY="192.0" onMouseClicked="#changeVolumeImage" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="200.0" />
    </children>
 </AnchorPane>
