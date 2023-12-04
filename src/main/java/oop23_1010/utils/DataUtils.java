@@ -24,17 +24,13 @@ public class DataUtils {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()), JsonUtils.MATCH_FILE);
 
             if (JsonUtils.ifDataExist(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE)) {
-                Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
-                        JsonUtils.BEST_SCORE_FILE);
+                Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE);
                 if (best_score < score) {
-                    JsonUtils.addElement(
-                            new Pair<String, Object>(String.valueOf(grid.getGridSize()), score),
-                            JsonUtils.BEST_SCORE_FILE);
+                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score), JsonUtils.BEST_SCORE_FILE);
                 }
             } else {
                 if(score > 0) {
-                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score),
-                        JsonUtils.BEST_SCORE_FILE);
+                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score), JsonUtils.BEST_SCORE_FILE);
                 }
             }
 
@@ -53,11 +49,28 @@ public class DataUtils {
                 blocksArray.put(block);
             }
 
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray),
-                    JsonUtils.MATCH_FILE);
-
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray), JsonUtils.MATCH_FILE);
         } catch (IOException e) {
             System.err.println("Error on match data saving!");
+        }
+    }
+
+    // Save best score
+
+    public static void saveBestScore(Integer score, String size){
+        try {
+            if (JsonUtils.ifDataExist(size, JsonUtils.BEST_SCORE_FILE)) {
+                Integer best_score = (Integer) JsonUtils.loadData(size, JsonUtils.BEST_SCORE_FILE);
+                if (best_score < score) {
+                    JsonUtils.addElement(new Pair<String, Object>(size, score), JsonUtils.BEST_SCORE_FILE);
+                }
+            } else {
+                if(score > 0) {
+                    JsonUtils.addElement(new Pair<String, Object>(size, score), JsonUtils.BEST_SCORE_FILE);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error on best score saving!");
         }
     }
 

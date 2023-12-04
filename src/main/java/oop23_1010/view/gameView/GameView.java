@@ -360,6 +360,8 @@ public class GameView extends View {
             if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
                 GameSoundSystem.getInstance().setAudioClip(SoundType.GAME_OVER);
                 GameSoundSystem.getInstance().playAudioClip();
+                DataUtils.saveCoins(this.coins);
+                DataUtils.saveBestScore(this.score, String.valueOf(this.grid.getGridSize()));
                 this.createGameOverPane();
                 this.gameOverPane.setVisible(true);
             }
