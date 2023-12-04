@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefWidth="1600" prefHeight="900" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.SettingsView">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.SettingsView">
    <children>
       <Button fx:id="buttonApply" layoutX="252.0" layoutY="334.0" mnemonicParsing="false" text="Applica" AnchorPane.leftAnchor="268.0" />
       <Button fx:id="buttonBack" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" AnchorPane.rightAnchor="268.0" />

@@ -18,11 +18,11 @@ import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ShopSkinItem;
-import oop23_1010.view.ViewImpl;
+import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
 
-public class ShopView extends ViewImpl {
+public class ShopView extends View {
 
     @FXML
     private AnchorPane mainPane;
@@ -47,22 +47,24 @@ public class ShopView extends ViewImpl {
     @Override
     public void init() {
 
+        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+
         this.loadSkins();
 
         this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
 
-        this.titlePane.setPrefSize(ViewSwitcher.getWindowWidth(), ViewSwitcher.getWindowHeight() / 9);
+        this.titlePane.setPrefSize(this.mainPane.getPrefWidth(), this.mainPane.getPrefHeight() / 9);
 
         this.titleLabel.setText("SHOP");
         this.titleLabel.setFont(new Font(30));
-        this.titleLabel.setPrefSize(ViewSwitcher.getWindowWidth(), ViewSwitcher.getWindowHeight() / 9);
+        this.titleLabel.setPrefSize(this.mainPane.getPrefWidth(), this.mainPane.getPrefHeight() / 9);
         this.titleLabel.setAlignment(Pos.BASELINE_CENTER);
 
         this.verticalBox.setPadding(new Insets(10));
         this.verticalBox.setSpacing(10);
-        this.verticalBox.setPrefSize(ViewSwitcher.getWindowWidth() - 100, 500);
-        this.verticalBox.relocate((ViewSwitcher.getWindowWidth() - this.verticalBox.getPrefWidth()) / 2,
-                (ViewSwitcher.getWindowHeight() - this.verticalBox.getPrefHeight()) / 2);
+        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, 500);
+        this.verticalBox.relocate((this.mainPane.getPrefWidth() - this.verticalBox.getPrefWidth()) / 2,
+                (this.mainPane.getPrefHeight() - this.verticalBox.getPrefHeight()) / 2);
 
         this.createPurchasePane();
     }
@@ -75,8 +77,10 @@ public class ShopView extends ViewImpl {
             a = JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
 
             for (int i = 0; i < a.length(); i++) {
-                ShopSkinItem temp = new ShopSkinItem(a.getJSONObject(i).getString("name"), i + 1,
-                        (Boolean) a.getJSONObject(i).get("purchased"));
+                ShopSkinItem temp = new ShopSkinItem(   a.getJSONObject(i).getString("name"), 
+                                                        i + 1,
+                                                        (Boolean) a.getJSONObject(i).get("purchased"),
+                                                        this.mainPane.getPrefWidth());
                 if (temp.getPurchased()) {
 
                     String selectedSkin = ThemeController.getSelectedSkin().name();
@@ -195,9 +199,9 @@ public class ShopView extends ViewImpl {
 
         this.verticalBox.setPadding(new Insets(10));
         this.verticalBox.setSpacing(10);
-        this.verticalBox.setPrefSize(ViewSwitcher.getWindowWidth() - 100, 500);
-        this.verticalBox.relocate((ViewSwitcher.getWindowWidth() - this.verticalBox.getPrefWidth()) / 2,
-                (ViewSwitcher.getWindowHeight() - this.verticalBox.getPrefHeight()) / 2);
+        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, 500);
+        this.verticalBox.relocate((this.mainPane.getPrefWidth() - this.verticalBox.getPrefWidth()) / 2,
+                (this.mainPane.getPrefHeight() - this.verticalBox.getPrefHeight()) / 2);
 
     }
 
@@ -207,10 +211,10 @@ public class ShopView extends ViewImpl {
 
     public void createPurchasePane() {
         this.purchasePane.setVisible(false);
-        this.purchasePane.setPrefSize(ViewSwitcher.getWindowWidth() / 4, ViewSwitcher.getWindowHeight() / 4);
+        this.purchasePane.setPrefSize(this.mainPane.getPrefWidth() / 4, this.mainPane.getPrefHeight() / 4);
         this.purchasePane.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-background-color: "
                 + ThemeController.getSelectedSkin().getColor_background());
-        this.purchasePane.relocate((ViewSwitcher.getWindowWidth() - this.purchasePane.getPrefWidth()) / 2,
-                (ViewSwitcher.getWindowHeight() - this.purchasePane.getPrefHeight()) / 2);
+        this.purchasePane.relocate((this.mainPane.getPrefWidth() - this.purchasePane.getPrefWidth()) / 2,
+                (this.mainPane.getPrefHeight() - this.purchasePane.getPrefHeight()) / 2);
     }
 }

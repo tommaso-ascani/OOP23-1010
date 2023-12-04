@@ -12,11 +12,11 @@ import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.utils.JsonUtils;
-import oop23_1010.view.ViewImpl;
+import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
 
-public class SettingsView extends ViewImpl {
+public class SettingsView extends View {
 
     @FXML
     private AnchorPane mainPane;
@@ -35,6 +35,8 @@ public class SettingsView extends ViewImpl {
 
     @Override
     public void init() {
+
+        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
 
         this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
 

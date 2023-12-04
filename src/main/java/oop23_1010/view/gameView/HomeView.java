@@ -16,21 +16,21 @@ import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
 import oop23_1010.types.SkinType;
 import oop23_1010.utils.JsonUtils;
-import oop23_1010.view.ViewImpl;
+import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
 
-public class HomeView extends ViewImpl {
+public class HomeView extends View {
 
     private static int gridSize;
 
     @FXML
-    private ImageView imageSettings,
-            imageTitle,
-            imageShop,
-            imageQuit,
-            imageResume,
-            imagePlay;
+    private ImageView   imageSettings,
+                        imageTitle,
+                        imageShop,
+                        imageQuit,
+                        imageResume,
+                        imagePlay;
 
     @FXML
     private Slider sliderGridWidth;
@@ -39,12 +39,14 @@ public class HomeView extends ViewImpl {
     private AnchorPane mainPane;
 
     @FXML
-    private Label bestScore,
-            sliderLabel,
-            coinsLabel;
+    private Label   bestScore,
+                    sliderLabel,
+                    coinsLabel;
 
     @Override
     public void init() {
+
+        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
 
         // Load saved Theme and save skins
         try {
@@ -76,14 +78,14 @@ public class HomeView extends ViewImpl {
         // Object relocate
 
         this.imageSettings.relocate(15, 15);
-        this.imageQuit.relocate(ViewSwitcher.getWindowWidth() - this.imageQuit.getFitWidth() - 15, 15);
-        this.imageTitle.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.imageTitle.getFitWidth() / 2), 220);
-        this.imagePlay.relocate((ViewSwitcher.getWindowWidth() / 2) + 75, 350);
-        this.imageResume.relocate((ViewSwitcher.getWindowWidth() / 2) - this.imageResume.getFitWidth() - 75, 350);
-        this.sliderLabel.relocate((ViewSwitcher.getWindowWidth() / 2) - this.sliderLabel.getPrefWidth(), 450);
-        this.sliderGridWidth.relocate((ViewSwitcher.getWindowWidth() / 2), 450);
-        this.imageShop.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.imageShop.getFitWidth() / 2), 750);
-        this.coinsLabel.relocate((ViewSwitcher.getWindowWidth() / 2) - (this.coinsLabel.getPrefWidth() / 2), 820);
+        this.imageQuit.relocate(this.mainPane.getPrefWidth() - this.imageQuit.getFitWidth() - 15, 15);
+        this.imageTitle.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageTitle.getFitWidth() / 2), 220);
+        this.imagePlay.relocate((this.mainPane.getPrefWidth() / 2) + 75, 350);
+        this.imageResume.relocate((this.mainPane.getPrefWidth() / 2) - this.imageResume.getFitWidth() - 75, 350);
+        this.sliderLabel.relocate((this.mainPane.getPrefWidth() / 2) - this.sliderLabel.getPrefWidth(), 450);
+        this.sliderGridWidth.relocate((this.mainPane.getPrefWidth() / 2), 450);
+        this.imageShop.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageShop.getFitWidth() / 2), 750);
+        this.coinsLabel.relocate((this.mainPane.getPrefWidth() / 2) - (this.coinsLabel.getPrefWidth() / 2), 820);
 
         // Style
 
@@ -111,7 +113,7 @@ public class HomeView extends ViewImpl {
                         this.bestScore = new Label();
                         this.bestScore.setPrefSize(200, 10);
                         this.bestScore.relocate(
-                                (ViewSwitcher.getWindowWidth() / 2) - (this.bestScore.getPrefWidth() / 2),
+                                (this.mainPane.getPrefWidth() / 2) - (this.bestScore.getPrefWidth() / 2),
                                 (padding * 25) + 5);
                         this.bestScore.setAlignment(Pos.CENTER);
                         this.bestScore.setText("Best Score on grid " + ((i + 1) * 5) + " ---> "

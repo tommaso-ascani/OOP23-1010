@@ -23,11 +23,11 @@ import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
 import oop23_1010.utils.Randomizer;
 import oop23_1010.utils.ShapeBlock;
-import oop23_1010.view.ViewImpl;
+import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
 
-public class GameView extends ViewImpl {
+public class GameView extends View {
 
     private GameGrid<GridBlock> grid;
     private BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
@@ -80,6 +80,8 @@ public class GameView extends ViewImpl {
 
     @Override
     public void init() {
+
+        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
 
         // -------------------------------- Sound Setup --------------------------------
 
@@ -377,8 +379,8 @@ public class GameView extends ViewImpl {
 
         this.gameOverPane.setPrefSize(400, 300);
 
-        this.gameOverPane.relocate((ViewSwitcher.getWindowWidth() - gameOverPane.getPrefWidth()) / 2,
-                (ViewSwitcher.getWindowHeight() - gameOverPane.getPrefHeight()) / 2);
+        this.gameOverPane.relocate((this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
+                (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
 
         Button buttonBackToMenu = new Button("Back to menu");
         Label labelScore = new Label(this.labelScore.getText());
@@ -527,40 +529,40 @@ public class GameView extends ViewImpl {
      */
     public void setObjectLocation() {
         this.upLeftSpawn.relocate(
-                (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
-                (ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
+                (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
+                (this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2);
         this.downLeftSpawn.relocate(
-                (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
-                ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - (ViewSwitcher.getWindowHeight()
+                (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
+                this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - (this.mainPane.getPrefHeight()
                         - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
         this.upRightSpawn.relocate(
-                (ViewSwitcher.getWindowWidth() - GameView.spawnPanelsWidth)
-                        - (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth)
+                (this.mainPane.getPrefWidth() - GameView.spawnPanelsWidth)
+                        - (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth)
                                 / 2,
-                (ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
+                (this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2);
         this.downRightSpawn.relocate(
-                (ViewSwitcher.getWindowWidth() - GameView.spawnPanelsWidth)
-                        - (((ViewSwitcher.getWindowWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth)
+                (this.mainPane.getPrefWidth() - GameView.spawnPanelsWidth)
+                        - (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth)
                                 / 2,
-                ViewSwitcher.getWindowHeight() - GameView.spawnPanelsWidth - (ViewSwitcher.getWindowHeight()
+                this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - (this.mainPane.getPrefHeight()
                         - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
 
-        this.titleCoin.relocate(ViewSwitcher.getWindowWidth() / 3 - (this.titleCoin.getWidth() / 2), 20);
+        this.titleCoin.relocate(this.mainPane.getPrefWidth() / 3 - (this.titleCoin.getWidth() / 2), 20);
 
-        this.labelCoin.relocate(ViewSwitcher.getWindowWidth() / 3 - (this.labelCoin.getWidth() / 2), 60);
+        this.labelCoin.relocate(this.mainPane.getPrefWidth() / 3 - (this.labelCoin.getWidth() / 2), 60);
 
-        this.titleScore.relocate(((ViewSwitcher.getWindowWidth() / 3) * 2) - (this.titleScore.getWidth() / 2), 20);
+        this.titleScore.relocate(((this.mainPane.getPrefWidth() / 3) * 2) - (this.titleScore.getWidth() / 2), 20);
 
-        this.labelScore.relocate(((ViewSwitcher.getWindowWidth() / 3) * 2) - (this.labelScore.getWidth() / 2), 60);
+        this.labelScore.relocate(((this.mainPane.getPrefWidth() / 3) * 2) - (this.labelScore.getWidth() / 2), 60);
 
-        this.gridPane.relocate(ViewSwitcher.getWindowWidth() / 2 - (this.gridPane.getWidth() / 2),
-                ViewSwitcher.getWindowHeight() / 2 - (this.gridPane.getHeight() / 2));
+        this.gridPane.relocate(this.mainPane.getPrefWidth() / 2 - (this.gridPane.getWidth() / 2),
+                this.mainPane.getPrefHeight() / 2 - (this.gridPane.getHeight() / 2));
 
-        this.imagePause.relocate(ViewSwitcher.getWindowWidth() - this.imagePause.getFitHeight() - 15, 15);
+        this.imagePause.relocate(this.mainPane.getPrefWidth() - this.imagePause.getFitHeight() - 15, 15);
     }
 
     /**

@@ -7,7 +7,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import oop23_1010.types.SkinType;
-import oop23_1010.view.ViewSwitcher;
 
 public class ShopSkinItem extends VBox {
 
@@ -27,7 +26,7 @@ public class ShopSkinItem extends VBox {
 
     private Label costLabel;
 
-    public ShopSkinItem(String skin, Integer pos, Boolean purchased) {
+    public ShopSkinItem(String skin, Integer pos, Boolean purchased, Double windowWidth) {
 
         for (SkinType skinType : SkinType.values()) {
             if (skinType.name().equals(skin)) {
@@ -39,22 +38,24 @@ public class ShopSkinItem extends VBox {
 
         this.descriptionPane = new Pane();
         this.costPane = new Pane();
+
         this.viewPane = new HBox();
-        this.viewPane.setPrefSize(ViewSwitcher.getWindowWidth() - 200, 120);
+        this.viewPane.setPrefSize(windowWidth - 200, 120);
+        this.viewPane.setSpacing(5);
+        this.viewPane.setStyle("-fx-padding: 15");
 
         this.costLabel = new Label();
         this.costLabel.setFont(new Font(20));
-        this.costLabel.setPrefSize(ViewSwitcher.getWindowWidth() - 200, 40);
+        this.costLabel.setPrefSize(windowWidth - 200, 40);
         this.costLabel.setAlignment(Pos.CENTER_LEFT);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
+
         this.descriptionLabel = new Label(this.skin.getDescription());
-        this.descriptionLabel.setPrefSize(ViewSwitcher.getWindowWidth() - 200, 40);
+        this.descriptionLabel.setPrefSize(windowWidth - 200, 40);
         this.descriptionLabel.setFont(new Font(25));
         this.descriptionLabel.setAlignment(Pos.BASELINE_CENTER);
         this.descriptionLabel.setStyle("-fx-padding: 5");
 
-        this.viewPane.setSpacing(5);
-        this.viewPane.setStyle("-fx-padding: 15");
         for (int i = 1; i <= 9; i++) {
             Pane pane = new Pane();
             switch (i) {

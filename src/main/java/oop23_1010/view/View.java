@@ -2,24 +2,35 @@ package oop23_1010.view;
 
 import javafx.stage.Stage;
 
-public interface View {
+public abstract class View {
+    private Stage currentStage;
+
+    public static final int WINDOW_WIDTH = 1600;
+    public static final int WINDOW_HEIGHT = 900; 
 
     /**
-     * This method initializes the view.
-     */
-    void init();
-
-    /**
-     * This method returns the current stage.
+     * Method to get the current stage.
      * 
-     * @return a stage object
+     * @return the current stage
      */
-    Stage getStage();
+    public Stage getStage() {
+        return this.currentStage;
+    }
 
     /**
-     * This method sets the view's stage to the one passed as parameter.
+     * Method to set the current stage.
      * 
-     * @param stageToSet a Stage object which will be attached to the current view.
+     * @param stageToSet the stage to set
      */
-    void setStage(Stage stageToSet);
+    public void setStage(final Stage stageToSet) {
+        stageToSet.setOnCloseRequest(event -> {
+            System.exit(0);
+        });
+        this.currentStage = stageToSet;
+    }
+
+    /**
+     * {@inheritDoc}}
+     */
+    public abstract void init();
 }
