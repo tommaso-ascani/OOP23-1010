@@ -2,7 +2,6 @@ package oop23_1010.view.gameView;
 
 import java.util.ArrayList;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import oop23_1010.controllers.ThemeController;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.sound.SoundType;
@@ -101,37 +99,14 @@ public class GameView extends View {
 
         GameView.spawnPanelsWidth = 6.0 * grid.getGridCellSize();
 
-        this.createGridCells();
-
-        this.setPanelsPrefSizes();
-
-        this.setPanelsStyle();
-
-        this.titleCoin.setFont(new Font(null, 30));
-        this.titleCoin.setText("Coin");
-        this.titleCoin.setAlignment(Pos.CENTER);
-
-        this.labelCoin.setFont(new Font(null, 30));
         this.labelCoin.setText(String.valueOf(this.coins));
-        this.labelCoin.setAlignment(Pos.CENTER);
-
-        this.titleScore.setFont(new Font(null, 30));
-        this.titleScore.setText("Score");
-        this.titleScore.setAlignment(Pos.CENTER);
-
-        this.labelScore.setFont(new Font(null, 30));
         this.labelScore.setText(String.valueOf(this.score));
-        this.labelScore.setAlignment(Pos.CENTER);
 
+        this.createGridCells();
+        this.setPanelsPrefSizes();
+        this.setPanelsStyle();
         this.createNewPuzzles();
-
         this.createPausePane();
-
-        Group gruppo = new Group(this.mainPane);
-
-        this.getStage().setScene(new Scene(gruppo));
-        this.getStage().show();
-
         this.setObjectLocation();
     }
 
@@ -386,9 +361,6 @@ public class GameView extends View {
                                     (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
 
         labelGameOverScore.setText("Score: " + String.valueOf(this.score));
-        labelGameOverScore.setFont(new Font(null, 30));
-
-        labelGameOver.setFont(new Font(null, 50));
 
         this.setListenersGameOverPane(buttonBackToMenu);
 
@@ -516,6 +488,10 @@ public class GameView extends View {
      * labels and buttons
      */
     public void setObjectLocation() {
+        Group gruppo = new Group(this.mainPane);
+        this.getStage().setScene(new Scene(gruppo));
+        this.getStage().show();
+
         this.upLeftSpawn.relocate(
                 (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
                 (this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth

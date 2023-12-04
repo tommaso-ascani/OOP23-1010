@@ -25,12 +25,20 @@ public class HomeView extends View {
     private static int gridSize;
 
     @FXML
-    private ImageView imageSettings,
-            imageTitle,
-            imageShop,
-            imageQuit,
-            imageResume,
-            imagePlay;
+    private ImageView   imageSettings,
+                        imageTitle,
+                        imageShop,
+                        imageQuit,
+                        imageResume,
+                        imagePlay;
+
+    @FXML
+    private Button  dialogResumeYes,
+                    dialogResumeDelete,
+                    dialogResumeBack;
+
+    @FXML
+    private Pane    dialogPaneResume;
 
     @FXML
     private Slider sliderGridWidth;
@@ -39,9 +47,10 @@ public class HomeView extends View {
     private AnchorPane mainPane;
 
     @FXML
-    private Label bestScore,
-            sliderLabel,
-            coinsLabel;
+    private Label   bestScore,
+                    sliderLabel,
+                    coinsLabel,
+                    dialogResumeLabel1;
 
     @Override
     public void init() {
@@ -90,17 +99,6 @@ public class HomeView extends View {
         // Style
 
         this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
-
-        this.sliderGridWidth.setValue(10);
-        this.sliderGridWidth.setMin(5);
-        this.sliderGridWidth.setMax(20);
-        this.sliderGridWidth.setShowTickMarks(false);
-        this.sliderGridWidth.setShowTickLabels(true);
-        this.sliderGridWidth.setMajorTickUnit(5);
-        this.sliderGridWidth.setMinorTickCount(0);
-        this.sliderGridWidth.setSnapToTicks(true);
-
-        this.coinsLabel.setAlignment(Pos.CENTER);
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
@@ -174,46 +172,13 @@ public class HomeView extends View {
      * for resume a game
      */
     public void createDialogResume() {
-        Pane dialogPaneResume = new Pane();
-        Button dialogResumeYes = new Button("Resume the game");
-        Button dialogResumeDelete = new Button("Delete the game");
-        Button dialogResumeBack = new Button("Back");
-        Label dialogResumeLabel1 = new Label("What do you want to do?");
 
-        dialogResumeLabel1.setAlignment(Pos.BASELINE_CENTER);
         dialogPaneResume.setStyle(
                 "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background()
                         + "; -fx-border-width: 2; -fx-border-color: black");
 
-        dialogPaneResume.setPrefSize(300, 200);
-        dialogResumeYes.setPrefSize(120, 30);
-        dialogResumeDelete.setPrefSize(120, 30);
-        dialogResumeBack.setPrefSize(90, 30);
-        dialogResumeLabel1.setPrefSize(300, 30);
-
         dialogPaneResume.relocate((this.mainPane.getPrefWidth() - dialogPaneResume.getPrefWidth()) / 2,
                 (this.mainPane.getPrefHeight() - dialogPaneResume.getPrefHeight()) / 2);
-
-        dialogResumeYes.relocate(
-                (dialogPaneResume.getPrefWidth() - dialogResumeYes.getPrefWidth() - dialogResumeDelete.getPrefWidth())
-                        / 3,
-                (dialogPaneResume.getPrefHeight() - dialogResumeYes.getPrefHeight()) / 1.5);
-
-        dialogResumeDelete.relocate((dialogPaneResume.getPrefWidth() - dialogResumeDelete.getPrefWidth()
-                - ((dialogPaneResume.getPrefWidth() - dialogResumeYes.getPrefWidth()
-                        - dialogResumeDelete.getPrefWidth() - 40)) / 2),
-                (dialogPaneResume.getPrefHeight() - dialogResumeYes.getPrefHeight()) / 1.5);
-
-        dialogResumeBack.relocate((dialogPaneResume.getPrefWidth() - dialogResumeBack.getPrefWidth()) / 2,
-                (dialogPaneResume.getPrefHeight() - dialogResumeBack.getPrefHeight()) / 1.1);
-
-        dialogResumeLabel1.relocate((dialogPaneResume.getPrefWidth() - dialogResumeLabel1.getPrefWidth()) / 2,
-                (dialogPaneResume.getPrefHeight() - dialogResumeBack.getPrefHeight()) / 5);
-
-        dialogPaneResume.getChildren().addAll(dialogResumeBack, dialogResumeDelete, dialogResumeLabel1,
-                dialogResumeYes);
-
-        this.mainPane.getChildren().add(dialogPaneResume);
 
         dialogPaneResume.setVisible(true);
 

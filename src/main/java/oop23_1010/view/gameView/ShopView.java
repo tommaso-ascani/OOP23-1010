@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -39,8 +38,6 @@ public class ShopView extends View {
 
     private ArrayList<ShopThemeItem> shopList = new ArrayList<ShopThemeItem>();
 
-    private static final Integer PADDING_SPACING_VBOX = 10;
-
     @Override
     public void init() {
 
@@ -50,12 +47,6 @@ public class ShopView extends View {
 
         this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
 
-        this.titlePane.setPrefSize(this.mainPane.getPrefWidth(), this.mainPane.getPrefHeight() / 9);
-
-        this.titleLabel.setPrefSize(this.mainPane.getPrefWidth(), this.mainPane.getPrefHeight() / 9);
-
-        this.verticalBox.setPadding(new Insets(PADDING_SPACING_VBOX));
-        this.verticalBox.setSpacing(PADDING_SPACING_VBOX);
         this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, this.mainPane.getPrefWidth() / 3.2);
         this.verticalBox.relocate((this.mainPane.getPrefWidth() - this.verticalBox.getPrefWidth()) / 2,
                 (this.mainPane.getPrefHeight() - this.verticalBox.getPrefHeight()) / 2);
@@ -126,14 +117,10 @@ public class ShopView extends View {
             });
         } else {
             shopThemeItem.setOnMouseClicked(e -> {
-                this.questionLabel
-                        .setText("Do you want to buy this item for " + shopThemeItem.getSkin().getCost() + " coins?");
+                this.questionLabel.setText( "Do you want to buy this item for " + 
+                                            shopThemeItem.getSkin().getCost() + 
+                                            " coins?");
                 this.questionLabel.setPrefSize(this.purchasePane.getPrefWidth(), 80);
-
-                this.labelAlert.setStyle("-fx-text-fill: red");
-
-                this.buttonConfirm.setText("Buy");
-                this.buttonBack.setText("Back");
 
                 this.purchasePane.setVisible(true);
 

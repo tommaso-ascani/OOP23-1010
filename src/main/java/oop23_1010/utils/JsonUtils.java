@@ -103,8 +103,10 @@ public class JsonUtils {
     }
 
     public static void flushJson(String fileName) throws IOException {
-        // Delete json file
-        Files.delete(Paths.get(DATA_PATH + fileName + ".json"));
+        if(jsonExist(fileName)){
+            // Delete json file
+            Files.delete(Paths.get(DATA_PATH + fileName + ".json"));
+        }
     }
 
     public static Boolean jsonExist(String fileName) throws IOException {

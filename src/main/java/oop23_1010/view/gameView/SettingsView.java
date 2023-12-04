@@ -46,7 +46,7 @@ public class SettingsView extends View {
             this.imageVolume.setImage(new Image("/img/NoAudioButton.png"));
         }
 
-        this.setValuesSliderVolume();
+        this.sliderVolume.setValue(GameSoundSystem.getInstance().getVolume());
 
         // Set the listener on the button apply to save the chosen volume in the
         // settings.json file
@@ -88,16 +88,5 @@ public class SettingsView extends View {
             this.imageVolume.setImage(new Image("/img/NoAudioButton.png"));
             this.sliderVolume.setValue(0);
         }
-    }
-
-    public void setValuesSliderVolume() {
-        this.sliderVolume.setValue(GameSoundSystem.getInstance().getVolume());
-        this.sliderVolume.setMin(0);
-        this.sliderVolume.setMax(100);
-        this.sliderVolume.setShowTickMarks(true);
-        this.sliderVolume.setShowTickLabels(true);
-        this.sliderVolume.setMajorTickUnit(10);
-        this.sliderVolume.setMinorTickCount(1);
-        this.sliderVolume.setSnapToTicks(true);
     }
 }
