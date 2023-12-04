@@ -48,10 +48,17 @@
             </Pane>
          </children>
       </Pane>
+      <Pane fx:id="gameOverPane" prefWidth="500.0" prefHeight="300.0" visible="false">
+         <children>
+            <Label fx:id="labelGameOver" layoutX="100" layoutY="30" prefWidth="300.0" prefHeight="50.0" text="GAME OVER!" alignment="BASELINE_CENTER" />
+            <Label fx:id="labelGameOverScore" layoutX="100" layoutY="100" prefWidth="300.0" prefHeight="50.0" text="" alignment="BASELINE_CENTER" />
+
+            <Button fx:id="buttonBackToMenu" layoutX="200" layoutY="200" prefWidth="100.0" prefHeight="40.0" text="Back to menu"/>
+         </children>
+      </Pane>
       <Pane fx:id="upLeftSpawn" />
       <Pane fx:id="downLeftSpawn" />
       <Pane fx:id="upRightSpawn" />
       <Pane fx:id="downRightSpawn" />
-      <Pane fx:id="gameOverPane" />
    </children>
 </AnchorPane>

@@ -63,7 +63,9 @@ public class GameView extends View {
                     dialogRestartLabel1,
                     dialogRestartLabel2,
                     dialogMenuLabel1,
-                    dialogMenuLabel2;
+                    dialogMenuLabel2,
+                    labelGameOver,
+                    labelGameOverScore;
 
     @FXML
     private Button  buttonRiprendi,
@@ -73,7 +75,8 @@ public class GameView extends View {
                     dialogMenuNo,
                     dialogMenuBack,
                     dialogRestartYes,
-                    dialogRestartNo;
+                    dialogRestartNo,
+                    buttonBackToMenu;
 
     @FXML
     private ImageView imagePause;
@@ -354,9 +357,11 @@ public class GameView extends View {
                 GameSoundSystem.getInstance().playAudioClip();
                 block.returnToStart();
             }
+            
             if (blocksAvalaible.size() == 0) {
                 createNewPuzzles();
             }
+
             if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
                 GameSoundSystem.getInstance().setAudioClip(SoundType.GAME_OVER);
                 GameSoundSystem.getInstance().playAudioClip();
@@ -374,35 +379,16 @@ public class GameView extends View {
      */
     private void createGameOverPane() {
 
-        this.gameOverPane.setVisible(false);
-
         this.gameOverPane.setStyle(
                 "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
 
-        this.gameOverPane.setPrefSize(400, 300);
+        this.gameOverPane.relocate( (this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
+                                    (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
 
-        this.gameOverPane.relocate((this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
-                (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
-
-        Button buttonBackToMenu = new Button("Back to menu");
-        Label labelScore = new Label(this.labelScore.getText());
-        Label labelGameOver = new Label("GAME OVER");
-
-        labelScore.setFont(new Font(null, 30));
-        labelScore.setPrefSize(gameOverPane.getPrefWidth(), 40);
-        labelScore.setAlignment(Pos.BASELINE_CENTER);
+        labelGameOverScore.setText("Score: " + String.valueOf(this.score));
+        labelGameOverScore.setFont(new Font(null, 30));
 
         labelGameOver.setFont(new Font(null, 50));
-        labelGameOver.setPrefSize(gameOverPane.getPrefWidth(), 50);
-        labelGameOver.setAlignment(Pos.BASELINE_CENTER);
-
-        labelScore.relocate(0, (gameOverPane.getPrefHeight() - labelScore.getPrefHeight()) / 2.7);
-        labelGameOver.relocate(0, (gameOverPane.getPrefHeight() - labelScore.getPrefHeight()) / 7);
-        buttonBackToMenu.setPrefSize(100, 40);
-        buttonBackToMenu.relocate((gameOverPane.getPrefWidth() - buttonBackToMenu.getPrefWidth()) / 2,
-                (gameOverPane.getPrefHeight() - buttonBackToMenu.getPrefHeight()) / 1.5);
-
-        this.gameOverPane.getChildren().addAll(buttonBackToMenu, labelScore, labelGameOver);
 
         this.setListenersGameOverPane(buttonBackToMenu);
 
