@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.util.Pair;
-import oop23_1010.controllers.ThemeController;
 import oop23_1010.view.gameView.HomeView;
 
 public class DataUtils {
@@ -50,7 +49,7 @@ public class DataUtils {
             }
 
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray), JsonUtils.MATCH_FILE);
-        } catch (IOException e) {
+        } catch (IOException exc) {
             System.err.println("Error on match data saving!");
         }
     }
@@ -69,7 +68,7 @@ public class DataUtils {
                     JsonUtils.addElement(new Pair<String, Object>(size, score), JsonUtils.BEST_SCORE_FILE);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException exc) {
             System.err.println("Error on best score saving!");
         }
     }
@@ -79,7 +78,7 @@ public class DataUtils {
     public static void saveCoins(Integer coins) {
         try {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, coins), JsonUtils.GAME_DATA_FILE);
-        } catch (IOException e) {
+        } catch (IOException exc) {
             System.err.println("Error on coins saving!");
         }
     }
@@ -93,7 +92,7 @@ public class DataUtils {
             if (JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)){
                 return (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
             }
-        } catch (IOException e) {
+        } catch (IOException exc) {
             System.err.println("Error on coins loading!");
         }
         return 0;
@@ -106,7 +105,7 @@ public class DataUtils {
             if (JsonUtils.ifDataExist(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE)){
                 return (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE);
             }
-        } catch (IOException e) {
+        } catch (IOException exc) {
             System.err.println("Error on score loading!");
         }
         return 0;
@@ -150,14 +149,14 @@ public class DataUtils {
 
                     GridBlock aPane = new GridBlock((Integer) a.getJSONObject(i).get("X"),
                             (Integer) a.getJSONObject(i).get("Y"),
-                            color, ThemeController.getSelectedSkin().getColor_grid());
+                            color, ThemeUtils.getSelectedSkin().getColor_grid());
 
                     grid.add(aPane);
                 }
 
                 return grid;
             }
-        } catch (IOException e) {
+        } catch (IOException exc) {
             System.err.println("Error on grid loading!");
         }
 

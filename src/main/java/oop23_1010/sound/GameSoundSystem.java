@@ -36,8 +36,8 @@ public final class GameSoundSystem {
                         JsonUtils.GAME_DATA_FILE);
                 GameSoundSystem.volume = GameSoundSystem.MAX_VOLUME;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Game Sound System - Error on volume loading!");
         }
         return instance;
     }

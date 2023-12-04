@@ -38,8 +38,8 @@ public class ViewSwitcher {
 
         try {
             root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("View Switcher - Error on FXML loading!");
         }
 
         Scene newScene = new Scene(root, View.WINDOW_WIDTH, View.WINDOW_HEIGHT);

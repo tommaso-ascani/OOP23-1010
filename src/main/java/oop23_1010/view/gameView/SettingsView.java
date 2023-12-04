@@ -10,9 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
-import oop23_1010.controllers.ThemeController;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.utils.JsonUtils;
+import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
@@ -41,7 +41,7 @@ public class SettingsView extends View {
     public void init() {
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
-        this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
 
         this.settingsPane.relocate( (View.WINDOW_WIDTH / 2) - (this.settingsPane.getPrefWidth() / 2), 
                                     (View.WINDOW_HEIGHT / 2) - (this.settingsPane.getPrefHeight() / 2));
@@ -61,8 +61,8 @@ public class SettingsView extends View {
             try {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, this.sliderVolume.getValue()),
                         JsonUtils.GAME_DATA_FILE);
-            } catch (IOException e1) {
-                e1.printStackTrace();
+            } catch (IOException exc) {
+                System.err.println("Settings View - Error on volume apply!");
             }
         });
 

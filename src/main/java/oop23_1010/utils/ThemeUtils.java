@@ -1,14 +1,14 @@
-package oop23_1010.controllers;
+package oop23_1010.utils;
 
 import oop23_1010.types.ThemeType;
-import oop23_1010.utils.JsonUtils;
+
 import java.io.IOException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.util.Pair;
 
-public final class ThemeController {
+public final class ThemeUtils {
 
     private static ThemeType selectedSkin;
 
@@ -24,8 +24,8 @@ public final class ThemeController {
         try {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_SKIN, selectedSkin),
                     JsonUtils.GAME_DATA_FILE);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Theme Utils - Error on selected skin saving!");
         }
     }
 
@@ -37,12 +37,12 @@ public final class ThemeController {
                     selectedSkin = skinType;
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Theme Utils - Error on selected skin loading!");
         }
     }
 
-    public static void saveSkins() {
+    public static void saveThemes() {
 
         JSONArray temp = new JSONArray();
 
@@ -55,8 +55,8 @@ public final class ThemeController {
 
         try {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SKINS, temp), JsonUtils.GAME_DATA_FILE);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Theme Utils - Error on themes saving!");
         }
     }
 
@@ -64,8 +64,8 @@ public final class ThemeController {
 
         try {
             return JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Theme Utils - Error on skin getting!");
         }
         return null;
     }

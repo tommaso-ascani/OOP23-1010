@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import oop23_1010.controllers.ThemeController;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.sound.SoundType;
 import oop23_1010.types.BlockType;
@@ -21,6 +20,7 @@ import oop23_1010.utils.GameGrid;
 import oop23_1010.utils.GridBlock;
 import oop23_1010.utils.Randomizer;
 import oop23_1010.utils.ShapeBlock;
+import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
@@ -116,9 +116,9 @@ public class GameView extends View {
      */
     public void createPausePane() {
         
-        this.pausePane.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
+        this.pausePane.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
+        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
+        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
 
         this.pausePane.relocate(            ((this.mainPane.getPrefWidth() / 2)  - (this.pausePane.getPrefWidth() / 2)),
                                             ((this.mainPane.getPrefHeight() / 2)  - (this.pausePane.getPrefHeight() / 2)));
@@ -355,7 +355,7 @@ public class GameView extends View {
     private void createGameOverPane() {
 
         this.gameOverPane.setStyle(
-                "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
+                "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
 
         this.gameOverPane.relocate( (this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
                                     (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
@@ -423,7 +423,7 @@ public class GameView extends View {
                 gridBlock.setPrefWidth(grid.getGridCellSize());
                 if (gridBlock.getFill() == null) {
                     gridBlock.setStyle(
-                            "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_grid()
+                            "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_grid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 } else {
                     gridBlock.setStyle(
@@ -437,12 +437,12 @@ public class GameView extends View {
         } else {
             for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
                 for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
-                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null, ThemeController.getSelectedSkin().getColor_grid());
+                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null, ThemeUtils.getSelectedSkin().getColor_grid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());
                     aPane.setStyle(
-                            "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_grid()
+                            "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_grid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
 
                     this.grid.add(aPane);
@@ -476,7 +476,7 @@ public class GameView extends View {
         this.upRightSpawn.setStyle(SpawnPanlesStyle);
         this.downRightSpawn.setStyle(SpawnPanlesStyle);
 
-        this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
 
         this.gridPane.setStyle(
                 "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE

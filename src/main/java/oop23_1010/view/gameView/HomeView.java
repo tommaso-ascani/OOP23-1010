@@ -13,9 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
-import oop23_1010.controllers.ThemeController;
 import oop23_1010.types.ThemeType;
 import oop23_1010.utils.JsonUtils;
+import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
@@ -60,17 +60,17 @@ public class HomeView extends View {
         // Load saved Theme and save skins
         try {
             if (!JsonUtils.ifDataExist(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE)) {
-                ThemeController.saveSkins();
+                ThemeUtils.saveThemes();
             }
             if (!JsonUtils.ifDataExist(JsonUtils.SELECTED_SKIN, JsonUtils.GAME_DATA_FILE)) {
-                ThemeController.setSelectedSkin(ThemeType.LIGHT);
-                ThemeController.saveSelectedSkin();
+                ThemeUtils.setSelectedSkin(ThemeType.LIGHT);
+                ThemeUtils.saveSelectedSkin();
                 ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
             }
-            ThemeController.loadSelectedSkin();
-            ThemeController.loadSelectedSkin();
-        } catch (IOException e) {
-            e.printStackTrace();
+            ThemeUtils.loadSelectedSkin();
+            ThemeUtils.loadSelectedSkin();
+        } catch (IOException exc) {
+            System.err.println("Home View - Error on skin loading!");
         }
         // Coins
 
@@ -80,8 +80,8 @@ public class HomeView extends View {
             }
             this.coinsLabel.setText("Coins: "
                     + String.valueOf((Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)));
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Home View - Error on coins loading!");
         }
 
         // Object relocate
@@ -98,7 +98,7 @@ public class HomeView extends View {
 
         // Style
 
-        this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
@@ -121,8 +121,8 @@ public class HomeView extends View {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Home View - Error on best score loading!");
         }
 
         // In this try/catch we control if there is a json file with saved data and if
@@ -138,8 +138,8 @@ public class HomeView extends View {
                 this.imageResume.setDisable(true);
                 this.imageResume.setOpacity(0.4);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Home View - Error on saved match loading!");
         }
 
     }
@@ -181,7 +181,7 @@ public class HomeView extends View {
     public void createDialogResume() {
 
         dialogPaneResume.setStyle(
-                "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background()
+                "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
                         + "; -fx-border-width: 2; -fx-border-color: black");
 
         dialogPaneResume.relocate((this.mainPane.getPrefWidth() - dialogPaneResume.getPrefWidth()) / 2,
@@ -216,8 +216,8 @@ public class HomeView extends View {
                 this.imagePlay.setOpacity(1);
                 this.sliderGridWidth.setDisable(false);
                 this.sliderGridWidth.setOpacity(1);
-            } catch (IOException e1) {
-                e1.printStackTrace();
+            } catch (IOException exc) {
+                System.err.println("Home View - Error on saved match deleting!");
             }
         });
 

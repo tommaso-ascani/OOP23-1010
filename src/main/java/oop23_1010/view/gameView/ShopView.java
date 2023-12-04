@@ -12,9 +12,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
-import oop23_1010.controllers.ThemeController;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ShopThemeItem;
+import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
@@ -43,9 +43,9 @@ public class ShopView extends View {
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
 
-        this.loadSkins();
+        this.loadThemes();
 
-        this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
 
         this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, this.mainPane.getPrefWidth() / 3.2);
         this.verticalBox.relocate((this.mainPane.getPrefWidth() - this.verticalBox.getPrefWidth()) / 2,
@@ -55,7 +55,7 @@ public class ShopView extends View {
 
     }
 
-    public void loadSkins() {
+    public void loadThemes() {
         this.verticalBox.getChildren().clear();
 
         try {
@@ -66,7 +66,7 @@ public class ShopView extends View {
                         (Boolean) a.getJSONObject(i).get("purchased"),
                         this.mainPane.getPrefWidth());
                 if (temp.getPurchased()) {
-                    if (!temp.getSkin().name().equals(ThemeController.getSelectedSkin().name())) {
+                    if (!temp.getSkin().name().equals(ThemeUtils.getSelectedSkin().name())) {
                         this.setListenerIfShopThemeItemPurchased(true, temp);
                         temp.getCostLabel().setText("PURCHASED BUT NOT SELECTED");
                     } else {
@@ -79,8 +79,8 @@ public class ShopView extends View {
                 this.verticalBox.getChildren().add(temp);
                 shopList.add(temp);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exc) {
+            System.err.println("Shop View - Error on themes loading!");
         }
     }
 
@@ -90,7 +90,7 @@ public class ShopView extends View {
 
     public void createPurchasePane() {
         this.purchasePane.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-background-color: "
-                + ThemeController.getSelectedSkin().getColor_background());
+                + ThemeUtils.getSelectedSkin().getColor_background());
         this.purchasePane.relocate((this.mainPane.getPrefWidth() - this.purchasePane.getPrefWidth()) / 2,
                 (this.mainPane.getPrefHeight() - this.purchasePane.getPrefHeight()) / 2);
     }
@@ -108,8 +108,8 @@ public class ShopView extends View {
                 });
 
                 buttonConfirm.setOnMouseClicked(b -> {
-                    ThemeController.setSelectedSkin(shopThemeItem.getSkin());
-                    ThemeController.saveSelectedSkin();
+                    ThemeUtils.setSelectedSkin(shopThemeItem.getSkin());
+                    ThemeUtils.saveSelectedSkin();
                     this.purchasePane.setVisible(false);
                     ViewSwitcher.getInstance().switchView(getStage(), ViewType.SHOP);
                 });
@@ -138,14 +138,14 @@ public class ShopView extends View {
                             shopThemeItem.getSkin().setPurchased(true);
                             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, coinAmount),
                                     JsonUtils.GAME_DATA_FILE);
-                            ThemeController.saveSkins();
-                            this.loadSkins();
+                            ThemeUtils.saveThemes();
+                            this.loadThemes();
                             this.purchasePane.setVisible(false);
                         } else {
                             this.labelAlert.setVisible(true);
                         }
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+                    } catch (IOException exc) {
+                        System.err.println("Shop View - Error on theme purchase!");
                     }
 
                 });
