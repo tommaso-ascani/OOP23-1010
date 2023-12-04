@@ -14,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
-import oop23_1010.types.SkinType;
+import oop23_1010.types.ThemeType;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
@@ -25,12 +25,12 @@ public class HomeView extends View {
     private static int gridSize;
 
     @FXML
-    private ImageView   imageSettings,
-                        imageTitle,
-                        imageShop,
-                        imageQuit,
-                        imageResume,
-                        imagePlay;
+    private ImageView imageSettings,
+            imageTitle,
+            imageShop,
+            imageQuit,
+            imageResume,
+            imagePlay;
 
     @FXML
     private Slider sliderGridWidth;
@@ -39,9 +39,9 @@ public class HomeView extends View {
     private AnchorPane mainPane;
 
     @FXML
-    private Label   bestScore,
-                    sliderLabel,
-                    coinsLabel;
+    private Label bestScore,
+            sliderLabel,
+            coinsLabel;
 
     @Override
     public void init() {
@@ -54,7 +54,7 @@ public class HomeView extends View {
                 ThemeController.saveSkins();
             }
             if (!JsonUtils.ifDataExist(JsonUtils.SELECTED_SKIN, JsonUtils.GAME_DATA_FILE)) {
-                ThemeController.setSelectedSkin(SkinType.LIGHT);
+                ThemeController.setSelectedSkin(ThemeType.LIGHT);
                 ThemeController.saveSelectedSkin();
                 ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
             }

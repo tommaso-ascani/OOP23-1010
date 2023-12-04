@@ -17,7 +17,7 @@ import javafx.scene.text.Font;
 import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
 import oop23_1010.utils.JsonUtils;
-import oop23_1010.utils.ShopSkinItem;
+import oop23_1010.utils.ShopThemeItem;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 import oop23_1010.view.ViewType;
@@ -42,7 +42,7 @@ public class ShopView extends View {
     @FXML
     private VBox verticalBox;
 
-    private ArrayList<ShopSkinItem> shopList = new ArrayList<ShopSkinItem>();
+    private ArrayList<ShopThemeItem> shopList = new ArrayList<ShopThemeItem>();
 
     @Override
     public void init() {
@@ -77,10 +77,10 @@ public class ShopView extends View {
             a = JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
 
             for (int i = 0; i < a.length(); i++) {
-                ShopSkinItem temp = new ShopSkinItem(   a.getJSONObject(i).getString("name"), 
-                                                        i + 1,
-                                                        (Boolean) a.getJSONObject(i).get("purchased"),
-                                                        this.mainPane.getPrefWidth());
+                ShopThemeItem temp = new ShopThemeItem(a.getJSONObject(i).getString("name"),
+                        i + 1,
+                        (Boolean) a.getJSONObject(i).get("purchased"),
+                        this.mainPane.getPrefWidth());
                 if (temp.getPurchased()) {
 
                     String selectedSkin = ThemeController.getSelectedSkin().name();

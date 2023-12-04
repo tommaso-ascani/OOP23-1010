@@ -1,6 +1,6 @@
 package oop23_1010.controllers;
 
-import oop23_1010.types.SkinType;
+import oop23_1010.types.ThemeType;
 import oop23_1010.utils.JsonUtils;
 import java.io.IOException;
 
@@ -10,13 +10,13 @@ import javafx.util.Pair;
 
 public final class ThemeController {
 
-    private static SkinType selectedSkin;
+    private static ThemeType selectedSkin;
 
-    public static void setSelectedSkin(SkinType newSkin) {
+    public static void setSelectedSkin(ThemeType newSkin) {
         selectedSkin = newSkin;
     }
 
-    public static SkinType getSelectedSkin() {
+    public static ThemeType getSelectedSkin() {
         return selectedSkin;
     }
 
@@ -32,7 +32,7 @@ public final class ThemeController {
     public static void loadSelectedSkin() {
         try {
             String selecSkin = (String) JsonUtils.loadData(JsonUtils.SELECTED_SKIN, JsonUtils.GAME_DATA_FILE);
-            for (SkinType skinType : SkinType.values()) {
+            for (ThemeType skinType : ThemeType.values()) {
                 if (skinType.name().equals(selecSkin)) {
                     selectedSkin = skinType;
                 }
@@ -46,7 +46,7 @@ public final class ThemeController {
 
         JSONArray temp = new JSONArray();
 
-        for (SkinType skin : SkinType.values()) {
+        for (ThemeType skin : ThemeType.values()) {
             JSONObject skinObject = new JSONObject();
             skinObject.put("name", skin.name());
             skinObject.put("purchased", skin.getPurchased());

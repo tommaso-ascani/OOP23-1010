@@ -1,6 +1,6 @@
 package oop23_1010.types;
 
-public enum SkinType {
+public enum ThemeType {
 
     LIGHT("white",
             "darkgrey",
@@ -46,7 +46,7 @@ public enum SkinType {
 
     private Boolean purchased;
 
-    SkinType(String color_background,
+    ThemeType(String color_background,
             String color_grid,
             String color_1x1,
             String color_2x2,

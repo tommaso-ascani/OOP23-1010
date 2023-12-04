@@ -6,11 +6,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import oop23_1010.types.SkinType;
+import oop23_1010.types.ThemeType;
 
-public class ShopSkinItem extends VBox {
+public class ShopThemeItem extends VBox {
 
-    private SkinType skin;
+    private ThemeType skin;
 
     private Integer pos;
 
@@ -26,9 +26,9 @@ public class ShopSkinItem extends VBox {
 
     private Label costLabel;
 
-    public ShopSkinItem(String skin, Integer pos, Boolean purchased, Double windowWidth) {
+    public ShopThemeItem(String skin, Integer pos, Boolean purchased, Double windowWidth) {
 
-        for (SkinType skinType : SkinType.values()) {
+        for (ThemeType skinType : ThemeType.values()) {
             if (skinType.name().equals(skin)) {
                 this.skin = skinType;
             }
@@ -133,11 +133,11 @@ public class ShopSkinItem extends VBox {
         this.costLabel = costLabel;
     }
 
-    public SkinType getSkin() {
+    public ThemeType getSkin() {
         return skin;
     }
 
-    public void setSkin(SkinType skin) {
+    public void setSkin(ThemeType skin) {
         this.skin = skin;
     }
 }
