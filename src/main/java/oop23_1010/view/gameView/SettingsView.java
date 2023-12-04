@@ -8,6 +8,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 import oop23_1010.controllers.ThemeController;
 import oop23_1010.sound.GameSoundSystem;
@@ -33,12 +34,17 @@ public class SettingsView extends View {
     @FXML
     private ImageView imageVolume;
 
+    @FXML
+    private Pane settingsPane;
+
     @Override
     public void init() {
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
-
         this.mainPane.setStyle("-fx-background: " + ThemeController.getSelectedSkin().getColor_background());
+
+        this.settingsPane.relocate( (View.WINDOW_WIDTH / 2) - (this.settingsPane.getPrefWidth() / 2), 
+                                    (View.WINDOW_HEIGHT / 2) - (this.settingsPane.getPrefHeight() / 2));
 
         if (GameSoundSystem.getInstance().getVolume() != 0) {
             this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));
