@@ -21,30 +21,31 @@
 
       <GridPane fx:id="gridPane" />
 
-      <Pane fx:id="dialogPaneRestart" prefWidth="300.0" prefHeight="200.0">
+      <Pane fx:id="pausePane" prefWidth="550.0" prefHeight="300.0" visible="false">
          <children>
-            <Label fx:id="dialogRestartLabel1" prefWidth="80.0" prefHeight="30.0" text="Restart?" alignment="BASELINE_CENTER" />
-            <Label fx:id="dialogRestartLabel2" prefWidth="300.0" prefHeight="30.0" text="(The current game will be overwritten)" alignment="BASELINE_CENTER" />
-            
-            <Button fx:id="dialogRestartYes" prefWidth="90.0" prefHeight="30.0" text="Yes"/>
-            <Button fx:id="dialogRestartNo" prefWidth="90.0" prefHeight="30.0" text="No"/>
-         </children>
-      </Pane>
-      <Pane fx:id="dialogPaneMenu" prefWidth="300.0" prefHeight="200.0">
-         <children>
-            <Label fx:id="dialogMenuLabel1" prefWidth="300.0" prefHeight="30.0" text="Quit and go to main menu?" alignment="BASELINE_CENTER" />
-            <Label fx:id="dialogMenuLabel2" prefWidth="300.0" prefHeight="30.0" text="(Choose whether to save the game)" alignment="BASELINE_CENTER" />
+            <Button fx:id="buttonRiprendi" layoutX="80" layoutY="130" prefWidth="80.0" prefHeight="40.0" text="Resume"/>
+            <Button fx:id="buttonRicomincia" layoutX="235" layoutY="130" prefWidth="80.0" prefHeight="40.0" text="Restart"/>
+            <Button fx:id="buttonMenu" layoutX="390" layoutY="130" prefWidth="80.0" prefHeight="40.0" text="Menu"/>
 
-            <Button fx:id="dialogMenuYes" prefWidth="90.0" prefHeight="30.0" text="Save and quit"/>
-            <Button fx:id="dialogMenuNo" prefWidth="90.0" prefHeight="30.0" text="Quit"/>
-            <Button fx:id="dialogMenuBack" prefWidth="90.0" prefHeight="30.0" text="Back"/>
-         </children>
-      </Pane>
-      <Pane fx:id="pausePane">
-         <children>
-            <Button fx:id="buttonRiprendi" prefWidth="80.0" prefHeight="40.0" text="Resume"/>
-            <Button fx:id="buttonRicomincia" prefWidth="80.0" prefHeight="40.0" text="Restart"/>
-            <Button fx:id="buttonMenu" prefWidth="80.0" prefHeight="40.0" text="Menu"/>
+            <Pane fx:id="dialogPaneRestart" prefWidth="300.0" prefHeight="200.0" visible="false">
+               <children>
+                  <Label fx:id="dialogRestartLabel1" layoutX="0" layoutY="30" prefWidth="300.0" prefHeight="30.0" text="Restart?" alignment="BASELINE_CENTER" />
+                  <Label fx:id="dialogRestartLabel2" layoutX="0" layoutY="60" prefWidth="300.0" prefHeight="30.0" text="(The current game will be overwritten)" alignment="BASELINE_CENTER" />
+                  
+                  <Button fx:id="dialogRestartYes" layoutX="40" layoutY="120" prefWidth="90.0" prefHeight="30.0" text="Yes"/>
+                  <Button fx:id="dialogRestartNo" layoutX="170" layoutY="120" prefWidth="90.0" prefHeight="30.0" text="No"/>
+               </children>
+            </Pane>
+            <Pane fx:id="dialogPaneMenu" prefWidth="300.0" prefHeight="200.0" visible="false">
+               <children>
+                  <Label fx:id="dialogMenuLabel1" layoutX="0" layoutY="30" prefWidth="300.0" prefHeight="30.0" text="Quit and go to main menu?" alignment="BASELINE_CENTER" />
+                  <Label fx:id="dialogMenuLabel2" layoutX="0" layoutY="60" prefWidth="300.0" prefHeight="30.0" text="(Choose whether to save the game)" alignment="BASELINE_CENTER" />
+
+                  <Button fx:id="dialogMenuYes" layoutX="40" layoutY="110" prefWidth="90.0" prefHeight="30.0" text="Save and quit"/>
+                  <Button fx:id="dialogMenuNo" layoutX="170" layoutY="110" prefWidth="90.0" prefHeight="30.0" text="Quit"/>
+                  <Button fx:id="dialogMenuBack" layoutX="105" layoutY="150" prefWidth="90.0" prefHeight="30.0" text="Back"/>
+               </children>
+            </Pane>
          </children>
       </Pane>
       <Pane fx:id="upLeftSpawn" />

@@ -136,71 +136,29 @@ public class GameView extends ViewImpl {
      */
     public void createPausePane() {
         
-        this.pausePane.setVisible(false);
-        this.pausePane.setPrefSize(ViewSwitcher.getWindowWidth() / 1.5, ViewSwitcher.getWindowHeight() / 1.5);
-        this.pausePane.setStyle(
-                "-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
-        this.pausePane.relocate(((ViewSwitcher.getWindowWidth() -
-                this.pausePane.getPrefWidth()) / 2),
-                ((ViewSwitcher.getWindowHeight() - this.pausePane.getPrefHeight()) / 2));
+        this.pausePane.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
+        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
+        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
 
-        buttonRiprendi.relocate((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2,
-                (this.pausePane.getPrefHeight() - 40) / 2);
-        buttonRicomincia.relocate(((this.pausePane.getPrefWidth() - 80) / 2),
-                (this.pausePane.getPrefHeight() - 40) / 2);
-        buttonMenu.relocate(
-                this.pausePane.getPrefWidth() - 80 - ((((this.pausePane.getPrefWidth() - 80) / 2) - 80) / 2),
-                (this.pausePane.getPrefHeight() - 40) / 2);
+        this.pausePane.relocate(            ((this.mainPane.getPrefWidth() / 2)  - (this.pausePane.getPrefWidth() / 2)),
+                                            ((this.mainPane.getPrefHeight() / 2)  - (this.pausePane.getPrefHeight() / 2)));
 
-        dialogPaneRestart.relocate((this.pausePane.getPrefWidth() - dialogPaneRestart.getPrefWidth()) / 2,
-                (this.pausePane.getPrefHeight() - dialogPaneRestart.getPrefHeight()) / 2);
+        this.dialogPaneRestart.relocate(    ((this.pausePane.getPrefWidth() / 2)  - (this.dialogPaneRestart.getPrefWidth() / 2)),
+                                            ((this.pausePane.getPrefHeight() / 2)  - (this.dialogPaneRestart.getPrefHeight() / 2)));
 
-        dialogRestartYes.relocate(
-                (dialogPaneRestart.getPrefWidth() - dialogRestartYes.getPrefWidth() - dialogRestartNo.getPrefWidth())
-                        / 3,
-                (dialogPaneRestart.getPrefHeight() - dialogRestartYes.getPrefHeight()) / 1.4);
-        dialogRestartNo.relocate(
-                (dialogPaneRestart.getPrefWidth() - dialogRestartNo.getPrefWidth()
-                        - ((dialogPaneRestart.getPrefWidth() - dialogRestartYes.getPrefWidth()
-                                - dialogRestartNo.getPrefWidth() - 40)) / 2),
-                (dialogPaneRestart.getPrefHeight() - dialogRestartYes.getPrefHeight()) / 1.4);
+        this.dialogPaneMenu.relocate(       ((this.pausePane.getPrefWidth() / 2)  - (this.dialogPaneMenu.getPrefWidth() / 2)),
+                                            ((this.pausePane.getPrefHeight() / 2)  - (this.dialogPaneMenu.getPrefHeight() / 2)));
 
-        dialogRestartLabel1.relocate((dialogPaneRestart.getPrefWidth() - dialogRestartLabel1.getPrefWidth()) / 2,
-                (dialogPaneRestart.getPrefHeight() - dialogRestartNo.getPrefHeight()) / 5);
-
-        dialogRestartLabel2.relocate((dialogPaneRestart.getPrefWidth() - dialogRestartLabel2.getPrefWidth()) / 2, 60);
-
-        dialogPaneMenu.relocate((this.pausePane.getPrefWidth() - dialogPaneRestart.getPrefWidth()) / 2,
-                (this.pausePane.getPrefHeight() - dialogPaneRestart.getPrefHeight()) / 2);
-
-        dialogMenuYes.relocate(
-                (dialogPaneRestart.getPrefWidth() - dialogRestartYes.getPrefWidth() - dialogRestartNo.getPrefWidth())
-                        / 3,
-                (dialogPaneRestart.getPrefHeight() - dialogRestartYes.getPrefHeight()) / 1.5);
-
-        dialogMenuNo.relocate(
-                (dialogPaneRestart.getPrefWidth() - dialogRestartNo.getPrefWidth()
-                        - ((dialogPaneRestart.getPrefWidth() - dialogRestartYes.getPrefWidth()
-                                - dialogRestartNo.getPrefWidth() - 40)) / 2),
-                (dialogPaneRestart.getPrefHeight() - dialogRestartYes.getPrefHeight()) / 1.5);
-
-        dialogMenuBack
-                .relocate(
-                        (dialogPaneMenu.getPrefWidth() - dialogMenuBack.getPrefWidth()) / 2,
-                        (dialogPaneMenu.getPrefHeight() - dialogMenuYes.getPrefHeight()) / 1.1);
-
-        dialogMenuLabel1.relocate((dialogPaneMenu.getPrefWidth() - dialogMenuLabel1.getPrefWidth()) / 2,
-                (dialogPaneMenu.getPrefHeight() - dialogRestartNo.getPrefHeight()) / 5);
-
-        dialogMenuLabel2.relocate((dialogPaneMenu.getPrefWidth() - dialogMenuLabel2.getPrefWidth()) / 2, 60);
-
-        dialogPaneRestart.setVisible(false);
-        dialogPaneMenu.setVisible(false);
-        dialogPaneRestart.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
-        dialogPaneMenu.setStyle("-fx-background-color: " + ThemeController.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
-
-        this.setListenersPausePane(buttonMenu, buttonRiprendi, buttonRicomincia, dialogRestartYes, dialogRestartNo,
-                dialogPaneRestart, dialogMenuBack, dialogMenuYes, dialogMenuNo, dialogPaneMenu);
+        this.setListenersPausePane( buttonMenu, 
+                                    buttonRiprendi, 
+                                    buttonRicomincia, 
+                                    dialogRestartYes, 
+                                    dialogRestartNo, 
+                                    dialogMenuBack, 
+                                    dialogMenuYes, 
+                                    dialogMenuNo, 
+                                    dialogPaneMenu, 
+                                    dialogPaneRestart);
     }
 
     /**
@@ -214,9 +172,17 @@ public class GameView extends ViewImpl {
      * @param btnDialogN the dialog no button
      * @param dialogPane the dialog pane
      */
-    private void setListenersPausePane(Button btnMenu, Button btnResume, Button btnRestart, Button btnDialogY,
-            Button btnDialogN, Pane dialogPane, Button btnMenuBack, Button btnMenuY, Button btnMenuN,
-            Pane dialogPaneMenu) {
+    private void setListenersPausePane( Button btnMenu, 
+                                        Button btnResume, 
+                                        Button btnRestart, 
+                                        Button btnDialogY,
+                                        Button btnDialogN,
+                                        Button btnMenuBack, 
+                                        Button btnMenuY, 
+                                        Button btnMenuN,
+                                        Pane dialogPaneMenu,
+                                        Pane dialogPane) {
+        
         btnResume.setOnMouseClicked(e -> {
 
             GameSoundSystem.getInstance().resumeMedia();
@@ -245,6 +211,7 @@ public class GameView extends ViewImpl {
 
         btnRestart.setOnMouseClicked(e -> {
             dialogPane.setVisible(true);
+            dialogPane.toFront();
 
             btnMenu.setDisable(true);
             btnMenu.setOpacity(0.5);
@@ -275,6 +242,7 @@ public class GameView extends ViewImpl {
 
         btnMenu.setOnMouseClicked(e -> {
             dialogPaneMenu.setVisible(true);
+            dialogPaneMenu.toFront();
 
             btnMenu.setDisable(true);
             btnMenu.setOpacity(0.5);
