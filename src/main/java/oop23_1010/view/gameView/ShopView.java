@@ -28,7 +28,7 @@ public class ShopView extends View {
     private Button buttonBackToHome, buttonConfirm, buttonBack;
 
     @FXML
-    private Pane titlePane, purchasePane;
+    private Pane purchasePane;
 
     @FXML
     private Label titleLabel, questionLabel, labelAlert;
@@ -41,16 +41,24 @@ public class ShopView extends View {
     @Override
     public void init() {
 
-        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+        // PrefSize
 
-        this.loadThemes();
+        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, this.mainPane.getPrefWidth() / 3.2);
+
+        // Relocate
+
+        this.verticalBox.relocate(          (this.mainPane.getPrefWidth() / 2) - (this.verticalBox.getPrefWidth() / 2),
+                                            (this.mainPane.getPrefHeight() / 2) - (this.verticalBox.getPrefHeight() / 2));
+        this.titleLabel.relocate(           (this.mainPane.getPrefWidth() / 2) - (this.titleLabel.getPrefWidth() / 2), 20);
+        this.buttonBackToHome.relocate(     (this.mainPane.getPrefWidth() / 2) - (this.buttonBackToHome.getPrefWidth() / 2), 
+                                            this.mainPane.getPrefHeight() - this.buttonBackToHome.getPrefHeight() - 50);
+
+        // Style
 
         this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
-
-        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, this.mainPane.getPrefWidth() / 3.2);
-        this.verticalBox.relocate((this.mainPane.getPrefWidth() - this.verticalBox.getPrefWidth()) / 2,
-                (this.mainPane.getPrefHeight() - this.verticalBox.getPrefHeight()) / 2);
-
+        
+        this.loadThemes();
         this.createPurchasePane();
 
     }
@@ -62,9 +70,9 @@ public class ShopView extends View {
             JSONArray a = JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
 
             for (int i = 0; i < a.length(); i++) {
-                ShopThemeItem temp = new ShopThemeItem(a.getJSONObject(i).getString("name"),
-                        (Boolean) a.getJSONObject(i).get("purchased"),
-                        this.mainPane.getPrefWidth());
+                ShopThemeItem temp = new ShopThemeItem( a.getJSONObject(i).getString("name"),
+                                                        (Boolean) a.getJSONObject(i).get("purchased"),
+                                                        this.mainPane.getPrefWidth());
                 if (temp.getPurchased()) {
                     if (!temp.getSkin().name().equals(ThemeUtils.getSelectedSkin().name())) {
                         this.setListenerIfShopThemeItemPurchased(true, temp);
@@ -91,8 +99,8 @@ public class ShopView extends View {
     public void createPurchasePane() {
         this.purchasePane.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-background-color: "
                 + ThemeUtils.getSelectedSkin().getColor_background());
-        this.purchasePane.relocate((this.mainPane.getPrefWidth() - this.purchasePane.getPrefWidth()) / 2,
-                (this.mainPane.getPrefHeight() - this.purchasePane.getPrefHeight()) / 2);
+        this.purchasePane.relocate( (this.mainPane.getPrefWidth() - this.purchasePane.getPrefWidth()) / 2,
+                                    (this.mainPane.getPrefHeight() - this.purchasePane.getPrefHeight()) / 2);
     }
 
     public void setListenerIfShopThemeItemPurchased(Boolean isPurchased, ShopThemeItem shopThemeItem) {

@@ -6,32 +6,30 @@
 
 <AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oop23_1010.view.gameView.ShopView">
    <children>
-      <Pane fx:id="titlePane" prefWidth="200.0" prefHeight="200.0">
-         <children>
-            <Label fx:id="titleLabel" prefWidth="200.0" prefHeight="50.0" text="SHOP" alignment="CENTER">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Label fx:id="titleLabel" prefWidth="200.0" prefHeight="50.0" text="SHOP" alignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+
       <VBox fx:id="verticalBox" spacing="10" style="-fx-padding: 10"/>
-      <Button fx:id="buttonBackToHome" layoutX="773.0" layoutY="732.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" />
+
+      <Button fx:id="buttonBackToHome" prefWidth="100.0" prefHeight="20.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" />
       
-      <Pane fx:id="purchasePane" visible="false" prefHeight="250.0" prefWidth="400.0">
+      <Pane fx:id="purchasePane" visible="false" prefWidth="400.0" prefHeight="250.0">
          <children>
-            <Label fx:id="questionLabel" alignment="BASELINE_CENTER" prefHeight="80.0" prefWidth="400.0">
+            <Label fx:id="questionLabel" alignment="CENTER" prefWidth="400.0" prefHeight="80.0">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="labelAlert" style="-fx-text-fill: red" alignment="BASELINE_CENTER" text="YOU CANNOT AFFORD THIS ITEM!" visible="false" prefHeight="80.0" prefWidth="400.0" layoutX="0" layoutY="83">
+            <Label fx:id="labelAlert" layoutX="0" layoutY="83" prefWidth="400.0" prefHeight="80.0" style="-fx-text-fill: red" alignment="CENTER" text="YOU CANNOT AFFORD THIS ITEM!" visible="false">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="buttonConfirm" prefHeight="30.0" prefWidth="80.0" layoutX="80.0" layoutY="166" text="Buy" />
-            <Button fx:id="buttonBack" prefHeight="30.0" prefWidth="80.0" layoutX="240.0" layoutY="166" text="Back" /> 
+            <Button fx:id="buttonConfirm" prefWidth="80.0" prefHeight="30.0" layoutX="80.0" layoutY="166" text="Buy" />
+            <Button fx:id="buttonBack" prefWidth="80.0" prefHeight="30.0" layoutX="240.0" layoutY="166" text="Back" /> 
          </children>
       </Pane>
    </children>
