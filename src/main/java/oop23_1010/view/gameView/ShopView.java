@@ -44,7 +44,7 @@ public class ShopView extends View {
         // PrefSize
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
-        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, this.mainPane.getPrefWidth() / 3.2);
+        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, this.mainPane.getPrefHeight() - 150);
 
         // Relocate
 

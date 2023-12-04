@@ -11,7 +11,7 @@ public enum ThemeType {
             "darkorange",
             "lightcoral",
             "firebrick",
-            "Light Mode",
+            "Light",
             0,
             true),
 
@@ -24,8 +24,21 @@ public enum ThemeType {
             "darkorange",
             "lightcoral",
             "firebrick",
-            "Dark Mode",
+            "Dark",
             10,
+            false),
+
+    SOFT("blanchedalmond",
+            "darkgrey",
+            "darkslateblue",
+            "forestgreen",
+            "cadetblue",
+            "mediumpurple",
+            "sandybrown",
+            "lightsteelblue",
+            "palevioletred",
+            "Soft",
+            100,
             false);
 
     // Colors
@@ -40,7 +53,7 @@ public enum ThemeType {
     private String color_4x1_1x4;
     private String color_5x1_1x5;
 
-    private String description;
+    private String name;
 
     public Integer cost;
 
@@ -55,7 +68,7 @@ public enum ThemeType {
             String color_3x1_1x3,
             String color_4x1_1x4,
             String color_5x1_1x5,
-            String description,
+            String name,
             Integer cost,
             Boolean purchased) {
 
@@ -68,7 +81,7 @@ public enum ThemeType {
         this.color_3x1_1x3 = color_3x1_1x3;
         this.color_4x1_1x4 = color_4x1_1x4;
         this.color_5x1_1x5 = color_5x1_1x5;
-        this.description = description;
+        this.name = name;
         this.cost = cost;
         this.purchased = purchased;
     }
@@ -111,8 +124,8 @@ public enum ThemeType {
         return color_5x1_1x5;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getName() {
+        return this.name;
     }
 
     public Integer getCost() {

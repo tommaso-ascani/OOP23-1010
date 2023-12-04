@@ -16,20 +16,20 @@
 
       <Button fx:id="buttonBackToHome" prefWidth="100.0" prefHeight="20.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" />
       
-      <Pane fx:id="purchasePane" visible="false" prefWidth="400.0" prefHeight="250.0">
+      <Pane fx:id="purchasePane" visible="false" prefWidth="450.0" prefHeight="200.0">
          <children>
-            <Label fx:id="questionLabel" alignment="CENTER" prefWidth="400.0" prefHeight="80.0">
+            <Label fx:id="questionLabel" alignment="CENTER" layoutX="0" layoutY="10" prefWidth="450.0" prefHeight="30.0">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="labelAlert" layoutX="0" layoutY="83" prefWidth="400.0" prefHeight="80.0" style="-fx-text-fill: red" alignment="CENTER" text="YOU CANNOT AFFORD THIS ITEM!" visible="false">
+            <Label fx:id="labelAlert" layoutX="0" layoutY="70" prefWidth="450.0" prefHeight="80.0" style="-fx-text-fill: red" alignment="CENTER" text="YOU CANNOT AFFORD THIS ITEM!" visible="false">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="buttonConfirm" prefWidth="80.0" prefHeight="30.0" layoutX="80.0" layoutY="166" text="Buy" />
-            <Button fx:id="buttonBack" prefWidth="80.0" prefHeight="30.0" layoutX="240.0" layoutY="166" text="Back" /> 
+            <Button fx:id="buttonConfirm" layoutX="100.0" layoutY="150" prefWidth="80.0" prefHeight="30.0" text="Buy" />
+            <Button fx:id="buttonBack" layoutX="270.0" layoutY="150" prefWidth="80.0" prefHeight="30.0" text="Back" /> 
          </children>
       </Pane>
    </children>

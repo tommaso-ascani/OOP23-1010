@@ -45,7 +45,7 @@ public class ShopThemeItem extends VBox {
         this.costLabel.setAlignment(Pos.CENTER);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
 
-        this.descriptionLabel = new Label(this.skin.getDescription());
+        this.descriptionLabel = new Label(this.skin.getName());
         this.descriptionLabel.setPrefSize(View.WINDOW_WIDTH, 40);
         this.descriptionLabel.setFont(new Font(25));
         this.descriptionLabel.setAlignment(Pos.CENTER);
