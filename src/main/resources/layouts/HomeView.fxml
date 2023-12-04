@@ -27,7 +27,7 @@
          </image>
       </ImageView>
 
-      <ImageView fx:id="imageQuit" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit" >
+      <ImageView fx:id="imageQuit" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#quitGame" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit" >
          <image>
             <Image url="@../img/QuitButton.png" />
          </image>

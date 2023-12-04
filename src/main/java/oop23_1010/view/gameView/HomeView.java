@@ -159,12 +159,19 @@ public class HomeView extends View {
     }
 
     /*
-     * This method is used to switch view to the geme view and setting the grid size
+     * This method is used to switch view to the game view and setting the grid size
      * if is a new game
      */
     public void switchToPlayView() {
         HomeView.gridSize = (int) this.sliderGridWidth.getValue();
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
+    }
+
+    /*
+     * This method is used to quit the geme
+     */
+    public void quitGame() {
+        System.exit(0);
     }
 
     /*
