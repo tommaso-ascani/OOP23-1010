@@ -10,26 +10,31 @@ import oop23_1010.view.gameView.HomeView;
 
 public class DataUtils {
 
-    // ------------------------------------------------ SAVE ------------------------------------------------
+    // ------------------------------------------------ SAVE
+    // ------------------------------------------------
 
     // Save match data
 
-    public static void saveMatchData(Integer score, GameGrid<GridBlock> grid){
+    public static void saveMatchData(Integer score, GameGrid<GridBlock> grid) {
         try {
             JsonUtils.flushJson(JsonUtils.MATCH_FILE);
 
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, score), JsonUtils.MATCH_FILE);
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true), JsonUtils.MATCH_FILE);
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()), JsonUtils.MATCH_FILE);
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()),
+                    JsonUtils.MATCH_FILE);
 
             if (JsonUtils.ifDataExist(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE)) {
-                Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE);
+                Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
+                        JsonUtils.BEST_SCORE_FILE);
                 if (best_score < score) {
-                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score), JsonUtils.BEST_SCORE_FILE);
+                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score),
+                            JsonUtils.BEST_SCORE_FILE);
                 }
             } else {
-                if(score > 0) {
-                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score), JsonUtils.BEST_SCORE_FILE);
+                if (score > 0) {
+                    JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score),
+                            JsonUtils.BEST_SCORE_FILE);
                 }
             }
 
@@ -48,7 +53,8 @@ public class DataUtils {
                 blocksArray.put(block);
             }
 
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray), JsonUtils.MATCH_FILE);
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray),
+                    JsonUtils.MATCH_FILE);
         } catch (IOException exc) {
             System.err.println("Error on match data saving!");
         }
@@ -56,7 +62,7 @@ public class DataUtils {
 
     // Save best score
 
-    public static void saveBestScore(Integer score, String size){
+    public static void saveBestScore(Integer score, String size) {
         try {
             if (JsonUtils.ifDataExist(size, JsonUtils.BEST_SCORE_FILE)) {
                 Integer best_score = (Integer) JsonUtils.loadData(size, JsonUtils.BEST_SCORE_FILE);
@@ -64,7 +70,7 @@ public class DataUtils {
                     JsonUtils.addElement(new Pair<String, Object>(size, score), JsonUtils.BEST_SCORE_FILE);
                 }
             } else {
-                if(score > 0) {
+                if (score > 0) {
                     JsonUtils.addElement(new Pair<String, Object>(size, score), JsonUtils.BEST_SCORE_FILE);
                 }
             }
@@ -83,13 +89,14 @@ public class DataUtils {
         }
     }
 
-    // ------------------------------------------------ LOAD ------------------------------------------------
+    // ------------------------------------------------ LOAD
+    // ------------------------------------------------
 
     // Load coins
 
-    public static Integer loadCoins(){
+    public static Integer loadCoins() {
         try {
-            if (JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)){
+            if (JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)) {
                 return (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
             }
         } catch (IOException exc) {
@@ -100,9 +107,9 @@ public class DataUtils {
 
     // Load score
 
-    public static Integer loadScore(){
+    public static Integer loadScore() {
         try {
-            if (JsonUtils.ifDataExist(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE)){
+            if (JsonUtils.ifDataExist(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE)) {
                 return (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE);
             }
         } catch (IOException exc) {
@@ -113,8 +120,8 @@ public class DataUtils {
 
     // Load grid
 
-    public static GameGrid<GridBlock> loadGrid(){
-        
+    public static GameGrid<GridBlock> loadGrid() {
+
         GameGrid<GridBlock> grid;
 
         try {
@@ -122,17 +129,26 @@ public class DataUtils {
 
                 grid = new GameGrid<>((Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE));
 
-                if (grid.getGridSize() == 5) {
-                    grid.setGridCellSize(45);
-                }
-                if (grid.getGridSize() == 10) {
-                    grid.setGridCellSize(35);
-                }
-                if (grid.getGridSize() == 15) {
-                    grid.setGridCellSize(30);
-                }
-                if (grid.getGridSize() == 20) {
-                    grid.setGridCellSize(25);
+                switch (grid.getGridSize()) {
+                    case 5:
+                        grid.setGridCellSize(45);
+                        break;
+
+                    case 10:
+                        grid.setGridCellSize(35);
+                        break;
+
+                    case 15:
+                        grid.setGridCellSize(30);
+                        break;
+
+                    case 20:
+                        grid.setGridCellSize(25);
+                        break;
+
+                    default:
+                        System.err.println("Error on sizing cell grid");
+                        break;
                 }
 
                 JSONArray a = JsonUtils.loadDataArray(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
@@ -162,17 +178,26 @@ public class DataUtils {
 
         grid = new GameGrid<>(HomeView.getGridSize());
 
-        if (grid.getGridSize() == 5) {
-            grid.setGridCellSize(45);
-        }
-        if (grid.getGridSize() == 10) {
-            grid.setGridCellSize(35);
-        }
-        if (grid.getGridSize() == 15) {
-            grid.setGridCellSize(30);
-        }
-        if (grid.getGridSize() == 20) {
-            grid.setGridCellSize(25);
+        switch (grid.getGridSize()) {
+            case 5:
+                grid.setGridCellSize(45);
+                break;
+
+            case 10:
+                grid.setGridCellSize(35);
+                break;
+
+            case 15:
+                grid.setGridCellSize(30);
+                break;
+
+            case 20:
+                grid.setGridCellSize(25);
+                break;
+
+            default:
+                System.err.println("Error on sizing cell grid");
+                break;
         }
 
         return grid;

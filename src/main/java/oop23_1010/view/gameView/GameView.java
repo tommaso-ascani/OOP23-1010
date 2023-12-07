@@ -37,6 +37,9 @@ public class GameView extends View {
     private static final Integer GAP_GRID_PANE = 5;
     private static Double spawnPanelsWidth;
     private static final Integer GAP_BETWEEN_SPAWN_PANELS = 40;
+    private static final Integer TITLE_LABEL_LAYOUTY = 20;
+    private static final Integer LABEL_VALUE_LAYOUTY = 60;
+    private static final Integer SPACE_PAUSE_BUTTON = 15;
 
     @FXML
     private AnchorPane mainPane;
@@ -339,7 +342,7 @@ public class GameView extends View {
                         this.coins++;
                     }
 
-                    if(grid.controlIfLinesCompleted() == 0){
+                    if (grid.controlIfLinesCompleted() == 0) {
                         GameSoundSystem.getInstance().setAudioClip(SoundType.RIGHT_BLOCK_POSITION);
                         GameSoundSystem.getInstance().playAudioClip();
                     }
@@ -553,18 +556,23 @@ public class GameView extends View {
                         - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
 
-        this.titleCoin.relocate(this.mainPane.getPrefWidth() / 3 - (this.titleCoin.getWidth() / 2), 20);
+        this.titleCoin.relocate(this.mainPane.getPrefWidth() / 3 - (this.titleCoin.getWidth() / 2),
+                TITLE_LABEL_LAYOUTY);
 
-        this.labelCoin.relocate(this.mainPane.getPrefWidth() / 3 - (this.labelCoin.getWidth() / 2), 60);
+        this.labelCoin.relocate(this.mainPane.getPrefWidth() / 3 - (this.labelCoin.getWidth() / 2),
+                LABEL_VALUE_LAYOUTY);
 
-        this.titleScore.relocate(((this.mainPane.getPrefWidth() / 3) * 2) - (this.titleScore.getWidth() / 2), 20);
+        this.titleScore.relocate(((this.mainPane.getPrefWidth() / 3) * 2) - (this.titleScore.getWidth() / 2),
+                TITLE_LABEL_LAYOUTY);
 
-        this.labelScore.relocate(((this.mainPane.getPrefWidth() / 3) * 2) - (this.labelScore.getWidth() / 2), 60);
+        this.labelScore.relocate(((this.mainPane.getPrefWidth() / 3) * 2) - (this.labelScore.getWidth() / 2),
+                LABEL_VALUE_LAYOUTY);
 
         this.gridPane.relocate(this.mainPane.getPrefWidth() / 2 - (this.gridPane.getWidth() / 2),
                 this.mainPane.getPrefHeight() / 2 - (this.gridPane.getHeight() / 2));
 
-        this.imagePause.relocate(this.mainPane.getPrefWidth() - this.imagePause.getFitHeight() - 15, 15);
+        this.imagePause.relocate(this.mainPane.getPrefWidth() - this.imagePause.getFitHeight() - SPACE_PAUSE_BUTTON,
+                SPACE_PAUSE_BUTTON);
     }
 
     /**

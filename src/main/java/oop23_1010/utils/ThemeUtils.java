@@ -25,7 +25,7 @@ public final class ThemeUtils {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_SKIN, selectedSkin),
                     JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
-            System.err.println("Theme Utils - Error on selected skin saving!");
+            System.err.println("Theme Utils - Error on selected theme saving!");
         }
     }
 
@@ -38,7 +38,7 @@ public final class ThemeUtils {
                 }
             }
         } catch (IOException exc) {
-            System.err.println("Theme Utils - Error on selected skin loading!");
+            System.err.println("Theme Utils - Error on selected theme loading!");
         }
     }
 
@@ -65,7 +65,7 @@ public final class ThemeUtils {
         try {
             return JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
-            System.err.println("Theme Utils - Error on skin getting!");
+            System.err.println("Theme Utils - Error on theme getting!");
         }
         return null;
     }

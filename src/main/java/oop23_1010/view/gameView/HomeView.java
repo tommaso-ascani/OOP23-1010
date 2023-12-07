@@ -25,6 +25,8 @@ public class HomeView extends View {
 
     private static int gridSize;
 
+    private static final Integer PAUSE_AND_QUIT_BUTTON_SPACE = 15;
+
     @FXML
     private ImageView imageSettings,
             imageTitle,
@@ -97,15 +99,22 @@ public class HomeView extends View {
 
         // Object relocate
 
-        this.imageSettings.relocate(15, 15);
-        this.imageQuit.relocate(this.mainPane.getPrefWidth() - this.imageQuit.getFitWidth() - 15, 15);
-        this.imageTitle.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageTitle.getFitWidth() / 2), 220);
-        this.imagePlay.relocate((this.mainPane.getPrefWidth() / 2) + 75, 350);
-        this.imageResume.relocate((this.mainPane.getPrefWidth() / 2) - this.imageResume.getFitWidth() - 75, 350);
-        this.sliderLabel.relocate((this.mainPane.getPrefWidth() / 2) - this.sliderLabel.getPrefWidth(), 450);
-        this.sliderGridWidth.relocate((this.mainPane.getPrefWidth() / 2), 450);
-        this.imageShop.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageShop.getFitWidth() / 2), 750);
-        this.coinsLabel.relocate((this.mainPane.getPrefWidth() / 2) - (this.coinsLabel.getPrefWidth() / 2), 820);
+        this.imageSettings.relocate(PAUSE_AND_QUIT_BUTTON_SPACE, PAUSE_AND_QUIT_BUTTON_SPACE);
+        this.imageQuit.relocate(
+                this.mainPane.getPrefWidth() - this.imageQuit.getFitWidth() - PAUSE_AND_QUIT_BUTTON_SPACE,
+                PAUSE_AND_QUIT_BUTTON_SPACE);
+        this.imageTitle.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageTitle.getFitWidth() / 2),
+                this.mainPane.getPrefHeight() / 4);
+        this.imagePlay.relocate((this.mainPane.getPrefWidth() / 2) + 75, this.mainPane.getPrefHeight() / 2.5);
+        this.imageResume.relocate((this.mainPane.getPrefWidth() / 2) - this.imageResume.getFitWidth() - 75,
+                this.mainPane.getPrefHeight() / 2.5);
+        this.sliderLabel.relocate((this.mainPane.getPrefWidth() / 2) - this.sliderLabel.getPrefWidth(),
+                this.mainPane.getPrefHeight() / 2);
+        this.sliderGridWidth.relocate((this.mainPane.getPrefWidth() / 2), this.mainPane.getPrefHeight() / 2);
+        this.imageShop.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageShop.getFitWidth() / 2),
+                this.mainPane.getPrefHeight() - (this.mainPane.getPrefHeight() / 6));
+        this.coinsLabel.relocate((this.mainPane.getPrefWidth() / 2) - (this.coinsLabel.getPrefWidth() / 2),
+                this.mainPane.getPrefHeight() - (this.mainPane.getPrefHeight() / 12));
 
         // Style
 

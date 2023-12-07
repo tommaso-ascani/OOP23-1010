@@ -22,6 +22,9 @@ import oop23_1010.view.ViewSwitcher;
 
 public class ShopView extends View {
 
+    private static final Integer VBOX_SPACE_LATERAL = 125;
+    private static final Integer SPACE_HEIGHT_FIRST_ELEMENT = 20;
+
     @FXML
     private AnchorPane mainPane;
 
@@ -50,15 +53,18 @@ public class ShopView extends View {
         // PrefSize
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
-        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - 100, this.mainPane.getPrefHeight() - 150);
+        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - ShopView.VBOX_SPACE_LATERAL,
+                this.mainPane.getPrefHeight() - (ShopView.VBOX_SPACE_LATERAL * 2));
 
         // Relocate
 
         this.verticalBox.relocate((this.mainPane.getPrefWidth() / 2) - (this.verticalBox.getPrefWidth() / 2),
                 (this.mainPane.getPrefHeight() / 2) - (this.verticalBox.getPrefHeight() / 2));
-        this.titleLabel.relocate((this.mainPane.getPrefWidth() / 2) - (this.titleLabel.getPrefWidth() / 2), 20);
+        this.titleLabel.relocate((this.mainPane.getPrefWidth() / 2) - (this.titleLabel.getPrefWidth() / 2),
+                ShopView.SPACE_HEIGHT_FIRST_ELEMENT);
         this.buttonBackToHome.relocate((this.mainPane.getPrefWidth() / 2) - (this.buttonBackToHome.getPrefWidth() / 2),
-                this.mainPane.getPrefHeight() - this.buttonBackToHome.getPrefHeight() - 50);
+                this.mainPane.getPrefHeight() - this.buttonBackToHome.getPrefHeight()
+                        - (ShopView.SPACE_HEIGHT_FIRST_ELEMENT * 3));
 
         // Style
 
@@ -138,6 +144,7 @@ public class ShopView extends View {
                         shopThemeItem.getSkin().getCost() + " "
                         + GameLanguageSystem.getInstance().getLanguageType().getCoins() + "?");
                 this.questionLabel.setPrefSize(this.purchasePane.getPrefWidth(), 80);
+                // TODO MAGIC NUMBERS
 
                 this.buttonConfirm.setText(GameLanguageSystem.getInstance().getLanguageType().getBuy());
 

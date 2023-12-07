@@ -23,6 +23,10 @@ public class ShopThemeItem extends VBox {
 
     private Label costLabel;
 
+    private static final Integer HEIGHT = 200;
+
+    private static final Integer VIEW_PANE_HEIGHT = 120;
+
     public ShopThemeItem(String skin, Boolean purchased, Double windowWidth) {
 
         for (ThemeType skinType : ThemeType.values()) {
@@ -30,23 +34,23 @@ public class ShopThemeItem extends VBox {
                 this.skin = skinType;
             }
         }
-        this.setPrefHeight(200);
+        this.setPrefHeight(ShopThemeItem.HEIGHT);
         this.setFillWidth(true);
 
         this.viewPane = new HBox();
-        this.viewPane.setPrefSize(View.WINDOW_WIDTH - 200, 120);
+        this.viewPane.setPrefSize(View.WINDOW_WIDTH - ShopThemeItem.HEIGHT, ShopThemeItem.VIEW_PANE_HEIGHT);
         this.viewPane.setSpacing(5);
         this.viewPane.setAlignment(Pos.CENTER);
         this.viewPane.setStyle("-fx-padding: 15");
 
         this.costLabel = new Label();
         this.costLabel.setFont(new Font(20));
-        this.costLabel.setPrefSize(View.WINDOW_WIDTH, 40);
+        this.costLabel.setPrefSize(View.WINDOW_WIDTH, ShopThemeItem.VIEW_PANE_HEIGHT / 3);
         this.costLabel.setAlignment(Pos.CENTER);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
 
         this.descriptionLabel = new Label(this.skin.getName());
-        this.descriptionLabel.setPrefSize(View.WINDOW_WIDTH, 40);
+        this.descriptionLabel.setPrefSize(View.WINDOW_WIDTH, ShopThemeItem.VIEW_PANE_HEIGHT / 3);
         this.descriptionLabel.setFont(new Font(25));
         this.descriptionLabel.setAlignment(Pos.CENTER);
 
@@ -54,7 +58,8 @@ public class ShopThemeItem extends VBox {
             Pane pane = new Pane();
             switch (i) {
                 case 1:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_background() + "; -fx-border-color: black");
+                    pane.setStyle(
+                            "-fx-background-color: " + this.skin.getColor_background() + "; -fx-border-color: black");
                     break;
                 case 2:
                     pane.setStyle("-fx-background-color: " + this.skin.getColor_grid() + "; -fx-border-color: black");
@@ -69,16 +74,20 @@ public class ShopThemeItem extends VBox {
                     pane.setStyle("-fx-background-color: " + this.skin.getColor_3x3() + "; -fx-border-color: black");
                     break;
                 case 6:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_2x1_1x2() + "; -fx-border-color: black");
+                    pane.setStyle(
+                            "-fx-background-color: " + this.skin.getColor_2x1_1x2() + "; -fx-border-color: black");
                     break;
                 case 7:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_3x1_1x3() + "; -fx-border-color: black");
+                    pane.setStyle(
+                            "-fx-background-color: " + this.skin.getColor_3x1_1x3() + "; -fx-border-color: black");
                     break;
                 case 8:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_4x1_1x4() + "; -fx-border-color: black");
+                    pane.setStyle(
+                            "-fx-background-color: " + this.skin.getColor_4x1_1x4() + "; -fx-border-color: black");
                     break;
                 case 9:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_5x1_1x5() + "; -fx-border-color: black");
+                    pane.setStyle(
+                            "-fx-background-color: " + this.skin.getColor_5x1_1x5() + "; -fx-border-color: black");
                     break;
                 default:
                     break;
