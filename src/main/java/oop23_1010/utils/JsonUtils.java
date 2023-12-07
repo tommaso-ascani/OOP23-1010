@@ -33,6 +33,7 @@ public class JsonUtils {
     public static final String SELECTED_SKIN = "selectedSkin";
     public static final String SKINS = "skins";
     public static final String COINS = "coins";
+    public static final String LANGUAGE = "Language";
 
     public static Object loadData(String data, String fileName) throws IOException {
         // Read file
@@ -103,7 +104,7 @@ public class JsonUtils {
     }
 
     public static void flushJson(String fileName) throws IOException {
-        if(jsonExist(fileName)){
+        if (jsonExist(fileName)) {
             // Delete json file
             Files.delete(Paths.get(DATA_PATH + fileName + ".json"));
         }
