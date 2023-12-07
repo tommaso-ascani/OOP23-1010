@@ -1,7 +1,7 @@
 plugins {
     java
     application
-    // Plugin fro jar file
+    // Plugin for jar file
     id("com.github.johnrengelman.shadow") version "8.1.1"
     // Plugin for java automated quality assurance
     id("org.danilopianini.gradle-java-qa") version "1.28.0"
