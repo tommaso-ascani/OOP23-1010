@@ -2,6 +2,9 @@ package oop23_1010.utils;
 
 import java.util.ArrayList;
 
+import oop23_1010.sound.GameSoundSystem;
+import oop23_1010.sound.SoundType;
+
 public class GameGrid<E> extends ArrayList<GridBlock> {
 
     private Integer gridSize;
@@ -84,7 +87,6 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @return
      */
     public Integer controlIfLinesCompleted() {
-
         Integer lines = 0;
 
         for (ArrayList<GridBlock> line : getNumFullLines()) {
@@ -92,9 +94,11 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
                 block.setStyle("-fx-background-color: " + block.getBackground_color());
                 block.setFill(null);
             }
+            GameSoundSystem.getInstance().setAudioClip(SoundType.LINE_COMPLETED);
+            GameSoundSystem.getInstance().playAudioClip();
             lines++;
         }
-        
+
         return lines;
     }
 

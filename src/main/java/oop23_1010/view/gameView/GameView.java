@@ -339,13 +339,10 @@ public class GameView extends View {
                         this.coins++;
                     }
 
-                    grid.controlIfLinesCompleted();
-
-                    /*
-                     * TO-DO
-                     */
-                    GameSoundSystem.getInstance().setAudioClip(SoundType.RIGHT_BLOCK_POSITION);
-                    GameSoundSystem.getInstance().playAudioClip();
+                    if(grid.controlIfLinesCompleted() == 0){
+                        GameSoundSystem.getInstance().setAudioClip(SoundType.RIGHT_BLOCK_POSITION);
+                        GameSoundSystem.getInstance().playAudioClip();
+                    }
                     blocksAvalaible.remove(block);
 
                     this.labelScore.setText(String.valueOf(this.score));
