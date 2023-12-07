@@ -4,6 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import oop23_1010.types.ViewType;
+
 import java.io.IOException;
 
 public class ViewSwitcher {

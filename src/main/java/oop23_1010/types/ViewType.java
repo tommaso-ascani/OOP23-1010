@@ -1,4 +1,4 @@
-package oop23_1010.view;
+package oop23_1010.types;
 
 public enum ViewType {
 

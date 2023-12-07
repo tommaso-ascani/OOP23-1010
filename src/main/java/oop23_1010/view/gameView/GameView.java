@@ -13,8 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import oop23_1010.language.GameLanguageSystem;
 import oop23_1010.sound.GameSoundSystem;
-import oop23_1010.sound.SoundType;
 import oop23_1010.types.BlockType;
+import oop23_1010.types.SoundType;
+import oop23_1010.types.ViewType;
 import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.DataUtils;
 import oop23_1010.utils.GameGrid;
@@ -24,7 +25,6 @@ import oop23_1010.utils.ShapeBlock;
 import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
-import oop23_1010.view.ViewType;
 
 public class GameView extends View {
 

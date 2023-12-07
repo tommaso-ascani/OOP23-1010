@@ -3,8 +3,8 @@ package oop23_1010.controllers;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import oop23_1010.types.ViewType;
 import oop23_1010.view.ViewSwitcher;
-import oop23_1010.view.ViewType;
 
 public class Startup extends Application {
 

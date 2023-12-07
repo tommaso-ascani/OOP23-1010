@@ -4,6 +4,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Pair;
+import oop23_1010.types.SoundType;
 import oop23_1010.utils.JsonUtils;
 import java.io.IOException;
 

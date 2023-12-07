@@ -13,12 +13,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 import oop23_1010.language.GameLanguageSystem;
+import oop23_1010.types.ViewType;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ShopThemeItem;
 import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
-import oop23_1010.view.ViewType;
 
 public class ShopView extends View {
 

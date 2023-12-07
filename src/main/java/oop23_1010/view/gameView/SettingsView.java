@@ -16,11 +16,11 @@ import javafx.util.Pair;
 import oop23_1010.language.GameLanguageSystem;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.types.LanguageType;
+import oop23_1010.types.ViewType;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
-import oop23_1010.view.ViewType;
 
 public class SettingsView extends View {
 
@@ -93,6 +93,7 @@ public class SettingsView extends View {
             } catch (IOException exc) {
                 System.err.println("Settings View - Error on volume/language apply!");
             }
+            ViewSwitcher.getInstance().switchView(getStage(), ViewType.SETTINGS);
         });
 
         // Set the listener on the slider to change the visualized image
