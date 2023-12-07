@@ -12,14 +12,27 @@ public final class ThemeUtils {
 
     private static ThemeType selectedSkin;
 
+    /**
+     * Method to set a skin.
+     * 
+     * @param newSkin type of skin.
+     */
     public static void setSelectedSkin(ThemeType newSkin) {
         selectedSkin = newSkin;
     }
 
+    /**
+     * Method to get the selected skin.
+     * 
+     * @return The selected skin.
+     */
     public static ThemeType getSelectedSkin() {
         return selectedSkin;
     }
 
+    /**
+     * Method to save the selected skin.
+     */
     public static void saveSelectedSkin() {
         try {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_SKIN, selectedSkin),
@@ -29,6 +42,9 @@ public final class ThemeUtils {
         }
     }
 
+    /**
+     * Method to load the selected skin.
+     */
     public static void loadSelectedSkin() {
         try {
             String selecSkin = (String) JsonUtils.loadData(JsonUtils.SELECTED_SKIN, JsonUtils.GAME_DATA_FILE);
@@ -42,6 +58,9 @@ public final class ThemeUtils {
         }
     }
 
+    /**
+     * Method to save themes state.
+     */
     public static void saveThemes() {
 
         JSONArray temp = new JSONArray();
@@ -60,6 +79,11 @@ public final class ThemeUtils {
         }
     }
 
+    /**
+     * Method to get all avalaible skins.
+     * 
+     * @return Array of skins.
+     */
     public static JSONArray getSkins() {
 
         try {

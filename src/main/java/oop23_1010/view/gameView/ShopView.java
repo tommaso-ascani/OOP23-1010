@@ -75,6 +75,9 @@ public class ShopView extends View {
 
     }
 
+    /**
+     * Load shop themes in the shop view.
+     */
     public void loadThemes() {
         this.verticalBox.getChildren().clear();
 
@@ -86,7 +89,7 @@ public class ShopView extends View {
                         (Boolean) a.getJSONObject(i).get("purchased"),
                         this.mainPane.getPrefWidth());
                 if (temp.getPurchased()) {
-                    if (!temp.getSkin().name().equals(ThemeUtils.getSelectedSkin().name())) {
+                    if (!temp.getTheme().name().equals(ThemeUtils.getSelectedSkin().name())) {
                         this.setListenerIfShopThemeItemPurchased(true, temp);
                         temp.getCostLabel()
                                 .setText(GameLanguageSystem.getInstance().getLanguageType().getPurchasedNotSelected());
@@ -95,7 +98,7 @@ public class ShopView extends View {
                                 .setText(GameLanguageSystem.getInstance().getLanguageType().getPurchasedSelected());
                     }
                 } else {
-                    temp.getCostLabel().setText(temp.getSkin().getCost().toString());
+                    temp.getCostLabel().setText(temp.getTheme().getCost().toString());
                     this.setListenerIfShopThemeItemPurchased(false, temp);
                 }
                 this.verticalBox.getChildren().add(temp);
@@ -106,10 +109,16 @@ public class ShopView extends View {
         }
     }
 
+    /**
+     * Switch to home view.
+     */
     public void switchToHomeView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
     }
 
+    /**
+     * Create a pop up panel asking for purchasing.
+     */
     public void createPurchasePane() {
         this.purchasePane.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-background-color: "
                 + ThemeUtils.getSelectedSkin().getColor_background());
@@ -117,6 +126,14 @@ public class ShopView extends View {
                 (this.mainPane.getPrefHeight() - this.purchasePane.getPrefHeight()) / 2);
     }
 
+    /**
+     * Set listener on each shop item. 
+     * If purchased set the listener for asking to set it,
+     * if not purchased se the listener for asking to purchase it.
+     * 
+     * @param isPurchased if item is purchased.
+     * @param shopThemeItem on which set the listener.
+     */
     public void setListenerIfShopThemeItemPurchased(Boolean isPurchased, ShopThemeItem shopThemeItem) {
         if (isPurchased) {
             shopThemeItem.setOnMouseClicked(e -> {
@@ -131,7 +148,7 @@ public class ShopView extends View {
                 });
 
                 buttonConfirm.setOnMouseClicked(b -> {
-                    ThemeUtils.setSelectedSkin(shopThemeItem.getSkin());
+                    ThemeUtils.setSelectedSkin(shopThemeItem.getTheme());
                     ThemeUtils.saveSelectedSkin();
                     this.purchasePane.setVisible(false);
                     ViewSwitcher.getInstance().switchView(getStage(), ViewType.SHOP);
@@ -141,7 +158,7 @@ public class ShopView extends View {
         } else {
             shopThemeItem.setOnMouseClicked(e -> {
                 this.questionLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getShopQuestionBuyItem() +
-                        shopThemeItem.getSkin().getCost() + " "
+                        shopThemeItem.getTheme().getCost() + " "
                         + GameLanguageSystem.getInstance().getLanguageType().getCoins() + "?");
                 this.questionLabel.setPrefSize(this.purchasePane.getPrefWidth(), 80);
                 // TODO MAGIC NUMBERS
@@ -159,9 +176,9 @@ public class ShopView extends View {
                     Integer coinAmount;
                     try {
                         coinAmount = (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
-                        if (coinAmount >= shopThemeItem.getSkin().getCost()) {
-                            coinAmount = coinAmount - shopThemeItem.getSkin().getCost();
-                            shopThemeItem.getSkin().setPurchased(true);
+                        if (coinAmount >= shopThemeItem.getTheme().getCost()) {
+                            coinAmount = coinAmount - shopThemeItem.getTheme().getCost();
+                            shopThemeItem.getTheme().setPurchased(true);
                             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, coinAmount),
                                     JsonUtils.GAME_DATA_FILE);
                             ThemeUtils.saveThemes();

@@ -165,22 +165,21 @@ public class HomeView extends View {
     }
 
     /*
-     * This method is used to switch view to the setting view
+     * This method switch to setting view.
      */
     public void switchToSettingsView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.SETTINGS);
     }
 
     /*
-     * This method is used to switch view to the shop view
+     * This method switch to shop view.
      */
     public void switchToShopView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.SHOP);
     }
 
     /*
-     * This method is used to switch view to the game view and setting the grid size
-     * if is a new game
+     * This method switch to game view and set the grid size if is a new game.
      */
     public void switchToPlayView() {
         HomeView.gridSize = (int) this.sliderGridWidth.getValue();
@@ -188,15 +187,15 @@ public class HomeView extends View {
     }
 
     /*
-     * This method is used to quit the geme
+     * Method to quit the game.
      */
     public void quitGame() {
         System.exit(0);
     }
 
     /*
-     * This method is used to create and positionize all nodes in the dialog pane
-     * for resume a game
+     * Method to create and locate all nodes in the dialog pane
+     * for resume a game.
      */
     public void createDialogResume() {
 
@@ -213,13 +212,13 @@ public class HomeView extends View {
     }
 
     /**
-     * This method is used to set the listeners to all the buttons in the dialog
-     * resume pane
+     * Method to set the listeners on all buttons in the dialog
+     * resume pane.
      * 
-     * @param btnBack    the back button
-     * @param btnDelete  the delete button
-     * @param btnResume  the resume button
-     * @param paneResume the dialog resume pane
+     * @param btnBack the back button.
+     * @param btnDelete the delete button.
+     * @param btnResume the resume button.
+     * @param paneResume the dialog resume pane.
      */
     private void setListenersResumePane(Button btnBack, Button btnDelete, Button btnResume, Pane paneResume) {
         btnBack.setOnMouseClicked(e -> {
@@ -246,6 +245,11 @@ public class HomeView extends View {
         });
     }
 
+    /**
+     * Method to get the grid size.
+     * 
+     * @return grid size.
+     */
     public static int getGridSize() {
         return gridSize;
     }

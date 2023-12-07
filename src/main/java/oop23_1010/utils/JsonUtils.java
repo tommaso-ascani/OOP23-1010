@@ -35,6 +35,14 @@ public class JsonUtils {
     public static final String COINS = "coins";
     public static final String LANGUAGE = "Language";
 
+    /**
+     * Method to load a specific data from a json file.
+     * 
+     * @param data to load.
+     * @param fileName to search on.
+     * @return The data founded.
+     * @throws IOException
+     */
     public static Object loadData(String data, String fileName) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
@@ -44,6 +52,14 @@ public class JsonUtils {
         return json.get(data);
     }
 
+    /**
+     * Method to load an array of data.
+     * 
+     * @param data Array name.
+     * @param fileName to search on.
+     * @return The array founded.
+     * @throws IOException
+     */
     public static JSONArray loadDataArray(String data, String fileName) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
@@ -53,6 +69,13 @@ public class JsonUtils {
         return (JSONArray) json.get(data);
     }
 
+    /**
+     * Method to lo all data from a json file.
+     * 
+     * @param fileName to search on.
+     * @return All data.
+     * @throws IOException
+     */
     public static JSONObject loadDatas(String fileName) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
@@ -62,14 +85,28 @@ public class JsonUtils {
         return json;
     }
 
-    public static void saveMatchData(JSONObject json, String fileName) throws IOException {
+    /**
+     * Method to save match data.
+     * 
+     * @param json to save.
+     * @param fileName to save on.
+     * @throws IOException
+     */
+    private static void saveMatchData(JSONObject json, String fileName) throws IOException {
         // Create directory if doesn't exist
         Files.createDirectories(Paths.get(DATA_PATH));
         // Write json on file
         Files.writeString(Paths.get(DATA_PATH + fileName + ".json"), json.toString(1));
     }
 
-    public static void addElement(Pair<String, Object> temp, String fileName) throws IOException {
+    /**
+     * Method to add or overwrite an element on a json file.
+     * 
+     * @param element to add.
+     * @param fileName to save on.
+     * @throws IOException
+     */
+    public static void addElement(Pair<String, Object> element, String fileName) throws IOException {
         // Create local variable
         JSONObject json;
 
@@ -83,11 +120,18 @@ public class JsonUtils {
         }
 
         // Add new element
-        json.put(temp.getKey(), temp.getValue());
+        json.put(element.getKey(), element.getValue());
         // Save data
         saveMatchData(json, fileName);
     }
 
+    /**
+     * Method to remove an element from a json file.
+     * 
+     * @param data to remove.
+     * @param fileName to remove on.
+     * @throws IOException
+     */
     public static void removeElement(String data, String fileName) throws IOException {
         // Get json element if exists
         JSONObject json = loadDatas(fileName);
@@ -103,6 +147,12 @@ public class JsonUtils {
         }
     }
 
+    /**
+     * Method to flush all json file content.
+     * 
+     * @param fileName to flush.
+     * @throws IOException
+     */
     public static void flushJson(String fileName) throws IOException {
         if (jsonExist(fileName)) {
             // Delete json file
@@ -110,6 +160,13 @@ public class JsonUtils {
         }
     }
 
+    /**
+     * Method to check if a json exist.
+     * 
+     * @param fileName to check.
+     * @return If exist.
+     * @throws IOException
+     */
     public static Boolean jsonExist(String fileName) throws IOException {
         // Check if exist some data to load
         if (Files.exists(Paths.get(DATA_PATH + fileName + ".json"))
@@ -120,6 +177,14 @@ public class JsonUtils {
         }
     }
 
+    /**
+     * Method to check if a specific data on a json file exist.
+     * 
+     * @param data to check.
+     * @param fileName to check on.
+     * @return If exist.
+     * @throws IOException
+     */
     public static Boolean ifDataExist(String data, String fileName) throws IOException {
         if (jsonExist(fileName)) {
             // Read file

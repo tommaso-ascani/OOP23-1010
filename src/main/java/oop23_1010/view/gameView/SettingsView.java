@@ -107,13 +107,16 @@ public class SettingsView extends View {
         });
     }
 
+    /**
+     * Switch to home view.
+     */
     public void switchToHomeView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
     }
 
     /*
      * This method is used to switch automatically from 0 to 100 volume by clicking
-     * on the ImageView
+     * on the ImageView.
      */
     public void changeVolumeImage() {
         Double temp = this.sliderVolume.getValue();

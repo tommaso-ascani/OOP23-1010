@@ -14,10 +14,10 @@ public class ViewSwitcher {
     private View currentView;
 
     /**
-     * This method is used to get the current instance of the ViewSwitcher.
+     * Method to get the current ViewSwitcher instance.
      * It use the singleton pattern.
      * 
-     * @return the current instance of the ViewSwitcher
+     * @return the current ViewSwitcher instance.
      */
     public static ViewSwitcher getInstance() {
         if (instance == null) {
@@ -27,12 +27,12 @@ public class ViewSwitcher {
     }
 
     /**
-     * This method is used to load the style of the view.
+     * Method to load the view style.
      * It loads the fxml file and set the new scene.
      * 
-     * @param stage    the stage to set the new scene
-     * @param viewType the type of the view to switch to
-     * @return the view loaded
+     * @param stage the stage to set the new scene.
+     * @param viewType the view type to switch to.
+     * @return the loaded view.
      */
     private View loadStyle(final Stage stage, final ViewType viewType) {
         FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(viewType.getPath()));
@@ -61,10 +61,10 @@ public class ViewSwitcher {
     }
 
     /**
-     * This method is used to switch between views.
+     * Method to switch between views.
      * 
-     * @param stage the stage to set the new scene
-     * @param type  the type of the view to switch to
+     * @param stage the stage to set the new scene.
+     * @param type the view type to switch to.
      */
     public void switchView(final Stage stage, final ViewType type) {
         currentView = this.loadStyle(stage, type);

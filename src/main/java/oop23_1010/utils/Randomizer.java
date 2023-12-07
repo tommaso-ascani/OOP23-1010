@@ -4,6 +4,11 @@ import oop23_1010.types.BlockType;
 
 public class Randomizer {
 
+    /**
+     * Method randomize a new item to be generated.
+     * 
+     * @return Block type.
+     */
     public static BlockType getRandomPuzzle(){
         Integer index = 0;
 

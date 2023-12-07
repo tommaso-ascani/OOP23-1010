@@ -134,8 +134,8 @@ public class GameView extends View {
     }
 
     /*
-     * Instantiate the pause pane and all the sub-object, like button and pane, and
-     * set size, style, position and text of all
+     * Method to create the pause pane and all the sub-object, like button and pane.
+     * Set size, style, position and text.
      */
     public void createPausePane() {
 
@@ -169,15 +169,14 @@ public class GameView extends View {
     }
 
     /**
-     * This method is used to set the listeners to the various button in the pause
-     * menu
+     * Method to set the listeners to the various buttons in the pause menu.
      * 
-     * @param btnMenu    the menu button
-     * @param btnResume  the resunme button
-     * @param btnRestart the restart button
-     * @param btnDialogY the dialog yes button
-     * @param btnDialogN the dialog no button
-     * @param dialogPane the dialog pane
+     * @param btnMenu menu button
+     * @param btnResume resume button
+     * @param btnRestart restart button
+     * @param btnDialogY dialog yes button
+     * @param btnDialogN dialog no button
+     * @param dialogPane dialog pane
      */
     private void setListenersPausePane(Button btnMenu,
             Button btnResume,
@@ -293,10 +292,9 @@ public class GameView extends View {
     }
 
     /**
-     * This method is used to set the listener when the mouse is released on the
-     * blocks
+     * Method to set the listener when the mouse is released on blocks.
      * 
-     * @param block
+     * @param block block on which set the listener.
      */
     public void setBlockReadyToBePlaced(ShapeBlock block) {
         block.setOnMouseReleased(e -> {
@@ -367,7 +365,7 @@ public class GameView extends View {
                 createNewPuzzles();
             }
 
-            if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid, grid.getGridSize())) {
+            if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid)) {
                 GameSoundSystem.getInstance().setAudioClip(SoundType.GAME_OVER);
                 GameSoundSystem.getInstance().playAudioClip();
                 DataUtils.saveCoins(this.coins);
@@ -379,8 +377,7 @@ public class GameView extends View {
     }
 
     /*
-     * This method is used to create and instantiate the game over pane and all its
-     * sub-nodes
+     * Method to create the game-over pane.
      */
     private void createGameOverPane() {
 
@@ -433,17 +430,15 @@ public class GameView extends View {
     }
 
     /**
-     * This method is used to get the node where the up-left corner of the block is,
-     * if
-     * its corner is in the GridPane, else return null
+     * Method to get the node on which the placeable item is released.
      * 
-     * @param block the block to check the up-left corner
-     * @return the node where the corner is
+     * @param block to check.
+     * @return node triggered.
      */
     public Node getNodeIfTriggered(ShapeBlock block) {
         for (GridBlock node : this.grid) {
             if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()) &&
-                    (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
+                (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
                 return node;
             }
         }
@@ -451,9 +446,9 @@ public class GameView extends View {
     }
 
     /**
-     * This methos is used to check if the grid is empty, then copy it in the
+     * Method to check if the grid is empty, then copy it in the
      * griPane to resume a game, or not, then create the panes and add them empty in
-     * the gridPane
+     * the gridPane.
      */
     public void createGridCells() {
         // Check if grid is full
@@ -473,7 +468,6 @@ public class GameView extends View {
 
                 this.gridPane.add(gridBlock, gridBlock.getGridX(), gridBlock.getGridY());
             }
-            // then the grid is empty so create panes
         } else {
             for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
                 for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
@@ -495,8 +489,7 @@ public class GameView extends View {
     }
 
     /**
-     * This method is used to set the various final preference sizes of all the main
-     * panels in the view
+     * Method to set the final preferences size of panels.
      */
     public void setPanelsPrefSizes() {
         this.upLeftSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
@@ -506,7 +499,7 @@ public class GameView extends View {
     }
 
     /**
-     * This method is used to set the style of the main panels
+     * Method to set the style of main panel.
      */
     public void setPanelsStyle() {
 
@@ -525,8 +518,8 @@ public class GameView extends View {
     }
 
     /**
-     * This methos is used to set the position on the view of the various panels,
-     * labels and buttons
+     * Method to set position on the view of various panels,
+     * labels and buttons.
      */
     public void setObjectLocation() {
         Group gruppo = new Group(this.mainPane);
@@ -576,9 +569,9 @@ public class GameView extends View {
     }
 
     /**
-     * This method is used to get the size of the GridPane
+     * Method to get the GridPane size.
      * 
-     * @return the width of the GridPane
+     * @return GridPane width.
      */
     public int getGridWidth() {
         int gridWidth = (grid.getGridSize() * grid.getGridCellSize()) + (grid.getGridSize() - 1) * GAP_GRID_PANE;
@@ -586,8 +579,7 @@ public class GameView extends View {
     }
 
     /*
-     * This methos is the listeners attached to the pause button and display the
-     * pause menu and disable the game view
+     * This method switch to pause pane.
      */
     public void switchToPauseView() {
 
@@ -616,7 +608,7 @@ public class GameView extends View {
     }
 
     /*
-     * This method is used to create random instances of blocks to play with
+     * Method to create new random placeable item.
      */
     public void createNewPuzzles() {
 

@@ -11,7 +11,7 @@ import oop23_1010.view.View;
 
 public class ShopThemeItem extends VBox {
 
-    private ThemeType skin;
+    private ThemeType theme;
 
     private Boolean purchased;
 
@@ -25,11 +25,18 @@ public class ShopThemeItem extends VBox {
 
     private static final Integer VIEW_PANE_HEIGHT = 120;
 
-    public ShopThemeItem(String skin, Boolean purchased, Double windowWidth) {
+    /**
+     * Initialize new ShopThemeItem object.
+     * 
+     * @param theme
+     * @param purchased 
+     * @param windowWidth
+     */
+    public ShopThemeItem(String theme, Boolean purchased, Double windowWidth) {
 
-        for (ThemeType skinType : ThemeType.values()) {
-            if (skinType.name().equals(skin)) {
-                this.skin = skinType;
+        for (ThemeType themeType : ThemeType.values()) {
+            if (themeType.name().equals(theme)) {
+                this.theme = themeType;
             }
         }
         this.setPrefHeight(ShopThemeItem.HEIGHT);
@@ -47,7 +54,7 @@ public class ShopThemeItem extends VBox {
         this.costLabel.setAlignment(Pos.CENTER);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
 
-        this.descriptionLabel = new Label(this.skin.getName());
+        this.descriptionLabel = new Label(this.theme.getName());
         this.descriptionLabel.setPrefSize(View.WINDOW_WIDTH, ShopThemeItem.VIEW_PANE_HEIGHT / 3);
         this.descriptionLabel.setFont(new Font(25));
         this.descriptionLabel.setAlignment(Pos.CENTER);
@@ -56,36 +63,31 @@ public class ShopThemeItem extends VBox {
             Pane pane = new Pane();
             switch (i) {
                 case 1:
-                    pane.setStyle(
-                            "-fx-background-color: " + this.skin.getColor_background() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_background() + "; -fx-border-color: black");
                     break;
                 case 2:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_grid() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_grid() + "; -fx-border-color: black");
                     break;
                 case 3:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_1x1() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_1x1() + "; -fx-border-color: black");
                     break;
                 case 4:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_2x2() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_2x2() + "; -fx-border-color: black");
                     break;
                 case 5:
-                    pane.setStyle("-fx-background-color: " + this.skin.getColor_3x3() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_3x3() + "; -fx-border-color: black");
                     break;
                 case 6:
-                    pane.setStyle(
-                            "-fx-background-color: " + this.skin.getColor_2x1_1x2() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_2x1_1x2() + "; -fx-border-color: black");
                     break;
                 case 7:
-                    pane.setStyle(
-                            "-fx-background-color: " + this.skin.getColor_3x1_1x3() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_3x1_1x3() + "; -fx-border-color: black");
                     break;
                 case 8:
-                    pane.setStyle(
-                            "-fx-background-color: " + this.skin.getColor_4x1_1x4() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_4x1_1x4() + "; -fx-border-color: black");
                     break;
                 case 9:
-                    pane.setStyle(
-                            "-fx-background-color: " + this.skin.getColor_5x1_1x5() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor_5x1_1x5() + "; -fx-border-color: black");
                     break;
                 default:
                     break;
@@ -101,27 +103,57 @@ public class ShopThemeItem extends VBox {
 
     }
 
+    /**
+     * Method to get if the item is purchased.
+     * 
+     * @return If purchased.
+     */
     public Boolean getPurchased() {
         return purchased;
     }
 
+    /**
+     * Method to set if the is purchased.
+     * 
+     * @param purchased
+     */
     public void setPurchased(Boolean purchased) {
         this.purchased = purchased;
     }
 
+    /**
+     * Method to get the cost amount.
+     * 
+     * @return Cost amount.
+     */
     public Label getCostLabel() {
         return costLabel;
     }
 
+    /**
+     * Method to set the cost amount.
+     * 
+     * @param costLabel
+     */
     public void setCostLabel(Label costLabel) {
         this.costLabel = costLabel;
     }
 
-    public ThemeType getSkin() {
-        return skin;
+    /**
+     * Method to get the theme.
+     * 
+     * @return Theme.
+     */
+    public ThemeType getTheme() {
+        return theme;
     }
 
-    public void setSkin(ThemeType skin) {
-        this.skin = skin;
+    /**
+     * Method to set the theme.
+     * 
+     * @param theme
+     */
+    public void setTheme(ThemeType theme) {
+        this.theme = theme;
     }
 }

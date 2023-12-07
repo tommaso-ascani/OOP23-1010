@@ -30,7 +30,7 @@ public abstract class View {
     }
 
     /**
-     * {@inheritDoc}}
+     * Method executed every view load before the stage show.
      */
     public abstract void init();
 }

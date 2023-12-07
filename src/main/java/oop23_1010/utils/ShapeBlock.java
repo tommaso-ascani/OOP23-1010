@@ -30,8 +30,14 @@ public class ShapeBlock extends Path {
 
     private Bounds bounds;
 
-    // Constuctor
-
+    /**
+     * Initialize new ShapeBlock object.
+     * 
+     * @param type
+     * @param pane
+     * @param grid
+     * @param blocksAvalaible
+     */
     public ShapeBlock(BlockType type, Pane pane, GameGrid<GridBlock> grid,
             BlocksAvailable<ShapeBlock> blocksAvalaible) {
 
@@ -105,44 +111,76 @@ public class ShapeBlock extends Path {
         pane.getChildren().addAll(this);
     }
 
-    // Getter
-
+    /**
+     * Method to get block type.
+     * 
+     * @return Block type.
+     */
     public BlockType getType() {
         return this.type;
     }
 
+    /**
+     * Method to get the pane on which is located.
+     * 
+     * @return Pane.
+     */
     public Pane getPane() {
         return this.pane;
     }
 
+    /**
+     * Method to get the width.
+     * 
+     * @return Width.
+     */
     public Integer getWidth() {
         return this.width;
     }
 
+    /**
+     * Method to get the height.
+     * 
+     * @return Height.
+     */
     public Integer getHeight() {
         return this.height;
     }
 
+    /**
+     * Method to get the ShapeBlock color.
+     * 
+     * @return ShapeBlock color.
+     */
     public String getColor() {
         return this.color;
     }
 
+    /**
+     * Method to get center X coordinate.
+     * 
+     * @return Center X coordinate.
+     */
     public Integer getTriggerX() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
         Double tempX = this.bounds.getMinX();
         return tempX.intValue() + (grid.getGridCellSize() / 2);
     }
 
+    /**
+     * Method to get center Y coordinate.
+     * 
+     * @return Center Y coordinate.
+     */
     public Integer getTriggerY() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
         Double tempY = this.bounds.getMinY();
         return tempY.intValue() + (grid.getGridCellSize() / 2);
     }
 
-    // -------- Methods --------
-
-    // Generate new shape that can be placed on the grid
-
+    /**
+     * Method to generate the new block.
+     */
     public void generateBlock() {
         Integer x;
         Integer y;
@@ -180,8 +218,9 @@ public class ShapeBlock extends Path {
         Movement.makeDraggable(this);
     }
 
-    // Reposition the item to start when it's not possibile to place it
-
+    /**
+     * Relocate ShapeBlock to start position.
+     */
     public void returnToStart() {
         this.setTranslateX(0);
         this.setTranslateY(0);
