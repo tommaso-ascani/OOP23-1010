@@ -13,8 +13,6 @@ public class ShopThemeItem extends VBox {
 
     private ThemeType skin;
 
-    private Integer pos;
-
     private Boolean purchased;
 
     private Label descriptionLabel;
@@ -109,14 +107,6 @@ public class ShopThemeItem extends VBox {
 
     public void setPurchased(Boolean purchased) {
         this.purchased = purchased;
-    }
-
-    public Integer getPos() {
-        return pos;
-    }
-
-    public void setPos(Integer pos) {
-        this.pos = pos;
     }
 
     public Label getCostLabel() {

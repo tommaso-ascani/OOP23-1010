@@ -1,5 +1,8 @@
 package oop23_1010.types;
 
+/**
+ * Class used to hold all the sound's path
+ */
 public enum SoundType {
 
     GAME_OVER("GameOverSound"),
@@ -20,6 +23,11 @@ public enum SoundType {
         this.file = string;
     }
 
+    /**
+     * Method to return the sound's path
+     * 
+     * @return String of the path
+     */
     public String getPath() {
         return PREFIX + this.file + EXTENSION;
     }

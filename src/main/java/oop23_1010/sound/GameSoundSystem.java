@@ -8,9 +8,6 @@ import oop23_1010.types.SoundType;
 import oop23_1010.utils.JsonUtils;
 import java.io.IOException;
 
-/**
- * Class that represents the game sound system.
- */
 public final class GameSoundSystem {
 
     private static GameSoundSystem instance;
@@ -22,6 +19,9 @@ public final class GameSoundSystem {
     private static final Double MAX_VOLUME = 1.0;
 
     /**
+     * Method to get the instace of the class. It used the Singleton
+     * pattern.
+     * 
      * @return GameSoundSystem
      */
     public static GameSoundSystem getInstance() {
@@ -43,46 +43,83 @@ public final class GameSoundSystem {
         return instance;
     }
 
+    /**
+     * Method to set the resource to play, put it in an AudioClip and set the
+     * volume.
+     * 
+     * @param sound
+     */
     public void setAudioClip(SoundType sound) {
         GameSoundSystem.aClip = new AudioClip(getClass().getResource(sound.getPath()).toExternalForm());
         GameSoundSystem.aClip.setVolume(GameSoundSystem.volume.doubleValue());
 
     }
 
+    /**
+     * Method to play the audio clip.
+     */
     public void playAudioClip() {
         GameSoundSystem.aClip.play();
     }
 
+    /**
+     * Method to stop the audio clip.
+     */
     public void stopAudioClip() {
         GameSoundSystem.aClip.stop();
     }
 
+    /**
+     * Method to to set the resource to play, put it in a Media, then in a
+     * MediaPlayer and set the
+     * volume.
+     * 
+     * @param music
+     */
     public void setMediaPlayer(SoundType music) {
         GameSoundSystem.media = new Media(getClass().getResource(music.getPath()).toExternalForm());
         GameSoundSystem.player = new MediaPlayer(media);
         GameSoundSystem.player.setVolume(GameSoundSystem.volume.doubleValue());
     }
 
+    /**
+     * Method to play the MediaPlayer.
+     */
     public void playMediaPlayer() {
         GameSoundSystem.player.play();
     }
 
+    /**
+     * Method to stop the MediaPlayer.
+     */
     public void pauseMedia() {
         GameSoundSystem.player.pause();
     }
 
+    /**
+     * Method to resume the MediaPlayer.
+     */
     public void resumeMedia() {
         GameSoundSystem.player.play();
     }
 
+    /**
+     * Method to get the volume.
+     */
     public Double getVolume() {
         return GameSoundSystem.volume.doubleValue() * 100.0;
     }
 
+    /**
+     * Method to get the volume's max value.
+     */
     public Double getMaxVolume() {
         return GameSoundSystem.MAX_VOLUME;
     }
 
+    /**
+     * Method to get the volume's min value.
+     */
     public Double getMinVolume() {
         return GameSoundSystem.MIN_VOLUME;
     }

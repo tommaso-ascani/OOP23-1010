@@ -1,5 +1,9 @@
 package oop23_1010.types;
 
+/**
+ * Class used to hold all the label's texts that will have to change based on
+ * the selection of the language
+ */
 public enum LanguageType {
 
     ITA("Grandezza della griglia: ",

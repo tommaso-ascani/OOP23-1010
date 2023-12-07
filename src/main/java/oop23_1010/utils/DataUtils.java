@@ -1,20 +1,19 @@
 package oop23_1010.utils;
 
 import java.io.IOException;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import javafx.util.Pair;
 import oop23_1010.view.gameView.HomeView;
 
 public class DataUtils {
 
-    // ------------------------------------------------ SAVE
-    // ------------------------------------------------
-
-    // Save match data
-
+    /**
+     * Method to save all match data (score, grid) in the json file.
+     * 
+     * @param score to be saved.
+     * @param grid  to be saved.
+     */
     public static void saveMatchData(Integer score, GameGrid<GridBlock> grid) {
         try {
             JsonUtils.flushJson(JsonUtils.MATCH_FILE);
@@ -60,8 +59,12 @@ public class DataUtils {
         }
     }
 
-    // Save best score
-
+    /**
+     * Method to save the best score in this specified grid size, in the json file.
+     * 
+     * @param score to be saved.
+     * @param size  to be saved.
+     */
     public static void saveBestScore(Integer score, String size) {
         try {
             if (JsonUtils.ifDataExist(size, JsonUtils.BEST_SCORE_FILE)) {
@@ -79,8 +82,11 @@ public class DataUtils {
         }
     }
 
-    // Save coins
-
+    /**
+     * Method to save in the json file the amount of coins gained.
+     * 
+     * @param coins to be saved.
+     */
     public static void saveCoins(Integer coins) {
         try {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, coins), JsonUtils.GAME_DATA_FILE);
@@ -89,11 +95,11 @@ public class DataUtils {
         }
     }
 
-    // ------------------------------------------------ LOAD
-    // ------------------------------------------------
-
-    // Load coins
-
+    /**
+     * Method to load the amount of coins from the json file.
+     * 
+     * @return Integer.
+     */
     public static Integer loadCoins() {
         try {
             if (JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)) {
@@ -105,8 +111,11 @@ public class DataUtils {
         return 0;
     }
 
-    // Load score
-
+    /**
+     * Method to load the score for the pending match from the json file.
+     * 
+     * @return Integer
+     */
     public static Integer loadScore() {
         try {
             if (JsonUtils.ifDataExist(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE)) {
@@ -118,8 +127,11 @@ public class DataUtils {
         return 0;
     }
 
-    // Load grid
-
+    /**
+     * Method to load the grid for thew pending match from the json file.
+     * 
+     * @return GameGrid
+     */
     public static GameGrid<GridBlock> loadGrid() {
 
         GameGrid<GridBlock> grid;

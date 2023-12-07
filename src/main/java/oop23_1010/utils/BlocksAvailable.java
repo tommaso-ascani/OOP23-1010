@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
 
+    /**
+     * Method to check whether at least one remaining placeable block can be placed
+     * in the grid. If at least one can be placed so it return true. False
+     * otherwise.
+     * 
+     * @param grid
+     * @return Boolean
+     */
     public Boolean checkIfBlocksCanBePlaced(GameGrid<GridBlock> grid, Integer gridsize) {
 
         Integer targetX;

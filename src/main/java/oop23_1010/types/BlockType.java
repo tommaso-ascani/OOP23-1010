@@ -1,9 +1,12 @@
 package oop23_1010.types;
 
+/**
+ * class used to hold all types of blocks
+ */
 public enum BlockType {
 
     // Width x Height
-    
+
     BLOCK_1x1,
     BLOCK_1x2,
     BLOCK_1x3,

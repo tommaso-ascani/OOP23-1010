@@ -1,5 +1,8 @@
 package oop23_1010.types;
 
+/**
+ * Class used to hold all the themes
+ */
 public enum ThemeType {
 
     LIGHT("white",
@@ -59,18 +62,18 @@ public enum ThemeType {
 
     private Boolean purchased;
 
-    ThemeType(  String color_background,
-                String color_grid,
-                String color_1x1,
-                String color_2x2,
-                String color_3x3,
-                String color_2x1_1x2,
-                String color_3x1_1x3,
-                String color_4x1_1x4,
-                String color_5x1_1x5,
-                String name,
-                Integer cost,
-                Boolean purchased) {
+    ThemeType(String color_background,
+            String color_grid,
+            String color_1x1,
+            String color_2x2,
+            String color_3x3,
+            String color_2x1_1x2,
+            String color_3x1_1x3,
+            String color_4x1_1x4,
+            String color_5x1_1x5,
+            String name,
+            Integer cost,
+            Boolean purchased) {
 
         this.color_background = color_background;
         this.color_grid = color_grid;

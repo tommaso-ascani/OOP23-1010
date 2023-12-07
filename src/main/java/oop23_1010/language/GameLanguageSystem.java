@@ -16,6 +16,12 @@ public final class GameLanguageSystem {
 
     private static final String DEFAULT_LANGUAGE = "ENG";
 
+    /**
+     * This method is used to get the instace of the class. It used the Singleton
+     * pattern.
+     * 
+     * @return GameLanguageSystem.
+     */
     public static GameLanguageSystem getInstance() {
         if (GameLanguageSystem.instance == null) {
             GameLanguageSystem.instance = new GameLanguageSystem();
@@ -40,10 +46,20 @@ public final class GameLanguageSystem {
         return instance;
     }
 
+    /**
+     * This method is used to get the selected language of the game.
+     * 
+     * @return String of the selected language.
+     */
     public String getLanguage() {
         return GameLanguageSystem.language;
     }
 
+    /**
+     * This method is used to get the language type with all the string to set.
+     * 
+     * @return LanguageType of the selected language.
+     */
     public LanguageType getLanguageType() {
         return GameLanguageSystem.languageType;
     }

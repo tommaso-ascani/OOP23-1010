@@ -14,8 +14,13 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         this.gridSize = gridSize;
     }
 
-    // Get up block
-
+    /**
+     * Method to get the block above the gave one.
+     * 
+     * @param block
+     * @param offset
+     * @return GridBlock.
+     */
     public GridBlock getUpBlock(GridBlock block, Integer offset) {
         for (GridBlock x : this) {
             if (block.getGridX() == x.getGridX() && block.getGridY() - offset == x.getGridY()) {
@@ -25,8 +30,13 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         return null;
     }
 
-    // Get down block
-
+    /**
+     * Method to get the block under the gave one.
+     * 
+     * @param block
+     * @param offset
+     * @return GridBlock.
+     */
     public GridBlock getDownBlock(GridBlock block, Integer offset) {
         for (GridBlock x : this) {
             if (block.getGridX() == x.getGridX() && block.getGridY() + offset == x.getGridY()) {
@@ -36,8 +46,13 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         return null;
     }
 
-    // Get right block
-
+    /**
+     * Method to get the block on the right of the gave one.
+     * 
+     * @param block
+     * @param offset
+     * @return GridBlock.
+     */
     public GridBlock getRightBlock(GridBlock block, Integer offset) {
         for (GridBlock x : this) {
             if (block.getGridX() + offset == x.getGridX() && block.getGridY() == x.getGridY()) {
@@ -47,8 +62,13 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         return null;
     }
 
-    // Get left block
-
+    /**
+     * Method to get the block on the left of the gave one.
+     * 
+     * @param block
+     * @param offset
+     * @return GridBlock.
+     */
     public GridBlock getLeftBlock(GridBlock block, Integer offset) {
         for (GridBlock x : this) {
             if (block.getGridX() - offset == x.getGridX() && block.getGridY() == x.getGridY()) {
@@ -58,6 +78,13 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         return null;
     }
 
+    /**
+     * Method to get the specified block at (x,y).
+     * 
+     * @param x
+     * @param y
+     * @return GridBlock.
+     */
     public GridBlock getElement(Integer x, Integer y) {
         for (GridBlock elem : this) {
             if (elem.getGridX() == x && elem.getGridY() == y) {
@@ -67,24 +94,39 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         return null;
     }
 
+    /**
+     * Method to get the size of the grid.
+     * 
+     * @return Integer.
+     */
     public Integer getGridSize() {
         return this.gridSize;
     }
 
+    /**
+     * Method to set the cell's size.
+     * 
+     * @param cellSize
+     */
     public void setGridCellSize(Integer cellSize) {
         this.gridCellSize = cellSize;
     }
 
+    /**
+     * Method to get the cell's size.
+     * 
+     * @return Integer.
+     */
     public Integer getGridCellSize() {
         return this.gridCellSize;
     }
 
     /**
      * Control if there are some lines (rows or columns) that are full,
-     * and then remove them
+     * and then remove them.
      * 
      * @param score
-     * @return
+     * @return Integer.
      */
     public Integer controlIfLinesCompleted() {
         Integer lines = 0;
@@ -105,7 +147,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Return the group of lines (rows or columns) that are full
      * 
-     * @return
+     * @return ArrayList
      */
     public ArrayList<ArrayList<GridBlock>> getNumFullLines() {
 
@@ -130,7 +172,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * Return a boolean that indicates if the line (row or column) is full
      * 
      * @param list
-     * @return
+     * @return Boolean
      */
     public Boolean isFull(ArrayList<GridBlock> list) {
 
@@ -146,7 +188,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * Return the row at the passed index
      * 
      * @param index
-     * @return
+     * @return ArrayList
      */
     public ArrayList<GridBlock> getRow(Integer index) {
 
@@ -164,7 +206,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * Return the column at the passed index
      * 
      * @param index
-     * @return
+     * @return ArrayList
      */
     public ArrayList<GridBlock> getColumn(Integer index) {
 
