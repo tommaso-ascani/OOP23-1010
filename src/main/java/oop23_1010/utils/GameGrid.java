@@ -3,7 +3,7 @@ package oop23_1010.utils;
 import java.util.ArrayList;
 
 import oop23_1010.sound.GameSoundSystem;
-import oop23_1010.sound.SoundType;
+import oop23_1010.types.SoundType;
 
 public class GameGrid<E> extends ArrayList<GridBlock> {
 
@@ -112,13 +112,13 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
         ArrayList<ArrayList<GridBlock>> lines = new ArrayList<>();
 
         for (int y = 0; y < this.getGridSize(); y++) {
-            if(this.isFull(getRow(y))) {
+            if (this.isFull(getRow(y))) {
                 lines.add(getRow(y));
             }
         }
 
         for (int x = 0; x < this.getGridSize(); x++) {
-            if(this.isFull(getColumn(x))) {
+            if (this.isFull(getColumn(x))) {
                 lines.add(getColumn(x));
             }
         }
@@ -135,7 +135,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     public Boolean isFull(ArrayList<GridBlock> list) {
 
         for (GridBlock block : list) {
-            if(block.getFill() == null){
+            if (block.getFill() == null) {
                 return false;
             }
         }
