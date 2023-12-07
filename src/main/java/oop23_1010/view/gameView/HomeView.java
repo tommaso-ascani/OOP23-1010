@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
+import oop23_1010.language.GameLanguageSystem;
 import oop23_1010.types.ThemeType;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ThemeUtils;
@@ -25,20 +26,20 @@ public class HomeView extends View {
     private static int gridSize;
 
     @FXML
-    private ImageView   imageSettings,
-                        imageTitle,
-                        imageShop,
-                        imageQuit,
-                        imageResume,
-                        imagePlay;
+    private ImageView imageSettings,
+            imageTitle,
+            imageShop,
+            imageQuit,
+            imageResume,
+            imagePlay;
 
     @FXML
-    private Button  dialogResumeYes,
-                    dialogResumeDelete,
-                    dialogResumeBack;
+    private Button dialogResumeYes,
+            dialogResumeDelete,
+            dialogResumeBack;
 
     @FXML
-    private Pane    dialogPaneResume;
+    private Pane dialogPaneResume;
 
     @FXML
     private Slider sliderGridWidth;
@@ -47,13 +48,22 @@ public class HomeView extends View {
     private AnchorPane mainPane;
 
     @FXML
-    private Label   bestScore,
-                    sliderLabel,
-                    coinsLabel,
-                    dialogResumeLabel1;
+    private Label bestScore,
+            sliderLabel,
+            coinsLabel,
+            dialogResumeLabel1;
 
     @Override
     public void init() {
+
+        this.sliderLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getGridSize());
+
+        this.coinsLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getCoins());
+
+        this.dialogResumeYes.setText(GameLanguageSystem.getInstance().getLanguageType().getResumeTheGame());
+        this.dialogResumeDelete.setText(GameLanguageSystem.getInstance().getLanguageType().getDeleteTheGame());
+        this.dialogResumeBack.setText(GameLanguageSystem.getInstance().getLanguageType().getBack());
+        this.dialogResumeLabel1.setText(GameLanguageSystem.getInstance().getLanguageType().getSavedGameLabel());
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
 
@@ -72,13 +82,14 @@ public class HomeView extends View {
         } catch (IOException exc) {
             System.err.println("Home View - Error on skin loading!");
         }
+
         // Coins
 
         try {
             if (!JsonUtils.ifDataExist(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)) {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, 0), JsonUtils.GAME_DATA_FILE);
             }
-            this.coinsLabel.setText("Coins: "
+            this.coinsLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getCoins() + ": "
                     + String.valueOf((Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)));
         } catch (IOException exc) {
             System.err.println("Home View - Error on coins loading!");

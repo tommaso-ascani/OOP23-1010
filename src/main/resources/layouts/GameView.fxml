@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oop23_1010.view.gameView.GameView">
    <children>
-      <Label fx:id="titleCoin" prefWidth="100.0" prefHeight="20.0" text="Coin" alignment="CENTER">
+      <Label fx:id="titleCoin" prefWidth="150.0" prefHeight="20.0" alignment="CENTER">
          <font>
             <Font size="30.0" />
          </font>
@@ -18,7 +18,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="titleScore" prefWidth="100.0" prefHeight="20.0" text="Score" alignment="CENTER">
+      <Label fx:id="titleScore" prefWidth="150.0" prefHeight="20.0" alignment="CENTER">
          <font>
             <Font size="30.0" />
          </font>
@@ -39,27 +39,27 @@
 
       <Pane fx:id="pausePane" prefWidth="550.0" prefHeight="300.0" visible="false">
          <children>
-            <Button fx:id="buttonRiprendi" layoutX="80" layoutY="130" prefWidth="80.0" prefHeight="40.0" text="Resume"/>
-            <Button fx:id="buttonRicomincia" layoutX="235" layoutY="130" prefWidth="80.0" prefHeight="40.0" text="Restart"/>
-            <Button fx:id="buttonMenu" layoutX="390" layoutY="130" prefWidth="80.0" prefHeight="40.0" text="Menu"/>
+            <Button fx:id="buttonRiprendi" layoutX="80" layoutY="130" prefWidth="80.0" prefHeight="40.0" />
+            <Button fx:id="buttonRicomincia" layoutX="235" layoutY="130" prefWidth="80.0" prefHeight="40.0" />
+            <Button fx:id="buttonMenu" layoutX="390" layoutY="130" prefWidth="80.0" prefHeight="40.0" />
 
             <Pane fx:id="dialogPaneRestart" prefWidth="300.0" prefHeight="200.0" visible="false">
                <children>
-                  <Label fx:id="dialogRestartLabel1" layoutX="0" layoutY="30" prefWidth="300.0" prefHeight="30.0" text="Restart?" alignment="BASELINE_CENTER" />
-                  <Label fx:id="dialogRestartLabel2" layoutX="0" layoutY="60" prefWidth="300.0" prefHeight="30.0" text="(The current game will be overwritten)" alignment="BASELINE_CENTER" />
+                  <Label fx:id="dialogRestartLabel1" layoutX="0" layoutY="30" prefWidth="300.0" prefHeight="30.0" alignment="BASELINE_CENTER" />
+                  <Label fx:id="dialogRestartLabel2" layoutX="0" layoutY="60" prefWidth="300.0" prefHeight="30.0" alignment="BASELINE_CENTER" />
                   
-                  <Button fx:id="dialogRestartYes" layoutX="40" layoutY="120" prefWidth="90.0" prefHeight="30.0" text="Yes"/>
-                  <Button fx:id="dialogRestartNo" layoutX="170" layoutY="120" prefWidth="90.0" prefHeight="30.0" text="No"/>
+                  <Button fx:id="dialogRestartYes" layoutX="40" layoutY="120" prefWidth="90.0" prefHeight="30.0" />
+                  <Button fx:id="dialogRestartNo" layoutX="170" layoutY="120" prefWidth="90.0" prefHeight="30.0" />
                </children>
             </Pane>
             <Pane fx:id="dialogPaneMenu" prefWidth="300.0" prefHeight="200.0" visible="false">
                <children>
-                  <Label fx:id="dialogMenuLabel1" layoutX="0" layoutY="30" prefWidth="300.0" prefHeight="30.0" text="Quit and go to main menu?" alignment="BASELINE_CENTER" />
-                  <Label fx:id="dialogMenuLabel2" layoutX="0" layoutY="60" prefWidth="300.0" prefHeight="30.0" text="(Choose whether to save the game)" alignment="BASELINE_CENTER" />
+                  <Label fx:id="dialogMenuLabel1" layoutX="0" layoutY="30" prefWidth="300.0" prefHeight="30.0" alignment="BASELINE_CENTER" />
+                  <Label fx:id="dialogMenuLabel2" layoutX="0" layoutY="60" prefWidth="300.0" prefHeight="30.0" alignment="BASELINE_CENTER" />
 
-                  <Button fx:id="dialogMenuYes" layoutX="40" layoutY="110" prefWidth="90.0" prefHeight="30.0" text="Save and quit"/>
-                  <Button fx:id="dialogMenuNo" layoutX="170" layoutY="110" prefWidth="90.0" prefHeight="30.0" text="Quit"/>
-                  <Button fx:id="dialogMenuBack" layoutX="105" layoutY="150" prefWidth="90.0" prefHeight="30.0" text="Back"/>
+                  <Button fx:id="dialogMenuYes" layoutX="40" layoutY="110" prefWidth="90.0" prefHeight="30.0" />
+                  <Button fx:id="dialogMenuNo" layoutX="170" layoutY="110" prefWidth="90.0" prefHeight="30.0" />
+                  <Button fx:id="dialogMenuBack" layoutX="105" layoutY="150" prefWidth="90.0" prefHeight="30.0" />
                </children>
             </Pane>
          </children>
@@ -71,13 +71,12 @@
             <Font size="50.0" />
          </font>
       </Label>
-            <Label fx:id="labelGameOverScore" layoutX="100" layoutY="100" prefWidth="300.0" prefHeight="50.0" text="" alignment="BASELINE_CENTER">
+            <Label fx:id="labelGameOverScore" layoutX="100" layoutY="100" prefWidth="300.0" prefHeight="50.0" alignment="BASELINE_CENTER">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-
-            <Button fx:id="buttonBackToMenu" layoutX="200" layoutY="200" prefWidth="100.0" prefHeight="40.0" text="Back to menu"/>
+            <Button fx:id="buttonBackToMenu" layoutX="200" layoutY="200" prefWidth="100.0" prefHeight="40.0" />
          </children>
       </Pane>
       <Pane fx:id="upLeftSpawn" />

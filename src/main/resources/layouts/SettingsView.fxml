@@ -14,22 +14,22 @@
    <children>
       <Pane fx:id="settingsPane" prefHeight="450.0" prefWidth="800.0">
          <children>
-            <Label alignment="CENTER" layoutX="300.0" layoutY="20.0" prefHeight="40" prefWidth="200.0" text="SETTINGS">
+            <Label fx:id="settingsLabel" alignment="CENTER" layoutX="275.0" layoutY="26.0" prefHeight="40" prefWidth="250.0">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="350.0" layoutY="100.0" prefHeight="40" prefWidth="100.0" text="Master Volume" />
+            <Label fx:id="volumeLabel" alignment="CENTER" layoutX="350.0" layoutY="100.0" prefHeight="40" prefWidth="100.0" />
             <Slider fx:id="sliderVolume" blockIncrement="2.0" layoutX="250.0" layoutY="140.0" majorTickUnit="10" max="100" min="0" minorTickCount="1" prefHeight="40.0" prefWidth="300.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                <cursor>
                   <Cursor fx:constant="H_RESIZE" />
                </cursor>
             </Slider>
             <ImageView fx:id="imageVolume" fitHeight="50.0" fitWidth="50.0" layoutX="375.0" layoutY="188.0" onMouseClicked="#changeVolumeImage" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="buttonApply" layoutX="150.0" layoutY="349.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Apply" />
-            <Button fx:id="buttonBack" layoutX="543.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" prefHeight="40.0" prefWidth="100.0" text="Back" />
+            <Button fx:id="buttonApply" layoutX="150.0" layoutY="349.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" />
+            <Button fx:id="buttonBack" layoutX="543.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" prefHeight="40.0" prefWidth="100.0" />
             <ChoiceBox fx:id="languageChoiceBox" layoutX="325.0" layoutY="292.0" prefWidth="150.0" />
-            <Label alignment="CENTER" layoutX="350.0" layoutY="252.0" prefHeight="40.0" prefWidth="100.0" text="Language" />
+            <Label fx:id="languageLabel" alignment="CENTER" layoutX="350.0" layoutY="252.0" prefHeight="40.0" prefWidth="100.0" />
          
          </children>
       </Pane>

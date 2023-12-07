@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import oop23_1010.language.GameLanguageSystem;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.sound.SoundType;
 import oop23_1010.types.BlockType;
@@ -41,40 +42,40 @@ public class GameView extends View {
     private AnchorPane mainPane;
 
     @FXML
-    private Pane    upLeftSpawn,
-                    upRightSpawn,
-                    downLeftSpawn,
-                    downRightSpawn,
-                    dialogPaneRestart,
-                    dialogPaneMenu,
-                    pausePane,
-                    gameOverPane;
+    private Pane upLeftSpawn,
+            upRightSpawn,
+            downLeftSpawn,
+            downRightSpawn,
+            dialogPaneRestart,
+            dialogPaneMenu,
+            pausePane,
+            gameOverPane;
 
     @FXML
     private GridPane gridPane;
 
     @FXML
-    private Label   labelCoin, 
-                    labelScore, 
-                    titleCoin, 
-                    titleScore,
-                    dialogRestartLabel1,
-                    dialogRestartLabel2,
-                    dialogMenuLabel1,
-                    dialogMenuLabel2,
-                    labelGameOver,
-                    labelGameOverScore;
+    private Label labelCoin,
+            labelScore,
+            titleCoin,
+            titleScore,
+            dialogRestartLabel1,
+            dialogRestartLabel2,
+            dialogMenuLabel1,
+            dialogMenuLabel2,
+            labelGameOver,
+            labelGameOverScore;
 
     @FXML
-    private Button  buttonRiprendi,
-                    buttonRicomincia,
-                    buttonMenu,
-                    dialogMenuYes,
-                    dialogMenuNo,
-                    dialogMenuBack,
-                    dialogRestartYes,
-                    dialogRestartNo,
-                    buttonBackToMenu;
+    private Button buttonRiprendi,
+            buttonRicomincia,
+            buttonMenu,
+            dialogMenuYes,
+            dialogMenuNo,
+            dialogMenuBack,
+            dialogRestartYes,
+            dialogRestartNo,
+            buttonBackToMenu;
 
     @FXML
     private ImageView imagePause;
@@ -83,6 +84,25 @@ public class GameView extends View {
     public void init() {
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+
+        this.titleCoin.setText(GameLanguageSystem.getInstance().getLanguageType().getCoins());
+        this.titleScore.setText(GameLanguageSystem.getInstance().getLanguageType().getScore());
+
+        this.buttonMenu.setText(GameLanguageSystem.getInstance().getLanguageType().getMenu());
+        this.buttonRicomincia.setText(GameLanguageSystem.getInstance().getLanguageType().getRestart());
+        this.buttonRiprendi.setText(GameLanguageSystem.getInstance().getLanguageType().getResume());
+
+        this.dialogRestartNo.setText(GameLanguageSystem.getInstance().getLanguageType().getNo());
+        this.dialogRestartYes.setText(GameLanguageSystem.getInstance().getLanguageType().getYes());
+
+        this.dialogMenuBack.setText(GameLanguageSystem.getInstance().getLanguageType().getBack());
+        this.dialogMenuNo.setText(GameLanguageSystem.getInstance().getLanguageType().getQuit());
+        this.dialogMenuYes.setText(GameLanguageSystem.getInstance().getLanguageType().getSaveAndQuit());
+
+        this.dialogRestartLabel1.setText(GameLanguageSystem.getInstance().getLanguageType().getDialogRestartLabel1());
+        this.dialogRestartLabel2.setText(GameLanguageSystem.getInstance().getLanguageType().getDialogRestartLabel2());
+        this.dialogMenuLabel1.setText(GameLanguageSystem.getInstance().getLanguageType().getDialogMenuLabel1());
+        this.dialogMenuLabel2.setText(GameLanguageSystem.getInstance().getLanguageType().getDialogMenuLabel2());
 
         // -------------------------------- Sound Setup --------------------------------
 
@@ -115,30 +135,34 @@ public class GameView extends View {
      * set size, style, position and text of all
      */
     public void createPausePane() {
-        
-        this.pausePane.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
 
-        this.pausePane.relocate(            ((this.mainPane.getPrefWidth() / 2)  - (this.pausePane.getPrefWidth() / 2)),
-                                            ((this.mainPane.getPrefHeight() / 2)  - (this.pausePane.getPrefHeight() / 2)));
+        this.pausePane.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+                + "; -fx-border-width: 2; -fx-border-color: black");
+        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+                + "; -fx-border-width: 2; -fx-border-color: black");
+        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+                + "; -fx-border-width: 2; -fx-border-color: black");
 
-        this.dialogPaneRestart.relocate(    ((this.pausePane.getPrefWidth() / 2)  - (this.dialogPaneRestart.getPrefWidth() / 2)),
-                                            ((this.pausePane.getPrefHeight() / 2)  - (this.dialogPaneRestart.getPrefHeight() / 2)));
+        this.pausePane.relocate(((this.mainPane.getPrefWidth() / 2) - (this.pausePane.getPrefWidth() / 2)),
+                ((this.mainPane.getPrefHeight() / 2) - (this.pausePane.getPrefHeight() / 2)));
 
-        this.dialogPaneMenu.relocate(       ((this.pausePane.getPrefWidth() / 2)  - (this.dialogPaneMenu.getPrefWidth() / 2)),
-                                            ((this.pausePane.getPrefHeight() / 2)  - (this.dialogPaneMenu.getPrefHeight() / 2)));
+        this.dialogPaneRestart.relocate(
+                ((this.pausePane.getPrefWidth() / 2) - (this.dialogPaneRestart.getPrefWidth() / 2)),
+                ((this.pausePane.getPrefHeight() / 2) - (this.dialogPaneRestart.getPrefHeight() / 2)));
 
-        this.setListenersPausePane( buttonMenu, 
-                                    buttonRiprendi, 
-                                    buttonRicomincia, 
-                                    dialogRestartYes, 
-                                    dialogRestartNo, 
-                                    dialogMenuBack, 
-                                    dialogMenuYes, 
-                                    dialogMenuNo, 
-                                    dialogPaneMenu, 
-                                    dialogPaneRestart);
+        this.dialogPaneMenu.relocate(((this.pausePane.getPrefWidth() / 2) - (this.dialogPaneMenu.getPrefWidth() / 2)),
+                ((this.pausePane.getPrefHeight() / 2) - (this.dialogPaneMenu.getPrefHeight() / 2)));
+
+        this.setListenersPausePane(buttonMenu,
+                buttonRiprendi,
+                buttonRicomincia,
+                dialogRestartYes,
+                dialogRestartNo,
+                dialogMenuBack,
+                dialogMenuYes,
+                dialogMenuNo,
+                dialogPaneMenu,
+                dialogPaneRestart);
     }
 
     /**
@@ -152,17 +176,17 @@ public class GameView extends View {
      * @param btnDialogN the dialog no button
      * @param dialogPane the dialog pane
      */
-    private void setListenersPausePane( Button btnMenu, 
-                                        Button btnResume, 
-                                        Button btnRestart, 
-                                        Button btnDialogY,
-                                        Button btnDialogN,
-                                        Button btnMenuBack, 
-                                        Button btnMenuY, 
-                                        Button btnMenuN,
-                                        Pane dialogPaneMenu,
-                                        Pane dialogPane) {
-        
+    private void setListenersPausePane(Button btnMenu,
+            Button btnResume,
+            Button btnRestart,
+            Button btnDialogY,
+            Button btnDialogN,
+            Button btnMenuBack,
+            Button btnMenuY,
+            Button btnMenuN,
+            Pane dialogPaneMenu,
+            Pane dialogPane) {
+
         btnResume.setOnMouseClicked(e -> {
 
             GameSoundSystem.getInstance().resumeMedia();
@@ -186,6 +210,12 @@ public class GameView extends View {
 
             this.labelScore.setDisable(false);
             this.labelScore.setOpacity(1);
+
+            this.titleCoin.setDisable(false);
+            this.titleCoin.setOpacity(1);
+
+            this.titleScore.setDisable(false);
+            this.titleScore.setOpacity(1);
 
         });
 
@@ -332,7 +362,7 @@ public class GameView extends View {
                 GameSoundSystem.getInstance().playAudioClip();
                 block.returnToStart();
             }
-            
+
             if (blocksAvalaible.size() == 0) {
                 createNewPuzzles();
             }
@@ -355,12 +385,16 @@ public class GameView extends View {
     private void createGameOverPane() {
 
         this.gameOverPane.setStyle(
-                "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background() + "; -fx-border-width: 2; -fx-border-color: black");
+                "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+                        + "; -fx-border-width: 2; -fx-border-color: black");
 
-        this.gameOverPane.relocate( (this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
-                                    (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
+        this.gameOverPane.relocate((this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
+                (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
 
-        labelGameOverScore.setText("Score: " + String.valueOf(this.score));
+        this.labelGameOverScore.setText(
+                GameLanguageSystem.getInstance().getLanguageType().getScore() + ": " + String.valueOf(this.score));
+
+        this.buttonBackToMenu.setText(GameLanguageSystem.getInstance().getLanguageType().getBackToMenu());
 
         this.setListenersGameOverPane(buttonBackToMenu);
 
@@ -384,6 +418,12 @@ public class GameView extends View {
 
         this.labelScore.setDisable(true);
         this.labelScore.setOpacity(0.5);
+
+        this.titleCoin.setDisable(true);
+        this.titleCoin.setOpacity(0.5);
+
+        this.titleScore.setDisable(true);
+        this.titleScore.setOpacity(0.5);
     }
 
     private void setListenersGameOverPane(Button buttonBackToMenu) {
@@ -437,7 +477,8 @@ public class GameView extends View {
         } else {
             for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
                 for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
-                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null, ThemeUtils.getSelectedSkin().getColor_grid());
+                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null,
+                            ThemeUtils.getSelectedSkin().getColor_grid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());

@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oop23_1010.view.gameView.HomeView">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oop23_1010.view.gameView.HomeView">
    <children>
       <ImageView fx:id="imageSettings" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#switchToSettingsView" pickOnBounds="true" preserveRatio="true" styleClass="imageSettings">
          <image>
@@ -27,27 +31,27 @@
          </image>
       </ImageView>
 
-      <ImageView fx:id="imageQuit" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#quitGame" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit" >
+      <ImageView fx:id="imageQuit" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#quitGame" pickOnBounds="true" preserveRatio="true" styleClass="imageQuit">
          <image>
             <Image url="@../img/QuitButton.png" />
          </image>
       </ImageView>
       
-      <ImageView fx:id="imageTitle" fitHeight="93.0" fitWidth="293.0" pickOnBounds="true" preserveRatio="true" styleClass="imageTitle" >
+      <ImageView fx:id="imageTitle" fitHeight="93.0" fitWidth="293.0" pickOnBounds="true" preserveRatio="true" styleClass="imageTitle">
          <image>
             <Image url="@../img/TitleLabel.png" />
          </image>
       </ImageView>
-      <Slider fx:id="sliderGridWidth" prefHeight="10.0" prefWidth="150.0" snapToTicks="true" value="10" min="5" max="20" showTickMarks="false" showTickLabels="true" majorTickUnit="5" minorTickCount="0"/>
-      <Label fx:id="sliderLabel" prefHeight="10.0" prefWidth="150.0" text="Grandezza della griglia: " />
-      <Label fx:id="coinsLabel" prefHeight="10.0" prefWidth="150.0" text="Coins: 0" alignment="CENTER"/>
-      <Pane fx:id="dialogPaneResume" prefWidth="300.0" prefHeight="200.0" visible="false">
+      <Slider fx:id="sliderGridWidth" majorTickUnit="5" max="20" min="5" minorTickCount="0" prefHeight="10.0" prefWidth="150.0" showTickLabels="true" showTickMarks="false" snapToTicks="true" value="10" />
+      <Label fx:id="sliderLabel" alignment="CENTER" prefHeight="10.0" prefWidth="150.0" />
+      <Label fx:id="coinsLabel" alignment="CENTER" prefHeight="10.0" prefWidth="150.0" />
+      <Pane fx:id="dialogPaneResume" prefHeight="200.0" prefWidth="300.0" visible="false">
          <children>
-            <Label fx:id="dialogResumeLabel1" layoutX="0" layoutY="30" prefWidth="300.0" prefHeight="30.0" text="What do you want to do?" alignment="BASELINE_CENTER" />
+            <Label fx:id="dialogResumeLabel1" alignment="BASELINE_CENTER" layoutX="0" layoutY="30" prefHeight="30.0" prefWidth="300.0" text="What do you want to do?" />
 
-            <Button fx:id="dialogResumeYes" layoutX="20" layoutY="100" prefWidth="120.0" prefHeight="30.0" text="Resume the game" />
-            <Button fx:id="dialogResumeDelete" layoutX="160" layoutY="100" prefWidth="120.0" prefHeight="30.0" text="Delete the game" />
-            <Button fx:id="dialogResumeBack" layoutX="105" layoutY="150" prefWidth="90.0" prefHeight="30.0" text="Back" />
+            <Button fx:id="dialogResumeYes" layoutX="20" layoutY="100" prefHeight="30.0" prefWidth="120.0" text="Resume the game" />
+            <Button fx:id="dialogResumeDelete" layoutX="160" layoutY="100" prefHeight="30.0" prefWidth="120.0" text="Delete the game" />
+            <Button fx:id="dialogResumeBack" layoutX="105" layoutY="150" prefHeight="30.0" prefWidth="90.0" text="Back" />
          </children>
       </Pane>
    </children>

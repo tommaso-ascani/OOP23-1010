@@ -1,14 +1,12 @@
 package oop23_1010.view.gameView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,8 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 import oop23_1010.language.GameLanguageSystem;
-import oop23_1010.language.LanguageType;
 import oop23_1010.sound.GameSoundSystem;
+import oop23_1010.types.LanguageType;
 import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
@@ -45,6 +43,9 @@ public class SettingsView extends View {
     private Pane settingsPane;
 
     @FXML
+    private Label settingsLabel, volumeLabel, languageLabel;
+
+    @FXML
     private ChoiceBox<String> languageChoiceBox;
 
     private ObservableList<String> languageList = FXCollections.observableArrayList();
@@ -57,6 +58,13 @@ public class SettingsView extends View {
         }
 
         this.languageChoiceBox.setItems(this.languageList);
+        this.languageChoiceBox.setValue(GameLanguageSystem.getInstance().getLanguage());
+
+        this.settingsLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getSettings());
+        this.volumeLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getVolume());
+        this.languageLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getLanguage());
+        this.buttonApply.setText(GameLanguageSystem.getInstance().getLanguageType().getApply());
+        this.buttonBack.setText(GameLanguageSystem.getInstance().getLanguageType().getBack());
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
         this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
@@ -71,8 +79,6 @@ public class SettingsView extends View {
         }
 
         this.sliderVolume.setValue(GameSoundSystem.getInstance().getVolume());
-
-        this.languageChoiceBox.setValue(GameLanguageSystem.getLanguage());
 
         // Set the listener on the button apply to save the chosen volume in the
         // settings.json file

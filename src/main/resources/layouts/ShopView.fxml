@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oop23_1010.view.gameView.ShopView">
    <children>
-      <Label fx:id="titleLabel" prefWidth="200.0" prefHeight="50.0" text="SHOP" alignment="CENTER">
+      <Label fx:id="titleLabel" prefWidth="200.0" prefHeight="50.0" alignment="CENTER">
          <font>
             <Font size="30.0" />
          </font>
@@ -14,7 +14,7 @@
 
       <VBox fx:id="verticalBox" spacing="10" style="-fx-padding: 10"/>
 
-      <Button fx:id="buttonBackToHome" prefWidth="100.0" prefHeight="20.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" text="Indietro" />
+      <Button fx:id="buttonBackToHome" prefWidth="100.0" prefHeight="20.0" mnemonicParsing="false" onMouseClicked="#switchToHomeView" />
       
       <Pane fx:id="purchasePane" visible="false" prefWidth="450.0" prefHeight="200.0">
          <children>
@@ -23,13 +23,13 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="labelAlert" layoutX="0" layoutY="70" prefWidth="450.0" prefHeight="80.0" style="-fx-text-fill: red" alignment="CENTER" text="YOU CANNOT AFFORD THIS ITEM!" visible="false">
+            <Label fx:id="labelAlert" layoutX="0" layoutY="70" prefWidth="450.0" prefHeight="80.0" style="-fx-text-fill: red" alignment="CENTER" visible="false">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="buttonConfirm" layoutX="100.0" layoutY="150" prefWidth="80.0" prefHeight="30.0" text="Buy" />
-            <Button fx:id="buttonBack" layoutX="270.0" layoutY="150" prefWidth="80.0" prefHeight="30.0" text="Back" /> 
+            <Button fx:id="buttonConfirm" layoutX="100.0" layoutY="150" prefWidth="80.0" prefHeight="30.0" />
+            <Button fx:id="buttonBack" layoutX="270.0" layoutY="150" prefWidth="80.0" prefHeight="30.0" /> 
          </children>
       </Pane>
    </children>
