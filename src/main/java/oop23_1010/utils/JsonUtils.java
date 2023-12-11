@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javafx.util.Pair;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Class that manage saving/loading saved match data, best scores data and
+ * option data from/to json file.
+ */
 public class JsonUtils {
 
     // Paths
@@ -16,30 +19,79 @@ public class JsonUtils {
 
     // Files
 
+    /**
+     * Static field used to get the saved match's string file used as key in json
+     * operation.
+     */
     public static final String MATCH_FILE = "match";
+    /**
+     * Static field used to get the best score's string file used as key in
+     * json operation.
+     */
     public static final String BEST_SCORE_FILE = "best_score";
+    /**
+     * Static field used to get the game data's string file used as key in json
+     * operation.
+     */
     public static final String GAME_DATA_FILE = "game_data";
 
     // Match values
 
+    /**
+     * Static field used to save the match score's string as key in key/value pair
+     * saved in json file.
+     */
     public static final String MATCH_SCORE = "matchScore";
+    /**
+     * Static field used to save the match on going's string as key in key/value
+     * pair
+     * saved in json file.
+     */
     public static final String MATCH_ON_GOING = "matchOnGoing";
+    /**
+     * Static field used to save the match grid size's string as key in key/value
+     * pair saved in json file.
+     */
     public static final String GRID_SIZE = "gridSize";
+    /**
+     * Static field used to save the grid's string as key in key/value pair
+     * saved in json file.
+     */
     public static final String GRID_COMPOSITION = "grid";
 
     // Game data values
 
+    /**
+     * Static field used to save the volume's string as key in key/value pair
+     * saved in json file.
+     */
     public static final String VOLUME = "volume";
-    public static final String SELECTED_SKIN = "selectedSkin";
-    public static final String SKINS = "skins";
+    /**
+     * Static field used to save the selected theme's string as key in key/value
+     * pair saved in json file.
+     */
+    public static final String SELECTED_THEME = "selectedTheme";
+    /**
+     * Static field used to save the themes's string as key in key/value pair
+     * saved in json file.
+     */
+    public static final String THEMES = "themes";
+    /**
+     * Static field used to save the coins score's string as key in key/value pair
+     * saved in json file.
+     */
     public static final String COINS = "coins";
-    public static final String LANGUAGE = "Language";
+    /**
+     * Static field used to save the language's string as key in key/value pair
+     * saved in json file.
+     */
+    public static final String LANGUAGE = "language";
 
     /**
      * Method to load a specific data from a json file.
      * 
-     * @param data to load.
-     * @param fileName to search on.
+     * @param data     to load.
+     * @param fileName to search in.
      * @return The data founded.
      * @throws IOException
      */
@@ -55,7 +107,7 @@ public class JsonUtils {
     /**
      * Method to load an array of data.
      * 
-     * @param data Array name.
+     * @param data     Array name.
      * @param fileName to search on.
      * @return The array founded.
      * @throws IOException
@@ -88,7 +140,7 @@ public class JsonUtils {
     /**
      * Method to save match data.
      * 
-     * @param json to save.
+     * @param json     to save.
      * @param fileName to save on.
      * @throws IOException
      */
@@ -102,7 +154,7 @@ public class JsonUtils {
     /**
      * Method to add or overwrite an element on a json file.
      * 
-     * @param element to add.
+     * @param element  to add.
      * @param fileName to save on.
      * @throws IOException
      */
@@ -128,7 +180,7 @@ public class JsonUtils {
     /**
      * Method to remove an element from a json file.
      * 
-     * @param data to remove.
+     * @param data     to remove.
      * @param fileName to remove on.
      * @throws IOException
      */
@@ -180,7 +232,7 @@ public class JsonUtils {
     /**
      * Method to check if a specific data on a json file exist.
      * 
-     * @param data to check.
+     * @param data     to check.
      * @param fileName to check on.
      * @return If exist.
      * @throws IOException

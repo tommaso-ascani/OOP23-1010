@@ -1,7 +1,7 @@
 package oop23_1010.types;
 
 /**
- * class used to hold all types of blocks
+ * class used to hold all types of blocks.
  */
 public enum BlockType {
 

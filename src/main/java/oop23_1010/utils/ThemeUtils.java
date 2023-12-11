@@ -35,7 +35,7 @@ public final class ThemeUtils {
      */
     public static void saveSelectedSkin() {
         try {
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_SKIN, selectedSkin),
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_THEME, selectedSkin),
                     JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
             System.err.println("Theme Utils - Error on selected theme saving!");
@@ -47,7 +47,7 @@ public final class ThemeUtils {
      */
     public static void loadSelectedSkin() {
         try {
-            String selecSkin = (String) JsonUtils.loadData(JsonUtils.SELECTED_SKIN, JsonUtils.GAME_DATA_FILE);
+            String selecSkin = (String) JsonUtils.loadData(JsonUtils.SELECTED_THEME, JsonUtils.GAME_DATA_FILE);
             for (ThemeType skinType : ThemeType.values()) {
                 if (skinType.name().equals(selecSkin)) {
                     selectedSkin = skinType;
@@ -73,7 +73,7 @@ public final class ThemeUtils {
         }
 
         try {
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SKINS, temp), JsonUtils.GAME_DATA_FILE);
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.THEMES, temp), JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
             System.err.println("Theme Utils - Error on themes saving!");
         }
@@ -87,7 +87,7 @@ public final class ThemeUtils {
     public static JSONArray getSkins() {
 
         try {
-            return JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
+            return JsonUtils.loadDataArray(JsonUtils.THEMES, JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
             System.err.println("Theme Utils - Error on theme getting!");
         }

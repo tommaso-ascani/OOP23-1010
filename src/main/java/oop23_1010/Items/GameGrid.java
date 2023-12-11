@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.types.SoundType;
 
+/**
+ * Class that extends ArrayList of type GridBlock, used to mantain reference of
+ * the various grid blocks in the cell.
+ */
 public class GameGrid<E> extends ArrayList<GridBlock> {
 
     private Integer gridSize;

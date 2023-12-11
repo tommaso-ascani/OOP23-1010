@@ -1,7 +1,7 @@
 package oop23_1010.types;
 
 /**
- * Class used to hold all view's path
+ * Class used to hold all view's path.
  */
 public enum ViewType {
 

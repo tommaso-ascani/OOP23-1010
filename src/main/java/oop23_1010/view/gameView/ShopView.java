@@ -82,7 +82,7 @@ public class ShopView extends View {
         this.verticalBox.getChildren().clear();
 
         try {
-            JSONArray a = JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
+            JSONArray a = JsonUtils.loadDataArray(JsonUtils.THEMES, JsonUtils.GAME_DATA_FILE);
 
             for (int i = 0; i < a.length(); i++) {
                 ShopTheme temp = new ShopTheme(a.getJSONObject(i).getString("name"),
@@ -127,11 +127,11 @@ public class ShopView extends View {
     }
 
     /**
-     * Set listener on each shop item. 
+     * Set listener on each shop item.
      * If purchased set the listener for asking to set it,
      * if not purchased se the listener for asking to purchase it.
      * 
-     * @param isPurchased if item is purchased.
+     * @param isPurchased   if item is purchased.
      * @param shopThemeItem on which set the listener.
      */
     public void setListenerIfShopThemeItemPurchased(Boolean isPurchased, ShopTheme shopThemeItem) {
@@ -161,7 +161,6 @@ public class ShopView extends View {
                         shopThemeItem.getTheme().getCost() + " "
                         + GameLanguageSystem.getInstance().getLanguageType().getCoins() + "?");
                 this.questionLabel.setPrefSize(this.purchasePane.getPrefWidth(), 80);
-                // TODO MAGIC NUMBERS
 
                 this.buttonConfirm.setText(GameLanguageSystem.getInstance().getLanguageType().getBuy());
 

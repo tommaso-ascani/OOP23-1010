@@ -2,7 +2,7 @@ package oop23_1010.types;
 
 /**
  * Class used to hold all the label's texts that will have to change based on
- * the selection of the language
+ * the selection of the language.
  */
 public enum LanguageType {
 
@@ -70,37 +70,37 @@ public enum LanguageType {
             "Do you want to set this theme?",
             "Back to menu");
 
-    String gridSize;
-    String settings;
-    String shop;
-    String volume;
-    String language;
-    String apply;
-    String back;
-    String coins;
-    String score;
-    String resume;
-    String restart;
-    String menu;
-    String yes;
-    String no;
-    String saveAndQuit;
-    String quit;
-    String resumeTheGame;
-    String deleteTheGame;
-    String savedGameLabel;
-    String dialogRestartLabel1;
-    String dialogRestartLabel2;
-    String dialogMenuLabel1;
-    String dialogMenuLabel2;
-    String purchasedSelected;
-    String purchasedNotSelected;
-    String alertLabel;
-    String buy;
-    String set;
-    String shopQuestionBuyItem;
-    String shopQuestionSetTheme;
-    String backToMenu;
+    private String gridSize;
+    private String settings;
+    private String shop;
+    private String volume;
+    private String language;
+    private String apply;
+    private String back;
+    private String coins;
+    private String score;
+    private String resume;
+    private String restart;
+    private String menu;
+    private String yes;
+    private String no;
+    private String saveAndQuit;
+    private String quit;
+    private String resumeTheGame;
+    private String deleteTheGame;
+    private String savedGameLabel;
+    private String dialogRestartLabel1;
+    private String dialogRestartLabel2;
+    private String dialogMenuLabel1;
+    private String dialogMenuLabel2;
+    private String purchasedSelected;
+    private String purchasedNotSelected;
+    private String alertLabel;
+    private String buy;
+    private String set;
+    private String shopQuestionBuyItem;
+    private String shopQuestionSetTheme;
+    private String backToMenu;
 
     LanguageType(String gridSize,
             String settings,

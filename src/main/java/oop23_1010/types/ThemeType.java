@@ -1,7 +1,7 @@
 package oop23_1010.types;
 
 /**
- * Class used to hold all the themes
+ * Class used to hold all the themes.
  */
 public enum ThemeType {
 
@@ -57,9 +57,7 @@ public enum ThemeType {
     private String color_5x1_1x5;
 
     private String name;
-
     public Integer cost;
-
     private Boolean purchased;
 
     ThemeType(String color_background,

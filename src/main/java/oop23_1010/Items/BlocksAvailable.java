@@ -2,6 +2,10 @@ package oop23_1010.Items;
 
 import java.util.ArrayList;
 
+/**
+ * Class that extends ArrayList of type ShapeBlock, it contains the four
+ * placeble blocks.
+ */
 public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
 
     /**

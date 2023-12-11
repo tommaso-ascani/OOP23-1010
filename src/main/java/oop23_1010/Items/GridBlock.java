@@ -3,6 +3,9 @@ package oop23_1010.Items;
 import javafx.geometry.Bounds;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Class that extends AnchorPane, used to represent each grid square.
+ */
 public class GridBlock extends AnchorPane {
 
     private Integer x;

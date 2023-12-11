@@ -1,7 +1,7 @@
 package oop23_1010.types;
 
 /**
- * Class used to hold all the sound's path
+ * Class used to hold all the sound's path.
  */
 public enum SoundType {
 

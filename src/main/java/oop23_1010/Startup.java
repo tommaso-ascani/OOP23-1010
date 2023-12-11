@@ -6,6 +6,10 @@ import javafx.stage.Stage;
 import oop23_1010.types.ViewType;
 import oop23_1010.view.ViewSwitcher;
 
+/**
+ * Class used to effectively start the application by setting the icon, the
+ * title and call ViewSwitcher to set the scene and show it.
+ */
 public class Startup extends Application {
 
     @Override

@@ -6,6 +6,9 @@ import javafx.util.Pair;
 import oop23_1010.types.LanguageType;
 import oop23_1010.utils.JsonUtils;
 
+/**
+ * Class that represent the game language system.
+ */
 public final class GameLanguageSystem {
 
     private static GameLanguageSystem instance;

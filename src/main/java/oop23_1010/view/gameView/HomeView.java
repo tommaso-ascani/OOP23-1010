@@ -71,10 +71,10 @@ public class HomeView extends View {
 
         // Load saved Theme and save skins
         try {
-            if (!JsonUtils.ifDataExist(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE)) {
+            if (!JsonUtils.ifDataExist(JsonUtils.THEMES, JsonUtils.GAME_DATA_FILE)) {
                 ThemeUtils.saveThemes();
             }
-            if (!JsonUtils.ifDataExist(JsonUtils.SELECTED_SKIN, JsonUtils.GAME_DATA_FILE)) {
+            if (!JsonUtils.ifDataExist(JsonUtils.SELECTED_THEME, JsonUtils.GAME_DATA_FILE)) {
                 ThemeUtils.setSelectedSkin(ThemeType.LIGHT);
                 ThemeUtils.saveSelectedSkin();
                 ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
@@ -215,9 +215,9 @@ public class HomeView extends View {
      * Method to set the listeners on all buttons in the dialog
      * resume pane.
      * 
-     * @param btnBack the back button.
-     * @param btnDelete the delete button.
-     * @param btnResume the resume button.
+     * @param btnBack    the back button.
+     * @param btnDelete  the delete button.
+     * @param btnResume  the resume button.
      * @param paneResume the dialog resume pane.
      */
     private void setListenersResumePane(Button btnBack, Button btnDelete, Button btnResume, Pane paneResume) {

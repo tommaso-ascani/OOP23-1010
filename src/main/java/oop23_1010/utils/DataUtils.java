@@ -8,6 +8,9 @@ import oop23_1010.Items.GameGrid;
 import oop23_1010.Items.GridBlock;
 import oop23_1010.view.gameView.HomeView;
 
+/**
+ * Class that manage saving/loading saved match data from/to json file.
+ */
 public class DataUtils {
 
     /**

@@ -8,6 +8,9 @@ import oop23_1010.types.SoundType;
 import oop23_1010.utils.JsonUtils;
 import java.io.IOException;
 
+/**
+ * Class that represent the game sound system.
+ */
 public final class GameSoundSystem {
 
     private static GameSoundSystem instance;

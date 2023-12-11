@@ -10,6 +10,10 @@ import oop23_1010.Movement;
 import oop23_1010.types.BlockType;
 import oop23_1010.utils.ThemeUtils;
 
+/**
+ * Class that extends Path, represent a draggable object that has to be place in
+ * the grid.
+ */
 public class ShapeBlock extends Path {
 
     private BlockType type;
