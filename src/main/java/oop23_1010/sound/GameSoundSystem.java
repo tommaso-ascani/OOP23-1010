@@ -66,6 +66,13 @@ public final class GameSoundSystem {
     }
 
     /**
+     * Method to get the audio clip.
+     */
+    public AudioClip getAudioClip() {
+        return GameSoundSystem.aClip;
+    }
+
+    /**
      * Method to stop the audio clip.
      */
     public void stopAudioClip() {
