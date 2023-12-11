@@ -22,7 +22,15 @@ import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 
+/**
+ * Class that implements all methods to use the settings view.
+ */
 public class SettingsView extends View {
+
+    /**
+     * List of languages.
+     */
+    private ObservableList<String> languageList = FXCollections.observableArrayList();
 
     @FXML
     private AnchorPane mainPane;
@@ -43,12 +51,12 @@ public class SettingsView extends View {
     private Pane settingsPane;
 
     @FXML
-    private Label settingsLabel, volumeLabel, languageLabel;
+    private Label   settingsLabel, 
+                    volumeLabel, 
+                    languageLabel;
 
     @FXML
     private ChoiceBox<String> languageChoiceBox;
-
-    private ObservableList<String> languageList = FXCollections.observableArrayList();
 
     @Override
     public void init() {
@@ -67,7 +75,7 @@ public class SettingsView extends View {
         this.buttonBack.setText(GameLanguageSystem.getInstance().getLanguageType().getBack());
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
-        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
 
         this.settingsPane.relocate((View.WINDOW_WIDTH / 2) - (this.settingsPane.getPrefWidth() / 2),
                 (View.WINDOW_HEIGHT / 2) - (this.settingsPane.getPrefHeight() / 2));

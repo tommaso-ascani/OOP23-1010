@@ -20,27 +20,44 @@ import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 
+/**
+ * Class that implements all methods to use the shop view.
+ */
 public class ShopView extends View {
 
-    private static final Integer VBOX_SPACE_LATERAL = 125;
-    private static final Integer SPACE_HEIGHT_FIRST_ELEMENT = 20;
+    /**
+     * Vbox lateral space at right and left.
+     */
+    private static final Integer VBOX_LATERAL_SPACE = 125;
+
+    /**
+     * Vbox top and bottom space.
+     */
+    private static final Integer TOP_BOTTOM_SPACE = 20;
+
+    /**
+     * List of shop item.
+     */
+    private ArrayList<ShopTheme> shopList = new ArrayList<ShopTheme>();
 
     @FXML
     private AnchorPane mainPane;
 
     @FXML
-    private Button buttonBackToHome, buttonConfirm, buttonBack;
+    private Button  buttonBackToHome, 
+                    buttonConfirm,
+                    buttonBack;
 
     @FXML
     private Pane purchasePane;
 
     @FXML
-    private Label titleLabel, questionLabel, labelAlert;
+    private Label   titleLabel, 
+                    questionLabel, 
+                    labelAlert;
 
     @FXML
     private VBox verticalBox;
-
-    private ArrayList<ShopTheme> shopList = new ArrayList<ShopTheme>();
 
     @Override
     public void init() {
@@ -53,22 +70,22 @@ public class ShopView extends View {
         // PrefSize
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
-        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - ShopView.VBOX_SPACE_LATERAL,
-                this.mainPane.getPrefHeight() - (ShopView.VBOX_SPACE_LATERAL * 2));
+        this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - ShopView.VBOX_LATERAL_SPACE,
+                this.mainPane.getPrefHeight() - (ShopView.VBOX_LATERAL_SPACE * 2));
 
         // Relocate
 
         this.verticalBox.relocate((this.mainPane.getPrefWidth() / 2) - (this.verticalBox.getPrefWidth() / 2),
                 (this.mainPane.getPrefHeight() / 2) - (this.verticalBox.getPrefHeight() / 2));
         this.titleLabel.relocate((this.mainPane.getPrefWidth() / 2) - (this.titleLabel.getPrefWidth() / 2),
-                ShopView.SPACE_HEIGHT_FIRST_ELEMENT);
+                ShopView.TOP_BOTTOM_SPACE);
         this.buttonBackToHome.relocate((this.mainPane.getPrefWidth() / 2) - (this.buttonBackToHome.getPrefWidth() / 2),
                 this.mainPane.getPrefHeight() - this.buttonBackToHome.getPrefHeight()
-                        - (ShopView.SPACE_HEIGHT_FIRST_ELEMENT * 3));
+                        - (ShopView.TOP_BOTTOM_SPACE * 3));
 
         // Style
 
-        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
 
         this.loadThemes();
         this.createPurchasePane();
@@ -89,7 +106,7 @@ public class ShopView extends View {
                         (Boolean) a.getJSONObject(i).get("purchased"),
                         this.mainPane.getPrefWidth());
                 if (temp.getPurchased()) {
-                    if (!temp.getTheme().name().equals(ThemeUtils.getSelectedSkin().name())) {
+                    if (!temp.getTheme().name().equals(ThemeUtils.getSelectedTheme().name())) {
                         this.setListenerIfShopThemeItemPurchased(true, temp);
                         temp.getCostLabel()
                                 .setText(GameLanguageSystem.getInstance().getLanguageType().getPurchasedNotSelected());
@@ -121,7 +138,7 @@ public class ShopView extends View {
      */
     public void createPurchasePane() {
         this.purchasePane.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-background-color: "
-                + ThemeUtils.getSelectedSkin().getColor_background());
+                + ThemeUtils.getSelectedTheme().getColor_background());
         this.purchasePane.relocate((this.mainPane.getPrefWidth() - this.purchasePane.getPrefWidth()) / 2,
                 (this.mainPane.getPrefHeight() - this.purchasePane.getPrefHeight()) / 2);
     }
@@ -148,8 +165,8 @@ public class ShopView extends View {
                 });
 
                 buttonConfirm.setOnMouseClicked(b -> {
-                    ThemeUtils.setSelectedSkin(shopThemeItem.getTheme());
-                    ThemeUtils.saveSelectedSkin();
+                    ThemeUtils.setSelectedTheme(shopThemeItem.getTheme());
+                    ThemeUtils.saveSelectedTheme();
                     this.purchasePane.setVisible(false);
                     ViewSwitcher.getInstance().switchView(getStage(), ViewType.SHOP);
                 });

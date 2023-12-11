@@ -26,59 +26,99 @@ import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 
+/**
+ * Class that implements all methods to use the game view.
+ */
 public class GameView extends View {
 
+    /**
+     * Game grid object.
+     */
     private GameGrid<GridBlock> grid;
+
+    /**
+     * Spawn pane width.
+     */
+    private static Double spawnPanelsWidth;
+
+    /**
+     * Avalaible spawn blocks.
+     */
     private BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
+    /**
+     * Game score.
+     */
     private Integer score;
+
+    /**
+     * Game coins.
+     */
     private Integer coins;
 
+    /**
+     * Space between grid block.
+     */
     private static final Integer GAP_GRID_PANE = 5;
-    private static Double spawnPanelsWidth;
+
+    /**
+     * Space between spawn pane.
+     */
     private static final Integer GAP_BETWEEN_SPAWN_PANELS = 40;
+
+    /**
+     * Space between window top and title label.
+     */
     private static final Integer TITLE_LABEL_LAYOUTY = 20;
+
+    /**
+     * Space between window top and lable value.
+     */
     private static final Integer LABEL_VALUE_LAYOUTY = 60;
+
+    /**
+     * Space between window and pause button.
+     */
     private static final Integer SPACE_PAUSE_BUTTON = 15;
 
     @FXML
     private AnchorPane mainPane;
 
     @FXML
-    private Pane upLeftSpawn,
-            upRightSpawn,
-            downLeftSpawn,
-            downRightSpawn,
-            dialogPaneRestart,
-            dialogPaneMenu,
-            pausePane,
-            gameOverPane;
+    private Pane    upLeftSpawn,
+                    upRightSpawn,
+                    downLeftSpawn,
+                    downRightSpawn,
+                    dialogPaneRestart,
+                    dialogPaneMenu,
+                    pausePane,
+                    gameOverPane;
 
     @FXML
     private GridPane gridPane;
 
     @FXML
-    private Label labelCoin,
-            labelScore,
-            titleCoin,
-            titleScore,
-            dialogRestartLabel1,
-            dialogRestartLabel2,
-            dialogMenuLabel1,
-            dialogMenuLabel2,
-            labelGameOver,
-            labelGameOverScore;
+    private Label   labelCoin,
+                    labelScore,
+                    titleCoin,
+                    titleScore,
+                    dialogRestartLabel1,
+                    dialogRestartLabel2,
+                    dialogMenuLabel1,
+                    dialogMenuLabel2,
+                    labelGameOver,
+                    labelGameOverScore;
 
     @FXML
-    private Button buttonRiprendi,
-            buttonRicomincia,
-            buttonMenu,
-            dialogMenuYes,
-            dialogMenuNo,
-            dialogMenuBack,
-            dialogRestartYes,
-            dialogRestartNo,
-            buttonBackToMenu;
+    private Button  buttonRiprendi,
+                    buttonRicomincia,
+                    buttonMenu,
+                    dialogMenuYes,
+                    dialogMenuNo,
+                    dialogMenuBack,
+                    dialogRestartYes,
+                    dialogRestartNo,
+                    buttonBackToMenu;
 
     @FXML
     private ImageView imagePause;
@@ -139,11 +179,11 @@ public class GameView extends View {
      */
     public void createPausePane() {
 
-        this.pausePane.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+        this.pausePane.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
                 + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
                 + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
                 + "; -fx-border-width: 2; -fx-border-color: black");
 
         this.pausePane.relocate(((this.mainPane.getPrefWidth() / 2) - (this.pausePane.getPrefWidth() / 2)),
@@ -382,7 +422,7 @@ public class GameView extends View {
     private void createGameOverPane() {
 
         this.gameOverPane.setStyle(
-                "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+                "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
                         + "; -fx-border-width: 2; -fx-border-color: black");
 
         this.gameOverPane.relocate((this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
@@ -458,7 +498,7 @@ public class GameView extends View {
                 gridBlock.setPrefWidth(grid.getGridCellSize());
                 if (gridBlock.getFill() == null) {
                     gridBlock.setStyle(
-                            "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_grid()
+                            "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_grid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 } else {
                     gridBlock.setStyle(
@@ -472,12 +512,12 @@ public class GameView extends View {
             for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
                 for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
                     GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null,
-                            ThemeUtils.getSelectedSkin().getColor_grid());
+                            ThemeUtils.getSelectedTheme().getColor_grid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());
                     aPane.setStyle(
-                            "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_grid()
+                            "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_grid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
 
                     this.grid.add(aPane);
@@ -510,7 +550,7 @@ public class GameView extends View {
         this.upRightSpawn.setStyle(SpawnPanlesStyle);
         this.downRightSpawn.setStyle(SpawnPanlesStyle);
 
-        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
 
         this.gridPane.setStyle(
                 "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE

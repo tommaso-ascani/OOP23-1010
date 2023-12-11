@@ -3,10 +3,13 @@ package oop23_1010;
 import javafx.scene.Node;
 
 /**
- * Class used to make a Node draggable.
+ * Class that allow object to be dragged on view.
  */
 public class Movement {
 
+    /**
+     * Start position of the object.
+     */
     private static double startX;
     private static double startY;
 

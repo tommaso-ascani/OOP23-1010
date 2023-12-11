@@ -21,24 +21,34 @@ import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
 
+/**
+ * Class that implements all methods to use the home view.
+ */
 public class HomeView extends View {
 
+    /**
+     * Grid size selected by user.
+     * Default is 10.
+     */
     private static int gridSize;
 
+    /**
+     * Space between pause and quit button.
+     */
     private static final Integer PAUSE_AND_QUIT_BUTTON_SPACE = 15;
 
     @FXML
-    private ImageView imageSettings,
-            imageTitle,
-            imageShop,
-            imageQuit,
-            imageResume,
-            imagePlay;
+    private ImageView   imageSettings,
+                        imageTitle,
+                        imageShop,
+                        imageQuit,
+                        imageResume,
+                        imagePlay;
 
     @FXML
-    private Button dialogResumeYes,
-            dialogResumeDelete,
-            dialogResumeBack;
+    private Button  dialogResumeYes,
+                    dialogResumeDelete,
+                    dialogResumeBack;
 
     @FXML
     private Pane dialogPaneResume;
@@ -50,10 +60,10 @@ public class HomeView extends View {
     private AnchorPane mainPane;
 
     @FXML
-    private Label bestScore,
-            sliderLabel,
-            coinsLabel,
-            dialogResumeLabel1;
+    private Label   bestScore,
+                    sliderLabel,
+                    coinsLabel,
+                    dialogResumeLabel1;
 
     @Override
     public void init() {
@@ -69,20 +79,20 @@ public class HomeView extends View {
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
 
-        // Load saved Theme and save skins
+        // Load saved Theme and save themes
         try {
             if (!JsonUtils.ifDataExist(JsonUtils.THEMES, JsonUtils.GAME_DATA_FILE)) {
                 ThemeUtils.saveThemes();
             }
             if (!JsonUtils.ifDataExist(JsonUtils.SELECTED_THEME, JsonUtils.GAME_DATA_FILE)) {
-                ThemeUtils.setSelectedSkin(ThemeType.LIGHT);
-                ThemeUtils.saveSelectedSkin();
+                ThemeUtils.setSelectedTheme(ThemeType.LIGHT);
+                ThemeUtils.saveSelectedTheme();
                 ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
             }
-            ThemeUtils.loadSelectedSkin();
-            ThemeUtils.loadSelectedSkin();
+            ThemeUtils.loadSelectedTheme();
+            ThemeUtils.loadSelectedTheme();
         } catch (IOException exc) {
-            System.err.println("Home View - Error on skin loading!");
+            System.err.println("Home View - Error on theme loading!");
         }
 
         // Coins
@@ -118,7 +128,7 @@ public class HomeView extends View {
 
         // Style
 
-        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedSkin().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
@@ -182,7 +192,7 @@ public class HomeView extends View {
      * This method switch to game view and set the grid size if is a new game.
      */
     public void switchToPlayView() {
-        HomeView.gridSize = (int) this.sliderGridWidth.getValue();
+        gridSize = (int) this.sliderGridWidth.getValue();
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
     }
 
@@ -200,7 +210,7 @@ public class HomeView extends View {
     public void createDialogResume() {
 
         dialogPaneResume.setStyle(
-                "-fx-background-color: " + ThemeUtils.getSelectedSkin().getColor_background()
+                "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
                         + "; -fx-border-width: 2; -fx-border-color: black");
 
         dialogPaneResume.relocate((this.mainPane.getPrefWidth() - dialogPaneResume.getPrefWidth()) / 2,

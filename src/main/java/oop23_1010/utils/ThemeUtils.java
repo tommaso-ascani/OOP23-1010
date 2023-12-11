@@ -8,34 +8,40 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.util.Pair;
 
+/**
+ * Class that implements methods usefull to manage themes.
+ */
 public final class ThemeUtils {
 
-    private static ThemeType selectedSkin;
+    /**
+     * Selected and active theme.
+     */
+    private static ThemeType selectedTheme;
 
     /**
-     * Method to set a skin.
+     * Method to set a theme.
      * 
-     * @param newSkin type of skin.
+     * @param newTheme type of theme.
      */
-    public static void setSelectedSkin(ThemeType newSkin) {
-        selectedSkin = newSkin;
+    public static void setSelectedTheme(ThemeType newTheme) {
+        selectedTheme = newTheme;
     }
 
     /**
-     * Method to get the selected skin.
+     * Method to get the selected theme.
      * 
-     * @return The selected skin.
+     * @return The selected theme.
      */
-    public static ThemeType getSelectedSkin() {
-        return selectedSkin;
+    public static ThemeType getSelectedTheme() {
+        return selectedTheme;
     }
 
     /**
-     * Method to save the selected skin.
+     * Method to save the selected theme.
      */
-    public static void saveSelectedSkin() {
+    public static void saveSelectedTheme() {
         try {
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_THEME, selectedSkin),
+            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_THEME, selectedTheme),
                     JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
             System.err.println("Theme Utils - Error on selected theme saving!");
@@ -43,14 +49,14 @@ public final class ThemeUtils {
     }
 
     /**
-     * Method to load the selected skin.
+     * Method to load the selected theme.
      */
-    public static void loadSelectedSkin() {
+    public static void loadSelectedTheme() {
         try {
-            String selecSkin = (String) JsonUtils.loadData(JsonUtils.SELECTED_THEME, JsonUtils.GAME_DATA_FILE);
-            for (ThemeType skinType : ThemeType.values()) {
-                if (skinType.name().equals(selecSkin)) {
-                    selectedSkin = skinType;
+            String selecTheme = (String) JsonUtils.loadData(JsonUtils.SELECTED_THEME, JsonUtils.GAME_DATA_FILE);
+            for (ThemeType themeType : ThemeType.values()) {
+                if (themeType.name().equals(selecTheme)) {
+                    selectedTheme = themeType;
                 }
             }
         } catch (IOException exc) {
@@ -65,11 +71,11 @@ public final class ThemeUtils {
 
         JSONArray temp = new JSONArray();
 
-        for (ThemeType skin : ThemeType.values()) {
-            JSONObject skinObject = new JSONObject();
-            skinObject.put("name", skin.name());
-            skinObject.put("purchased", skin.getPurchased());
-            temp.put(skinObject);
+        for (ThemeType theme : ThemeType.values()) {
+            JSONObject themeObject = new JSONObject();
+            themeObject.put("name", theme.name());
+            themeObject.put("purchased", theme.getPurchased());
+            temp.put(themeObject);
         }
 
         try {
@@ -80,11 +86,11 @@ public final class ThemeUtils {
     }
 
     /**
-     * Method to get all avalaible skins.
+     * Method to get all avalaible themes.
      * 
-     * @return Array of skins.
+     * @return Array of themes.
      */
-    public static JSONArray getSkins() {
+    public static JSONArray getThemes() {
 
         try {
             return JsonUtils.loadDataArray(JsonUtils.THEMES, JsonUtils.GAME_DATA_FILE);

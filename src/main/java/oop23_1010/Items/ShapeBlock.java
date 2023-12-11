@@ -56,57 +56,57 @@ public class ShapeBlock extends Path {
             case BLOCK_1x1:
                 this.width = 1;
                 this.height = 1;
-                this.color = ThemeUtils.getSelectedSkin().getColor_1x1();
+                this.color = ThemeUtils.getSelectedTheme().getColor_1x1();
                 break;
             case BLOCK_1x2:
                 this.width = 1;
                 this.height = 2;
-                this.color = ThemeUtils.getSelectedSkin().getColor_2x1_1x2();
+                this.color = ThemeUtils.getSelectedTheme().getColor_2x1_1x2();
                 break;
             case BLOCK_1x3:
                 this.width = 1;
                 this.height = 3;
-                this.color = ThemeUtils.getSelectedSkin().getColor_3x1_1x3();
+                this.color = ThemeUtils.getSelectedTheme().getColor_3x1_1x3();
                 break;
             case BLOCK_1x4:
                 this.width = 1;
                 this.height = 4;
-                this.color = ThemeUtils.getSelectedSkin().getColor_4x1_1x4();
+                this.color = ThemeUtils.getSelectedTheme().getColor_4x1_1x4();
                 break;
             case BLOCK_1x5:
                 this.width = 1;
                 this.height = 5;
-                this.color = ThemeUtils.getSelectedSkin().getColor_5x1_1x5();
+                this.color = ThemeUtils.getSelectedTheme().getColor_5x1_1x5();
                 break;
             case BLOCK_2x1:
                 this.width = 2;
                 this.height = 1;
-                this.color = ThemeUtils.getSelectedSkin().getColor_2x1_1x2();
+                this.color = ThemeUtils.getSelectedTheme().getColor_2x1_1x2();
                 break;
             case BLOCK_2x2:
                 this.width = 2;
                 this.height = 2;
-                this.color = ThemeUtils.getSelectedSkin().getColor_2x2();
+                this.color = ThemeUtils.getSelectedTheme().getColor_2x2();
                 break;
             case BLOCK_3x1:
                 this.width = 3;
                 this.height = 1;
-                this.color = ThemeUtils.getSelectedSkin().getColor_3x1_1x3();
+                this.color = ThemeUtils.getSelectedTheme().getColor_3x1_1x3();
                 break;
             case BLOCK_3x3:
                 this.width = 3;
                 this.height = 3;
-                this.color = ThemeUtils.getSelectedSkin().getColor_3x3();
+                this.color = ThemeUtils.getSelectedTheme().getColor_3x3();
                 break;
             case BLOCK_4x1:
                 this.width = 4;
                 this.height = 1;
-                this.color = ThemeUtils.getSelectedSkin().getColor_4x1_1x4();
+                this.color = ThemeUtils.getSelectedTheme().getColor_4x1_1x4();
                 break;
             case BLOCK_5x1:
                 this.width = 5;
                 this.height = 1;
-                this.color = ThemeUtils.getSelectedSkin().getColor_5x1_1x5();
+                this.color = ThemeUtils.getSelectedTheme().getColor_5x1_1x5();
                 break;
             default:
                 break;

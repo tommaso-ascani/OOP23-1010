@@ -5,12 +5,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import oop23_1010.types.ViewType;
-
 import java.io.IOException;
 
+/**
+ * Class that implements methods to switch a view.
+ */
 public class ViewSwitcher {
 
+    /**
+     * ViewSwitcher istance.
+     */
     private static ViewSwitcher instance;
+    
+    /**
+     * Current view on which work.
+     */
     private View currentView;
 
     /**
