@@ -1,9 +1,10 @@
 package oop23_1010.view;
 
 import javafx.stage.Stage;
+import java.awt.*;
 
 /**
- * Class that implements a View object. 
+ * Class that implements a View object.
  */
 public abstract class View {
 
@@ -15,12 +16,14 @@ public abstract class View {
     /**
      * Window width.
      */
-    public static final int WINDOW_WIDTH = 1600;
+    public static final int WINDOW_WIDTH = ((Double) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 6 * 5))
+            .intValue();
 
     /**
      * Window height.
      */
-    public static final int WINDOW_HEIGHT = 900; 
+    public static final int WINDOW_HEIGHT = ((Double) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 6 * 5))
+            .intValue();
 
     /**
      * Method to get the current stage.

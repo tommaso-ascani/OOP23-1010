@@ -38,17 +38,17 @@ public class HomeView extends View {
     private static final Integer PAUSE_AND_QUIT_BUTTON_SPACE = 15;
 
     @FXML
-    private ImageView   imageSettings,
-                        imageTitle,
-                        imageShop,
-                        imageQuit,
-                        imageResume,
-                        imagePlay;
+    private ImageView imageSettings,
+            imageTitle,
+            imageShop,
+            imageQuit,
+            imageResume,
+            imagePlay;
 
     @FXML
-    private Button  dialogResumeYes,
-                    dialogResumeDelete,
-                    dialogResumeBack;
+    private Button dialogResumeYes,
+            dialogResumeDelete,
+            dialogResumeBack;
 
     @FXML
     private Pane dialogPaneResume;
@@ -60,10 +60,10 @@ public class HomeView extends View {
     private AnchorPane mainPane;
 
     @FXML
-    private Label   bestScore,
-                    sliderLabel,
-                    coinsLabel,
-                    dialogResumeLabel1;
+    private Label bestScore,
+            sliderLabel,
+            coinsLabel,
+            dialogResumeLabel1;
 
     @Override
     public void init() {

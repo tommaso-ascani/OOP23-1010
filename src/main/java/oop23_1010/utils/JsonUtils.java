@@ -13,9 +13,14 @@ import org.json.JSONObject;
  */
 public class JsonUtils {
 
+    public static final String PROP_FILE_SEPARATOR = "file.separator";
+
+    private static String separator = System.getProperty(PROP_FILE_SEPARATOR);
+
     // Paths
 
-    private static final String DATA_PATH = "src/main/resources/config/";
+    private static final String DATA_PATH = "src" + separator + "main" + separator + "resources" + separator + "config"
+            + separator;
 
     // Files
 
