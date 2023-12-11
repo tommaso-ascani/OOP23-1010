@@ -11,17 +11,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import oop23_1010.Items.BlocksAvailable;
+import oop23_1010.Items.GameGrid;
+import oop23_1010.Items.GridBlock;
+import oop23_1010.Items.ShapeBlock;
 import oop23_1010.language.GameLanguageSystem;
 import oop23_1010.sound.GameSoundSystem;
 import oop23_1010.types.BlockType;
 import oop23_1010.types.SoundType;
 import oop23_1010.types.ViewType;
-import oop23_1010.utils.BlocksAvailable;
 import oop23_1010.utils.DataUtils;
-import oop23_1010.utils.GameGrid;
-import oop23_1010.utils.GridBlock;
-import oop23_1010.utils.Randomizer;
-import oop23_1010.utils.ShapeBlock;
+import oop23_1010.utils.RandomUtils;
 import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
@@ -617,7 +617,7 @@ public class GameView extends View {
 
         for (int x = 1; x <= 4; x++) {
 
-            type = Randomizer.getRandomPuzzle();
+            type = RandomUtils.getRandomPuzzle();
 
             switch (x) {
                 case 1:

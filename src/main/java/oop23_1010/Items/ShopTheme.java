@@ -1,4 +1,4 @@
-package oop23_1010.utils;
+package oop23_1010.Items;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -9,7 +9,7 @@ import javafx.scene.text.Font;
 import oop23_1010.types.ThemeType;
 import oop23_1010.view.View;
 
-public class ShopThemeItem extends VBox {
+public class ShopTheme extends VBox {
 
     private ThemeType theme;
 
@@ -32,30 +32,30 @@ public class ShopThemeItem extends VBox {
      * @param purchased 
      * @param windowWidth
      */
-    public ShopThemeItem(String theme, Boolean purchased, Double windowWidth) {
+    public ShopTheme(String theme, Boolean purchased, Double windowWidth) {
 
         for (ThemeType themeType : ThemeType.values()) {
             if (themeType.name().equals(theme)) {
                 this.theme = themeType;
             }
         }
-        this.setPrefHeight(ShopThemeItem.HEIGHT);
+        this.setPrefHeight(ShopTheme.HEIGHT);
         this.setFillWidth(true);
 
         this.viewPane = new HBox();
-        this.viewPane.setPrefSize(View.WINDOW_WIDTH - ShopThemeItem.HEIGHT, ShopThemeItem.VIEW_PANE_HEIGHT);
+        this.viewPane.setPrefSize(View.WINDOW_WIDTH - ShopTheme.HEIGHT, ShopTheme.VIEW_PANE_HEIGHT);
         this.viewPane.setSpacing(5);
         this.viewPane.setAlignment(Pos.CENTER);
         this.viewPane.setStyle("-fx-padding: 15");
 
         this.costLabel = new Label();
         this.costLabel.setFont(new Font(20));
-        this.costLabel.setPrefSize(View.WINDOW_WIDTH, ShopThemeItem.VIEW_PANE_HEIGHT / 3);
+        this.costLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3);
         this.costLabel.setAlignment(Pos.CENTER);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
 
         this.descriptionLabel = new Label(this.theme.getName());
-        this.descriptionLabel.setPrefSize(View.WINDOW_WIDTH, ShopThemeItem.VIEW_PANE_HEIGHT / 3);
+        this.descriptionLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3);
         this.descriptionLabel.setFont(new Font(25));
         this.descriptionLabel.setAlignment(Pos.CENTER);
 

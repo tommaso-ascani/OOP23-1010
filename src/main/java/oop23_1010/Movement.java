@@ -1,4 +1,4 @@
-package oop23_1010.controllers;
+package oop23_1010;
 
 import javafx.scene.Node;
 

@@ -1,4 +1,4 @@
-package oop23_1010.utils;
+package oop23_1010.Items;
 
 import javafx.geometry.Bounds;
 import javafx.scene.layout.Pane;
@@ -6,8 +6,9 @@ import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import oop23_1010.controllers.Movement;
+import oop23_1010.Movement;
 import oop23_1010.types.BlockType;
+import oop23_1010.utils.ThemeUtils;
 
 public class ShapeBlock extends Path {
 

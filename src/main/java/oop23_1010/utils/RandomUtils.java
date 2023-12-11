@@ -2,7 +2,7 @@ package oop23_1010.utils;
 
 import oop23_1010.types.BlockType;
 
-public class Randomizer {
+public class RandomUtils {
 
     /**
      * Method randomize a new item to be generated.

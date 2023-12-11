@@ -12,10 +12,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
+import oop23_1010.Items.ShopTheme;
 import oop23_1010.language.GameLanguageSystem;
 import oop23_1010.types.ViewType;
 import oop23_1010.utils.JsonUtils;
-import oop23_1010.utils.ShopThemeItem;
 import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
 import oop23_1010.view.ViewSwitcher;
@@ -40,7 +40,7 @@ public class ShopView extends View {
     @FXML
     private VBox verticalBox;
 
-    private ArrayList<ShopThemeItem> shopList = new ArrayList<ShopThemeItem>();
+    private ArrayList<ShopTheme> shopList = new ArrayList<ShopTheme>();
 
     @Override
     public void init() {
@@ -85,7 +85,7 @@ public class ShopView extends View {
             JSONArray a = JsonUtils.loadDataArray(JsonUtils.SKINS, JsonUtils.GAME_DATA_FILE);
 
             for (int i = 0; i < a.length(); i++) {
-                ShopThemeItem temp = new ShopThemeItem(a.getJSONObject(i).getString("name"),
+                ShopTheme temp = new ShopTheme(a.getJSONObject(i).getString("name"),
                         (Boolean) a.getJSONObject(i).get("purchased"),
                         this.mainPane.getPrefWidth());
                 if (temp.getPurchased()) {
@@ -134,7 +134,7 @@ public class ShopView extends View {
      * @param isPurchased if item is purchased.
      * @param shopThemeItem on which set the listener.
      */
-    public void setListenerIfShopThemeItemPurchased(Boolean isPurchased, ShopThemeItem shopThemeItem) {
+    public void setListenerIfShopThemeItemPurchased(Boolean isPurchased, ShopTheme shopThemeItem) {
         if (isPurchased) {
             shopThemeItem.setOnMouseClicked(e -> {
                 this.questionLabel
