@@ -3,6 +3,7 @@ package oop23_1010.sound;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import oop23_1010.types.SoundType;
 import oop23_1010.utils.JsonUtils;
@@ -89,6 +90,14 @@ public final class GameSoundSystem {
     public void setMediaPlayer(SoundType music) {
         GameSoundSystem.media = new Media(getClass().getResource(music.getPath()).toExternalForm());
         GameSoundSystem.player = new MediaPlayer(media);
+        GameSoundSystem.player.setOnEndOfMedia(new Runnable() {
+
+            @Override
+            public void run() {
+                GameSoundSystem.player.seek(Duration.ZERO);
+            }
+
+        });
         GameSoundSystem.player.setVolume(GameSoundSystem.volume.doubleValue());
     }
 
@@ -100,7 +109,7 @@ public final class GameSoundSystem {
     }
 
     /**
-     * Method to stop the MediaPlayer.
+     * Method to pause the MediaPlayer.
      */
     public void pauseMedia() {
         GameSoundSystem.player.pause();
@@ -111,6 +120,13 @@ public final class GameSoundSystem {
      */
     public void resumeMedia() {
         GameSoundSystem.player.play();
+    }
+
+    /**
+     * Method to stop the MediaPlayer.
+     */
+    public void stopMedia() {
+        GameSoundSystem.player.stop();
     }
 
     /**

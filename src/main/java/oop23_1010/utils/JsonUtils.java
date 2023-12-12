@@ -13,9 +13,9 @@ import org.json.JSONObject;
  */
 public class JsonUtils {
 
-    public static final String PROP_FILE_SEPARATOR = "file.separator";
+    private static final String PROP_FILE_SEPARATOR = "file.separator";
 
-    private static String separator = System.getProperty(PROP_FILE_SEPARATOR);
+    public static String separator = System.getProperty(PROP_FILE_SEPARATOR);
 
     // Paths
 
@@ -192,7 +192,7 @@ public class JsonUtils {
     public static void removeElement(String data, String fileName) throws IOException {
         // Get json element if exists
         JSONObject json = loadDatas(fileName);
-        // Add new element
+        // Remove element
         json.remove(data);
 
         if (json.isEmpty()) {

@@ -85,40 +85,40 @@ public class GameView extends View {
     private AnchorPane mainPane;
 
     @FXML
-    private Pane    upLeftSpawn,
-                    upRightSpawn,
-                    downLeftSpawn,
-                    downRightSpawn,
-                    dialogPaneRestart,
-                    dialogPaneMenu,
-                    pausePane,
-                    gameOverPane;
+    private Pane upLeftSpawn,
+            upRightSpawn,
+            downLeftSpawn,
+            downRightSpawn,
+            dialogPaneRestart,
+            dialogPaneMenu,
+            pausePane,
+            gameOverPane;
 
     @FXML
     private GridPane gridPane;
 
     @FXML
-    private Label   labelCoin,
-                    labelScore,
-                    titleCoin,
-                    titleScore,
-                    dialogRestartLabel1,
-                    dialogRestartLabel2,
-                    dialogMenuLabel1,
-                    dialogMenuLabel2,
-                    labelGameOver,
-                    labelGameOverScore;
+    private Label labelCoin,
+            labelScore,
+            titleCoin,
+            titleScore,
+            dialogRestartLabel1,
+            dialogRestartLabel2,
+            dialogMenuLabel1,
+            dialogMenuLabel2,
+            labelGameOver,
+            labelGameOverScore;
 
     @FXML
-    private Button  buttonRiprendi,
-                    buttonRicomincia,
-                    buttonMenu,
-                    dialogMenuYes,
-                    dialogMenuNo,
-                    dialogMenuBack,
-                    dialogRestartYes,
-                    dialogRestartNo,
-                    buttonBackToMenu;
+    private Button buttonRiprendi,
+            buttonRicomincia,
+            buttonMenu,
+            dialogMenuYes,
+            dialogMenuNo,
+            dialogMenuBack,
+            dialogRestartYes,
+            dialogRestartNo,
+            buttonBackToMenu;
 
     @FXML
     private ImageView imagePause;
@@ -211,8 +211,8 @@ public class GameView extends View {
     /**
      * Method to set the listeners to the various buttons in the pause menu.
      * 
-     * @param btnMenu menu button
-     * @param btnResume resume button
+     * @param btnMenu    menu button
+     * @param btnResume  resume button
      * @param btnRestart restart button
      * @param btnDialogY dialog yes button
      * @param btnDialogN dialog no button
@@ -420,6 +420,7 @@ public class GameView extends View {
      * Method to create the game-over pane.
      */
     private void createGameOverPane() {
+        GameSoundSystem.getInstance().stopMedia();
 
         this.gameOverPane.setStyle(
                 "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
@@ -478,7 +479,7 @@ public class GameView extends View {
     public Node getNodeIfTriggered(ShapeBlock block) {
         for (GridBlock node : this.grid) {
             if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()) &&
-                (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
+                    (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
                 return node;
             }
         }

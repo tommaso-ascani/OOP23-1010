@@ -21,7 +21,7 @@ public class GameGridTest {
     }
 
     @Test
-    public void getUpBlockTest() {
+    public void testGetUpBlock() {
         GridBlock gb1 = new GridBlock(2, 2, null, null);
         GridBlock gb2 = new GridBlock(2, 1, null, null);
 
@@ -30,7 +30,7 @@ public class GameGridTest {
     }
 
     @Test
-    public void getDownBlockTest() {
+    public void testGetDownBlock() {
         GridBlock gb1 = new GridBlock(2, 2, null, null);
         GridBlock gb2 = new GridBlock(2, 1, null, null);
 
@@ -39,7 +39,7 @@ public class GameGridTest {
     }
 
     @Test
-    public void getLeftBlockTest() {
+    public void testGetLeftBlock() {
         GridBlock gb1 = new GridBlock(2, 2, null, null);
         GridBlock gb2 = new GridBlock(1, 2, null, null);
 
@@ -48,7 +48,7 @@ public class GameGridTest {
     }
 
     @Test
-    public void getRightBlockTest() {
+    public void testGetRightBlock() {
         GridBlock gb1 = new GridBlock(2, 2, null, null);
         GridBlock gb2 = new GridBlock(3, 2, null, null);
 
@@ -57,7 +57,7 @@ public class GameGridTest {
     }
 
     @Test
-    public void getElementTest() {
+    public void testGetElement() {
 
         Assertions.assertEquals(2, gg.getElement(2, 2).getGridX());
         Assertions.assertEquals(2, gg.getElement(2, 2).getGridY());
