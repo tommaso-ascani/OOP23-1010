@@ -123,7 +123,7 @@ public final class SettingsView extends View {
     }
 
     /**
-     * This method is used to switch automatically from 0 to 100 volume by clicking
+     * This method is used to switch from 0 to 100 volume by clicking
      * on the ImageView.
      */
     public void changeVolumeImage() {
