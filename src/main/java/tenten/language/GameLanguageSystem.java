@@ -66,5 +66,4 @@ public final class GameLanguageSystem {
     public LanguageType getLanguageType() {
         return GameLanguageSystem.languageType;
     }
-
 }

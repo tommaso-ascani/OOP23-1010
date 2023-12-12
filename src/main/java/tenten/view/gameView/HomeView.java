@@ -128,7 +128,7 @@ public final class HomeView extends View {
 
         // Style
 
-        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColorBackground());
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
@@ -210,7 +210,7 @@ public final class HomeView extends View {
     public void createDialogResume() {
 
         dialogPaneResume.setStyle(
-                "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
+                "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
                         + "; -fx-border-width: 2; -fx-border-color: black");
 
         dialogPaneResume.relocate((this.mainPane.getPrefWidth() - dialogPaneResume.getPrefWidth()) / 2,

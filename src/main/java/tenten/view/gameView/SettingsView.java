@@ -51,9 +51,9 @@ public final class SettingsView extends View {
     private Pane settingsPane;
 
     @FXML
-    private Label   settingsLabel, 
-                    volumeLabel, 
-                    languageLabel;
+    private Label settingsLabel,
+            volumeLabel,
+            languageLabel;
 
     @FXML
     private ChoiceBox<String> languageChoiceBox;
@@ -75,7 +75,7 @@ public final class SettingsView extends View {
         this.buttonBack.setText(GameLanguageSystem.getInstance().getLanguageType().getBack());
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
-        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColorBackground());
 
         this.settingsPane.relocate((View.WINDOW_WIDTH / 2) - (this.settingsPane.getPrefWidth() / 2),
                 (View.WINDOW_HEIGHT / 2) - (this.settingsPane.getPrefHeight() / 2));

@@ -9,6 +9,9 @@ import javafx.scene.text.Font;
 import tenten.types.ThemeType;
 import tenten.view.View;
 
+/**
+ * Class that extend VBox, used to represent a theme item in the shop.
+ */
 public class ShopTheme extends VBox {
 
     private ThemeType theme;
@@ -64,35 +67,35 @@ public class ShopTheme extends VBox {
             switch (i) {
                 case 1:
                     pane.setStyle(
-                            "-fx-background-color: " + this.theme.getColor_background() + "; -fx-border-color: black");
+                            "-fx-background-color: " + this.theme.getColorBackground() + "; -fx-border-color: black");
                     break;
                 case 2:
-                    pane.setStyle("-fx-background-color: " + this.theme.getColor_grid() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColorGrid() + "; -fx-border-color: black");
                     break;
                 case 3:
-                    pane.setStyle("-fx-background-color: " + this.theme.getColor_1x1() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor1x1() + "; -fx-border-color: black");
                     break;
                 case 4:
-                    pane.setStyle("-fx-background-color: " + this.theme.getColor_2x2() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor2x2() + "; -fx-border-color: black");
                     break;
                 case 5:
-                    pane.setStyle("-fx-background-color: " + this.theme.getColor_3x3() + "; -fx-border-color: black");
+                    pane.setStyle("-fx-background-color: " + this.theme.getColor3x3() + "; -fx-border-color: black");
                     break;
                 case 6:
                     pane.setStyle(
-                            "-fx-background-color: " + this.theme.getColor_2x1_1x2() + "; -fx-border-color: black");
+                            "-fx-background-color: " + this.theme.getColor2x1or1x2() + "; -fx-border-color: black");
                     break;
                 case 7:
                     pane.setStyle(
-                            "-fx-background-color: " + this.theme.getColor_3x1_1x3() + "; -fx-border-color: black");
+                            "-fx-background-color: " + this.theme.getColor3x1or1x3() + "; -fx-border-color: black");
                     break;
                 case 8:
                     pane.setStyle(
-                            "-fx-background-color: " + this.theme.getColor_4x1_1x4() + "; -fx-border-color: black");
+                            "-fx-background-color: " + this.theme.getColor4x1or1x4() + "; -fx-border-color: black");
                     break;
                 case 9:
                     pane.setStyle(
-                            "-fx-background-color: " + this.theme.getColor_5x1_1x5() + "; -fx-border-color: black");
+                            "-fx-background-color: " + this.theme.getColor5x1or1x5() + "; -fx-border-color: black");
                     break;
                 default:
                     break;

@@ -54,7 +54,7 @@ public final class GameSoundSystem {
      * 
      * @param sound
      */
-    public void setAudioClip(SoundType sound) {
+    public void setAudioClip(final SoundType sound) {
         GameSoundSystem.aClip = new AudioClip(getClass().getResource(sound.getPath()).toExternalForm());
         GameSoundSystem.aClip.setVolume(GameSoundSystem.volume.doubleValue());
 
@@ -69,6 +69,8 @@ public final class GameSoundSystem {
 
     /**
      * Method to get the audio clip.
+     * 
+     * @return GameSoundSystem.aClip
      */
     public AudioClip getAudioClip() {
         return GameSoundSystem.aClip;
@@ -88,7 +90,7 @@ public final class GameSoundSystem {
      * 
      * @param music
      */
-    public void setMediaPlayer(SoundType music) {
+    public void setMediaPlayer(final SoundType music) {
         GameSoundSystem.media = new Media(getClass().getResource(music.getPath()).toExternalForm());
         GameSoundSystem.player = new MediaPlayer(media);
         GameSoundSystem.player.setOnEndOfMedia(new Runnable() {
@@ -132,6 +134,8 @@ public final class GameSoundSystem {
 
     /**
      * Method to get the volume.
+     * 
+     * @return GameSoundSystem.volume
      */
     public Double getVolume() {
         return GameSoundSystem.volume.doubleValue() * 100.0;
@@ -139,6 +143,8 @@ public final class GameSoundSystem {
 
     /**
      * Method to get the volume's max value.
+     * 
+     * @return GameSoundSystem.MAX_VOLUME
      */
     public Double getMaxVolume() {
         return GameSoundSystem.MAX_VOLUME;
@@ -146,6 +152,8 @@ public final class GameSoundSystem {
 
     /**
      * Method to get the volume's min value.
+     * 
+     * @return GameSoundSystem.MIN_VOLUME
      */
     public Double getMinVolume() {
         return GameSoundSystem.MIN_VOLUME;

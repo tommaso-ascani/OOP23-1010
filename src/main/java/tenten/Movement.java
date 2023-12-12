@@ -5,7 +5,7 @@ import javafx.scene.Node;
 /**
  * Class that allow object to be dragged on view.
  */
-public class Movement {
+public final class Movement {
 
     /**
      * Start position of the object.
@@ -19,7 +19,7 @@ public class Movement {
      * 
      * @param node The node to make draggable.
      */
-    public static void makeDraggable(Node node) {
+    public static void makeDraggable(final Node node) {
 
         node.setOnMousePressed(e -> {
             startX = e.getSceneX() - node.getTranslateX();
@@ -30,5 +30,11 @@ public class Movement {
             node.setTranslateX(e.getSceneX() - startX);
             node.setTranslateY(e.getSceneY() - startY);
         });
+    }
+
+    /**
+     * Default constructor.
+     */
+    private Movement() {
     }
 }

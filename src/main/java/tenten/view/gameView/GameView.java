@@ -181,11 +181,11 @@ public final class GameView extends View {
      */
     public void createPausePane() {
 
-        this.pausePane.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
+        this.pausePane.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
                 + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
+        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
                 + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
+        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
                 + "; -fx-border-width: 2; -fx-border-color: black");
 
         this.pausePane.relocate(((this.mainPane.getPrefWidth() / 2) - (this.pausePane.getPrefWidth() / 2)),
@@ -213,27 +213,27 @@ public final class GameView extends View {
     /**
      * Method to set the listeners to the various buttons in the pause menu.
      * 
-     * @param btnMenu menu button
-     * @param btnResume resume button
-     * @param btnRestart restart button
-     * @param btnDialogY dialog yes button
-     * @param btnDialogN dialog no button
-     * @param btnMenuBack button back
-     * @param btnMenuY button yes
-     * @param btnMenuN button no
+     * @param btnMenu        menu button
+     * @param btnResume      resume button
+     * @param btnRestart     restart button
+     * @param btnDialogY     dialog yes button
+     * @param btnDialogN     dialog no button
+     * @param btnMenuBack    button back
+     * @param btnMenuY       button yes
+     * @param btnMenuN       button no
      * @param dialogPaneMenu dialog menu pane
-     * @param dialogPane dialog pane
+     * @param dialogPane     dialog pane
      */
     private void setListenersPausePane(final Button btnMenu,
-                                       final Button btnResume,
-                                       final Button btnRestart,
-                                       final Button btnDialogY,
-                                       final Button btnDialogN,
-                                       final Button btnMenuBack,
-                                       final Button btnMenuY,
-                                       final Button btnMenuN,
-                                       final Pane dialogPaneMenu,
-                                       final Pane dialogPane) {
+            final Button btnResume,
+            final Button btnRestart,
+            final Button btnDialogY,
+            final Button btnDialogN,
+            final Button btnMenuBack,
+            final Button btnMenuY,
+            final Button btnMenuN,
+            final Pane dialogPaneMenu,
+            final Pane dialogPane) {
 
         btnResume.setOnMouseClicked(e -> {
 
@@ -434,7 +434,7 @@ public final class GameView extends View {
         GameSoundSystem.getInstance().stopMedia();
 
         this.gameOverPane.setStyle(
-                "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_background()
+                "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
                         + "; -fx-border-width: 2; -fx-border-color: black");
 
         this.gameOverPane.relocate((this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
@@ -489,8 +489,8 @@ public final class GameView extends View {
      */
     public Node getNodeIfTriggered(final ShapeBlock block) {
         for (GridBlock node : this.grid) {
-            if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()) 
-                && (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
+            if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX())
+                    && (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
                 return node;
             }
         }
@@ -510,7 +510,7 @@ public final class GameView extends View {
                 gridBlock.setPrefWidth(grid.getGridCellSize());
                 if (gridBlock.getFill() == null) {
                     gridBlock.setStyle(
-                            "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_grid()
+                            "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorGrid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 } else {
                     gridBlock.setStyle(
@@ -524,12 +524,12 @@ public final class GameView extends View {
             for (int rowIndex = 0; rowIndex < grid.getGridSize(); rowIndex++) {
                 for (int columnIndex = 0; columnIndex < grid.getGridSize(); columnIndex++) {
                     GridBlock aPane = new GridBlock(columnIndex, rowIndex, null,
-                            ThemeUtils.getSelectedTheme().getColor_grid());
+                            ThemeUtils.getSelectedTheme().getColorGrid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());
                     aPane.setStyle(
-                            "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColor_grid()
+                            "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorGrid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
 
                     this.grid.add(aPane);
@@ -562,7 +562,7 @@ public final class GameView extends View {
         this.upRightSpawn.setStyle(spawnPanlesStyle);
         this.downRightSpawn.setStyle(spawnPanlesStyle);
 
-        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColorBackground());
 
         this.gridPane.setStyle(
                 "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE

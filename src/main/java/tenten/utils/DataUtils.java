@@ -187,7 +187,7 @@ public final class DataUtils {
 
                     GridBlock aPane = new GridBlock((Integer) a.getJSONObject(i).get("X"),
                             (Integer) a.getJSONObject(i).get("Y"),
-                            color, ThemeUtils.getSelectedTheme().getColor_grid());
+                            color, ThemeUtils.getSelectedTheme().getColorGrid());
 
                     grid.add(aPane);
                 }

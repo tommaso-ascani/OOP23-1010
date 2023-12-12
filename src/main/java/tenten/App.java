@@ -11,7 +11,8 @@ public final class App {
     /**
      * Deafult constructor.
      */
-    private App() { }
+    private App() {
+    }
 
     /**
      * Application main.

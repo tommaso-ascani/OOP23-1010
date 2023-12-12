@@ -6,6 +6,9 @@ package tenten.types;
  */
 public enum LanguageType {
 
+    /**
+     * Define all the italian strings used in the app.
+     */
     ITA("Grandezza della griglia: ",
             "IMPOSTAZIONI",
             "NEGOZIO",
@@ -38,6 +41,9 @@ public enum LanguageType {
             "Vuoi selezionare questo tema?",
             "Vai al menu"),
 
+    /**
+     * Define all the english strings used in the app.
+     */
     ENG("Grid size: ",
             "SETTINGS",
             "SHOP",
@@ -102,37 +108,37 @@ public enum LanguageType {
     private String shopQuestionSetTheme;
     private String backToMenu;
 
-    LanguageType(String gridSize,
-            String settings,
-            String shop,
-            String volume,
-            String language,
-            String apply,
-            String back,
-            String coins,
-            String score,
-            String resume,
-            String restart,
-            String menu,
-            String yes,
-            String no,
-            String saveAndQuit,
-            String quit,
-            String resumeTheGame,
-            String deleteTheGame,
-            String savedGameLabel,
-            String dialogRestartLabel1,
-            String dialogRestartLabel2,
-            String dialogMenuLabel1,
-            String dialogMenuLabel2,
-            String purchasedSelected,
-            String purchasedNotSelected,
-            String alertLabel,
-            String buy,
-            String set,
-            String shopQuestionBuyItem,
-            String shopQuestionSetTheme,
-            String backToMenu) {
+    LanguageType(final String gridSize,
+            final String settings,
+            final String shop,
+            final String volume,
+            final String language,
+            final String apply,
+            final String back,
+            final String coins,
+            final String score,
+            final String resume,
+            final String restart,
+            final String menu,
+            final String yes,
+            final String no,
+            final String saveAndQuit,
+            final String quit,
+            final String resumeTheGame,
+            final String deleteTheGame,
+            final String savedGameLabel,
+            final String dialogRestartLabel1,
+            final String dialogRestartLabel2,
+            final String dialogMenuLabel1,
+            final String dialogMenuLabel2,
+            final String purchasedSelected,
+            final String purchasedNotSelected,
+            final String alertLabel,
+            final String buy,
+            final String set,
+            final String shopQuestionBuyItem,
+            final String shopQuestionSetTheme,
+            final String backToMenu) {
         this.gridSize = gridSize;
         this.settings = settings;
         this.shop = shop;
@@ -166,127 +172,282 @@ public enum LanguageType {
         this.backToMenu = backToMenu;
     }
 
+    /**
+     * Getter of gridSize string.
+     * 
+     * @return gridSize string.
+     */
     public String getGridSize() {
         return gridSize;
     }
 
+    /**
+     * Getter of settings string.
+     * 
+     * @return settings string.
+     */
     public String getSettings() {
         return settings;
     }
 
+    /**
+     * Getter of shop string.
+     * 
+     * @return shop string.
+     */
     public String getShop() {
         return shop;
     }
 
+    /**
+     * Getter of volume string.
+     * 
+     * @return volume string.
+     */
     public String getVolume() {
         return volume;
     }
 
+    /**
+     * Getter of language string.
+     * 
+     * @return language string.
+     */
     public String getLanguage() {
         return language;
     }
 
+    /**
+     * Getter of apply string.
+     * 
+     * @return apply string.
+     */
     public String getApply() {
         return apply;
     }
 
+    /**
+     * Getter of back string.
+     * 
+     * @return back string.
+     */
     public String getBack() {
         return back;
     }
 
+    /**
+     * Getter of coins string.
+     * 
+     * @return coins string.
+     */
     public String getCoins() {
         return coins;
     }
 
+    /**
+     * Getter of score string.
+     * 
+     * @return score string.
+     */
     public String getScore() {
         return score;
     }
 
+    /**
+     * Getter of resume string.
+     * 
+     * @return resume string.
+     */
     public String getResume() {
         return resume;
     }
 
+    /**
+     * Getter of restart string.
+     * 
+     * @return restart string.
+     */
     public String getRestart() {
         return restart;
     }
 
+    /**
+     * Getter of menu string.
+     * 
+     * @return menu string.
+     */
     public String getMenu() {
         return menu;
     }
 
+    /**
+     * Getter of yes string.
+     * 
+     * @return yes string.
+     */
     public String getYes() {
         return yes;
     }
 
+    /**
+     * Getter of no string.
+     * 
+     * @return no string.
+     */
     public String getNo() {
         return no;
     }
 
+    /**
+     * Getter of save and quit string.
+     * 
+     * @return save and quit string.
+     */
     public String getSaveAndQuit() {
         return saveAndQuit;
     }
 
+    /**
+     * Getter of quit string.
+     * 
+     * @return quit string.
+     */
     public String getQuit() {
         return quit;
     }
 
+    /**
+     * Getter of resume the game string.
+     * 
+     * @return resume the game string.
+     */
     public String getResumeTheGame() {
         return resumeTheGame;
     }
 
+    /**
+     * Getter of delete the game string.
+     *
+     * @return delete the game string.
+     */
     public String getDeleteTheGame() {
         return deleteTheGame;
     }
 
+    /**
+     * Getter of saved game label string.
+     * 
+     * @return saved game label string.
+     */
     public String getSavedGameLabel() {
         return savedGameLabel;
     }
 
+    /**
+     * Getter of dialog restart label 1 string.
+     * 
+     * @return dialog restart label 1 string.
+     */
     public String getDialogRestartLabel1() {
         return dialogRestartLabel1;
     }
 
+    /**
+     * Getter of dialog restart label 2 string.
+     * 
+     * @return dialog restart label 2 string.
+     */
     public String getDialogRestartLabel2() {
         return dialogRestartLabel2;
     }
 
+    /**
+     * Getter of dialog menu label 1 string.
+     * 
+     * @return dialog menu label 1 string.
+     */
     public String getDialogMenuLabel1() {
         return dialogMenuLabel1;
     }
 
+    /**
+     * Getter of dialog menu label 2 string.
+     * 
+     * @return dialog menu label 2 string.
+     */
     public String getDialogMenuLabel2() {
         return dialogMenuLabel2;
     }
 
+    /**
+     * Getter of purchased selected string.
+     * 
+     * @return purchased selected string.
+     */
     public String getPurchasedSelected() {
         return purchasedSelected;
     }
 
+    /**
+     * Getter of purchased not selected string.
+     * 
+     * @return purchased not selected string.
+     */
     public String getPurchasedNotSelected() {
         return purchasedNotSelected;
     }
 
+    /**
+     * Getter of alert label string.
+     * 
+     * @return alert label string.
+     */
     public String getAlertLabel() {
         return alertLabel;
     }
 
+    /**
+     * Getter of buy string.
+     * 
+     * @return buy string.
+     */
     public String getBuy() {
         return buy;
     }
 
+    /**
+     * Getter of set string.
+     * 
+     * @return set string.
+     */
     public String getSet() {
         return set;
     }
 
+    /**
+     * Getter of shop question buy item string.
+     * 
+     * @return shop question buy item string.
+     */
     public String getShopQuestionBuyItem() {
         return shopQuestionBuyItem;
 
     }
 
+    /**
+     * Getter of shop question set theme string.
+     * 
+     * @return shop question set theme string.
+     */
     public String getShopQuestionSetTheme() {
         return shopQuestionSetTheme;
     }
 
+    /**
+     * Getter of back to menu string.
+     * 
+     * @return back to menu string.
+     */
     public String getBackToMenu() {
         return backToMenu;
     }

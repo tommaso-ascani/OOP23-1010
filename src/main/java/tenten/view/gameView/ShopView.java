@@ -44,17 +44,17 @@ public final class ShopView extends View {
     private AnchorPane mainPane;
 
     @FXML
-    private Button  buttonBackToHome, 
-                    buttonConfirm,
-                    buttonBack;
+    private Button buttonBackToHome,
+            buttonConfirm,
+            buttonBack;
 
     @FXML
     private Pane purchasePane;
 
     @FXML
-    private Label   titleLabel, 
-                    questionLabel, 
-                    labelAlert;
+    private Label titleLabel,
+            questionLabel,
+            labelAlert;
 
     @FXML
     private VBox verticalBox;
@@ -85,7 +85,7 @@ public final class ShopView extends View {
 
         // Style
 
-        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
+        this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColorBackground());
 
         this.loadThemes();
         this.createPurchasePane();
@@ -138,7 +138,7 @@ public final class ShopView extends View {
      */
     public void createPurchasePane() {
         this.purchasePane.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-background-color: "
-                + ThemeUtils.getSelectedTheme().getColor_background());
+                + ThemeUtils.getSelectedTheme().getColorBackground());
         this.purchasePane.relocate((this.mainPane.getPrefWidth() - this.purchasePane.getPrefWidth()) / 2,
                 (this.mainPane.getPrefHeight() - this.purchasePane.getPrefHeight()) / 2);
     }
