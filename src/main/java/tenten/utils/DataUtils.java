@@ -11,7 +11,12 @@ import tenten.view.gameView.HomeView;
 /**
  * Class that manage saving/loading saved match data from/to json file.
  */
-public class DataUtils {
+public final class DataUtils {
+
+    /**
+     * Deafult constructor.
+     */
+    private DataUtils() { }
 
     /**
      * Method to save all match data (score, grid) in the json file.
@@ -19,7 +24,7 @@ public class DataUtils {
      * @param score to be saved.
      * @param grid  to be saved.
      */
-    public static void saveMatchData(Integer score, GameGrid<GridBlock> grid) {
+    public static void saveMatchData(final Integer score, final GameGrid<GridBlock> grid) {
         try {
             JsonUtils.flushJson(JsonUtils.MATCH_FILE);
 
@@ -29,9 +34,9 @@ public class DataUtils {
                     JsonUtils.MATCH_FILE);
 
             if (JsonUtils.ifDataExist(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE)) {
-                Integer best_score = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
+                Integer bestScore = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
                         JsonUtils.BEST_SCORE_FILE);
-                if (best_score < score) {
+                if (bestScore < score) {
                     JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score),
                             JsonUtils.BEST_SCORE_FILE);
                 }
@@ -70,11 +75,11 @@ public class DataUtils {
      * @param score to be saved.
      * @param size  to be saved.
      */
-    public static void saveBestScore(Integer score, String size) {
+    public static void saveBestScore(final Integer score, final String size) {
         try {
             if (JsonUtils.ifDataExist(size, JsonUtils.BEST_SCORE_FILE)) {
-                Integer best_score = (Integer) JsonUtils.loadData(size, JsonUtils.BEST_SCORE_FILE);
-                if (best_score < score) {
+                Integer bestScore = (Integer) JsonUtils.loadData(size, JsonUtils.BEST_SCORE_FILE);
+                if (bestScore < score) {
                     JsonUtils.addElement(new Pair<String, Object>(size, score), JsonUtils.BEST_SCORE_FILE);
                 }
             } else {
@@ -92,7 +97,7 @@ public class DataUtils {
      * 
      * @param coins to be saved.
      */
-    public static void saveCoins(Integer coins) {
+    public static void saveCoins(final Integer coins) {
         try {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, coins), JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {

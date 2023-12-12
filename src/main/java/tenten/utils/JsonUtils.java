@@ -11,18 +11,28 @@ import org.json.JSONObject;
  * Class that manage saving/loading saved match data, best scores data and
  * option data from/to json file.
  */
-public class JsonUtils {
+public final class JsonUtils {
 
+    /**
+     * Deafult constructor.
+     */
+    private JsonUtils() { }
+
+    /**
+     * Static field used to assign separator.
+     */
     private static final String PROP_FILE_SEPARATOR = "file.separator";
 
-    public static String separator = System.getProperty(PROP_FILE_SEPARATOR);
+    /**
+     * Static field to get operation system separtor.
+     */
+    private static String separator = System.getProperty(PROP_FILE_SEPARATOR);
 
-    // Paths
-
+    /**
+     * Static field used to create data path base.
+     */
     public static final String DATA_PATH = "src" + separator + "main" + separator + "resources" + separator + "config"
             + separator;
-
-    // Files
 
     /**
      * Static field used to get the saved match's string file used as key in json
@@ -100,7 +110,7 @@ public class JsonUtils {
      * @return The data founded.
      * @throws IOException
      */
-    public static Object loadData(String data, String fileName) throws IOException {
+    public static Object loadData(final String data, final String fileName) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
         // Create new JSONObject with file data
@@ -117,7 +127,7 @@ public class JsonUtils {
      * @return The array founded.
      * @throws IOException
      */
-    public static JSONArray loadDataArray(String data, String fileName) throws IOException {
+    public static JSONArray loadDataArray(final String data, final String fileName) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
         // Create new JSONObject with file data
@@ -133,7 +143,7 @@ public class JsonUtils {
      * @return All data.
      * @throws IOException
      */
-    public static JSONObject loadDatas(String fileName) throws IOException {
+    public static JSONObject loadDatas(final String fileName) throws IOException {
         // Read file
         String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
         // Create new JSONObject with file data
@@ -149,7 +159,7 @@ public class JsonUtils {
      * @param fileName to save on.
      * @throws IOException
      */
-    private static void saveMatchData(JSONObject json, String fileName) throws IOException {
+    private static void saveMatchData(final JSONObject json, final String fileName) throws IOException {
         // Create directory if doesn't exist
         Files.createDirectories(Paths.get(DATA_PATH));
         // Write json on file
@@ -163,7 +173,7 @@ public class JsonUtils {
      * @param fileName to save on.
      * @throws IOException
      */
-    public static void addElement(Pair<String, Object> element, String fileName) throws IOException {
+    public static void addElement(final Pair<String, Object> element, final String fileName) throws IOException {
         // Create local variable
         JSONObject json;
 
@@ -189,7 +199,7 @@ public class JsonUtils {
      * @param fileName to remove on.
      * @throws IOException
      */
-    public static void removeElement(String data, String fileName) throws IOException {
+    public static void removeElement(final String data, final String fileName) throws IOException {
         // Get json element if exists
         JSONObject json = loadDatas(fileName);
         // Remove element
@@ -210,7 +220,7 @@ public class JsonUtils {
      * @param fileName to flush.
      * @throws IOException
      */
-    public static void flushJson(String fileName) throws IOException {
+    public static void flushJson(final String fileName) throws IOException {
         if (jsonExist(fileName)) {
             // Delete json file
             Files.delete(Paths.get(DATA_PATH + fileName + ".json"));
@@ -224,14 +234,13 @@ public class JsonUtils {
      * @return If exist.
      * @throws IOException
      */
-    public static Boolean jsonExist(String fileName) throws IOException {
+    public static Boolean jsonExist(final String fileName) throws IOException {
         // Check if exist some data to load
         if (Files.exists(Paths.get(DATA_PATH + fileName + ".json"))
                 && Files.readAllBytes(Paths.get(DATA_PATH + fileName + ".json")).length > 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -242,7 +251,7 @@ public class JsonUtils {
      * @return If exist.
      * @throws IOException
      */
-    public static Boolean ifDataExist(String data, String fileName) throws IOException {
+    public static Boolean ifDataExist(final String data, final String fileName) throws IOException {
         if (jsonExist(fileName)) {
             // Read file
             String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));

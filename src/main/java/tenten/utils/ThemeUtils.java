@@ -13,6 +13,11 @@ import tenten.types.ThemeType;
 public final class ThemeUtils {
 
     /**
+     * Deafult constructor.
+     */
+    private ThemeUtils() { }
+
+    /**
      * Selected and active theme.
      */
     private static ThemeType selectedTheme;
@@ -22,7 +27,7 @@ public final class ThemeUtils {
      * 
      * @param newTheme type of theme.
      */
-    public static void setSelectedTheme(ThemeType newTheme) {
+    public static void setSelectedTheme(final ThemeType newTheme) {
         selectedTheme = newTheme;
     }
 

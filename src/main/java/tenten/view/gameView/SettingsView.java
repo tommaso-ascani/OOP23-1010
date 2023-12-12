@@ -25,7 +25,7 @@ import tenten.view.ViewSwitcher;
 /**
  * Class that implements all methods to use the settings view.
  */
-public class SettingsView extends View {
+public final class SettingsView extends View {
 
     /**
      * List of languages.
@@ -122,7 +122,7 @@ public class SettingsView extends View {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
     }
 
-    /*
+    /**
      * This method is used to switch automatically from 0 to 100 volume by clicking
      * on the ImageView.
      */

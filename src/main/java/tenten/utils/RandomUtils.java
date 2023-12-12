@@ -2,7 +2,15 @@ package tenten.utils;
 
 import tenten.types.BlockType;
 
-public class RandomUtils {
+/**
+ * Class with random utility methods.
+ */
+public final class RandomUtils {
+
+    /**
+     * Deafult constructor.
+     */
+    private RandomUtils() { }
 
     /**
      * Method randomize a new item to be generated.

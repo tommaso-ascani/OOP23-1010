@@ -31,7 +31,7 @@ import tenten.view.ViewSwitcher;
 /**
  * Class that implements all methods to use the game view.
  */
-public class GameView extends View {
+public final class GameView extends View {
 
     /**
      * Game grid object.
@@ -175,7 +175,7 @@ public class GameView extends View {
         this.setObjectLocation();
     }
 
-    /*
+    /**
      * Method to create the pause pane and all the sub-object, like button and pane.
      * Set size, style, position and text.
      */
@@ -213,23 +213,27 @@ public class GameView extends View {
     /**
      * Method to set the listeners to the various buttons in the pause menu.
      * 
-     * @param btnMenu    menu button
-     * @param btnResume  resume button
+     * @param btnMenu menu button
+     * @param btnResume resume button
      * @param btnRestart restart button
      * @param btnDialogY dialog yes button
      * @param btnDialogN dialog no button
+     * @param btnMenuBack button back
+     * @param btnMenuY button yes
+     * @param btnMenuN button no
+     * @param dialogPaneMenu dialog menu pane
      * @param dialogPane dialog pane
      */
-    private void setListenersPausePane(Button btnMenu,
-            Button btnResume,
-            Button btnRestart,
-            Button btnDialogY,
-            Button btnDialogN,
-            Button btnMenuBack,
-            Button btnMenuY,
-            Button btnMenuN,
-            Pane dialogPaneMenu,
-            Pane dialogPane) {
+    private void setListenersPausePane(final Button btnMenu,
+                                       final Button btnResume,
+                                       final Button btnRestart,
+                                       final Button btnDialogY,
+                                       final Button btnDialogN,
+                                       final Button btnMenuBack,
+                                       final Button btnMenuY,
+                                       final Button btnMenuN,
+                                       final Pane dialogPaneMenu,
+                                       final Pane dialogPane) {
 
         btnResume.setOnMouseClicked(e -> {
 
@@ -338,7 +342,7 @@ public class GameView extends View {
      * 
      * @param block block on which set the listener.
      */
-    public void setBlockReadyToBePlaced(ShapeBlock block) {
+    public void setBlockReadyToBePlaced(final ShapeBlock block) {
         block.setOnMouseReleased(e -> {
 
             GridBlock node = (GridBlock) this.getNodeIfTriggered(block);
@@ -471,7 +475,7 @@ public class GameView extends View {
         this.titleScore.setOpacity(0.5);
     }
 
-    private void setListenersGameOverPane(Button buttonBackToMenu) {
+    private void setListenersGameOverPane(final Button buttonBackToMenu) {
         buttonBackToMenu.setOnMouseClicked(e -> {
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
         });
@@ -483,10 +487,10 @@ public class GameView extends View {
      * @param block to check.
      * @return node triggered.
      */
-    public Node getNodeIfTriggered(ShapeBlock block) {
+    public Node getNodeIfTriggered(final ShapeBlock block) {
         for (GridBlock node : this.grid) {
-            if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()) &&
-                    (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
+            if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()) 
+                && (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
                 return node;
             }
         }
@@ -517,9 +521,9 @@ public class GameView extends View {
                 this.gridPane.add(gridBlock, gridBlock.getGridX(), gridBlock.getGridY());
             }
         } else {
-            for (int RowIndex = 0; RowIndex < grid.getGridSize(); RowIndex++) {
-                for (int ColumnIndex = 0; ColumnIndex < grid.getGridSize(); ColumnIndex++) {
-                    GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null,
+            for (int rowIndex = 0; rowIndex < grid.getGridSize(); rowIndex++) {
+                for (int columnIndex = 0; columnIndex < grid.getGridSize(); columnIndex++) {
+                    GridBlock aPane = new GridBlock(columnIndex, rowIndex, null,
                             ThemeUtils.getSelectedTheme().getColor_grid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
@@ -529,7 +533,7 @@ public class GameView extends View {
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
 
                     this.grid.add(aPane);
-                    this.gridPane.add(aPane, ColumnIndex, RowIndex);
+                    this.gridPane.add(aPane, columnIndex, rowIndex);
                 }
             }
         }
@@ -551,12 +555,12 @@ public class GameView extends View {
      */
     public void setPanelsStyle() {
 
-        String SpawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10";
+        String spawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10";
 
-        this.upLeftSpawn.setStyle(SpawnPanlesStyle);
-        this.downLeftSpawn.setStyle(SpawnPanlesStyle);
-        this.upRightSpawn.setStyle(SpawnPanlesStyle);
-        this.downRightSpawn.setStyle(SpawnPanlesStyle);
+        this.upLeftSpawn.setStyle(spawnPanlesStyle);
+        this.downLeftSpawn.setStyle(spawnPanlesStyle);
+        this.upRightSpawn.setStyle(spawnPanlesStyle);
+        this.downRightSpawn.setStyle(spawnPanlesStyle);
 
         this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColor_background());
 
@@ -626,7 +630,7 @@ public class GameView extends View {
         return gridWidth;
     }
 
-    /*
+    /**
      * This method switch to pause pane.
      */
     public void switchToPauseView() {
@@ -655,7 +659,7 @@ public class GameView extends View {
         this.labelScore.setOpacity(0.5);
     }
 
-    /*
+    /**
      * Method to create new random placeable item.
      */
     public void createNewPuzzles() {

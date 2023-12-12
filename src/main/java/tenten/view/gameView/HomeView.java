@@ -24,7 +24,7 @@ import tenten.view.ViewSwitcher;
 /**
  * Class that implements all methods to use the home view.
  */
-public class HomeView extends View {
+public final class HomeView extends View {
 
     /**
      * Grid size selected by user.
@@ -132,7 +132,7 @@ public class HomeView extends View {
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
-                JSONObject best_score = JsonUtils.loadDatas(JsonUtils.BEST_SCORE_FILE);
+                JSONObject bestScore = JsonUtils.loadDatas(JsonUtils.BEST_SCORE_FILE);
 
                 Integer padding = 0;
 
@@ -145,7 +145,7 @@ public class HomeView extends View {
                                 (padding * 25) + 5);
                         this.bestScore.setAlignment(Pos.CENTER);
                         this.bestScore.setText("Best Score on grid " + ((i + 1) * 5) + " ---> "
-                                + String.valueOf(best_score.get(String.valueOf((i + 1) * 5))));
+                                + String.valueOf(bestScore.get(String.valueOf((i + 1) * 5))));
                         this.mainPane.getChildren().add(this.bestScore);
                         padding++;
                     }
@@ -174,21 +174,21 @@ public class HomeView extends View {
 
     }
 
-    /*
+    /**
      * This method switch to setting view.
      */
     public void switchToSettingsView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.SETTINGS);
     }
 
-    /*
+    /**
      * This method switch to shop view.
      */
     public void switchToShopView() {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.SHOP);
     }
 
-    /*
+    /**
      * This method switch to game view and set the grid size if is a new game.
      */
     public void switchToPlayView() {
@@ -196,14 +196,14 @@ public class HomeView extends View {
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
     }
 
-    /*
+    /**
      * Method to quit the game.
      */
     public void quitGame() {
         System.exit(0);
     }
 
-    /*
+    /**
      * Method to create and locate all nodes in the dialog pane
      * for resume a game.
      */
@@ -230,7 +230,10 @@ public class HomeView extends View {
      * @param btnResume  the resume button.
      * @param paneResume the dialog resume pane.
      */
-    private void setListenersResumePane(Button btnBack, Button btnDelete, Button btnResume, Pane paneResume) {
+    private void setListenersResumePane(final Button btnBack, 
+                                        final Button btnDelete, 
+                                        final Button btnResume, 
+                                        final Pane paneResume) {
         btnBack.setOnMouseClicked(e -> {
             paneResume.setVisible(false);
         });

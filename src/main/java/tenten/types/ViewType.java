@@ -5,12 +5,24 @@ package tenten.types;
  */
 public enum ViewType {
 
+    /**
+     * HomeView.
+     */
     HOME("HomeView"),
 
+    /**
+     * SettingsView.
+     */
     SETTINGS("SettingsView"),
 
+    /**
+     * ShopView.
+     */
     SHOP("ShopView"),
 
+    /**
+     * GameView.
+     */
     GAME("GameView");
 
     private static final String PREFIX = "layouts/";
@@ -22,7 +34,7 @@ public enum ViewType {
     }
 
     /**
-     * Method to return the views's path
+     * Method to return the views's path.
      * 
      * @return String of the view's path
      */

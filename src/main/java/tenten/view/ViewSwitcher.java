@@ -17,7 +17,7 @@ public class ViewSwitcher {
      * ViewSwitcher istance.
      */
     private static ViewSwitcher instance;
-    
+
     /**
      * Current view on which work.
      */

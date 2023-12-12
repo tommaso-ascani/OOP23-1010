@@ -23,7 +23,7 @@ import tenten.view.ViewSwitcher;
 /**
  * Class that implements all methods to use the shop view.
  */
-public class ShopView extends View {
+public final class ShopView extends View {
 
     /**
      * Vbox lateral space at right and left.
@@ -151,7 +151,7 @@ public class ShopView extends View {
      * @param isPurchased   if item is purchased.
      * @param shopThemeItem on which set the listener.
      */
-    public void setListenerIfShopThemeItemPurchased(Boolean isPurchased, ShopTheme shopThemeItem) {
+    public void setListenerIfShopThemeItemPurchased(final Boolean isPurchased, final ShopTheme shopThemeItem) {
         if (isPurchased) {
             shopThemeItem.setOnMouseClicked(e -> {
                 this.questionLabel
@@ -174,8 +174,8 @@ public class ShopView extends View {
             });
         } else {
             shopThemeItem.setOnMouseClicked(e -> {
-                this.questionLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getShopQuestionBuyItem() +
-                        shopThemeItem.getTheme().getCost() + " "
+                this.questionLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getShopQuestionBuyItem()
+                        + shopThemeItem.getTheme().getCost() + " "
                         + GameLanguageSystem.getInstance().getLanguageType().getCoins() + "?");
                 this.questionLabel.setPrefSize(this.purchasePane.getPrefWidth(), 80);
 
