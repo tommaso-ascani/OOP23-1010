@@ -15,6 +15,7 @@ val javaFXModules = listOf("base", "controls", "fxml", "swing", "graphics", "med
 val supportedPlatforms = listOf("linux", "mac", "win")
 
 dependencies {
+
     val junitVersion = "5.9.2"
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
@@ -38,6 +39,13 @@ tasks.test {
     }
 }
 
+tasks.jar {
+    val mainResources = sourceSets.getByName("main").resources
+    from(mainResources) {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+}
+
 application {
-    mainClass.set("app.src.main.java.javafx.App")
+    mainClass.set("oop23_1010.App")
 }
