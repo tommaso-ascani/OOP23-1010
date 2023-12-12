@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oop23_1010.view.gameView.SettingsView">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="tenten.view.gameView.SettingsView">
    <children>
       <Pane fx:id="settingsPane" prefHeight="450.0" prefWidth="800.0">
          <children>

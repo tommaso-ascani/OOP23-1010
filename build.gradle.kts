@@ -47,5 +47,5 @@ tasks.jar {
 }
 
 application {
-    mainClass.set("oop23_1010.App")
+    mainClass.set("tenten.App")
 }

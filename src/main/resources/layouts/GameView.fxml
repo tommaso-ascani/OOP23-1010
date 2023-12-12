@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oop23_1010.view.gameView.GameView">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="tenten.view.gameView.GameView">
    <children>
       <Label fx:id="titleCoin" prefWidth="150.0" prefHeight="20.0" alignment="CENTER">
          <font>
