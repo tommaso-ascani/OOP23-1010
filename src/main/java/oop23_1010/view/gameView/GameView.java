@@ -1,5 +1,6 @@
 package oop23_1010.view.gameView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -21,6 +22,7 @@ import oop23_1010.types.BlockType;
 import oop23_1010.types.SoundType;
 import oop23_1010.types.ViewType;
 import oop23_1010.utils.DataUtils;
+import oop23_1010.utils.JsonUtils;
 import oop23_1010.utils.RandomUtils;
 import oop23_1010.utils.ThemeUtils;
 import oop23_1010.view.View;
@@ -412,6 +414,11 @@ public class GameView extends View {
                 DataUtils.saveBestScore(this.score, String.valueOf(this.grid.getGridSize()));
                 this.createGameOverPane();
                 this.gameOverPane.setVisible(true);
+                try {
+                    JsonUtils.flushJson(JsonUtils.MATCH_FILE);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
             }
         });
     }

@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 public class GameGridTest {
 
-    private GameGrid<GridBlock> gg;
+    private static GameGrid<GridBlock> gg;
 
     @BeforeAll
-    public void setup() {
+    public static void setup() {
         gg = new GameGrid<>(5);
         for (int RowIndex = 0; RowIndex < gg.getGridSize(); RowIndex++) {
             for (int ColumnIndex = 0; ColumnIndex < gg.getGridSize(); ColumnIndex++) {

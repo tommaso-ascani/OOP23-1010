@@ -19,7 +19,7 @@ public class JsonUtils {
 
     // Paths
 
-    private static final String DATA_PATH = "src" + separator + "main" + separator + "resources" + separator + "config"
+    public static final String DATA_PATH = "src" + separator + "main" + separator + "resources" + separator + "config"
             + separator;
 
     // Files
