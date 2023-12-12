@@ -197,6 +197,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Return the row at the passed index.
      * 
+     * 
      * @param index
      * @return ArrayList
      */
@@ -214,6 +215,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
 
     /**
      * Return the column at the passed index.
+     * 
      * 
      * @param index
      * @return ArrayList
