@@ -19,7 +19,6 @@ public class GridBlock extends AnchorPane {
     /**
      * Method to initialize the fields x, y, color and background_color.
      * 
-     * 
      * @param x
      * @param y
      * @param color
