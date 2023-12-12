@@ -37,6 +37,18 @@ public final class HomeView extends View {
      */
     private static final Integer PAUSE_AND_QUIT_BUTTON_SPACE = 15;
 
+    private static final Integer PLAY_AND_RESUME_BUTTON_SPACE = 75;
+
+    private static final Integer PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT = 75;
+
+    private static final Integer SHOP_BUTTON_DIVISOR_CONSTANT = 6;
+
+    private static final Integer COINS_LABEL_DIVISOR_CONSTANT = 12;
+
+    private static final Integer BEST_SCORE_LABEL_PREF_WIDTH = 200;
+
+    private static final Double OPACITY_FOR_DISABLED_CONTENT = 0.4;
+
     @FXML
     private ImageView imageSettings,
             imageTitle,
@@ -115,16 +127,21 @@ public final class HomeView extends View {
                 PAUSE_AND_QUIT_BUTTON_SPACE);
         this.imageTitle.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageTitle.getFitWidth() / 2),
                 this.mainPane.getPrefHeight() / 4);
-        this.imagePlay.relocate((this.mainPane.getPrefWidth() / 2) + 75, this.mainPane.getPrefHeight() / 2.5);
-        this.imageResume.relocate((this.mainPane.getPrefWidth() / 2) - this.imageResume.getFitWidth() - 75,
-                this.mainPane.getPrefHeight() / 2.5);
+        this.imagePlay.relocate((this.mainPane.getPrefWidth() / 2) + HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
+                this.mainPane.getPrefHeight() / HomeView.PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT);
+        this.imageResume.relocate(
+                (this.mainPane.getPrefWidth() / 2) - this.imageResume.getFitWidth()
+                        - HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
+                this.mainPane.getPrefHeight() / HomeView.PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT);
         this.sliderLabel.relocate((this.mainPane.getPrefWidth() / 2) - this.sliderLabel.getPrefWidth(),
                 this.mainPane.getPrefHeight() / 2);
         this.sliderGridWidth.relocate((this.mainPane.getPrefWidth() / 2), this.mainPane.getPrefHeight() / 2);
         this.imageShop.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageShop.getFitWidth() / 2),
-                this.mainPane.getPrefHeight() - (this.mainPane.getPrefHeight() / 6));
+                this.mainPane.getPrefHeight()
+                        - (this.mainPane.getPrefHeight() / HomeView.SHOP_BUTTON_DIVISOR_CONSTANT));
         this.coinsLabel.relocate((this.mainPane.getPrefWidth() / 2) - (this.coinsLabel.getPrefWidth() / 2),
-                this.mainPane.getPrefHeight() - (this.mainPane.getPrefHeight() / 12));
+                this.mainPane.getPrefHeight()
+                        - (this.mainPane.getPrefHeight() / HomeView.COINS_LABEL_DIVISOR_CONSTANT));
 
         // Style
 
@@ -139,7 +156,7 @@ public final class HomeView extends View {
                 for (int i = 0; i < 4; i++) {
                     if (JsonUtils.ifDataExist(String.valueOf((i + 1) * 5), JsonUtils.BEST_SCORE_FILE)) {
                         this.bestScore = new Label();
-                        this.bestScore.setPrefSize(200, 10);
+                        this.bestScore.setPrefSize(HomeView.BEST_SCORE_LABEL_PREF_WIDTH, 10);
                         this.bestScore.relocate(
                                 (this.mainPane.getPrefWidth() / 2) - (this.bestScore.getPrefWidth() / 2),
                                 (padding * 25) + 5);
@@ -161,12 +178,12 @@ public final class HomeView extends View {
         try {
             if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
                 this.imagePlay.setDisable(true);
-                this.imagePlay.setOpacity(0.4);
+                this.imagePlay.setOpacity(HomeView.OPACITY_FOR_DISABLED_CONTENT);
                 this.sliderGridWidth.setDisable(true);
-                this.sliderGridWidth.setOpacity(0.4);
+                this.sliderGridWidth.setOpacity(HomeView.OPACITY_FOR_DISABLED_CONTENT);
             } else {
                 this.imageResume.setDisable(true);
-                this.imageResume.setOpacity(0.4);
+                this.imageResume.setOpacity(HomeView.OPACITY_FOR_DISABLED_CONTENT);
             }
         } catch (IOException exc) {
             System.err.println("Home View - Error on saved match loading!");
@@ -230,10 +247,10 @@ public final class HomeView extends View {
      * @param btnResume  the resume button.
      * @param paneResume the dialog resume pane.
      */
-    private void setListenersResumePane(final Button btnBack, 
-                                        final Button btnDelete, 
-                                        final Button btnResume, 
-                                        final Pane paneResume) {
+    private void setListenersResumePane(final Button btnBack,
+            final Button btnDelete,
+            final Button btnResume,
+            final Pane paneResume) {
         btnBack.setOnMouseClicked(e -> {
             paneResume.setVisible(false);
         });
@@ -243,7 +260,7 @@ public final class HomeView extends View {
                 JsonUtils.flushJson(JsonUtils.MATCH_FILE);
                 paneResume.setVisible(false);
                 this.imageResume.setDisable(true);
-                this.imageResume.setOpacity(0.4);
+                this.imageResume.setOpacity(HomeView.OPACITY_FOR_DISABLED_CONTENT);
                 this.imagePlay.setDisable(false);
                 this.imagePlay.setOpacity(1);
                 this.sliderGridWidth.setDisable(false);

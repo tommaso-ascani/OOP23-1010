@@ -28,6 +28,14 @@ public class ShopTheme extends VBox {
 
     private static final Integer VIEW_PANE_HEIGHT = 120;
 
+    private static final Integer SPACING_HBOX = 5;
+
+    private static final Integer FONT_SIZE_LABEL = 20;
+
+    private static final Integer NUMBER_OF_BLOCK_TYPE_COLOR = 9;
+
+    private static final Integer WIDTH_PANE_COLORS = 155;
+
     /**
      * Initialize new ShopThemeItem object.
      * 
@@ -47,22 +55,22 @@ public class ShopTheme extends VBox {
 
         this.viewPane = new HBox();
         this.viewPane.setPrefSize(View.WINDOW_WIDTH - ShopTheme.HEIGHT, ShopTheme.VIEW_PANE_HEIGHT);
-        this.viewPane.setSpacing(5);
+        this.viewPane.setSpacing(ShopTheme.SPACING_HBOX);
         this.viewPane.setAlignment(Pos.CENTER);
         this.viewPane.setStyle("-fx-padding: 15");
 
         this.costLabel = new Label();
-        this.costLabel.setFont(new Font(20));
+        this.costLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
         this.costLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3);
         this.costLabel.setAlignment(Pos.CENTER);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
 
         this.descriptionLabel = new Label(this.theme.getName());
         this.descriptionLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3);
-        this.descriptionLabel.setFont(new Font(25));
+        this.descriptionLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
         this.descriptionLabel.setAlignment(Pos.CENTER);
 
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= ShopTheme.NUMBER_OF_BLOCK_TYPE_COLOR; i++) {
             Pane pane = new Pane();
             switch (i) {
                 case 1:
@@ -100,7 +108,7 @@ public class ShopTheme extends VBox {
                 default:
                     break;
             }
-            pane.setPrefWidth(this.viewPane.getPrefWidth() / 9);
+            pane.setPrefWidth(ShopTheme.WIDTH_PANE_COLORS);
             this.viewPane.getChildren().add(pane);
         }
         this.purchased = purchased;

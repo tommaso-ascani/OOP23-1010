@@ -16,7 +16,16 @@ public final class DataUtils {
     /**
      * Deafult constructor.
      */
-    private DataUtils() { }
+    private DataUtils() {
+    }
+
+    private static final Integer GRID_CELL_SIZE_IF_NUMBER_OF_CELL_5 = 45;
+
+    private static final Integer GRID_CELL_SIZE_IF_NUMBER_OF_CELL_10 = 35;
+
+    private static final Integer GRID_CELL_SIZE_IF_NUMBER_OF_CELL_15 = 30;
+
+    private static final Integer GRID_CELL_SIZE_IF_NUMBER_OF_CELL_20 = 25;
 
     /**
      * Method to save all match data (score, grid) in the json file.
@@ -153,19 +162,19 @@ public final class DataUtils {
 
                 switch (grid.getGridSize()) {
                     case 5:
-                        grid.setGridCellSize(45);
+                        grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_5);
                         break;
 
                     case 10:
-                        grid.setGridCellSize(35);
+                        grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_10);
                         break;
 
                     case 15:
-                        grid.setGridCellSize(30);
+                        grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_15);
                         break;
 
                     case 20:
-                        grid.setGridCellSize(25);
+                        grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_20);
                         break;
 
                     default:
@@ -202,19 +211,19 @@ public final class DataUtils {
 
         switch (grid.getGridSize()) {
             case 5:
-                grid.setGridCellSize(45);
+                grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_5);
                 break;
 
             case 10:
-                grid.setGridCellSize(35);
+                grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_10);
                 break;
 
             case 15:
-                grid.setGridCellSize(30);
+                grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_15);
                 break;
 
             case 20:
-                grid.setGridCellSize(25);
+                grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_20);
                 break;
 
             default:

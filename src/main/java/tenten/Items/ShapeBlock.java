@@ -16,6 +16,8 @@ import tenten.utils.ThemeUtils;
  */
 public class ShapeBlock extends Path {
 
+    private static final Integer SIZE_CHECKSTYLE_ERROR = 5;
+
     private BlockType type;
     private GameGrid<GridBlock> grid;
     private Pane pane;
@@ -77,7 +79,7 @@ public class ShapeBlock extends Path {
                 break;
             case BLOCK_1x5:
                 this.width = 1;
-                this.height = 5;
+                this.height = ShapeBlock.SIZE_CHECKSTYLE_ERROR;
                 this.color = ThemeUtils.getSelectedTheme().getColor5x1or1x5();
                 break;
             case BLOCK_2x1:
@@ -106,7 +108,7 @@ public class ShapeBlock extends Path {
                 this.color = ThemeUtils.getSelectedTheme().getColor4x1or1x4();
                 break;
             case BLOCK_5x1:
-                this.width = 5;
+                this.width = ShapeBlock.SIZE_CHECKSTYLE_ERROR;
                 this.height = 1;
                 this.color = ThemeUtils.getSelectedTheme().getColor5x1or1x5();
                 break;

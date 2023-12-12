@@ -35,6 +35,8 @@ public final class ShopView extends View {
      */
     private static final Integer TOP_BOTTOM_SPACE = 20;
 
+    private static final Integer QUESTION_LABEL_PREF_HEIGTH = 80;
+
     /**
      * List of shop item.
      */
@@ -177,7 +179,7 @@ public final class ShopView extends View {
                 this.questionLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getShopQuestionBuyItem()
                         + shopThemeItem.getTheme().getCost() + " "
                         + GameLanguageSystem.getInstance().getLanguageType().getCoins() + "?");
-                this.questionLabel.setPrefSize(this.purchasePane.getPrefWidth(), 80);
+                this.questionLabel.setPrefSize(this.purchasePane.getPrefWidth(), ShopView.QUESTION_LABEL_PREF_HEIGTH);
 
                 this.buttonConfirm.setText(GameLanguageSystem.getInstance().getLanguageType().getBuy());
 

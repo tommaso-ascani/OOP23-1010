@@ -83,6 +83,8 @@ public final class GameView extends View {
      */
     private static final Integer SPACE_PAUSE_BUTTON = 15;
 
+    private static final Double SPAWN_PANELS_MOLTIPLICATION_RATIO_CONSTANT = 6.0;
+
     @FXML
     private AnchorPane mainPane;
 
@@ -162,7 +164,7 @@ public final class GameView extends View {
 
         // -------------------------------- View Setup ---------------------------------
 
-        GameView.spawnPanelsWidth = 6.0 * grid.getGridCellSize();
+        GameView.spawnPanelsWidth = GameView.SPAWN_PANELS_MOLTIPLICATION_RATIO_CONSTANT * grid.getGridCellSize();
 
         this.labelCoin.setText(String.valueOf(this.coins));
         this.labelScore.setText(String.valueOf(this.score));
