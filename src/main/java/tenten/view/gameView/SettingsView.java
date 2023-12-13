@@ -1,6 +1,8 @@
 package tenten.view.gameview;
 
 import java.io.IOException;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import tenten.language.GameLanguageSystem;
 import tenten.sound.GameSoundSystem;
 import tenten.types.LanguageType;
 import tenten.types.ViewType;
+import tenten.utils.DataUtils;
 import tenten.utils.JsonUtils;
 import tenten.utils.ThemeUtils;
 import tenten.view.View;
@@ -27,10 +30,12 @@ import tenten.view.ViewSwitcher;
  */
 public final class SettingsView extends View {
 
+    private static final Logger LOG = Logger.getLogger(DataUtils.class.getName());
+
     /**
      * List of languages.
      */
-    private ObservableList<String> languageList = FXCollections.observableArrayList();
+    private final ObservableList<String> languageList = FXCollections.observableArrayList();
 
     @FXML
     private AnchorPane mainPane;
@@ -61,7 +66,7 @@ public final class SettingsView extends View {
     @Override
     public void init() {
 
-        for (LanguageType langType : LanguageType.values()) {
+        for (final LanguageType langType : LanguageType.values()) {
             this.languageList.add(langType.name());
         }
 
@@ -77,8 +82,8 @@ public final class SettingsView extends View {
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
         this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColorBackground());
 
-        this.settingsPane.relocate((View.WINDOW_WIDTH / 2) - (this.settingsPane.getPrefWidth() / 2),
-                (View.WINDOW_HEIGHT / 2) - (this.settingsPane.getPrefHeight() / 2));
+        this.settingsPane.relocate(View.WINDOW_WIDTH / 2 - this.settingsPane.getPrefWidth() / 2,
+                View.WINDOW_HEIGHT / 2 - this.settingsPane.getPrefHeight() / 2);
 
         if (GameSoundSystem.getInstance().getVolume() != 0) {
             this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));
@@ -99,7 +104,7 @@ public final class SettingsView extends View {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.LANGUAGE, this.languageChoiceBox.getValue()),
                         JsonUtils.GAME_DATA_FILE);
             } catch (IOException exc) {
-                System.err.println("Settings View - Error on volume/language apply!");
+                LOG.fine("Settings View - Error on volume/language apply!");
             }
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.SETTINGS);
         });
@@ -127,7 +132,7 @@ public final class SettingsView extends View {
      * on the ImageView.
      */
     public void changeVolumeImage() {
-        Double temp = this.sliderVolume.getValue();
+        final Double temp = this.sliderVolume.getValue();
         if (temp.doubleValue() == 0.0) {
             this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));
             this.sliderVolume.setValue(100);

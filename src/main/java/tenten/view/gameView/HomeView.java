@@ -1,9 +1,9 @@
 package tenten.view.gameview;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import org.json.JSONObject;
-
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,6 +16,7 @@ import javafx.util.Pair;
 import tenten.language.GameLanguageSystem;
 import tenten.types.ThemeType;
 import tenten.types.ViewType;
+import tenten.utils.DataUtils;
 import tenten.utils.JsonUtils;
 import tenten.utils.ThemeUtils;
 import tenten.view.View;
@@ -25,6 +26,8 @@ import tenten.view.ViewSwitcher;
  * Class that implements all methods to use the home view.
  */
 public final class HomeView extends View {
+
+    private static final Logger LOG = Logger.getLogger(DataUtils.class.getName());
 
     /**
      * Grid size selected by user.
@@ -104,7 +107,7 @@ public final class HomeView extends View {
             ThemeUtils.loadSelectedTheme();
             ThemeUtils.loadSelectedTheme();
         } catch (IOException exc) {
-            System.err.println("Home View - Error on theme loading!");
+            LOG.fine("Home View - Error on theme loading!");
         }
 
         // Coins
@@ -114,9 +117,9 @@ public final class HomeView extends View {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, 0), JsonUtils.GAME_DATA_FILE);
             }
             this.coinsLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getCoins() + ": "
-                    + String.valueOf((Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE)));
+                    + (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE));
         } catch (IOException exc) {
-            System.err.println("Home View - Error on coins loading!");
+            LOG.fine("Home View - Error on coins loading!");
         }
 
         // Object relocate
@@ -125,21 +128,20 @@ public final class HomeView extends View {
         this.imageQuit.relocate(
                 this.mainPane.getPrefWidth() - this.imageQuit.getFitWidth() - PAUSE_AND_QUIT_BUTTON_SPACE,
                 PAUSE_AND_QUIT_BUTTON_SPACE);
-        this.imageTitle.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageTitle.getFitWidth() / 2),
+        this.imageTitle.relocate(this.mainPane.getPrefWidth() / 2 - this.imageTitle.getFitWidth() / 2,
                 this.mainPane.getPrefHeight() / 4);
-        this.imagePlay.relocate((this.mainPane.getPrefWidth() / 2) + HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
+        this.imagePlay.relocate(this.mainPane.getPrefWidth() / 2 + HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
                 this.mainPane.getPrefHeight() / HomeView.PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT);
         this.imageResume.relocate(
-                (this.mainPane.getPrefWidth() / 2) - this.imageResume.getFitWidth()
-                        - HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
+            this.mainPane.getPrefWidth() / 2 - this.imageResume.getFitWidth() - HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
                 this.mainPane.getPrefHeight() / HomeView.PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT);
-        this.sliderLabel.relocate((this.mainPane.getPrefWidth() / 2) - this.sliderLabel.getPrefWidth(),
+        this.sliderLabel.relocate(this.mainPane.getPrefWidth() / 2 - this.sliderLabel.getPrefWidth(),
                 this.mainPane.getPrefHeight() / 2);
-        this.sliderGridWidth.relocate((this.mainPane.getPrefWidth() / 2), this.mainPane.getPrefHeight() / 2);
-        this.imageShop.relocate((this.mainPane.getPrefWidth() / 2) - (this.imageShop.getFitWidth() / 2),
+        this.sliderGridWidth.relocate(this.mainPane.getPrefWidth() / 2, this.mainPane.getPrefHeight() / 2);
+        this.imageShop.relocate(this.mainPane.getPrefWidth() / 2 - this.imageShop.getFitWidth() / 2,
                 this.mainPane.getPrefHeight()
                         - (this.mainPane.getPrefHeight() / HomeView.SHOP_BUTTON_DIVISOR_CONSTANT));
-        this.coinsLabel.relocate((this.mainPane.getPrefWidth() / 2) - (this.coinsLabel.getPrefWidth() / 2),
+        this.coinsLabel.relocate(this.mainPane.getPrefWidth() / 2 - this.coinsLabel.getPrefWidth() / 2,
                 this.mainPane.getPrefHeight()
                         - (this.mainPane.getPrefHeight() / HomeView.COINS_LABEL_DIVISOR_CONSTANT));
 
@@ -149,7 +151,7 @@ public final class HomeView extends View {
 
         try {
             if (JsonUtils.jsonExist(JsonUtils.BEST_SCORE_FILE)) {
-                JSONObject bestScore = JsonUtils.loadDatas(JsonUtils.BEST_SCORE_FILE);
+                final JSONObject bestScore = JsonUtils.loadDatas(JsonUtils.BEST_SCORE_FILE);
 
                 Integer padding = 0;
 
@@ -158,18 +160,18 @@ public final class HomeView extends View {
                         this.bestScore = new Label();
                         this.bestScore.setPrefSize(HomeView.BEST_SCORE_LABEL_PREF_WIDTH, 10);
                         this.bestScore.relocate(
-                                (this.mainPane.getPrefWidth() / 2) - (this.bestScore.getPrefWidth() / 2),
-                                (padding * 25) + 5);
+                                this.mainPane.getPrefWidth() / 2 - this.bestScore.getPrefWidth() / 2,
+                                padding * 25 + 5);
                         this.bestScore.setAlignment(Pos.CENTER);
                         this.bestScore.setText("Best Score on grid " + ((i + 1) * 5) + " ---> "
-                                + String.valueOf(bestScore.get(String.valueOf((i + 1) * 5))));
+                                + bestScore.get(String.valueOf((i + 1) * 5)));
                         this.mainPane.getChildren().add(this.bestScore);
                         padding++;
                     }
                 }
             }
         } catch (IOException exc) {
-            System.err.println("Home View - Error on best score loading!");
+            LOG.fine("Home View - Error on best score loading!");
         }
 
         // In this try/catch we control if there is a json file with saved data and if
@@ -186,7 +188,7 @@ public final class HomeView extends View {
                 this.imageResume.setOpacity(HomeView.OPACITY_FOR_DISABLED_CONTENT);
             }
         } catch (IOException exc) {
-            System.err.println("Home View - Error on saved match loading!");
+            LOG.fine("Home View - Error on saved match loading!");
         }
 
     }
@@ -266,7 +268,7 @@ public final class HomeView extends View {
                 this.sliderGridWidth.setDisable(false);
                 this.sliderGridWidth.setOpacity(1);
             } catch (IOException exc) {
-                System.err.println("Home View - Error on saved match deleting!");
+                LOG.fine("Home View - Error on saved match deleting!");
             }
         });
 
@@ -274,7 +276,7 @@ public final class HomeView extends View {
             try {
                 gridSize = (Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE);
             } catch (IOException e1) {
-                System.err.println("Error in loading grid size!");
+                LOG.fine("Error in loading grid size!");
             }
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
         });
