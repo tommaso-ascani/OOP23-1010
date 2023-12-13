@@ -22,6 +22,14 @@ public final class DataUtils {
 
     private static final Integer GRID_CELL_SIZE_IF_NUMBER_OF_CELL_20 = 25;
 
+    private static final Integer GRID_CELL_SIZE_IS_5 = 5;
+
+    private static final Integer GRID_CELL_SIZE_IS_10 = 10;
+
+    private static final Integer GRID_CELL_SIZE_IS_15 = 15;
+
+    private static final Integer GRID_CELL_SIZE_IS_20 = 20;
+
     private static final String COLOR_STRING_KEY_JSON = "color";
 
     /**
@@ -161,35 +169,14 @@ public final class DataUtils {
      */
     public static GameGrid<GridBlock> loadGrid() {
 
-        GameGrid<GridBlock> grid;
+        GameGrid<GridBlock> grid = new GameGrid<>(HomeView.getGridSize());
 
         try {
             if (JsonUtils.ifDataExist(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE)) {
 
                 grid = new GameGrid<>((Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE));
 
-                switch (grid.getGridSize()) {
-                    case 5:
-                        grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_5);
-                        break;
-
-                    case 10:
-                        grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_10);
-                        break;
-
-                    case 15:
-                        grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_15);
-                        break;
-
-                    case 20:
-                        grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_20);
-                        break;
-
-                    default:
-                        final Logger log = Logger.getLogger(DataUtils.class.getName());
-                        log.fine("Error on sizing cell grid");
-                        break;
-                }
+                DataUtils.setGridCellSizeInner(grid);
 
                 final JSONArray a = JsonUtils.loadDataArray(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
 
@@ -209,39 +196,29 @@ public final class DataUtils {
 
                     grid.add(aPane);
                 }
-
-                return grid;
+            } else {
+                DataUtils.setGridCellSizeInner(grid);
             }
         } catch (IOException exc) {
             final Logger log = Logger.getLogger(DataUtils.class.getName());
             log.fine("Error on grid loading!");
         }
 
-        grid = new GameGrid<>(HomeView.getGridSize());
-
-        switch (grid.getGridSize()) {
-            case 5:
-                grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_5);
-                break;
-
-            case 10:
-                grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_10);
-                break;
-
-            case 15:
-                grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_15);
-                break;
-
-            case 20:
-                grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_20);
-                break;
-
-            default:
-                final Logger log = Logger.getLogger(DataUtils.class.getName());
-                log.fine("Error on sizing cell grid");
-                break;
-        }
-
         return grid;
+    }
+
+    private static void setGridCellSizeInner(final GameGrid<GridBlock> grid) {
+        if (grid.getGridSize().equals(DataUtils.GRID_CELL_SIZE_IS_5)) {
+            grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_5);
+        } else if (grid.getGridSize().equals(DataUtils.GRID_CELL_SIZE_IS_10)) {
+            grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_10);
+        } else if (grid.getGridSize().equals(DataUtils.GRID_CELL_SIZE_IS_15)) {
+            grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_15);
+        } else if (grid.getGridSize().equals(DataUtils.GRID_CELL_SIZE_IS_20)) {
+            grid.setGridCellSize(DataUtils.GRID_CELL_SIZE_IF_NUMBER_OF_CELL_20);
+        } else {
+            final Logger log = Logger.getLogger(DataUtils.class.getName());
+            log.fine("Error on sizing cell grid");
+        }
     }
 }

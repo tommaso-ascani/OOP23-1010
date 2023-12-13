@@ -52,6 +52,10 @@ public final class HomeView extends View {
 
     private static final Double OPACITY_FOR_DISABLED_CONTENT = 0.4;
 
+    private static final Integer GRID_SIZE_FACTOR_FOR_BEST_SCORE = 5;
+
+    private static final Integer GRID_SIZE_PADDING_FACTOR_FOR_BEST_SCORE = 25;
+
     @FXML
     private ImageView imageSettings,
             imageTitle,
@@ -133,7 +137,8 @@ public final class HomeView extends View {
         this.imagePlay.relocate(this.mainPane.getPrefWidth() / 2 + HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
                 this.mainPane.getPrefHeight() / HomeView.PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT);
         this.imageResume.relocate(
-            this.mainPane.getPrefWidth() / 2 - this.imageResume.getFitWidth() - HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
+                this.mainPane.getPrefWidth() / 2 - this.imageResume.getFitWidth()
+                        - HomeView.PLAY_AND_RESUME_BUTTON_SPACE,
                 this.mainPane.getPrefHeight() / HomeView.PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT);
         this.sliderLabel.relocate(this.mainPane.getPrefWidth() / 2 - this.sliderLabel.getPrefWidth(),
                 this.mainPane.getPrefHeight() / 2);
@@ -156,15 +161,18 @@ public final class HomeView extends View {
                 Integer padding = 0;
 
                 for (int i = 0; i < 4; i++) {
-                    if (JsonUtils.ifDataExist(String.valueOf((i + 1) * 5), JsonUtils.BEST_SCORE_FILE)) {
+                    if (JsonUtils.ifDataExist(String.valueOf((i + 1) * HomeView.GRID_SIZE_FACTOR_FOR_BEST_SCORE),
+                            JsonUtils.BEST_SCORE_FILE)) {
                         this.bestScore = new Label();
                         this.bestScore.setPrefSize(HomeView.BEST_SCORE_LABEL_PREF_WIDTH, 10);
                         this.bestScore.relocate(
                                 this.mainPane.getPrefWidth() / 2 - this.bestScore.getPrefWidth() / 2,
-                                padding * 25 + 5);
+                                padding * HomeView.GRID_SIZE_PADDING_FACTOR_FOR_BEST_SCORE
+                                        + HomeView.GRID_SIZE_FACTOR_FOR_BEST_SCORE);
                         this.bestScore.setAlignment(Pos.CENTER);
-                        this.bestScore.setText("Best Score on grid " + ((i + 1) * 5) + " ---> "
-                                + bestScore.get(String.valueOf((i + 1) * 5)));
+                        this.bestScore.setText("Best Score on grid "
+                                + ((i + 1) * HomeView.GRID_SIZE_FACTOR_FOR_BEST_SCORE) + " ---> "
+                                + bestScore.get(String.valueOf((i + 1) * HomeView.GRID_SIZE_FACTOR_FOR_BEST_SCORE)));
                         this.mainPane.getChildren().add(this.bestScore);
                         padding++;
                     }

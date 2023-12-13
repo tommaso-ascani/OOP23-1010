@@ -34,6 +34,16 @@ public class ShopTheme extends VBox {
 
     private static final String STATIC_STYLE_ATTRIBUTES = "-fx-border-color: black; -fx-background-color: ";
 
+    private static final Integer PANE_NUMBER_1 = 1;
+    private static final Integer PANE_NUMBER_2 = 2;
+    private static final Integer PANE_NUMBER_3 = 3;
+    private static final Integer PANE_NUMBER_4 = 4;
+    private static final Integer PANE_NUMBER_5 = 5;
+    private static final Integer PANE_NUMBER_6 = 6;
+    private static final Integer PANE_NUMBER_7 = 7;
+    private static final Integer PANE_NUMBER_8 = 8;
+    private static final Integer PANE_NUMBER_9 = 9;
+
     /**
      * Initialize new ShopThemeItem object.
      * 
@@ -67,43 +77,31 @@ public class ShopTheme extends VBox {
         descriptionLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
         descriptionLabel.setAlignment(Pos.CENTER);
 
-        for (int i = 1; i <= ShopTheme.NUMBER_OF_BLOCK_TYPE_COLOR; i++) {
+        for (Integer i = 1; i <= ShopTheme.NUMBER_OF_BLOCK_TYPE_COLOR; i++) {
             final Pane pane = new Pane();
-            switch (i) {
-                case 1:
-                    pane.setStyle(
-                            ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColorBackground());
-                    break;
-                case 2:
-                    pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColorGrid());
-                    break;
-                case 3:
-                    pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor1x1());
-                    break;
-                case 4:
-                    pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor2x2());
-                    break;
-                case 5:
-                    pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor3x3());
-                    break;
-                case 6:
-                    pane.setStyle(
-                            ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor2x1or1x2());
-                    break;
-                case 7:
-                    pane.setStyle(
-                            ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor3x1or1x3());
-                    break;
-                case 8:
-                    pane.setStyle(
-                            ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor4x1or1x4());
-                    break;
-                case 9:
-                    pane.setStyle(
-                            ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor5x1or1x5());
-                    break;
-                default:
-                    break;
+            if (i.equals(ShopTheme.PANE_NUMBER_1)) {
+                pane.setStyle(
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColorBackground());
+            } else if (i.equals(ShopTheme.PANE_NUMBER_2)) {
+                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColorGrid());
+            } else if (i.equals(ShopTheme.PANE_NUMBER_3)) {
+                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor1x1());
+            } else if (i.equals(ShopTheme.PANE_NUMBER_4)) {
+                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor2x2());
+            } else if (i.equals(ShopTheme.PANE_NUMBER_5)) {
+                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor3x3());
+            } else if (i.equals(ShopTheme.PANE_NUMBER_6)) {
+                pane.setStyle(
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor2x1or1x2());
+            } else if (i.equals(ShopTheme.PANE_NUMBER_7)) {
+                pane.setStyle(
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor3x1or1x3());
+            } else if (i.equals(ShopTheme.PANE_NUMBER_8)) {
+                pane.setStyle(
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor4x1or1x4());
+            } else if (i.equals(ShopTheme.PANE_NUMBER_9)) {
+                pane.setStyle(
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor5x1or1x5());
             }
             pane.setPrefWidth(ShopTheme.WIDTH_PANE_COLORS);
             viewPane.getChildren().add(pane);
