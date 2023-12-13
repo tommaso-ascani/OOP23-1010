@@ -7,14 +7,14 @@ import javafx.scene.Node;
 /**
  * Class that test the java class Movement.
  */
-public class MovementTest {
+class MovementTest {
 
     /**
      * Method that test if the function makeDraggable is working.
      */
     @Test
-    public void testMakeDraggable() {
-        Node node = new Node() {
+    void testMakeDraggable() {
+        final Node node = new Node() {
         };
         Movement.makeDraggable(node);
         Assertions.assertNotNull(node.getOnMousePressed());

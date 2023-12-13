@@ -8,13 +8,13 @@ import javafx.scene.image.Image;
 /**
  * Class that used to test the java class Startup.
  */
-public class StartupTest {
+class StartupTest {
 
     /**
      * Method that test if start is setting correctly the icon image.
      */
     @Test
-    public void testStart() {
+    void testStart() {
         Assertions.assertNotNull(new Image(ClassLoader.getSystemResourceAsStream("img/icon.jpg")));
     }
 }

@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 /**
  * Class that test the java class ViewSwitcher.
  */
-public class ViewSwitcherTest {
+class ViewSwitcherTest {
 
     /**
      * Method that verify the correct behavoiur of the function getInstance.
      */
     @Test
-    public void testGetInstance() {
+    void testGetInstance() {
         Assertions.assertNotNull(ViewSwitcher.getInstance());
     }
 }
