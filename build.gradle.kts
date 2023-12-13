@@ -32,21 +32,6 @@ dependencies {
     }
 }
 
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events(*org.gradle.api.tasks.testing.logging.TestLogEvent.values())
-        showStandardStreams = true
-    }
-}
-
-tasks.jar {
-    val mainResources = sourceSets.getByName("main").resources
-    from(mainResources) {
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    }
-}
-
 application {
     mainClass.set("tenten.App")
 }
