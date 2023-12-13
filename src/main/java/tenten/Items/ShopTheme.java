@@ -39,7 +39,6 @@ public class ShopTheme extends VBox {
      * 
      * @param theme
      * @param purchased
-     * @param windowWidth
      */
     public ShopTheme(final String theme, final Boolean purchased) {
 

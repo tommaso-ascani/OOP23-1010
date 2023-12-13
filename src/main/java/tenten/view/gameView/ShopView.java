@@ -107,7 +107,7 @@ public final class ShopView extends View {
             final JSONArray a = JsonUtils.loadDataArray(JsonUtils.THEMES, JsonUtils.GAME_DATA_FILE);
 
             for (int i = 0; i < a.length(); i++) {
-                ShopTheme temp = new ShopTheme(a.getJSONObject(i).getString("name"),
+                final ShopTheme temp = new ShopTheme(a.getJSONObject(i).getString("name"),
                         (Boolean) a.getJSONObject(i).get("purchased"));
                 if (temp.getPurchased()) {
                     if (!temp.getTheme().name().equals(ThemeUtils.getSelectedTheme().name())) {
