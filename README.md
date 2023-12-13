@@ -14,6 +14,27 @@
 - Game resume
 - Best score
 
+## Usage
+
+To build executable .jar, run the following gradle command:
+
+Windows
+```bash
+./gradlew.bat build
+```
+
+Linux
+```bash
+./gradlew build
+```
+
+After this command the .jar file is located in build/libs.
+
+You can also run the application with gradle:
+```bash
+./gradlew run
+```
+
 # Screenshots
 ![HomeView](https://github.com/tommaso-ascani/OOP23-1010/assets/31596042/2559f2cc-bba7-41ae-acd4-6daba800599f)
 ![GameView](https://github.com/tommaso-ascani/OOP23-1010/assets/31596042/db5c2278-368f-4aeb-aff6-70ca6b52781c)
