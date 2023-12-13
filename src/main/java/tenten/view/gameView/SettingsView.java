@@ -1,4 +1,4 @@
-package tenten.view.gameView;
+package tenten.view.gameview;
 
 import java.io.IOException;
 import javafx.collections.FXCollections;

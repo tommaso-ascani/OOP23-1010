@@ -18,22 +18,16 @@ public class ShapeBlock extends Path {
 
     private static final Integer SIZE_CHECKSTYLE_ERROR = 5;
 
-    private BlockType type;
-    private GameGrid<GridBlock> grid;
-    private Pane pane;
+    private final BlockType type;
+    private final GameGrid<GridBlock> grid;
+    private final Pane pane;
 
-    private Integer width;
-    private Integer height;
+    private final Integer width;
+    private final Integer height;
 
-    private Double widthPx;
-    private Double heigthPx;
+    private final String color;
 
-    private String color;
-
-    private Double startX;
-    private Double startY;
-
-    private BlocksAvailable<ShapeBlock> blocksAvalaible;
+    private final BlocksAvailable<ShapeBlock> blocksAvalaible;
 
     private Bounds bounds;
 
@@ -57,66 +51,69 @@ public class ShapeBlock extends Path {
         this.blocksAvalaible = blocksAvalaible;
 
         switch (type) {
-            case BLOCK_1x1:
+            case BLOCK_1_1:
                 this.width = 1;
                 this.height = 1;
                 this.color = ThemeUtils.getSelectedTheme().getColor1x1();
                 break;
-            case BLOCK_1x2:
+            case BLOCK_1_2:
                 this.width = 1;
                 this.height = 2;
                 this.color = ThemeUtils.getSelectedTheme().getColor2x1or1x2();
                 break;
-            case BLOCK_1x3:
+            case BLOCK_1_3:
                 this.width = 1;
                 this.height = 3;
                 this.color = ThemeUtils.getSelectedTheme().getColor3x1or1x3();
                 break;
-            case BLOCK_1x4:
+            case BLOCK_1_4:
                 this.width = 1;
                 this.height = 4;
                 this.color = ThemeUtils.getSelectedTheme().getColor4x1or1x4();
                 break;
-            case BLOCK_1x5:
+            case BLOCK_1_5:
                 this.width = 1;
                 this.height = ShapeBlock.SIZE_CHECKSTYLE_ERROR;
                 this.color = ThemeUtils.getSelectedTheme().getColor5x1or1x5();
                 break;
-            case BLOCK_2x1:
+            case BLOCK_2_1:
                 this.width = 2;
                 this.height = 1;
                 this.color = ThemeUtils.getSelectedTheme().getColor2x1or1x2();
                 break;
-            case BLOCK_2x2:
+            case BLOCK_2_2:
                 this.width = 2;
                 this.height = 2;
                 this.color = ThemeUtils.getSelectedTheme().getColor2x2();
                 break;
-            case BLOCK_3x1:
+            case BLOCK_3_1:
                 this.width = 3;
                 this.height = 1;
                 this.color = ThemeUtils.getSelectedTheme().getColor3x1or1x3();
                 break;
-            case BLOCK_3x3:
+            case BLOCK_3_3:
                 this.width = 3;
                 this.height = 3;
                 this.color = ThemeUtils.getSelectedTheme().getColor3x3();
                 break;
-            case BLOCK_4x1:
+            case BLOCK_4_1:
                 this.width = 4;
                 this.height = 1;
                 this.color = ThemeUtils.getSelectedTheme().getColor4x1or1x4();
                 break;
-            case BLOCK_5x1:
+            case BLOCK_5_1:
                 this.width = ShapeBlock.SIZE_CHECKSTYLE_ERROR;
                 this.height = 1;
                 this.color = ThemeUtils.getSelectedTheme().getColor5x1or1x5();
                 break;
             default:
+                this.height = 0;
+                this.width = 0;
+                this.color = "white";
                 break;
         }
 
-        generateBlock();
+        this.generateBlock();
         pane.getChildren().addAll(this);
     }
 
@@ -172,7 +169,7 @@ public class ShapeBlock extends Path {
      */
     public Integer getTriggerX() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
-        Double tempX = this.bounds.getMinX();
+        final Double tempX = this.bounds.getMinX();
         return tempX.intValue() + (grid.getGridCellSize() / 2);
     }
 
@@ -183,43 +180,40 @@ public class ShapeBlock extends Path {
      */
     public Integer getTriggerY() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
-        Double tempY = this.bounds.getMinY();
+        final Double tempY = this.bounds.getMinY();
         return tempY.intValue() + (grid.getGridCellSize() / 2);
     }
 
     /**
      * Method to generate the new block.
      */
-    public void generateBlock() {
+    private void generateBlock() {
         Integer x;
         Integer y;
 
         for (x = 0; x < this.width; x++) {
             for (y = 0; y < this.height; y++) {
                 this.getElements().addAll(
-                        new MoveTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize(),
-                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize()),
+                        new MoveTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize(),
+                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize()),
 
-                        new LineTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize(),
-                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize() * 2),
-                        new LineTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize() * 2,
-                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize() * 2),
-                        new LineTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize() * 2,
-                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize()),
-                        new LineTo((x * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize(),
-                                (y * (this.grid.getGridCellSize() + 3)) + this.grid.getGridCellSize()),
+                        new LineTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize(),
+                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize() * 2),
+                        new LineTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize() * 2,
+                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize() * 2),
+                        new LineTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize() * 2,
+                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize()),
+                        new LineTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize(),
+                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize()),
 
                         new ClosePath());
             }
         }
 
-        this.widthPx = this.getBoundsInParent().getMaxX() - this.getBoundsInParent().getMinX();
-        this.heigthPx = this.getBoundsInParent().getMaxY() - this.getBoundsInParent().getMinY();
-
-        this.startX = (this.pane.getPrefWidth() - this.widthPx) / 2;
-        this.startY = (this.pane.getPrefHeight() - this.heigthPx) / 2;
-
-        this.relocate(this.startX, this.startY);
+        this.relocate((this.pane.getPrefWidth()
+                - (this.getBoundsInParent().getMaxX() - this.getBoundsInParent().getMinX())) / 2,
+                (this.pane.getPrefHeight()
+                        - (this.getBoundsInParent().getMaxY() - this.getBoundsInParent().getMinY())) / 2);
 
         this.setStyle("-fx-fill: " + this.color + "; -fx-stroke-width: 0");
         this.setAccessibleText(this.color);

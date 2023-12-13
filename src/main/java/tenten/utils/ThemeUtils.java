@@ -1,7 +1,7 @@
 package tenten.utils;
 
 import java.io.IOException;
-
+import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.util.Pair;
@@ -13,14 +13,15 @@ import tenten.types.ThemeType;
 public final class ThemeUtils {
 
     /**
-     * Deafult constructor.
-     */
-    private ThemeUtils() { }
-
-    /**
      * Selected and active theme.
      */
     private static ThemeType selectedTheme;
+
+    /**
+     * Deafult constructor.
+     */
+    private ThemeUtils() {
+    }
 
     /**
      * Method to set a theme.
@@ -48,7 +49,8 @@ public final class ThemeUtils {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.SELECTED_THEME, selectedTheme),
                     JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
-            System.err.println("Theme Utils - Error on selected theme saving!");
+            final Logger log = Logger.getLogger(ThemeUtils.class.getName());
+            log.fine("Theme Utils - Error on selected theme saving!");
         }
     }
 
@@ -57,14 +59,15 @@ public final class ThemeUtils {
      */
     public static void loadSelectedTheme() {
         try {
-            String selecTheme = (String) JsonUtils.loadData(JsonUtils.SELECTED_THEME, JsonUtils.GAME_DATA_FILE);
-            for (ThemeType themeType : ThemeType.values()) {
+            final String selecTheme = (String) JsonUtils.loadData(JsonUtils.SELECTED_THEME, JsonUtils.GAME_DATA_FILE);
+            for (final ThemeType themeType : ThemeType.values()) {
                 if (themeType.name().equals(selecTheme)) {
                     selectedTheme = themeType;
                 }
             }
         } catch (IOException exc) {
-            System.err.println("Theme Utils - Error on selected theme loading!");
+            final Logger log = Logger.getLogger(ThemeUtils.class.getName());
+            log.fine("Theme Utils - Error on selected theme loading!");
         }
     }
 
@@ -73,10 +76,10 @@ public final class ThemeUtils {
      */
     public static void saveThemes() {
 
-        JSONArray temp = new JSONArray();
+        final JSONArray temp = new JSONArray();
 
-        for (ThemeType theme : ThemeType.values()) {
-            JSONObject themeObject = new JSONObject();
+        for (final ThemeType theme : ThemeType.values()) {
+            final JSONObject themeObject = new JSONObject();
             themeObject.put("name", theme.name());
             themeObject.put("purchased", theme.getPurchased());
             temp.put(themeObject);
@@ -85,7 +88,8 @@ public final class ThemeUtils {
         try {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.THEMES, temp), JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
-            System.err.println("Theme Utils - Error on themes saving!");
+            final Logger log = Logger.getLogger(ThemeUtils.class.getName());
+            log.fine("Theme Utils - Error on themes saving!");
         }
     }
 
@@ -99,7 +103,8 @@ public final class ThemeUtils {
         try {
             return JsonUtils.loadDataArray(JsonUtils.THEMES, JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
-            System.err.println("Theme Utils - Error on theme getting!");
+            final Logger log = Logger.getLogger(ThemeUtils.class.getName());
+            log.fine("Theme Utils - Error on theme getting!");
         }
         return null;
     }

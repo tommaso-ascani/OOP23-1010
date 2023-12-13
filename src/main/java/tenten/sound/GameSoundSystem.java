@@ -5,8 +5,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.util.Pair;
+import tenten.language.GameLanguageSystem;
 import tenten.types.SoundType;
 import tenten.utils.JsonUtils;
+import java.util.logging.Logger;
 
 import java.io.IOException;
 
@@ -38,12 +40,13 @@ public final class GameSoundSystem {
                 GameSoundSystem.volume = (Double) (((Integer) JsonUtils.loadData(JsonUtils.VOLUME,
                         JsonUtils.GAME_DATA_FILE)).doubleValue() / 100.0);
             } else {
-                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, (GameSoundSystem.MAX_VOLUME * 100.0)),
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, GameSoundSystem.MAX_VOLUME * 100.0),
                         JsonUtils.GAME_DATA_FILE);
                 GameSoundSystem.volume = GameSoundSystem.MAX_VOLUME;
             }
         } catch (IOException exc) {
-            System.err.println("Game Sound System - Error on volume loading!");
+            final Logger log = Logger.getLogger(GameLanguageSystem.class.getName());
+            log.fine("Game Sound System - Error on volume loading!");
         }
         return instance;
     }

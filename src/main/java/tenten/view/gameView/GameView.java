@@ -1,4 +1,4 @@
-package tenten.view.gameView;
+package tenten.view.gameview;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +28,7 @@ import tenten.utils.RandomUtils;
 import tenten.utils.ThemeUtils;
 import tenten.view.View;
 import tenten.view.ViewSwitcher;
+import java.util.logging.Logger;
 
 /**
  * Class that implements all methods to use the game view.
@@ -47,7 +48,7 @@ public final class GameView extends View {
     /**
      * Avalaible spawn blocks.
      */
-    private BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
+    private final BlocksAvailable<ShapeBlock> blocksAvalaible = new BlocksAvailable<>();
 
     /**
      * Game score.
@@ -85,6 +86,10 @@ public final class GameView extends View {
     private static final Integer SPACE_PAUSE_BUTTON = 15;
 
     private static final Double SPAWN_PANELS_MOLTIPLICATION_RATIO_CONSTANT = 6.0;
+
+    private static final String BACKGROUND_COLOR_STRING = "-fx-background-color: ";
+
+    private static final String STYLE_BORDER_AND_BORDERCOLOR_STRING = "; -fx-border-width: 2; -fx-border-color: black";
 
     @FXML
     private AnchorPane mainPane;
@@ -184,22 +189,24 @@ public final class GameView extends View {
      */
     public void createPausePane() {
 
-        this.pausePane.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
-                + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneRestart.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
-                + "; -fx-border-width: 2; -fx-border-color: black");
-        this.dialogPaneMenu.setStyle("-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
-                + "; -fx-border-width: 2; -fx-border-color: black");
+        this.pausePane.setStyle(GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorBackground()
+                + GameView.STYLE_BORDER_AND_BORDERCOLOR_STRING);
+        this.dialogPaneRestart
+                .setStyle(GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorBackground()
+                        + GameView.STYLE_BORDER_AND_BORDERCOLOR_STRING);
+        this.dialogPaneMenu
+                .setStyle(GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorBackground()
+                        + GameView.STYLE_BORDER_AND_BORDERCOLOR_STRING);
 
-        this.pausePane.relocate(((this.mainPane.getPrefWidth() / 2) - (this.pausePane.getPrefWidth() / 2)),
-                ((this.mainPane.getPrefHeight() / 2) - (this.pausePane.getPrefHeight() / 2)));
+        this.pausePane.relocate(this.mainPane.getPrefWidth() / 2 - this.pausePane.getPrefWidth() / 2,
+                this.mainPane.getPrefHeight() / 2 - this.pausePane.getPrefHeight() / 2);
 
         this.dialogPaneRestart.relocate(
-                ((this.pausePane.getPrefWidth() / 2) - (this.dialogPaneRestart.getPrefWidth() / 2)),
-                ((this.pausePane.getPrefHeight() / 2) - (this.dialogPaneRestart.getPrefHeight() / 2)));
+                this.pausePane.getPrefWidth() / 2 - this.dialogPaneRestart.getPrefWidth() / 2,
+                this.pausePane.getPrefHeight() / 2 - this.dialogPaneRestart.getPrefHeight() / 2);
 
-        this.dialogPaneMenu.relocate(((this.pausePane.getPrefWidth() / 2) - (this.dialogPaneMenu.getPrefWidth() / 2)),
-                ((this.pausePane.getPrefHeight() / 2) - (this.dialogPaneMenu.getPrefHeight() / 2)));
+        this.dialogPaneMenu.relocate(this.pausePane.getPrefWidth() / 2 - this.dialogPaneMenu.getPrefWidth() / 2,
+                this.pausePane.getPrefHeight() / 2 - this.dialogPaneMenu.getPrefHeight() / 2);
 
         this.setListenersPausePane(buttonMenu,
                 buttonRiprendi,
@@ -286,13 +293,14 @@ public final class GameView extends View {
 
         btnDialogY.setOnMouseClicked(e -> {
             try {
-                Integer gridSizeTemp = this.grid.getGridSize();
+                final Integer gridSizeTemp = this.grid.getGridSize();
                 if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
                     JsonUtils.flushJson(JsonUtils.MATCH_FILE);
                 }
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, gridSizeTemp), JsonUtils.MATCH_FILE);
             } catch (IOException e1) {
-                System.err.println("Error on restart yes button pressed!");
+                final Logger log = Logger.getLogger(GameView.class.getName());
+                log.fine("Error on restart yes button pressed!");
             }
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
         });
@@ -341,7 +349,8 @@ public final class GameView extends View {
             try {
                 JsonUtils.flushJson(JsonUtils.MATCH_FILE);
             } catch (IOException e1) {
-                System.err.println("Error on flush match file!");
+                final Logger log = Logger.getLogger(GameView.class.getName());
+                log.fine("Error on flush match file!");
             }
             DataUtils.saveCoins(this.coins);
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
@@ -362,14 +371,14 @@ public final class GameView extends View {
     public void setBlockReadyToBePlaced(final ShapeBlock block) {
         block.setOnMouseReleased(e -> {
 
-            GridBlock node = (GridBlock) this.getNodeIfTriggered(block);
+            final GridBlock node = (GridBlock) this.getNodeIfTriggered(block);
 
             if (this.getNodeIfTriggered(block) != null) {
 
-                Integer targetX = node.getGridX();
-                Integer targetY = node.getGridY();
+                final Integer targetX = node.getGridX();
+                final Integer targetY = node.getGridY();
 
-                ArrayList<GridBlock> toFill = new ArrayList<>();
+                final ArrayList<GridBlock> toFill = new ArrayList<>();
 
                 toFill.clear();
                 for (int y = targetY; y < targetY + block.getHeight(); y++) {
@@ -390,10 +399,10 @@ public final class GameView extends View {
                 }
 
                 if (toFill.size() == block.getWidth() * block.getHeight()) {
-                    for (GridBlock x : toFill) {
+                    for (final GridBlock x : toFill) {
                         x.setFill(block.getColor());
-                        x.setStyle("-fx-background-color: " + block.getColor());
-                        Pane pane = block.getPane();
+                        x.setStyle(GameView.BACKGROUND_COLOR_STRING + block.getColor());
+                        final Pane pane = block.getPane();
                         pane.getChildren().remove(block);
                         this.score++;
                     }
@@ -438,7 +447,8 @@ public final class GameView extends View {
                 try {
                     JsonUtils.flushJson(JsonUtils.MATCH_FILE);
                 } catch (IOException exception) {
-                    exception.printStackTrace();
+                    final Logger log = Logger.getLogger(GameView.class.getName());
+                    log.fine("Error on flush json file in GameView!");
                 }
             }
         });
@@ -451,14 +461,14 @@ public final class GameView extends View {
         GameSoundSystem.getInstance().stopMedia();
 
         this.gameOverPane.setStyle(
-                "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorBackground()
-                        + "; -fx-border-width: 2; -fx-border-color: black");
+                GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorBackground()
+                        + GameView.STYLE_BORDER_AND_BORDERCOLOR_STRING);
 
         this.gameOverPane.relocate((this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
                 (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
 
         this.labelGameOverScore.setText(
-                GameLanguageSystem.getInstance().getLanguageType().getScore() + ": " + String.valueOf(this.score));
+                GameLanguageSystem.getInstance().getLanguageType().getScore() + ": " + this.score);
 
         this.buttonBackToMenu.setText(GameLanguageSystem.getInstance().getLanguageType().getBackToMenu());
 
@@ -505,9 +515,9 @@ public final class GameView extends View {
      * @return node triggered.
      */
     public Node getNodeIfTriggered(final ShapeBlock block) {
-        for (GridBlock node : this.grid) {
-            if ((node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX())
-                    && (node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY())) {
+        for (final GridBlock node : this.grid) {
+            if (node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()
+                    && node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY()) {
                 return node;
             }
         }
@@ -522,16 +532,16 @@ public final class GameView extends View {
     public void createGridCells() {
         // Check if grid is full
         if (!this.grid.isEmpty()) {
-            for (GridBlock gridBlock : this.grid) {
+            for (final GridBlock gridBlock : this.grid) {
                 gridBlock.setPrefHeight(grid.getGridCellSize());
                 gridBlock.setPrefWidth(grid.getGridCellSize());
                 if (gridBlock.getFill() == null) {
                     gridBlock.setStyle(
-                            "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorGrid()
+                            GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorGrid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 } else {
                     gridBlock.setStyle(
-                            "-fx-background-color: " + gridBlock.getFill()
+                            GameView.BACKGROUND_COLOR_STRING + gridBlock.getFill()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 }
 
@@ -540,13 +550,13 @@ public final class GameView extends View {
         } else {
             for (int rowIndex = 0; rowIndex < grid.getGridSize(); rowIndex++) {
                 for (int columnIndex = 0; columnIndex < grid.getGridSize(); columnIndex++) {
-                    GridBlock aPane = new GridBlock(columnIndex, rowIndex, null,
+                    final GridBlock aPane = new GridBlock(columnIndex, rowIndex, null,
                             ThemeUtils.getSelectedTheme().getColorGrid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());
                     aPane.setStyle(
-                            "-fx-background-color: " + ThemeUtils.getSelectedTheme().getColorGrid()
+                            GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorGrid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
 
                     this.grid.add(aPane);
@@ -572,7 +582,7 @@ public final class GameView extends View {
      */
     public void setPanelsStyle() {
 
-        String spawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10";
+        final String spawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10";
 
         this.upLeftSpawn.setStyle(spawnPanlesStyle);
         this.downLeftSpawn.setStyle(spawnPanlesStyle);
@@ -591,47 +601,47 @@ public final class GameView extends View {
      * labels and buttons.
      */
     public void setObjectLocation() {
-        Group gruppo = new Group(this.mainPane);
+        final Group gruppo = new Group(this.mainPane);
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
 
         this.upLeftSpawn.relocate(
-                (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
+                ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - GameView.spawnPanelsWidth) / 2,
                 (this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2);
         this.downLeftSpawn.relocate(
-                (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth) / 2,
+                ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - GameView.spawnPanelsWidth) / 2,
                 this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - (this.mainPane.getPrefHeight()
                         - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
         this.upRightSpawn.relocate(
                 (this.mainPane.getPrefWidth() - GameView.spawnPanelsWidth)
-                        - (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth)
+                        - ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - GameView.spawnPanelsWidth)
                                 / 2,
                 (this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2);
         this.downRightSpawn.relocate(
                 (this.mainPane.getPrefWidth() - GameView.spawnPanelsWidth)
-                        - (((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2) - GameView.spawnPanelsWidth)
+                        - ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - GameView.spawnPanelsWidth)
                                 / 2,
                 this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - (this.mainPane.getPrefHeight()
                         - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
 
-        this.titleCoin.relocate(this.mainPane.getPrefWidth() / 3 - (this.titleCoin.getWidth() / 2),
+        this.titleCoin.relocate(this.mainPane.getPrefWidth() / 3 - this.titleCoin.getWidth() / 2,
                 TITLE_LABEL_LAYOUTY);
 
-        this.labelCoin.relocate(this.mainPane.getPrefWidth() / 3 - (this.labelCoin.getWidth() / 2),
+        this.labelCoin.relocate(this.mainPane.getPrefWidth() / 3 - this.labelCoin.getWidth() / 2,
                 LABEL_VALUE_LAYOUTY);
 
-        this.titleScore.relocate(((this.mainPane.getPrefWidth() / 3) * 2) - (this.titleScore.getWidth() / 2),
+        this.titleScore.relocate((this.mainPane.getPrefWidth() / 3) * 2 - this.titleScore.getWidth() / 2,
                 TITLE_LABEL_LAYOUTY);
 
-        this.labelScore.relocate(((this.mainPane.getPrefWidth() / 3) * 2) - (this.labelScore.getWidth() / 2),
+        this.labelScore.relocate((this.mainPane.getPrefWidth() / 3) * 2 - this.labelScore.getWidth() / 2,
                 LABEL_VALUE_LAYOUTY);
 
-        this.gridPane.relocate(this.mainPane.getPrefWidth() / 2 - (this.gridPane.getWidth() / 2),
-                this.mainPane.getPrefHeight() / 2 - (this.gridPane.getHeight() / 2));
+        this.gridPane.relocate(this.mainPane.getPrefWidth() / 2 - this.gridPane.getWidth() / 2,
+                this.mainPane.getPrefHeight() / 2 - this.gridPane.getHeight() / 2);
 
         this.imagePause.relocate(this.mainPane.getPrefWidth() - this.imagePause.getFitHeight() - SPACE_PAUSE_BUTTON,
                 SPACE_PAUSE_BUTTON);
@@ -643,8 +653,7 @@ public final class GameView extends View {
      * @return GridPane width.
      */
     public int getGridWidth() {
-        int gridWidth = (grid.getGridSize() * grid.getGridCellSize()) + (grid.getGridSize() - 1) * GAP_GRID_PANE;
-        return gridWidth;
+        return grid.getGridSize() * grid.getGridCellSize() + (grid.getGridSize() - 1) * GAP_GRID_PANE;
     }
 
     /**

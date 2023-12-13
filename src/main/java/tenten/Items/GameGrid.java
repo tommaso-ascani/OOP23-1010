@@ -167,7 +167,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      */
     public List<List<GridBlock>> getNumFullLines() {
 
-        List<List<GridBlock>> lines = new ArrayList<>();
+        final List<List<GridBlock>> lines = new ArrayList<>();
 
         for (int y = 0; y < this.getGridSize(); y++) {
             if (this.isFull(getRow(y))) {
@@ -209,7 +209,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      */
     public List<GridBlock> getRow(final Integer index) {
 
-        List<GridBlock> row = new ArrayList<>();
+        final List<GridBlock> row = new ArrayList<>();
 
         for (final GridBlock block : this) {
             if (block.getGridY().equals(index)) {
@@ -228,7 +228,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      */
     public List<GridBlock> getColumn(final Integer index) {
 
-        List<GridBlock> column = new ArrayList<>();
+        final List<GridBlock> column = new ArrayList<>();
 
         for (final GridBlock block : this) {
             if (block.getGridX().equals(index)) {

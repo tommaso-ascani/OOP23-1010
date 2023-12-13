@@ -8,11 +8,11 @@ import javafx.scene.layout.AnchorPane;
  */
 public class GridBlock extends AnchorPane {
 
-    private Integer x;
-    private Integer y;
+    private final Integer x;
+    private final Integer y;
 
     private String color;
-    private String backgroundColor;
+    private final String backgroundColor;
 
     private Bounds bounds;
 

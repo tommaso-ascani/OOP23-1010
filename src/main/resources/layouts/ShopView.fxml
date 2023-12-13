@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="tenten.view.gameView.ShopView">
+<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="tenten.view.gameview.ShopView">
    <children>
       <Label fx:id="titleLabel" prefWidth="200.0" prefHeight="50.0" alignment="CENTER">
          <font>

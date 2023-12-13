@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tenten.types.ViewType;
-
+import java.util.logging.Logger;
 import java.io.IOException;
 
 /**
@@ -14,14 +14,15 @@ import java.io.IOException;
 public class ViewSwitcher {
 
     /**
-     * ViewSwitcher istance.
+     * Inner class used to maintain the instance of ViewSwitcher.
      */
-    private static ViewSwitcher instance;
+    static class ViewSwitcherInner {
 
-    /**
-     * Current view on which work.
-     */
-    private View currentView;
+        /**
+         * ViewSwitcher istance.
+         */
+        static final ViewSwitcher INSTANCE = new ViewSwitcher();
+    }
 
     /**
      * Method to get the current ViewSwitcher instance.
@@ -30,35 +31,33 @@ public class ViewSwitcher {
      * @return the current ViewSwitcher instance.
      */
     public static ViewSwitcher getInstance() {
-        if (instance == null) {
-            instance = new ViewSwitcher();
-        }
-        return instance;
+        return ViewSwitcherInner.INSTANCE;
     }
 
     /**
      * Method to load the view style.
      * It loads the fxml file and set the new scene.
      * 
-     * @param stage the stage to set the new scene.
+     * @param stage    the stage to set the new scene.
      * @param viewType the view type to switch to.
      * @return the loaded view.
      */
     private View loadStyle(final Stage stage, final ViewType viewType) {
-        FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(viewType.getPath()));
+        final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(viewType.getPath()));
         Parent root = null;
 
         try {
             root = loader.load();
         } catch (IOException exc) {
-            System.err.println("View Switcher - Error on FXML loading!");
+            final Logger log = Logger.getLogger(ViewSwitcher.class.getName());
+            log.fine("View Switcher - Error on FXML loading!");
         }
 
-        Scene newScene = new Scene(root, View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+        final Scene newScene = new Scene(root, View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
 
         stage.setScene(newScene);
         stage.getScene().getStylesheets().clear();
-        View view = loader.getController();
+        final View view = loader.getController();
 
         stage.setWidth(View.WINDOW_WIDTH);
         stage.setHeight(View.WINDOW_HEIGHT);
@@ -74,10 +73,10 @@ public class ViewSwitcher {
      * Method to switch between views.
      * 
      * @param stage the stage to set the new scene.
-     * @param type the view type to switch to.
+     * @param type  the view type to switch to.
      */
     public void switchView(final Stage stage, final ViewType type) {
-        currentView = this.loadStyle(stage, type);
+        final View currentView = this.loadStyle(stage, type);
         currentView.setStage(stage);
         currentView.init();
         stage.show();

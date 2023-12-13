@@ -6,18 +6,13 @@ import org.json.JSONObject;
 import javafx.util.Pair;
 import tenten.items.GameGrid;
 import tenten.items.GridBlock;
-import tenten.view.gameView.HomeView;
+import tenten.view.gameview.HomeView;
+import java.util.logging.Logger;
 
 /**
  * Class that manage saving/loading saved match data from/to json file.
  */
 public final class DataUtils {
-
-    /**
-     * Deafult constructor.
-     */
-    private DataUtils() {
-    }
 
     private static final Integer GRID_CELL_SIZE_IF_NUMBER_OF_CELL_5 = 45;
 
@@ -26,6 +21,14 @@ public final class DataUtils {
     private static final Integer GRID_CELL_SIZE_IF_NUMBER_OF_CELL_15 = 30;
 
     private static final Integer GRID_CELL_SIZE_IF_NUMBER_OF_CELL_20 = 25;
+
+    private static final String COLOR_STRING_KEY_JSON = "color";
+
+    /**
+     * Deafult constructor.
+     */
+    private DataUtils() {
+    }
 
     /**
      * Method to save all match data (score, grid) in the json file.
@@ -43,7 +46,7 @@ public final class DataUtils {
                     JsonUtils.MATCH_FILE);
 
             if (JsonUtils.ifDataExist(String.valueOf(grid.getGridSize()), JsonUtils.BEST_SCORE_FILE)) {
-                Integer bestScore = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
+                final Integer bestScore = (Integer) JsonUtils.loadData(String.valueOf(grid.getGridSize()),
                         JsonUtils.BEST_SCORE_FILE);
                 if (bestScore < score) {
                     JsonUtils.addElement(new Pair<String, Object>(String.valueOf(grid.getGridSize()), score),
@@ -56,16 +59,16 @@ public final class DataUtils {
                 }
             }
 
-            JSONArray blocksArray = new JSONArray();
+            final JSONArray blocksArray = new JSONArray();
 
-            for (GridBlock gridBlock : grid) {
-                JSONObject block = new JSONObject();
+            for (final GridBlock gridBlock : grid) {
+                final JSONObject block = new JSONObject();
                 block.put("X", gridBlock.getGridX());
                 block.put("Y", gridBlock.getGridY());
                 if (gridBlock.getFill() != null) {
-                    block.put("color", gridBlock.getFill());
+                    block.put(DataUtils.COLOR_STRING_KEY_JSON, gridBlock.getFill());
                 } else {
-                    block.put("color", "null");
+                    block.put(DataUtils.COLOR_STRING_KEY_JSON, "null");
                 }
 
                 blocksArray.put(block);
@@ -74,7 +77,8 @@ public final class DataUtils {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_COMPOSITION, blocksArray),
                     JsonUtils.MATCH_FILE);
         } catch (IOException exc) {
-            System.err.println("Error on match data saving!");
+            final Logger log = Logger.getLogger(DataUtils.class.getName());
+            log.fine("Error on match data saving!");
         }
     }
 
@@ -87,7 +91,7 @@ public final class DataUtils {
     public static void saveBestScore(final Integer score, final String size) {
         try {
             if (JsonUtils.ifDataExist(size, JsonUtils.BEST_SCORE_FILE)) {
-                Integer bestScore = (Integer) JsonUtils.loadData(size, JsonUtils.BEST_SCORE_FILE);
+                final Integer bestScore = (Integer) JsonUtils.loadData(size, JsonUtils.BEST_SCORE_FILE);
                 if (bestScore < score) {
                     JsonUtils.addElement(new Pair<String, Object>(size, score), JsonUtils.BEST_SCORE_FILE);
                 }
@@ -97,7 +101,8 @@ public final class DataUtils {
                 }
             }
         } catch (IOException exc) {
-            System.err.println("Error on best score saving!");
+            final Logger log = Logger.getLogger(DataUtils.class.getName());
+            log.fine("Error on best score saving!");
         }
     }
 
@@ -110,7 +115,8 @@ public final class DataUtils {
         try {
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, coins), JsonUtils.GAME_DATA_FILE);
         } catch (IOException exc) {
-            System.err.println("Error on coins saving!");
+            final Logger log = Logger.getLogger(DataUtils.class.getName());
+            log.fine("Error on coins saving!");
         }
     }
 
@@ -125,7 +131,8 @@ public final class DataUtils {
                 return (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
             }
         } catch (IOException exc) {
-            System.err.println("Error on coins loading!");
+            final Logger log = Logger.getLogger(DataUtils.class.getName());
+            log.fine("Error on coins loading!");
         }
         return 0;
     }
@@ -141,7 +148,8 @@ public final class DataUtils {
                 return (Integer) JsonUtils.loadData(JsonUtils.MATCH_SCORE, JsonUtils.MATCH_FILE);
             }
         } catch (IOException exc) {
-            System.err.println("Error on score loading!");
+            final Logger log = Logger.getLogger(DataUtils.class.getName());
+            log.fine("Error on score loading!");
         }
         return 0;
     }
@@ -178,23 +186,24 @@ public final class DataUtils {
                         break;
 
                     default:
-                        System.err.println("Error on sizing cell grid");
+                        final Logger log = Logger.getLogger(DataUtils.class.getName());
+                        log.fine("Error on sizing cell grid");
                         break;
                 }
 
-                JSONArray a = JsonUtils.loadDataArray(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
+                final JSONArray a = JsonUtils.loadDataArray(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE);
 
                 for (int i = 0; i < a.length(); i++) {
 
                     String color;
 
-                    if (a.getJSONObject(i).get("color").equals("null")) {
+                    if ("null".equals(a.getJSONObject(i).get(DataUtils.COLOR_STRING_KEY_JSON))) {
                         color = null;
                     } else {
-                        color = (String) a.getJSONObject(i).get("color");
+                        color = (String) a.getJSONObject(i).get(DataUtils.COLOR_STRING_KEY_JSON);
                     }
 
-                    GridBlock aPane = new GridBlock((Integer) a.getJSONObject(i).get("X"),
+                    final GridBlock aPane = new GridBlock((Integer) a.getJSONObject(i).get("X"),
                             (Integer) a.getJSONObject(i).get("Y"),
                             color, ThemeUtils.getSelectedTheme().getColorGrid());
 
@@ -204,7 +213,8 @@ public final class DataUtils {
                 return grid;
             }
         } catch (IOException exc) {
-            System.err.println("Error on grid loading!");
+            final Logger log = Logger.getLogger(DataUtils.class.getName());
+            log.fine("Error on grid loading!");
         }
 
         grid = new GameGrid<>(HomeView.getGridSize());
@@ -227,7 +237,8 @@ public final class DataUtils {
                 break;
 
             default:
-                System.err.println("Error on sizing cell grid");
+                final Logger log = Logger.getLogger(DataUtils.class.getName());
+                log.fine("Error on sizing cell grid");
                 break;
         }
 

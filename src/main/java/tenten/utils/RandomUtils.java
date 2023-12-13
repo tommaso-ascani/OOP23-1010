@@ -10,7 +10,8 @@ public final class RandomUtils {
     /**
      * Deafult constructor.
      */
-    private RandomUtils() { }
+    private RandomUtils() {
+    }
 
     /**
      * Method randomize a new item to be generated.
@@ -20,11 +21,11 @@ public final class RandomUtils {
     public static BlockType getRandomPuzzle() {
         Integer index = 0;
 
-        Double temp = Math.floor(Math.random() * (BlockType.values().length - 1));
-        Integer rand = temp.intValue();
+        final Double temp = Math.floor(Math.random() * (BlockType.values().length - 1));
+        final Integer rand = temp.intValue();
 
-        for (BlockType block : BlockType.values()) {
-            if (index == rand) {
+        for (final BlockType block : BlockType.values()) {
+            if (index.equals(rand)) {
                 return block;
             }
             index++;

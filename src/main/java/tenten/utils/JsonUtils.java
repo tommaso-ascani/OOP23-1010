@@ -13,10 +13,7 @@ import org.json.JSONObject;
  */
 public final class JsonUtils {
 
-    /**
-     * Deafult constructor.
-     */
-    private JsonUtils() { }
+    private static final String JSON_EXTENSION_FILE_STRING = ".json";
 
     /**
      * Static field used to assign separator.
@@ -103,6 +100,12 @@ public final class JsonUtils {
     public static final String LANGUAGE = "language";
 
     /**
+     * Deafult constructor.
+     */
+    private JsonUtils() {
+    }
+
+    /**
      * Method to load a specific data from a json file.
      * 
      * @param data     to load.
@@ -112,9 +115,9 @@ public final class JsonUtils {
      */
     public static Object loadData(final String data, final String fileName) throws IOException {
         // Read file
-        String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
+        final String file = Files.readString(Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING));
         // Create new JSONObject with file data
-        JSONObject json = new JSONObject(file);
+        final JSONObject json = new JSONObject(file);
         // Return json given data
         return json.get(data);
     }
@@ -129,9 +132,9 @@ public final class JsonUtils {
      */
     public static JSONArray loadDataArray(final String data, final String fileName) throws IOException {
         // Read file
-        String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
+        final String file = Files.readString(Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING));
         // Create new JSONObject with file data
-        JSONObject json = new JSONObject(file);
+        final JSONObject json = new JSONObject(file);
         // Return jsonArray of the grid's cells occupied
         return (JSONArray) json.get(data);
     }
@@ -145,11 +148,9 @@ public final class JsonUtils {
      */
     public static JSONObject loadDatas(final String fileName) throws IOException {
         // Read file
-        String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
-        // Create new JSONObject with file data
-        JSONObject json = new JSONObject(file);
+        final String file = Files.readString(Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING));
         // Return all json datas
-        return json;
+        return new JSONObject(file);
     }
 
     /**
@@ -163,7 +164,7 @@ public final class JsonUtils {
         // Create directory if doesn't exist
         Files.createDirectories(Paths.get(DATA_PATH));
         // Write json on file
-        Files.writeString(Paths.get(DATA_PATH + fileName + ".json"), json.toString(1));
+        Files.writeString(Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING), json.toString(1));
     }
 
     /**
@@ -177,8 +178,9 @@ public final class JsonUtils {
         // Create local variable
         JSONObject json;
 
-        if (Files.exists(Paths.get(DATA_PATH + fileName + ".json"))
-                && Files.readAllBytes(Paths.get(DATA_PATH + fileName + ".json")).length > 0) {
+        if (Files.exists(Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING))
+                && Files.readAllBytes(
+                        Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING)).length > 0) {
             // Get json element if exists
             json = loadDatas(fileName);
         } else {
@@ -201,7 +203,7 @@ public final class JsonUtils {
      */
     public static void removeElement(final String data, final String fileName) throws IOException {
         // Get json element if exists
-        JSONObject json = loadDatas(fileName);
+        final JSONObject json = loadDatas(fileName);
         // Remove element
         json.remove(data);
 
@@ -223,7 +225,7 @@ public final class JsonUtils {
     public static void flushJson(final String fileName) throws IOException {
         if (jsonExist(fileName)) {
             // Delete json file
-            Files.delete(Paths.get(DATA_PATH + fileName + ".json"));
+            Files.delete(Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING));
         }
     }
 
@@ -236,8 +238,9 @@ public final class JsonUtils {
      */
     public static Boolean jsonExist(final String fileName) throws IOException {
         // Check if exist some data to load
-        if (Files.exists(Paths.get(DATA_PATH + fileName + ".json"))
-                && Files.readAllBytes(Paths.get(DATA_PATH + fileName + ".json")).length > 0) {
+        if (Files.exists(Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING))
+                && Files.readAllBytes(
+                        Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING)).length > 0) {
             return true;
         }
         return false;
@@ -254,9 +257,10 @@ public final class JsonUtils {
     public static Boolean ifDataExist(final String data, final String fileName) throws IOException {
         if (jsonExist(fileName)) {
             // Read file
-            String file = Files.readString(Paths.get(DATA_PATH + fileName + ".json"));
+            final String file = Files
+                    .readString(Paths.get(DATA_PATH + fileName + JsonUtils.JSON_EXTENSION_FILE_STRING));
             // Create new JSONObject with file data
-            JSONObject json = new JSONObject(file);
+            final JSONObject json = new JSONObject(file);
             // Return true if json given data exist
             return json.has(data);
         } else {
