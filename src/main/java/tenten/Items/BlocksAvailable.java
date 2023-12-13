@@ -1,4 +1,4 @@
-package tenten.Items;
+package tenten.items;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
 
         Integer targetX;
         Integer targetY;
-        ArrayList<GridBlock> toFill = new ArrayList<>();
+        ArrayList<GridBlock> toBeFilled = new ArrayList<>();
 
         for (ShapeBlock block : this) {
             for (GridBlock elem : grid) {
@@ -30,9 +30,9 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
                 targetX = elem.getGridX();
                 targetY = elem.getGridY();
 
-                toFill = new ArrayList<>();
+                toBeFilled = new ArrayList<>();
 
-                toFill.clear();
+                toBeFilled.clear();
                 for (int y = targetY; y < targetY + block.getHeight(); y++) {
                     if (y >= grid.getGridSize()) {
                         break;
@@ -42,19 +42,19 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
                             break;
                         }
                         if (grid.getElement(x, y).getFill() == null) {
-                            toFill.add(grid.getElement(x, y));
+                            toBeFilled.add(grid.getElement(x, y));
                         } else {
-                            toFill.clear();
+                            toBeFilled.clear();
                             break;
                         }
                     }
                 }
-                if (toFill.size() == block.getWidth() * block.getHeight()) {
+                if (toBeFilled.size() == block.getWidth() * block.getHeight()) {
                     break;
                 }
             }
 
-            if (toFill.size() == block.getWidth() * block.getHeight()) {
+            if (toBeFilled.size() == block.getWidth() * block.getHeight()) {
                 return true;
             }
         }

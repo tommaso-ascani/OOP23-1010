@@ -1,4 +1,4 @@
-package tenten.Items;
+package tenten.items;
 
 import javafx.geometry.Bounds;
 import javafx.scene.layout.AnchorPane;

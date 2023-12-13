@@ -1,4 +1,4 @@
-package tenten.Items;
+package tenten.items;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

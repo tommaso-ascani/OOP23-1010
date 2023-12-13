@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
-import tenten.Items.ShopTheme;
+import tenten.items.ShopTheme;
 import tenten.language.GameLanguageSystem;
 import tenten.types.ViewType;
 import tenten.utils.JsonUtils;

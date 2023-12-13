@@ -4,8 +4,8 @@ import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.util.Pair;
-import tenten.Items.GameGrid;
-import tenten.Items.GridBlock;
+import tenten.items.GameGrid;
+import tenten.items.GridBlock;
 import tenten.view.gameView.HomeView;
 
 /**

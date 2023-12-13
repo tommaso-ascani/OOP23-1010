@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import tenten.items.GameGrid;
+import tenten.items.GridBlock;
+
 /**
  * Class used to test the main method of the GameGrid class.
  */
