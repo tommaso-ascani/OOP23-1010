@@ -31,8 +31,8 @@ public final class ShapeBlock extends Path {
     /**
      * Initialize new ShapeBlock object.
      * 
-     * @param type
-     * @param gridCellSize
+     * @param type BlockType
+     * @param gridCellSize gridCellSize
      */
     public ShapeBlock(final BlockType type,
                       final Integer gridCellSize) {

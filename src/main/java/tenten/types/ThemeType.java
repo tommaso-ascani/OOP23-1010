@@ -216,7 +216,7 @@ public enum ThemeType {
     /**
      * Setter of purchased of theme.
      * 
-     * @param purch
+     * @param purch condition
      */
     public void recallSetPurchased(final Boolean purch) {
         this.setPurchased(purch);

@@ -19,10 +19,10 @@ public class GridBlock extends AnchorPane {
     /**
      * Method to initialize the fields x, y, color and background_color.
      * 
-     * @param x
-     * @param y
-     * @param color
-     * @param backgroundColor
+     * @param x coordinate
+     * @param y coordinate
+     * @param color of gridBlock
+     * @param backgroundColor of gridBlock
      */
     public GridBlock(final Integer x, final Integer y, final String color, final String backgroundColor) {
         this.x = x;
@@ -34,7 +34,7 @@ public class GridBlock extends AnchorPane {
     /**
      * Method to set the field color.
      * 
-     * @param color
+     * @param color of block
      */
     public void setFill(final String color) {
         this.color = color;

@@ -47,8 +47,8 @@ public final class ShopTheme extends VBox {
     /**
      * Initialize new ShopThemeItem object.
      * 
-     * @param theme
-     * @param purchased
+     * @param theme name
+     * @param purchased condition
      */
     public ShopTheme(final String theme, final Boolean purchased) {
 
@@ -126,7 +126,7 @@ public final class ShopTheme extends VBox {
     /**
      * Method to set if the is purchased.
      * 
-     * @param purchased
+     * @param purchased condition
      */
     public void setPurchased(final Boolean purchased) {
         this.purchased = purchased;
@@ -135,7 +135,7 @@ public final class ShopTheme extends VBox {
     /**
      * Method to set the cost label text.
      * 
-     * @param text
+     * @param text of cost
      */
     public void setCostLabeltext(final String text) {
         this.costLabel.setText(text);
@@ -153,7 +153,7 @@ public final class ShopTheme extends VBox {
     /**
      * Method to set the theme.
      * 
-     * @param theme
+     * @param theme ThemeType
      */
     public void setTheme(final ThemeType theme) {
         this.theme = theme;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Class that extends ArrayList of type ShapeBlock, it contains the four
  * placeble blocks.
  * 
- * @param <E>
+ * @param <E> Shapeblock
  */
 public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
 
@@ -20,7 +20,7 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
      * in the grid. If at least one can be placed so it return true. False
      * otherwise.
      * 
-     * @param grid
+     * @param grid GameGrid
      * @return Boolean
      */
     public Boolean checkIfBlocksCanBePlaced(final GameGrid<GridBlock> grid) {

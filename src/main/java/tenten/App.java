@@ -17,8 +17,8 @@ public final class App {
     /**
      * Application main.
      * 
-     * @param args
-     * @throws IOException
+     * @param args args
+     * @throws IOException exception
      */
     public static void main(final String[] args) throws IOException {
         Application.launch(Startup.class, args);

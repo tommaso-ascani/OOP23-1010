@@ -71,7 +71,7 @@ public final class GameSoundSystem {
      * Method to set the resource to play, put it in an AudioClip and set the
      * volume.
      * 
-     * @param sound
+     * @param sound soundType
      */
     public void setAudioClip(final SoundType sound) {
         this.aClip = new AudioClip(getClass().getResource(sound.getPath()).toExternalForm());
@@ -109,7 +109,7 @@ public final class GameSoundSystem {
      * MediaPlayer and set the
      * volume.
      * 
-     * @param music
+     * @param music SuondType
      */
     public void setMediaPlayer(final SoundType music) {
         this.player = new MediaPlayer(new Media(getClass().getResource(music.getPath()).toExternalForm()));

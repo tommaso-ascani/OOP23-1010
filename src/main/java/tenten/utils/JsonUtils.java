@@ -111,7 +111,7 @@ public final class JsonUtils {
      * @param data     to load.
      * @param fileName to search in.
      * @return The data founded.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static Object loadData(final String data, final String fileName) throws IOException {
         // Read file
@@ -128,7 +128,7 @@ public final class JsonUtils {
      * @param data     Array name.
      * @param fileName to search on.
      * @return The array founded.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static JSONArray loadDataArray(final String data, final String fileName) throws IOException {
         // Read file
@@ -144,7 +144,7 @@ public final class JsonUtils {
      * 
      * @param fileName to search on.
      * @return All data.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static JSONObject loadDatas(final String fileName) throws IOException {
         // Read file
@@ -158,7 +158,7 @@ public final class JsonUtils {
      * 
      * @param json     to save.
      * @param fileName to save on.
-     * @throws IOException
+     * @throws IOException exception
      */
     private static void saveMatchData(final JSONObject json, final String fileName) throws IOException {
         // Create directory if doesn't exist
@@ -172,7 +172,7 @@ public final class JsonUtils {
      * 
      * @param element  to add.
      * @param fileName to save on.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static void addElement(final Pair<String, Object> element, final String fileName) throws IOException {
         // Create local variable
@@ -199,7 +199,7 @@ public final class JsonUtils {
      * 
      * @param data     to remove.
      * @param fileName to remove on.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static void removeElement(final String data, final String fileName) throws IOException {
         // Get json element if exists
@@ -220,7 +220,7 @@ public final class JsonUtils {
      * Method to flush all json file content.
      * 
      * @param fileName to flush.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static void flushJson(final String fileName) throws IOException {
         if (jsonExist(fileName)) {
@@ -234,7 +234,7 @@ public final class JsonUtils {
      * 
      * @param fileName to check.
      * @return If exist.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static Boolean jsonExist(final String fileName) throws IOException {
         // Check if exist some data to load
@@ -252,7 +252,7 @@ public final class JsonUtils {
      * @param data     to check.
      * @param fileName to check on.
      * @return If exist.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static Boolean ifDataExist(final String data, final String fileName) throws IOException {
         if (jsonExist(fileName)) {

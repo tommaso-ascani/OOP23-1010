@@ -9,11 +9,18 @@ import tenten.types.SoundType;
  * Class that extends ArrayList of type GridBlock, used to mantain reference of
  * the various grid blocks in the cell.
  * 
- * @param <E>
+ * @param <E> Gridblock
  */
 public class GameGrid<E> extends ArrayList<GridBlock> {
 
+    /**
+     * Size of the game grid.
+     */
     private final Integer gridSize;
+
+    /**
+     * Size of the game grid cell.
+     */
     private Integer gridCellSize;
 
     /**
@@ -24,7 +31,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Gamegrid constructor.
      * 
-     * @param gridSize
+     * @param gridSize gridSize
      */
     public GameGrid(final Integer gridSize) {
         this.gridSize = gridSize;
@@ -33,8 +40,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Method to get the block above the gave one.
      * 
-     * @param block
-     * @param offset
+     * @param block block
+     * @param offset offset
      * @return GridBlock.
      */
     public GridBlock getUpBlock(final GridBlock block, final Integer offset) {
@@ -49,8 +56,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Method to get the block under the gave one.
      * 
-     * @param block
-     * @param offset
+     * @param block block
+     * @param offset offset
      * @return GridBlock.
      */
     public GridBlock getDownBlock(final GridBlock block, final Integer offset) {
@@ -65,8 +72,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Method to get the block on the right of the gave one.
      * 
-     * @param block
-     * @param offset
+     * @param block block
+     * @param offset offset
      * @return GridBlock.
      */
     public GridBlock getRightBlock(final GridBlock block, final Integer offset) {
@@ -81,8 +88,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Method to get the block on the left of the gave one.
      * 
-     * @param block
-     * @param offset
+     * @param block block
+     * @param offset offset
      * @return GridBlock.
      */
     public GridBlock getLeftBlock(final GridBlock block, final Integer offset) {
@@ -97,8 +104,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Method to get the specified block at (x,y).
      * 
-     * @param x
-     * @param y
+     * @param x coordinate
+     * @param y coordinate
      * @return GridBlock.
      */
     public GridBlock getElement(final Integer x, final Integer y) {
@@ -122,7 +129,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Method to set the cell's size.
      * 
-     * @param cellSize
+     * @param cellSize cellSize
      */
     public void setGridCellSize(final Integer cellSize) {
         this.gridCellSize = cellSize;
@@ -186,7 +193,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     /**
      * Return a boolean that indicates if the line (row or column) is full.
      * 
-     * @param list
+     * @param list of blocks
      * @return Boolean
      */
     public Boolean isFull(final List<GridBlock> list) {
@@ -203,7 +210,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * Return the row at the passed index.
      * 
      * 
-     * @param index
+     * @param index of row to get
      * @return ArrayList
      */
     public List<GridBlock> getRow(final Integer index) {
@@ -222,7 +229,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * Return the column at the passed index.
      * 
      * 
-     * @param index
+     * @param index of column to get
      * @return ArrayList
      */
     public List<GridBlock> getColumn(final Integer index) {

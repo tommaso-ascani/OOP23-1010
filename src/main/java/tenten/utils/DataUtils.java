@@ -238,7 +238,7 @@ public final class DataUtils {
     /**
      * Method to set gridSize.
      * 
-     * @param gridSize
+     * @param gridSize gridSize
      */
     public static void setGridSize(final Integer gridSize) {
         DataUtils.gridSize = gridSize;
