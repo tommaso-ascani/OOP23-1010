@@ -10,19 +10,24 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javafx.util.Pair;
-public class JsonUtilsTest {
 
-    Pair<String,Object> pair = new Pair<String,Object>("test", "value");
-    JSONArray blocksArray = new JSONArray();
-    
+/**
+ * Class that test the main functions of tha java class JsonUtils.
+ */
+public final class JsonUtilsTest {
+
+    private Pair<String, Object> pair = new Pair<String, Object>("test", "value");
+
+    private JSONArray blocksArray = new JSONArray();
+
     @BeforeEach
-    void setup() throws IOException{
+    void setup() throws IOException {
         blocksArray.put("test1");
         blocksArray.put("test2");
         blocksArray.put("test3");
         blocksArray.put("test4");
-        
-        JsonUtils.addElement(new Pair<String,Object>("array", blocksArray), "test");
+
+        JsonUtils.addElement(new Pair<String, Object>("array", blocksArray), "test");
 
         JsonUtils.addElement(pair, "test");
     }
@@ -49,7 +54,7 @@ public class JsonUtilsTest {
 
     @Test
     void testLoadDataArray() throws IOException {
-        for(int x = 0; x<JsonUtils.loadDataArray("array", "test").length(); x++){
+        for (int x = 0; x < JsonUtils.loadDataArray("array", "test").length(); x++) {
             Assertions.assertEquals(JsonUtils.loadDataArray("array", "test").get(x), blocksArray.get(x));
         }
     }
@@ -66,7 +71,7 @@ public class JsonUtilsTest {
     @Test
     void testLoadDatas() throws IOException {
         Assertions.assertEquals(JsonUtils.loadDatas("test").get("test"), pair.getValue());
-        for(int x = 0; x<JsonUtils.loadDataArray("array", "test").length(); x++){
+        for (int x = 0; x < JsonUtils.loadDataArray("array", "test").length(); x++) {
             Assertions.assertEquals(JsonUtils.loadDataArray("array", "test").get(x), blocksArray.get(x));
         }
     }

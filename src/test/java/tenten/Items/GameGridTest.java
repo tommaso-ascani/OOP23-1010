@@ -4,22 +4,33 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Class used to test the main method of the GameGrid class.
+ */
 public class GameGridTest {
 
     private static GameGrid<GridBlock> gg;
 
+    private static final Integer TEST_GRID_SIZE = 5;
+
+    /**
+     * Method that instantiate a GameGrid of GridBlocks.
+     */
     @BeforeAll
     public static void setup() {
-        gg = new GameGrid<>(5);
-        for (int RowIndex = 0; RowIndex < gg.getGridSize(); RowIndex++) {
-            for (int ColumnIndex = 0; ColumnIndex < gg.getGridSize(); ColumnIndex++) {
-                GridBlock aPane = new GridBlock(ColumnIndex, RowIndex, null,
+        gg = new GameGrid<>(GameGridTest.TEST_GRID_SIZE);
+        for (int rowIndex = 0; rowIndex < gg.getGridSize(); rowIndex++) {
+            for (int columnIndex = 0; columnIndex < gg.getGridSize(); columnIndex++) {
+                GridBlock aPane = new GridBlock(columnIndex, rowIndex, null,
                         null);
                 gg.add(aPane);
             }
         }
     }
 
+    /**
+     * Method that test the function getUpBlock.
+     */
     @Test
     public void testGetUpBlock() {
         GridBlock gb1 = new GridBlock(2, 2, null, null);
@@ -29,6 +40,9 @@ public class GameGridTest {
         Assertions.assertEquals(gb2.getGridY(), gg.getUpBlock(gb1, 1).getGridY());
     }
 
+    /**
+     * Method that test the function getDownBlock.
+     */
     @Test
     public void testGetDownBlock() {
         GridBlock gb1 = new GridBlock(2, 2, null, null);
@@ -38,6 +52,9 @@ public class GameGridTest {
         Assertions.assertEquals(gb1.getGridY(), gg.getDownBlock(gb2, 1).getGridY());
     }
 
+    /**
+     * Method that test the function getLeftBlock.
+     */
     @Test
     public void testGetLeftBlock() {
         GridBlock gb1 = new GridBlock(2, 2, null, null);
@@ -47,6 +64,9 @@ public class GameGridTest {
         Assertions.assertEquals(gb2.getGridY(), gg.getLeftBlock(gb1, 1).getGridY());
     }
 
+    /**
+     * Method that test the function getRightBlock.
+     */
     @Test
     public void testGetRightBlock() {
         GridBlock gb1 = new GridBlock(2, 2, null, null);
@@ -56,6 +76,9 @@ public class GameGridTest {
         Assertions.assertEquals(gb2.getGridY(), gg.getRightBlock(gb1, 1).getGridY());
     }
 
+    /**
+     * Method that test the function getElement.
+     */
     @Test
     public void testGetElement() {
 
