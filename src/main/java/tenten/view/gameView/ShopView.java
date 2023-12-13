@@ -108,8 +108,7 @@ public final class ShopView extends View {
 
             for (int i = 0; i < a.length(); i++) {
                 ShopTheme temp = new ShopTheme(a.getJSONObject(i).getString("name"),
-                        (Boolean) a.getJSONObject(i).get("purchased"),
-                        this.mainPane.getPrefWidth());
+                        (Boolean) a.getJSONObject(i).get("purchased"));
                 if (temp.getPurchased()) {
                     if (!temp.getTheme().name().equals(ThemeUtils.getSelectedTheme().name())) {
                         this.setListenerIfShopThemeItemPurchased(true, temp);
