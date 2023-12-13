@@ -39,7 +39,7 @@ public final class HomeView extends View {
 
     private static final Integer PLAY_AND_RESUME_BUTTON_SPACE = 75;
 
-    private static final Integer PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT = 75;
+    private static final Double PLAY_AND_RESUME_BUTTON_DIVISOR_CONSTANT = 2.5;
 
     private static final Integer SHOP_BUTTON_DIVISOR_CONSTANT = 6;
 
@@ -271,7 +271,12 @@ public final class HomeView extends View {
         });
 
         btnResume.setOnMouseClicked(e -> {
-            this.switchToPlayView();
+            try {
+                gridSize = (Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE);
+            } catch (IOException e1) {
+                System.err.println("Error in loading grid size!");
+            }
+            ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
         });
     }
 

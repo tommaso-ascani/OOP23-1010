@@ -1,6 +1,7 @@
 package tenten.items;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import tenten.sound.GameSoundSystem;
 import tenten.types.SoundType;
@@ -13,8 +14,13 @@ import tenten.types.SoundType;
  */
 public class GameGrid<E> extends ArrayList<GridBlock> {
 
-    private Integer gridSize;
+    private final Integer gridSize;
     private Integer gridCellSize;
+
+    /**
+     * Define serialization id to avoid serialization related bugs.
+     */
+    public static final long serialVersionUID = 4328742;
 
     /**
      * Gamegrid constructor.
@@ -33,8 +39,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @return GridBlock.
      */
     public GridBlock getUpBlock(final GridBlock block, final Integer offset) {
-        for (GridBlock x : this) {
-            if (block.getGridX() == x.getGridX() && block.getGridY() - offset == x.getGridY()) {
+        for (final GridBlock x : this) {
+            if (block.getGridX().equals(x.getGridX()) && x.getGridY().equals(block.getGridY() - offset)) {
                 return x;
             }
         }
@@ -49,8 +55,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @return GridBlock.
      */
     public GridBlock getDownBlock(final GridBlock block, final Integer offset) {
-        for (GridBlock x : this) {
-            if (block.getGridX() == x.getGridX() && block.getGridY() + offset == x.getGridY()) {
+        for (final GridBlock x : this) {
+            if (block.getGridX().equals(x.getGridX()) && x.getGridY().equals(block.getGridY() + offset)) {
                 return x;
             }
         }
@@ -65,8 +71,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @return GridBlock.
      */
     public GridBlock getRightBlock(final GridBlock block, final Integer offset) {
-        for (GridBlock x : this) {
-            if (block.getGridX() + offset == x.getGridX() && block.getGridY() == x.getGridY()) {
+        for (final GridBlock x : this) {
+            if (x.getGridX().equals(block.getGridX() + offset) && block.getGridY().equals(x.getGridY())) {
                 return x;
             }
         }
@@ -81,8 +87,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @return GridBlock.
      */
     public GridBlock getLeftBlock(final GridBlock block, final Integer offset) {
-        for (GridBlock x : this) {
-            if (block.getGridX() - offset == x.getGridX() && block.getGridY() == x.getGridY()) {
+        for (final GridBlock x : this) {
+            if (x.getGridX().equals(block.getGridX() - offset) && block.getGridY().equals(x.getGridY())) {
                 return x;
             }
         }
@@ -97,8 +103,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @return GridBlock.
      */
     public GridBlock getElement(final Integer x, final Integer y) {
-        for (GridBlock elem : this) {
-            if (elem.getGridX() == x && elem.getGridY() == y) {
+        for (final GridBlock elem : this) {
+            if (elem.getGridX().equals(x) && elem.getGridY().equals(y)) {
                 return elem;
             }
         }
@@ -141,8 +147,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     public Integer controlIfLinesCompleted() {
         Integer lines = 0;
 
-        for (ArrayList<GridBlock> line : getNumFullLines()) {
-            for (GridBlock block : line) {
+        for (final List<GridBlock> line : getNumFullLines()) {
+            for (final GridBlock block : line) {
                 block.setStyle("-fx-background-color: " + block.getBackgroundColor());
                 block.setFill(null);
             }
@@ -159,9 +165,9 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * 
      * @return ArrayList
      */
-    public ArrayList<ArrayList<GridBlock>> getNumFullLines() {
+    public List<List<GridBlock>> getNumFullLines() {
 
-        ArrayList<ArrayList<GridBlock>> lines = new ArrayList<>();
+        List<List<GridBlock>> lines = new ArrayList<>();
 
         for (int y = 0; y < this.getGridSize(); y++) {
             if (this.isFull(getRow(y))) {
@@ -184,9 +190,9 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @param list
      * @return Boolean
      */
-    public Boolean isFull(final ArrayList<GridBlock> list) {
+    public Boolean isFull(final List<GridBlock> list) {
 
-        for (GridBlock block : list) {
+        for (final GridBlock block : list) {
             if (block.getFill() == null) {
                 return false;
             }
@@ -201,12 +207,12 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @param index
      * @return ArrayList
      */
-    public ArrayList<GridBlock> getRow(final Integer index) {
+    public List<GridBlock> getRow(final Integer index) {
 
-        ArrayList<GridBlock> row = new ArrayList<>();
+        List<GridBlock> row = new ArrayList<>();
 
-        for (GridBlock block : this) {
-            if (block.getGridY() == index) {
+        for (final GridBlock block : this) {
+            if (block.getGridY().equals(index)) {
                 row.add(block);
             }
         }
@@ -220,12 +226,12 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * @param index
      * @return ArrayList
      */
-    public ArrayList<GridBlock> getColumn(final Integer index) {
+    public List<GridBlock> getColumn(final Integer index) {
 
-        ArrayList<GridBlock> column = new ArrayList<>();
+        List<GridBlock> column = new ArrayList<>();
 
-        for (GridBlock block : this) {
-            if (block.getGridX() == index) {
+        for (final GridBlock block : this) {
+            if (block.getGridX().equals(index)) {
                 column.add(block);
             }
         }

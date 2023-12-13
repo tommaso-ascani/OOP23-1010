@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 import tenten.items.BlocksAvailable;
 import tenten.items.GameGrid;
 import tenten.items.GridBlock;
@@ -284,6 +285,15 @@ public final class GameView extends View {
         });
 
         btnDialogY.setOnMouseClicked(e -> {
+            try {
+                Integer gridSizeTemp = this.grid.getGridSize();
+                if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
+                    JsonUtils.flushJson(JsonUtils.MATCH_FILE);
+                }
+                JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, gridSizeTemp), JsonUtils.MATCH_FILE);
+            } catch (IOException e1) {
+                System.err.println("Error on restart yes button pressed!");
+            }
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
         });
 
@@ -328,6 +338,11 @@ public final class GameView extends View {
         });
 
         btnMenuN.setOnMouseClicked(e -> {
+            try {
+                JsonUtils.flushJson(JsonUtils.MATCH_FILE);
+            } catch (IOException e1) {
+                System.err.println("Error on flush match file!");
+            }
             DataUtils.saveCoins(this.coins);
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.HOME);
         });

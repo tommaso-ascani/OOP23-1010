@@ -11,6 +11,11 @@ import java.util.ArrayList;
 public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
 
     /**
+     * Define serialization id to avoid serialization related bugs.
+     */
+    public static final long serialVersionUID = 4328743;
+
+    /**
      * Method to check whether at least one remaining placeable block can be placed
      * in the grid. If at least one can be placed so it return true. False
      * otherwise.
@@ -24,8 +29,8 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
         Integer targetY;
         ArrayList<GridBlock> toBeFilled = new ArrayList<>();
 
-        for (ShapeBlock block : this) {
-            for (GridBlock elem : grid) {
+        for (final ShapeBlock block : this) {
+            for (final GridBlock elem : grid) {
 
                 targetX = elem.getGridX();
                 targetY = elem.getGridY();
