@@ -46,8 +46,8 @@ public abstract class View {
         value = { // List of bugs to be suppressed
             "EI_EXPOSE_REP"
         }, // String with the reasons for them to be suppressed
-        justification = "A ChoiceDialog is always in its own stage"
-            + ", and we don't need the status of the Runnable"
+        justification = "I need to let other methods access stage object"
+            + ", and it can't be cloned."
     )
     public Stage getStage() {
         return this.currentStage;
@@ -62,8 +62,8 @@ public abstract class View {
         value = { // List of bugs to be suppressed
             "EI_EXPOSE_REP2"
         }, // String with the reasons for them to be suppressed
-        justification = "A ChoiceDialog is always in its own stage"
-            + ", and we don't need the status of the Runnable"
+        justification = "I need to let other methods access stage object"
+            + ", and it can't be cloned."
     )
     public void setStage(final Stage stageToSet) {
         this.currentStage = stageToSet;
