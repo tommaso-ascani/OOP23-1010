@@ -71,6 +71,9 @@ public final class SettingsView extends View {
         }
 
         this.languageChoiceBox.setItems(this.languageList);
+
+        GameLanguageSystem.getInstance().checkLanguageData();
+
         this.languageChoiceBox.setValue(GameLanguageSystem.getInstance().getLanguage());
 
         this.settingsLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getSettings());
@@ -83,7 +86,7 @@ public final class SettingsView extends View {
         this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColorBackground());
 
         this.settingsPane.relocate((double) View.WINDOW_WIDTH / 2 - this.settingsPane.getPrefWidth() / 2,
-                                   (double) View.WINDOW_HEIGHT / 2 - this.settingsPane.getPrefHeight() / 2);
+                (double) View.WINDOW_HEIGHT / 2 - this.settingsPane.getPrefHeight() / 2);
 
         GameSoundSystem.getInstance().checkSoundData();
         if (GameSoundSystem.getInstance().getVolume() != 0) {

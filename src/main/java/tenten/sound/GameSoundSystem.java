@@ -92,7 +92,9 @@ public final class GameSoundSystem {
      * @return GameSoundSystem.aClip
      */
     public AudioClip getAudioClip() {
-        return this.aClip;
+        final AudioClip newAudioClip = new AudioClip(this.aClip.getSource());
+        newAudioClip.setVolume(this.aClip.getVolume());
+        return newAudioClip;
     }
 
     /**
@@ -128,7 +130,9 @@ public final class GameSoundSystem {
      * @return GameSoundSystem.player
      */
     public MediaPlayer getMediaPlayer() {
-        return this.player;
+        final MediaPlayer newMediaPlayer = new MediaPlayer(this.player.getMedia());
+        newMediaPlayer.setVolume(this.player.getVolume());
+        return newMediaPlayer;
     }
 
     /**

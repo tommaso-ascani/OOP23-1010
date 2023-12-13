@@ -138,6 +138,8 @@ public final class GameView extends View {
 
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
 
+        GameLanguageSystem.getInstance().checkLanguageData();
+
         this.titleCoin.setText(GameLanguageSystem.getInstance().getLanguageType().getCoins());
         this.titleScore.setText(GameLanguageSystem.getInstance().getLanguageType().getScore());
 
@@ -468,6 +470,8 @@ public final class GameView extends View {
 
         this.gameOverPane.relocate((this.mainPane.getPrefWidth() - gameOverPane.getPrefWidth()) / 2,
                 (this.mainPane.getPrefHeight() - gameOverPane.getPrefHeight()) / 2);
+
+        GameLanguageSystem.getInstance().checkLanguageData();
 
         this.labelGameOverScore.setText(
                 GameLanguageSystem.getInstance().getLanguageType().getScore() + ": " + this.score);

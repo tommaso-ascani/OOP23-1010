@@ -12,13 +12,22 @@ import java.util.logging.Logger;
  */
 public final class GameLanguageSystem {
 
-    private static GameLanguageSystem instance;
+    private String language;
 
-    private static String language;
-
-    private static LanguageType languageType;
+    private LanguageType languageType;
 
     private static final String DEFAULT_LANGUAGE = "ENG";
+
+    /**
+     * Inner class used to maintain the instance of GameLanguageSystem.
+     */
+    static class InnerGameLanguageSystem {
+
+        /**
+         * GameLanguageSystem istance.
+         */
+        static final GameLanguageSystem INSTANCE = new GameLanguageSystem();
+    }
 
     /**
      * This method is used to get the instace of the class. It used the Singleton
@@ -27,28 +36,33 @@ public final class GameLanguageSystem {
      * @return GameLanguageSystem.
      */
     public static GameLanguageSystem getInstance() {
-        if (GameLanguageSystem.instance == null) {
-            GameLanguageSystem.instance = new GameLanguageSystem();
-        }
+        return InnerGameLanguageSystem.INSTANCE;
+    }
+
+    /**
+     * Method that control and set the field language and languagetype if there is a
+     * saved data of them
+     * or set them by default.
+     */
+    public void checkLanguageData() {
         try {
             if (JsonUtils.ifDataExist(JsonUtils.LANGUAGE, JsonUtils.GAME_DATA_FILE)) {
-                GameLanguageSystem.language = (String) JsonUtils.loadData(JsonUtils.LANGUAGE, JsonUtils.GAME_DATA_FILE);
+                this.language = (String) JsonUtils.loadData(JsonUtils.LANGUAGE, JsonUtils.GAME_DATA_FILE);
                 for (final LanguageType languageType : LanguageType.values()) {
-                    if (languageType.name().equals(GameLanguageSystem.language)) {
-                        GameLanguageSystem.languageType = languageType;
+                    if (languageType.name().equals(this.language)) {
+                        this.languageType = languageType;
                     }
                 }
             } else {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.LANGUAGE, GameLanguageSystem.DEFAULT_LANGUAGE),
                         JsonUtils.GAME_DATA_FILE);
-                GameLanguageSystem.language = GameLanguageSystem.DEFAULT_LANGUAGE;
-                GameLanguageSystem.languageType = LanguageType.ENG;
+                this.language = GameLanguageSystem.DEFAULT_LANGUAGE;
+                this.languageType = LanguageType.ENG;
             }
         } catch (IOException exc) {
             final Logger log = Logger.getLogger(GameLanguageSystem.class.getName());
             log.fine("Game Language System - Error on language loading!");
         }
-        return instance;
     }
 
     /**
@@ -57,7 +71,7 @@ public final class GameLanguageSystem {
      * @return String of the selected language.
      */
     public String getLanguage() {
-        return GameLanguageSystem.language;
+        return this.language;
     }
 
     /**
@@ -66,6 +80,6 @@ public final class GameLanguageSystem {
      * @return LanguageType of the selected language.
      */
     public LanguageType getLanguageType() {
-        return GameLanguageSystem.languageType;
+        return this.languageType;
     }
 }

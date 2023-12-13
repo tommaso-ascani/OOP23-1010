@@ -81,6 +81,7 @@ public final class HomeView extends View {
     @Override
     public void init() {
 
+        GameLanguageSystem.getInstance().checkLanguageData();
         this.sliderLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getGridSize());
 
         this.coinsLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getCoins());
@@ -180,7 +181,8 @@ public final class HomeView extends View {
         // true, make the play button and the slider disable, if false make de resume
         // button disable
         try {
-            if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)) {
+            if (JsonUtils.jsonExist(JsonUtils.MATCH_FILE)
+                    && JsonUtils.ifDataExist(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE)) {
                 this.imagePlay.setDisable(true);
                 this.imagePlay.setOpacity(HomeView.OPACITY_FOR_DISABLED_CONTENT);
                 this.sliderGridWidth.setDisable(true);

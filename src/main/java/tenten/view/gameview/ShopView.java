@@ -67,6 +67,8 @@ public final class ShopView extends View {
     @Override
     public void init() {
 
+        GameLanguageSystem.getInstance().checkLanguageData();
+
         this.titleLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getShop());
         this.buttonBackToHome.setText(GameLanguageSystem.getInstance().getLanguageType().getBack());
         this.labelAlert.setText(GameLanguageSystem.getInstance().getLanguageType().getAlertLabel());
