@@ -14,7 +14,7 @@ import tenten.utils.ThemeUtils;
  * Class that extends Path, represent a draggable object that has to be place in
  * the grid.
  */
-public class ShapeBlock extends Path {
+public final class ShapeBlock extends Path {
 
     private static final Integer SIZE_CHECKSTYLE_ERROR = 5;
 

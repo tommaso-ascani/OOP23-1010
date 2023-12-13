@@ -30,12 +30,6 @@ public final class HomeView extends View {
     private static final Logger LOG = Logger.getLogger(DataUtils.class.getName());
 
     /**
-     * Grid size selected by user.
-     * Default is 10.
-     */
-    private static int gridSize;
-
-    /**
      * Space between pause and quit button.
      */
     private static final Integer PAUSE_AND_QUIT_BUTTON_SPACE = 15;
@@ -219,7 +213,7 @@ public final class HomeView extends View {
      * This method switch to game view and set the grid size if is a new game.
      */
     public void switchToPlayView() {
-        gridSize = (int) this.sliderGridWidth.getValue();
+        DataUtils.setGridSize((int) this.sliderGridWidth.getValue());
         ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
     }
 
@@ -227,7 +221,7 @@ public final class HomeView extends View {
      * Method to quit the game.
      */
     public void quitGame() {
-        System.exit(0);
+        Runtime.getRuntime().exit(0);
     }
 
     /**
@@ -281,21 +275,7 @@ public final class HomeView extends View {
         });
 
         btnResume.setOnMouseClicked(e -> {
-            try {
-                gridSize = (Integer) JsonUtils.loadData(JsonUtils.GRID_SIZE, JsonUtils.MATCH_FILE);
-            } catch (IOException e1) {
-                LOG.fine("Error in loading grid size!");
-            }
             ViewSwitcher.getInstance().switchView(getStage(), ViewType.GAME);
         });
-    }
-
-    /**
-     * Method to get the grid size.
-     * 
-     * @return grid size.
-     */
-    public static int getGridSize() {
-        return gridSize;
     }
 }

@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import javafx.util.Pair;
 import tenten.items.GameGrid;
 import tenten.items.GridBlock;
-import tenten.view.gameview.HomeView;
 import java.util.logging.Logger;
 
 /**
@@ -31,6 +30,11 @@ public final class DataUtils {
     private static final Integer GRID_CELL_SIZE_IS_20 = 20;
 
     private static final String COLOR_STRING_KEY_JSON = "color";
+
+    /**
+     * Game grid size.
+     */
+    private static Integer gridSize;
 
     /**
      * Deafult constructor.
@@ -169,7 +173,7 @@ public final class DataUtils {
      */
     public static GameGrid<GridBlock> loadGrid() {
 
-        GameGrid<GridBlock> grid = new GameGrid<>(HomeView.getGridSize());
+        GameGrid<GridBlock> grid = new GameGrid<>(gridSize);
 
         try {
             if (JsonUtils.ifDataExist(JsonUtils.GRID_COMPOSITION, JsonUtils.MATCH_FILE)) {
@@ -220,5 +224,23 @@ public final class DataUtils {
             final Logger log = Logger.getLogger(DataUtils.class.getName());
             log.fine("Error on sizing cell grid");
         }
+    }
+
+    /**
+     * Method to get gridSize.
+     * 
+     * @return gridSize
+     */
+    public static Integer getGridSize() {
+        return gridSize;
+    }
+
+    /**
+     * Method to set gridSize.
+     * 
+     * @param gridSize
+     */
+    public static void setGridSize(final Integer gridSize) {
+        DataUtils.gridSize = gridSize;
     }
 }

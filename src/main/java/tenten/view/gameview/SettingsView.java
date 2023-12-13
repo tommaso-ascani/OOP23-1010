@@ -82,8 +82,8 @@ public final class SettingsView extends View {
         this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
         this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColorBackground());
 
-        this.settingsPane.relocate(View.WINDOW_WIDTH / 2 - this.settingsPane.getPrefWidth() / 2,
-                View.WINDOW_HEIGHT / 2 - this.settingsPane.getPrefHeight() / 2);
+        this.settingsPane.relocate((double) View.WINDOW_WIDTH / 2 - this.settingsPane.getPrefWidth() / 2,
+                                   (double) View.WINDOW_HEIGHT / 2 - this.settingsPane.getPrefHeight() / 2);
 
         if (GameSoundSystem.getInstance().getVolume() != 0) {
             this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));

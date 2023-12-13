@@ -170,7 +170,7 @@ public final class GameView extends View {
 
         // -------------------------------- View Setup ---------------------------------
 
-        GameView.spawnPanelsWidth = GameView.SPAWN_PANELS_MOLTIPLICATION_RATIO_CONSTANT * grid.getGridCellSize();
+        spawnPanelsWidth = GameView.SPAWN_PANELS_MOLTIPLICATION_RATIO_CONSTANT * grid.getGridCellSize();
 
         this.labelCoin.setText(String.valueOf(this.coins));
         this.labelScore.setText(String.valueOf(this.score));
@@ -698,9 +698,6 @@ public final class GameView extends View {
             type = RandomUtils.getRandomPuzzle();
 
             switch (x) {
-                case 1:
-                    block = new ShapeBlock(type, upLeftSpawn, this.grid, blocksAvalaible);
-                    break;
                 case 2:
                     block = new ShapeBlock(type, upRightSpawn, this.grid, blocksAvalaible);
                     break;

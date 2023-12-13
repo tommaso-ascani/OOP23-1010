@@ -68,12 +68,12 @@ public class ShopTheme extends VBox {
 
         this.costLabel = new Label();
         this.costLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
-        this.costLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3);
+        this.costLabel.setPrefSize((double) View.WINDOW_WIDTH, (double) ShopTheme.VIEW_PANE_HEIGHT / 3);
         this.costLabel.setAlignment(Pos.CENTER);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
 
         final Label descriptionLabel = new Label(this.theme.getName());
-        descriptionLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3);
+        descriptionLabel.setPrefSize((double) View.WINDOW_WIDTH, (double) ShopTheme.VIEW_PANE_HEIGHT / 3);
         descriptionLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
         descriptionLabel.setAlignment(Pos.CENTER);
 
