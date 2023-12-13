@@ -9,7 +9,6 @@ import tenten.language.GameLanguageSystem;
 import tenten.types.SoundType;
 import tenten.utils.JsonUtils;
 import java.util.logging.Logger;
-
 import java.io.IOException;
 
 /**
@@ -17,13 +16,26 @@ import java.io.IOException;
  */
 public final class GameSoundSystem {
 
-    private static GameSoundSystem instance;
-    private static AudioClip aClip;
-    private static Media media;
-    private static MediaPlayer player;
-    private static Double volume;
+    private AudioClip aClip;
+
+    private MediaPlayer player;
+
+    private Double volume;
+
     private static final Double MIN_VOLUME = 0.0;
+
     private static final Double MAX_VOLUME = 1.0;
+
+    /**
+     * Inner class used to maintain the instance of GameSoundSystem.
+     */
+    static class InnerGameSoundSystem {
+
+        /**
+         * GameSoundSystem istance.
+         */
+        static final GameSoundSystem INSTANCE = new GameSoundSystem();
+    }
 
     /**
      * Method to get the instace of the class. It used the Singleton
@@ -32,23 +44,27 @@ public final class GameSoundSystem {
      * @return GameSoundSystem
      */
     public static GameSoundSystem getInstance() {
-        if (GameSoundSystem.instance == null) {
-            GameSoundSystem.instance = new GameSoundSystem();
-        }
+        return InnerGameSoundSystem.INSTANCE;
+    }
+
+    /**
+     * Method that control and set the filed volume if there is a saved data of it
+     * or set it by default at MAX_VOLUME.
+     */
+    public void checkSoundData() {
         try {
             if (JsonUtils.ifDataExist(JsonUtils.VOLUME, JsonUtils.GAME_DATA_FILE)) {
-                GameSoundSystem.volume = (Double) (((Integer) JsonUtils.loadData(JsonUtils.VOLUME,
+                this.volume = (Double) (((Integer) JsonUtils.loadData(JsonUtils.VOLUME,
                         JsonUtils.GAME_DATA_FILE)).doubleValue() / 100.0);
             } else {
                 JsonUtils.addElement(new Pair<String, Object>(JsonUtils.VOLUME, GameSoundSystem.MAX_VOLUME * 100.0),
                         JsonUtils.GAME_DATA_FILE);
-                GameSoundSystem.volume = GameSoundSystem.MAX_VOLUME;
+                this.volume = GameSoundSystem.MAX_VOLUME;
             }
         } catch (IOException exc) {
             final Logger log = Logger.getLogger(GameLanguageSystem.class.getName());
             log.fine("Game Sound System - Error on volume loading!");
         }
-        return instance;
     }
 
     /**
@@ -58,8 +74,8 @@ public final class GameSoundSystem {
      * @param sound
      */
     public void setAudioClip(final SoundType sound) {
-        GameSoundSystem.aClip = new AudioClip(getClass().getResource(sound.getPath()).toExternalForm());
-        GameSoundSystem.aClip.setVolume(GameSoundSystem.volume.doubleValue());
+        this.aClip = new AudioClip(getClass().getResource(sound.getPath()).toExternalForm());
+        this.aClip.setVolume(this.volume.doubleValue());
 
     }
 
@@ -67,7 +83,7 @@ public final class GameSoundSystem {
      * Method to play the audio clip.
      */
     public void playAudioClip() {
-        GameSoundSystem.aClip.play();
+        this.aClip.play();
     }
 
     /**
@@ -76,14 +92,14 @@ public final class GameSoundSystem {
      * @return GameSoundSystem.aClip
      */
     public AudioClip getAudioClip() {
-        return GameSoundSystem.aClip;
+        return this.aClip;
     }
 
     /**
      * Method to stop the audio clip.
      */
     public void stopAudioClip() {
-        GameSoundSystem.aClip.stop();
+        this.aClip.stop();
     }
 
     /**
@@ -94,45 +110,53 @@ public final class GameSoundSystem {
      * @param music
      */
     public void setMediaPlayer(final SoundType music) {
-        GameSoundSystem.media = new Media(getClass().getResource(music.getPath()).toExternalForm());
-        GameSoundSystem.player = new MediaPlayer(media);
-        GameSoundSystem.player.setOnEndOfMedia(new Runnable() {
+        this.player = new MediaPlayer(new Media(getClass().getResource(music.getPath()).toExternalForm()));
+        this.player.setOnEndOfMedia(new Runnable() {
 
             @Override
             public void run() {
-                GameSoundSystem.player.seek(Duration.ZERO);
+                GameSoundSystem.getInstance().getMediaPlayer().seek(Duration.ZERO);
             }
 
         });
-        GameSoundSystem.player.setVolume(GameSoundSystem.volume.doubleValue());
+        this.player.setVolume(this.volume.doubleValue());
+    }
+
+    /**
+     * Method to get the media player.
+     * 
+     * @return GameSoundSystem.player
+     */
+    public MediaPlayer getMediaPlayer() {
+        return this.player;
     }
 
     /**
      * Method to play the MediaPlayer.
      */
     public void playMediaPlayer() {
-        GameSoundSystem.player.play();
+        this.player.play();
     }
 
     /**
      * Method to pause the MediaPlayer.
      */
     public void pauseMedia() {
-        GameSoundSystem.player.pause();
+        this.player.pause();
     }
 
     /**
      * Method to resume the MediaPlayer.
      */
     public void resumeMedia() {
-        GameSoundSystem.player.play();
+        this.player.play();
     }
 
     /**
      * Method to stop the MediaPlayer.
      */
     public void stopMedia() {
-        GameSoundSystem.player.stop();
+        this.player.stop();
     }
 
     /**
@@ -141,7 +165,7 @@ public final class GameSoundSystem {
      * @return GameSoundSystem.volume
      */
     public Double getVolume() {
-        return GameSoundSystem.volume.doubleValue() * 100.0;
+        return this.volume.doubleValue() * 100.0;
     }
 
     /**

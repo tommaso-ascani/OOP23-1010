@@ -159,7 +159,9 @@ public final class GameView extends View {
 
         // -------------------------------- Sound Setup --------------------------------
 
+        GameSoundSystem.getInstance().checkSoundData();
         GameSoundSystem.getInstance().setMediaPlayer(SoundType.BACKGROUND_01);
+        GameSoundSystem.getInstance().checkSoundData();
         GameSoundSystem.getInstance().playMediaPlayer();
 
         // -------------------------------- Json Setup ---------------------------------

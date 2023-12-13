@@ -112,14 +112,14 @@ public final class ShopView extends View {
                 if (temp.getPurchased()) {
                     if (!temp.getTheme().name().equals(ThemeUtils.getSelectedTheme().name())) {
                         this.setListenerIfShopThemeItemPurchased(true, temp);
-                        temp.getCostLabel()
-                                .setText(GameLanguageSystem.getInstance().getLanguageType().getPurchasedNotSelected());
+                        temp.setCostLabeltext(
+                                GameLanguageSystem.getInstance().getLanguageType().getPurchasedNotSelected());
                     } else {
-                        temp.getCostLabel()
-                                .setText(GameLanguageSystem.getInstance().getLanguageType().getPurchasedSelected());
+                        temp.setCostLabeltext(
+                                GameLanguageSystem.getInstance().getLanguageType().getPurchasedSelected());
                     }
                 } else {
-                    temp.getCostLabel().setText(temp.getTheme().getCost().toString());
+                    temp.setCostLabeltext(temp.getTheme().getCost().toString());
                     this.setListenerIfShopThemeItemPurchased(false, temp);
                 }
                 this.verticalBox.getChildren().add(temp);
@@ -198,7 +198,7 @@ public final class ShopView extends View {
                         coinAmount = (Integer) JsonUtils.loadData(JsonUtils.COINS, JsonUtils.GAME_DATA_FILE);
                         if (coinAmount >= shopThemeItem.getTheme().getCost()) {
                             coinAmount = coinAmount - shopThemeItem.getTheme().getCost();
-                            shopThemeItem.getTheme().setPurchased(true);
+                            shopThemeItem.getTheme().recallSetPurchased(true);
                             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.COINS, coinAmount),
                                     JsonUtils.GAME_DATA_FILE);
                             ThemeUtils.saveThemes();

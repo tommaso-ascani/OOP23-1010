@@ -207,9 +207,18 @@ public enum ThemeType {
     /**
      * Setter of purchased of theme.
      * 
-     * @param purchased
+     * @param purch
      */
-    public void setPurchased(final Boolean purchased) {
-        this.purchased = purchased;
+    private void setPurchased(final Boolean purch) {
+        this.purchased = purch;
+    }
+
+    /**
+     * Setter of purchased of theme.
+     * 
+     * @param purch
+     */
+    public void recallSetPurchased(final Boolean purch) {
+        this.setPurchased(purch);
     }
 }

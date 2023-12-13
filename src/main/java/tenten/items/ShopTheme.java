@@ -12,13 +12,13 @@ import tenten.view.View;
 /**
  * Class that extend VBox, used to represent a theme item in the shop.
  */
-public class ShopTheme extends VBox {
+public final class ShopTheme extends VBox {
 
     private ThemeType theme;
 
     private Boolean purchased;
 
-    private Label costLabel;
+    private final Label costLabel;
 
     private static final Integer HEIGHT = 200;
 
@@ -68,12 +68,12 @@ public class ShopTheme extends VBox {
 
         this.costLabel = new Label();
         this.costLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
-        this.costLabel.setPrefSize((double) View.WINDOW_WIDTH, (double) ShopTheme.VIEW_PANE_HEIGHT / 3);
+        this.costLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3.0);
         this.costLabel.setAlignment(Pos.CENTER);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
 
         final Label descriptionLabel = new Label(this.theme.getName());
-        descriptionLabel.setPrefSize((double) View.WINDOW_WIDTH, (double) ShopTheme.VIEW_PANE_HEIGHT / 3);
+        descriptionLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3.0);
         descriptionLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
         descriptionLabel.setAlignment(Pos.CENTER);
 
@@ -133,21 +133,12 @@ public class ShopTheme extends VBox {
     }
 
     /**
-     * Method to get the cost amount.
+     * Method to set the cost label text.
      * 
-     * @return Cost amount.
+     * @param text
      */
-    public Label getCostLabel() {
-        return costLabel;
-    }
-
-    /**
-     * Method to set the cost amount.
-     * 
-     * @param costLabel
-     */
-    public void setCostLabel(final Label costLabel) {
-        this.costLabel = costLabel;
+    public void setCostLabeltext(final String text) {
+        this.costLabel.setText(text);
     }
 
     /**

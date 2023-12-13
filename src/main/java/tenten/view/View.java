@@ -3,7 +3,6 @@ package tenten.view;
 import java.awt.Toolkit;
 import javafx.stage.Stage;
 
-
 /**
  * Class that implements a View object.
  */
@@ -27,14 +26,14 @@ public abstract class View {
     /**
      * Window width.
      */
-    public static final int WINDOW_WIDTH = ((Double) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() 
-                                                / WIDTH_PROPORTION * HEIGHT_PROPORTION)).intValue();
+    public static final int WINDOW_WIDTH = ((Double) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()
+            / WIDTH_PROPORTION * HEIGHT_PROPORTION)).intValue();
 
     /**
      * Window height.
      */
-    public static final int WINDOW_HEIGHT = ((Double) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() 
-                                                / WIDTH_PROPORTION * HEIGHT_PROPORTION)).intValue();
+    public static final int WINDOW_HEIGHT = ((Double) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()
+            / WIDTH_PROPORTION * HEIGHT_PROPORTION)).intValue();
 
     /**
      * Method to get the current stage.
@@ -51,14 +50,14 @@ public abstract class View {
      * @param stageToSet the stage to set
      */
     public void setStage(final Stage stageToSet) {
-        stageToSet.setOnCloseRequest(event -> {
-            System.exit(0);
-        });
         this.currentStage = stageToSet;
+        this.currentStage.setOnCloseRequest(event -> {
+            Runtime.getRuntime().exit(0);
+        });
     }
 
     /**
-     * Method executed every view load before the stage show.
+     * Method executed by every view load before the stage show.
      */
     public abstract void init();
 }

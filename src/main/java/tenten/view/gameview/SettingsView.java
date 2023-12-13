@@ -85,12 +85,14 @@ public final class SettingsView extends View {
         this.settingsPane.relocate((double) View.WINDOW_WIDTH / 2 - this.settingsPane.getPrefWidth() / 2,
                                    (double) View.WINDOW_HEIGHT / 2 - this.settingsPane.getPrefHeight() / 2);
 
+        GameSoundSystem.getInstance().checkSoundData();
         if (GameSoundSystem.getInstance().getVolume() != 0) {
             this.imageVolume.setImage(new Image("/img/YesAudioButton.png"));
         } else {
             this.imageVolume.setImage(new Image("/img/NoAudioButton.png"));
         }
 
+        GameSoundSystem.getInstance().checkSoundData();
         this.sliderVolume.setValue(GameSoundSystem.getInstance().getVolume());
 
         // Set the listener on the button apply to save the chosen volume in the
