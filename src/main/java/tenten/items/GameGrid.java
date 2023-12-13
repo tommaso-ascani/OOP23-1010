@@ -2,7 +2,6 @@ package tenten.items;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import tenten.sound.GameSoundSystem;
 import tenten.types.SoundType;
 
@@ -236,5 +235,21 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
             }
         }
         return column;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object object) {
+        return super.equals(object);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

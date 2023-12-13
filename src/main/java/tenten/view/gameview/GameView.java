@@ -43,7 +43,7 @@ public final class GameView extends View {
     /**
      * Spawn pane width.
      */
-    private static Double spawnPanelsWidth;
+    private Double spawnPanelsWidth;
 
     /**
      * Avalaible spawn blocks.
@@ -174,7 +174,7 @@ public final class GameView extends View {
 
         // -------------------------------- View Setup ---------------------------------
 
-        spawnPanelsWidth = GameView.SPAWN_PANELS_MOLTIPLICATION_RATIO_CONSTANT * grid.getGridCellSize();
+        this.setSpawnPanelsWidth(SPAWN_PANELS_MOLTIPLICATION_RATIO_CONSTANT * grid.getGridCellSize());
 
         this.labelCoin.setText(String.valueOf(this.coins));
         this.labelScore.setText(String.valueOf(this.score));
@@ -406,8 +406,6 @@ public final class GameView extends View {
                     for (final GridBlock x : toFill) {
                         x.setFill(block.getColor());
                         x.setStyle(GameView.BACKGROUND_COLOR_STRING + block.getColor());
-                        final Pane pane = block.getPane();
-                        pane.getChildren().remove(block);
                         this.score++;
                     }
 
@@ -421,6 +419,7 @@ public final class GameView extends View {
                         GameSoundSystem.getInstance().playAudioClip();
                     }
                     blocksAvalaible.remove(block);
+                    ((Pane) block.getParent()).getChildren().remove(block);
 
                     this.labelScore.setText(String.valueOf(this.score));
                     this.labelCoin.setText(String.valueOf(this.coins));
@@ -577,10 +576,10 @@ public final class GameView extends View {
      * Method to set the final preferences size of panels.
      */
     public void setPanelsPrefSizes() {
-        this.upLeftSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
-        this.downLeftSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
-        this.upRightSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
-        this.downRightSpawn.setPrefSize(GameView.spawnPanelsWidth, GameView.spawnPanelsWidth);
+        this.upLeftSpawn.setPrefSize(this.getSpawnPanelsWidth(), this.getSpawnPanelsWidth());
+        this.downLeftSpawn.setPrefSize(this.getSpawnPanelsWidth(), this.getSpawnPanelsWidth());
+        this.upRightSpawn.setPrefSize(this.getSpawnPanelsWidth(), this.getSpawnPanelsWidth());
+        this.downRightSpawn.setPrefSize(this.getSpawnPanelsWidth(), this.getSpawnPanelsWidth());
     }
 
     /**
@@ -612,26 +611,26 @@ public final class GameView extends View {
         this.getStage().show();
 
         this.upLeftSpawn.relocate(
-                ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - GameView.spawnPanelsWidth) / 2,
-                (this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
+                ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - this.getSpawnPanelsWidth()) / 2,
+                (this.mainPane.getPrefHeight() - this.getSpawnPanelsWidth() - this.getSpawnPanelsWidth()
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2);
         this.downLeftSpawn.relocate(
-                ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - GameView.spawnPanelsWidth) / 2,
-                this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - (this.mainPane.getPrefHeight()
-                        - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
+                ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - this.getSpawnPanelsWidth()) / 2,
+                this.mainPane.getPrefHeight() - this.getSpawnPanelsWidth() - (this.mainPane.getPrefHeight()
+                        - this.getSpawnPanelsWidth() - this.getSpawnPanelsWidth() - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
         this.upRightSpawn.relocate(
-                (this.mainPane.getPrefWidth() - GameView.spawnPanelsWidth)
-                        - ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - GameView.spawnPanelsWidth)
+                (this.mainPane.getPrefWidth() - this.getSpawnPanelsWidth())
+                        - ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - this.getSpawnPanelsWidth())
                                 / 2,
-                (this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth
+                (this.mainPane.getPrefHeight() - this.getSpawnPanelsWidth() - this.getSpawnPanelsWidth()
                         - GameView.GAP_BETWEEN_SPAWN_PANELS) / 2);
         this.downRightSpawn.relocate(
-                (this.mainPane.getPrefWidth() - GameView.spawnPanelsWidth)
-                        - ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - GameView.spawnPanelsWidth)
+                (this.mainPane.getPrefWidth() - this.getSpawnPanelsWidth())
+                        - ((this.mainPane.getPrefWidth() - this.getGridWidth()) / 2 - this.getSpawnPanelsWidth())
                                 / 2,
-                this.mainPane.getPrefHeight() - GameView.spawnPanelsWidth - (this.mainPane.getPrefHeight()
-                        - GameView.spawnPanelsWidth - GameView.spawnPanelsWidth - GameView.GAP_BETWEEN_SPAWN_PANELS)
+                this.mainPane.getPrefHeight() - this.getSpawnPanelsWidth() - (this.mainPane.getPrefHeight()
+                        - this.getSpawnPanelsWidth() - this.getSpawnPanelsWidth() - GameView.GAP_BETWEEN_SPAWN_PANELS)
                         / 2);
 
         this.titleCoin.relocate(this.mainPane.getPrefWidth() / 3 - this.titleCoin.getWidth() / 2,
@@ -698,6 +697,7 @@ public final class GameView extends View {
 
         ShapeBlock block;
         BlockType type;
+        Pane pane;
 
         for (int x = 1; x <= 4; x++) {
 
@@ -705,19 +705,40 @@ public final class GameView extends View {
 
             switch (x) {
                 case 2:
-                    block = new ShapeBlock(type, upRightSpawn, this.grid, blocksAvalaible);
+                    block = new ShapeBlock(type, grid.getGridCellSize());
+                    pane = upRightSpawn;
                     break;
                 case 3:
-                    block = new ShapeBlock(type, downLeftSpawn, this.grid, blocksAvalaible);
+                    block = new ShapeBlock(type, grid.getGridCellSize());
+                    pane = downLeftSpawn;
                     break;
                 case 4:
-                    block = new ShapeBlock(type, downRightSpawn, this.grid, blocksAvalaible);
+                    block = new ShapeBlock(type, grid.getGridCellSize());
+                    pane = downRightSpawn;
                     break;
                 default:
-                    block = new ShapeBlock(type, upLeftSpawn, this.grid, blocksAvalaible);
+                    block = new ShapeBlock(type, grid.getGridCellSize());
+                    pane = upLeftSpawn;
                     break;
             }
+
+            pane.getChildren().addAll(block);
+            this.blocksAvalaible.add(block);
+
+            block.relocate((pane.getPrefWidth()
+                - (block.getBoundsInParent().getMaxX() - block.getBoundsInParent().getMinX())) / 2,
+                (pane.getPrefHeight()
+                        - (block.getBoundsInParent().getMaxY() - block.getBoundsInParent().getMinY())) / 2);
+
             this.setBlockReadyToBePlaced(block);
         }
+    }
+
+    private Double getSpawnPanelsWidth() {
+        return spawnPanelsWidth;
+    }
+
+    private void setSpawnPanelsWidth(final Double spawnPanelsWidth) {
+        this.spawnPanelsWidth = spawnPanelsWidth;
     }
 }

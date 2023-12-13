@@ -1,7 +1,6 @@
 package tenten.items;
 
 import javafx.geometry.Bounds;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -19,15 +18,13 @@ public final class ShapeBlock extends Path {
     private static final Integer SIZE_CHECKSTYLE_ERROR = 5;
 
     private final BlockType type;
-    private final GameGrid<GridBlock> grid;
-    private final Pane pane;
 
     private final Integer width;
     private final Integer height;
 
-    private final String color;
+    private final Integer gridCellSize;
 
-    private final BlocksAvailable<ShapeBlock> blocksAvalaible;
+    private final String color;
 
     private Bounds bounds;
 
@@ -35,20 +32,14 @@ public final class ShapeBlock extends Path {
      * Initialize new ShapeBlock object.
      * 
      * @param type
-     * @param pane
-     * @param grid
-     * @param blocksAvalaible
+     * @param gridCellSize
      */
     public ShapeBlock(final BlockType type,
-            final Pane pane,
-            final GameGrid<GridBlock> grid,
-            final BlocksAvailable<ShapeBlock> blocksAvalaible) {
+                      final Integer gridCellSize) {
 
         this.bounds = this.localToScene(this.getBoundsInLocal());
         this.type = type;
-        this.grid = grid;
-        this.pane = pane;
-        this.blocksAvalaible = blocksAvalaible;
+        this.gridCellSize = gridCellSize;
 
         switch (type) {
             case BLOCK_1_1:
@@ -114,7 +105,6 @@ public final class ShapeBlock extends Path {
         }
 
         this.generateBlock();
-        pane.getChildren().addAll(this);
     }
 
     /**
@@ -124,15 +114,6 @@ public final class ShapeBlock extends Path {
      */
     public BlockType getType() {
         return this.type;
-    }
-
-    /**
-     * Method to get the pane on which is located.
-     * 
-     * @return Pane.
-     */
-    public Pane getPane() {
-        return this.pane;
     }
 
     /**
@@ -170,7 +151,7 @@ public final class ShapeBlock extends Path {
     public Integer getTriggerX() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
         final Double tempX = this.bounds.getMinX();
-        return tempX.intValue() + (grid.getGridCellSize() / 2);
+        return tempX.intValue() + (this.gridCellSize / 2);
     }
 
     /**
@@ -181,7 +162,7 @@ public final class ShapeBlock extends Path {
     public Integer getTriggerY() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
         final Double tempY = this.bounds.getMinY();
-        return tempY.intValue() + (grid.getGridCellSize() / 2);
+        return tempY.intValue() + (this.gridCellSize / 2);
     }
 
     /**
@@ -194,30 +175,24 @@ public final class ShapeBlock extends Path {
         for (x = 0; x < this.width; x++) {
             for (y = 0; y < this.height; y++) {
                 this.getElements().addAll(
-                        new MoveTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize(),
-                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize()),
+                        new MoveTo(x * (this.gridCellSize + 3) + this.gridCellSize,
+                                y * (this.gridCellSize + 3) + this.gridCellSize),
 
-                        new LineTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize(),
-                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize() * 2),
-                        new LineTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize() * 2,
-                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize() * 2),
-                        new LineTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize() * 2,
-                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize()),
-                        new LineTo(x * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize(),
-                                y * (this.grid.getGridCellSize() + 3) + this.grid.getGridCellSize()),
+                        new LineTo(x * (this.gridCellSize + 3) + this.gridCellSize,
+                                y * (this.gridCellSize + 3) + this.gridCellSize * 2),
+                        new LineTo(x * (this.gridCellSize + 3) + this.gridCellSize * 2,
+                                y * (this.gridCellSize + 3) + this.gridCellSize * 2),
+                        new LineTo(x * (this.gridCellSize + 3) + this.gridCellSize * 2,
+                                y * (this.gridCellSize + 3) + this.gridCellSize),
+                        new LineTo(x * (this.gridCellSize + 3) + this.gridCellSize,
+                                y * (this.gridCellSize + 3) + this.gridCellSize),
 
                         new ClosePath());
             }
         }
 
-        this.relocate((this.pane.getPrefWidth()
-                - (this.getBoundsInParent().getMaxX() - this.getBoundsInParent().getMinX())) / 2,
-                (this.pane.getPrefHeight()
-                        - (this.getBoundsInParent().getMaxY() - this.getBoundsInParent().getMinY())) / 2);
-
         this.setStyle("-fx-fill: " + this.color + "; -fx-stroke-width: 0");
         this.setAccessibleText(this.color);
-        this.blocksAvalaible.add(this);
         Movement.makeDraggable(this);
     }
 
