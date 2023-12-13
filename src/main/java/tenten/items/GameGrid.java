@@ -242,7 +242,9 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      */
     @Override
     public boolean equals(final Object object) {
-        return super.equals(object);
+        final boolean ris = super.equals(object);
+        final Boolean risObject = (Boolean) ris;
+        return risObject.booleanValue();
     }
 
     /**
@@ -250,6 +252,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      */
     @Override
     public int hashCode() {
-        return super.hashCode();
+        final int ris = super.hashCode();
+        final Integer risObject = (Integer) ris;
+        return risObject.intValue();
     }
 }
