@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 /**
  * Class that implements a View object.
  */
-public abstract class ViewImpl implements View{
+public abstract class ViewImpl implements View {
 
     /**
      * Current stage on which work.
@@ -49,6 +49,7 @@ public abstract class ViewImpl implements View{
         justification = "I need to let other methods access stage object"
             + ", and it can't be cloned."
     )
+    @Override
     public Stage getStage() {
         return this.currentStage;
     }
@@ -65,6 +66,7 @@ public abstract class ViewImpl implements View{
         justification = "I need to let other methods access stage object"
             + ", and it can't be cloned."
     )
+    @Override
     public void setStage(final Stage stageToSet) {
         this.currentStage = stageToSet;
         this.currentStage.setOnCloseRequest(event -> {
@@ -75,5 +77,6 @@ public abstract class ViewImpl implements View{
     /**
      * Method executed by every view load before the stage show.
      */
+    @Override
     public abstract void init();
 }
