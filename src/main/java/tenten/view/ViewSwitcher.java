@@ -37,11 +37,10 @@ public class ViewSwitcher {
 
     /**
      * Method to load the view style.
-     * It loads the fxml file and set the new scene.
      * 
-     * @param stage    the stage to set the new scene.
-     * @param viewType the view type to switch to.
-     * @return the loaded view.
+     * @param stage    to be set.
+     * @param viewType indicates the view that will be showed.
+     * @return the loaded viewImpl.
      */
     private void loadStyle(final Stage stage, final ViewType viewType) {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(viewType.getPath()));
@@ -67,15 +66,15 @@ public class ViewSwitcher {
 
         view.setStage(stage);
         stage.setScene(newScene);
-        
-        view.init();
+
+        view.start();
     }
 
     /**
      * Method to switch between views.
      * 
-     * @param stage the stage to set the new scene.
-     * @param type  the view type to switch to.
+     * @param stage to be set.
+     * @param type  indicates the view that will be showed.
      */
     public void switchView(final Stage stage, final ViewType type) {
         this.loadStyle(stage, type);

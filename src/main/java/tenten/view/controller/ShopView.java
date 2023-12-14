@@ -65,7 +65,7 @@ public final class ShopView extends ViewImpl {
     private VBox verticalBox;
 
     @Override
-    public void init() {
+    public void start() {
 
         GameLanguageSystem.getInstance().checkLanguageData();
 

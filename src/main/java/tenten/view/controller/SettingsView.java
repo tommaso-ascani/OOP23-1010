@@ -64,7 +64,7 @@ public final class SettingsView extends ViewImpl {
     private ChoiceBox<String> languageChoiceBox;
 
     @Override
-    public void init() {
+    public void start() {
 
         for (final LanguageType langType : LanguageType.values()) {
             this.languageList.add(langType.name());

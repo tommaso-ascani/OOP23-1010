@@ -42,13 +42,11 @@ public abstract class ViewImpl implements View {
      * 
      * @return the current stage
      */
-    @SuppressFBWarnings(
-        value = { // List of bugs to be suppressed
+    @SuppressFBWarnings(value = { // List of bugs to be suppressed
             "EI_EXPOSE_REP"
-        }, // String with the reasons for them to be suppressed
-        justification = "I need to let other methods access stage object"
-            + ", and it can't be cloned."
-    )
+    }, // String with the reasons for them to be suppressed
+            justification = "I need to let other methods access stage object"
+                    + ", and it can't be cloned.")
     @Override
     public Stage getStage() {
         return this.currentStage;
@@ -59,13 +57,11 @@ public abstract class ViewImpl implements View {
      * 
      * @param stageToSet the stage to set
      */
-    @SuppressFBWarnings(
-        value = { // List of bugs to be suppressed
+    @SuppressFBWarnings(value = { // List of bugs to be suppressed
             "EI_EXPOSE_REP2"
-        }, // String with the reasons for them to be suppressed
-        justification = "I need to let other methods access stage object"
-            + ", and it can't be cloned."
-    )
+    }, // String with the reasons for them to be suppressed
+            justification = "I need to let other methods access stage object"
+                    + ", and it can't be cloned.")
     @Override
     public void setStage(final Stage stageToSet) {
         this.currentStage = stageToSet;
@@ -78,5 +74,5 @@ public abstract class ViewImpl implements View {
      * Method executed by every view load before the stage show.
      */
     @Override
-    public abstract void init();
+    public abstract void start();
 }

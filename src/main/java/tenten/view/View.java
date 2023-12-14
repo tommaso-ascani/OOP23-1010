@@ -3,26 +3,26 @@ package tenten.view;
 import javafx.stage.Stage;
 
 /**
- * This is a generic view implementation.
+ * View interface.
  */
 public interface View {
 
     /**
-     * This method initializes the view.
-     */
-    void init();
-
-    /**
-     * This method returns the current stage.
+     * Method that returns the current stage.
      * 
-     * @return a stage object
+     * @return stage.
      */
     Stage getStage();
 
     /**
-     * This method sets the view's stage to the one passed as parameter.
+     * Method to set the new current stage.
      * 
-     * @param stageToSet a Stage object which will be attached to the current view.
+     * @param stageToSet new stage that have to be set.
      */
     void setStage(Stage stageToSet);
+
+    /**
+     * This method is called at the view startup.
+     */
+    void start();
 }

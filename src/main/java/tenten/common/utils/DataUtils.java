@@ -54,7 +54,6 @@ public final class DataUtils {
             JsonUtils.flushJson(JsonUtils.MATCH_FILE);
 
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_SCORE, score), JsonUtils.MATCH_FILE);
-            JsonUtils.addElement(new Pair<String, Object>(JsonUtils.MATCH_ON_GOING, true), JsonUtils.MATCH_FILE);
             JsonUtils.addElement(new Pair<String, Object>(JsonUtils.GRID_SIZE, grid.getGridSize()),
                     JsonUtils.MATCH_FILE);
 

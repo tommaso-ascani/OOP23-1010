@@ -134,7 +134,7 @@ public final class GameView extends ViewImpl {
     private ImageView imagePause;
 
     @Override
-    public void init() {
+    public void start() {
 
         this.mainPane.setPrefSize(ViewImpl.WINDOW_WIDTH, ViewImpl.WINDOW_HEIGHT);
 

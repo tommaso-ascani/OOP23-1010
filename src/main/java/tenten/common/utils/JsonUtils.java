@@ -54,12 +54,7 @@ public final class JsonUtils {
      * saved in json file.
      */
     public static final String MATCH_SCORE = "matchScore";
-    /**
-     * Static field used to save the match on going's string as key in key/value
-     * pair
-     * saved in json file.
-     */
-    public static final String MATCH_ON_GOING = "matchOnGoing";
+
     /**
      * Static field used to save the match grid size's string as key in key/value
      * pair saved in json file.

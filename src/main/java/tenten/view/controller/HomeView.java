@@ -79,7 +79,7 @@ public final class HomeView extends ViewImpl {
             dialogResumeLabel1;
 
     @Override
-    public void init() {
+    public void start() {
 
         GameLanguageSystem.getInstance().checkLanguageData();
         this.sliderLabel.setText(GameLanguageSystem.getInstance().getLanguageType().getGridSize());
