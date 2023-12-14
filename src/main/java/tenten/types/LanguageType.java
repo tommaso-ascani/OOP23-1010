@@ -39,7 +39,8 @@ public enum LanguageType {
             "Seleziona",
             "Vuoi comprare questo oggetto per ",
             "Vuoi selezionare questo tema?",
-            "Vai al menu"),
+            "Vai al menu",
+            "Miglior punteggio in griglia da "),
 
     /**
      * Define all the english strings used in the app.
@@ -74,7 +75,8 @@ public enum LanguageType {
             "Set",
             "Do you want to buy this item for ",
             "Do you want to set this theme?",
-            "Back to menu");
+            "Back to menu",
+            "Best score on grid ");
 
     private String gridSize;
     private String settings;
@@ -107,6 +109,7 @@ public enum LanguageType {
     private String shopQuestionBuyItem;
     private String shopQuestionSetTheme;
     private String backToMenu;
+    private String bestScoreLabel;
 
     LanguageType(final String gridSize,
             final String settings,
@@ -138,7 +141,8 @@ public enum LanguageType {
             final String set,
             final String shopQuestionBuyItem,
             final String shopQuestionSetTheme,
-            final String backToMenu) {
+            final String backToMenu,
+            final String bestScoreLabel) {
         this.gridSize = gridSize;
         this.settings = settings;
         this.shop = shop;
@@ -170,6 +174,7 @@ public enum LanguageType {
         this.shopQuestionBuyItem = shopQuestionBuyItem;
         this.shopQuestionSetTheme = shopQuestionSetTheme;
         this.backToMenu = backToMenu;
+        this.bestScoreLabel = bestScoreLabel;
     }
 
     /**
@@ -450,5 +455,14 @@ public enum LanguageType {
      */
     public String getBackToMenu() {
         return backToMenu;
+    }
+
+    /**
+     * Getter of best score label string.
+     * 
+     * @return back to menu string.
+     */
+    public String getBestScoreLabel() {
+        return this.bestScoreLabel;
     }
 }

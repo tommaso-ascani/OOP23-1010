@@ -142,7 +142,7 @@ public final class ShopView extends ViewImpl {
     /**
      * Create a pop up panel asking for purchasing.
      */
-    public void createPurchasePane() {
+    private void createPurchasePane() {
         this.purchasePane.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-background-color: "
                 + ThemeUtils.getSelectedTheme().getColorBackground());
         this.purchasePane.relocate((this.mainPane.getPrefWidth() - this.purchasePane.getPrefWidth()) / 2,
@@ -157,7 +157,7 @@ public final class ShopView extends ViewImpl {
      * @param isPurchased   if item is purchased.
      * @param shopThemeItem on which set the listener.
      */
-    public void setListenerIfShopThemeItemPurchased(final Boolean isPurchased, final ShopTheme shopThemeItem) {
+    private void setListenerIfShopThemeItemPurchased(final Boolean isPurchased, final ShopTheme shopThemeItem) {
         if (isPurchased) {
             shopThemeItem.setOnMouseClicked(e -> {
                 this.questionLabel

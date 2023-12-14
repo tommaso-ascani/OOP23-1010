@@ -42,7 +42,7 @@ public final class HomeView extends ViewImpl {
 
     private static final Integer COINS_LABEL_DIVISOR_CONSTANT = 12;
 
-    private static final Integer BEST_SCORE_LABEL_PREF_WIDTH = 200;
+    private static final Integer BEST_SCORE_LABEL_PREF_WIDTH = 300;
 
     private static final Double OPACITY_FOR_DISABLED_CONTENT = 0.4;
 
@@ -165,7 +165,7 @@ public final class HomeView extends ViewImpl {
                                 padding * HomeView.GRID_SIZE_PADDING_FACTOR_FOR_BEST_SCORE
                                         + HomeView.GRID_SIZE_FACTOR_FOR_BEST_SCORE);
                         this.bestScore.setAlignment(Pos.CENTER);
-                        this.bestScore.setText("Best Score on grid "
+                        this.bestScore.setText(GameLanguageSystem.getInstance().getLanguageType().getBestScoreLabel()
                                 + ((i + 1) * HomeView.GRID_SIZE_FACTOR_FOR_BEST_SCORE) + " ---> "
                                 + bestScore.get(String.valueOf((i + 1) * HomeView.GRID_SIZE_FACTOR_FOR_BEST_SCORE)));
                         this.mainPane.getChildren().add(this.bestScore);

@@ -191,7 +191,7 @@ public final class GameView extends ViewImpl {
      * Method to create the pause pane and all the sub-object, like button and pane.
      * Set size, style, position and text.
      */
-    public void createPausePane() {
+    private void createPausePane() {
 
         this.pausePane.setStyle(GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorBackground()
                 + GameView.STYLE_BORDER_AND_BORDERCOLOR_STRING);
@@ -372,7 +372,7 @@ public final class GameView extends ViewImpl {
      * 
      * @param block block on which set the listener.
      */
-    public void setBlockReadyToBePlaced(final ShapeBlock block) {
+    private void setBlockReadyToBePlaced(final ShapeBlock block) {
         block.setOnMouseReleased(e -> {
 
             final GridBlock node = (GridBlock) this.getNodeIfTriggered(block);
@@ -519,7 +519,7 @@ public final class GameView extends ViewImpl {
      * @param block to check.
      * @return node triggered.
      */
-    public Node getNodeIfTriggered(final ShapeBlock block) {
+    private Node getNodeIfTriggered(final ShapeBlock block) {
         for (final GridBlock node : this.grid) {
             if (node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()
                     && node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY()) {
@@ -534,7 +534,7 @@ public final class GameView extends ViewImpl {
      * griPane to resume a game, or not, then create the panes and add them empty in
      * the gridPane.
      */
-    public void createGridCells() {
+    private void createGridCells() {
         // Check if grid is full
         if (!this.grid.isEmpty()) {
             for (final GridBlock gridBlock : this.grid) {
@@ -575,7 +575,7 @@ public final class GameView extends ViewImpl {
     /**
      * Method to set the final preferences size of panels.
      */
-    public void setPanelsPrefSizes() {
+    private void setPanelsPrefSizes() {
         this.upLeftSpawn.setPrefSize(this.getSpawnPanelsWidth(), this.getSpawnPanelsWidth());
         this.downLeftSpawn.setPrefSize(this.getSpawnPanelsWidth(), this.getSpawnPanelsWidth());
         this.upRightSpawn.setPrefSize(this.getSpawnPanelsWidth(), this.getSpawnPanelsWidth());
@@ -585,7 +585,7 @@ public final class GameView extends ViewImpl {
     /**
      * Method to set the style of main panel.
      */
-    public void setPanelsStyle() {
+    private void setPanelsStyle() {
 
         final String spawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10";
 
@@ -605,7 +605,7 @@ public final class GameView extends ViewImpl {
      * Method to set position on the view of various panels,
      * labels and buttons.
      */
-    public void setObjectLocation() {
+    private void setObjectLocation() {
         final Group gruppo = new Group(this.mainPane);
         this.getStage().setScene(new Scene(gruppo));
         this.getStage().show();
@@ -657,7 +657,7 @@ public final class GameView extends ViewImpl {
      * 
      * @return GridPane width.
      */
-    public int getGridWidth() {
+    private int getGridWidth() {
         return grid.getGridSize() * grid.getGridCellSize() + (grid.getGridSize() - 1) * GAP_GRID_PANE;
     }
 
@@ -693,7 +693,7 @@ public final class GameView extends ViewImpl {
     /**
      * Method to create new random placeable item.
      */
-    public void createNewPuzzles() {
+    private void createNewPuzzles() {
 
         ShapeBlock block;
         BlockType type;
@@ -726,9 +726,9 @@ public final class GameView extends ViewImpl {
             this.blocksAvalaible.add(block);
 
             block.relocate((pane.getPrefWidth()
-                - (block.getBoundsInParent().getMaxX() - block.getBoundsInParent().getMinX())) / 2,
-                (pane.getPrefHeight()
-                        - (block.getBoundsInParent().getMaxY() - block.getBoundsInParent().getMinY())) / 2);
+                    - (block.getBoundsInParent().getMaxX() - block.getBoundsInParent().getMinX())) / 2,
+                    (pane.getPrefHeight()
+                            - (block.getBoundsInParent().getMaxY() - block.getBoundsInParent().getMinY())) / 2);
 
             this.setBlockReadyToBePlaced(block);
         }
