@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javafx.util.Pair;
+import tenten.common.utils.JsonUtils;
 
 /**
  * Class that test the main functions of tha java class JsonUtils.

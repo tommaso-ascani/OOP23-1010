@@ -1,4 +1,4 @@
-package tenten.types;
+package tenten.model.types;
 
 /**
  * Class used to hold all the label's texts that will have to change based on

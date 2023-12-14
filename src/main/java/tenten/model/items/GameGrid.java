@@ -1,9 +1,10 @@
-package tenten.items;
+package tenten.model.items;
 
 import java.util.ArrayList;
 import java.util.List;
-import tenten.sound.GameSoundSystem;
-import tenten.types.SoundType;
+
+import tenten.common.sound.GameSoundSystem;
+import tenten.model.types.SoundType;
 
 /**
  * Class that extends ArrayList of type GridBlock, used to mantain reference of

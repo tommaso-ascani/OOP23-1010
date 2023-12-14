@@ -1,4 +1,4 @@
-package tenten.types;
+package tenten.model.types;
 
 /**
  * class used to hold all types of blocks.

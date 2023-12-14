@@ -1,13 +1,14 @@
-package tenten.sound;
+package tenten.common.sound;
 
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.util.Pair;
-import tenten.language.GameLanguageSystem;
-import tenten.types.SoundType;
-import tenten.utils.JsonUtils;
+import tenten.common.language.GameLanguageSystem;
+import tenten.common.utils.JsonUtils;
+import tenten.model.types.SoundType;
+
 import java.util.logging.Logger;
 import java.io.IOException;
 

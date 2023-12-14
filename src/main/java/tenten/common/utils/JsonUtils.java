@@ -1,4 +1,4 @@
-package tenten.utils;
+package tenten.common.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;

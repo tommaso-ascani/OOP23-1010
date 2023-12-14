@@ -2,7 +2,9 @@ package tenten.utils;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import tenten.types.BlockType;
+
+import tenten.common.utils.RandomUtils;
+import tenten.model.types.BlockType;
 
 /**
  * Class that test the java class RandomUtils.

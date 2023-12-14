@@ -1,4 +1,4 @@
-package tenten.items;
+package tenten.model.items;
 
 import javafx.geometry.Bounds;
 import javafx.scene.shape.ClosePath;
@@ -6,8 +6,8 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import tenten.Movement;
-import tenten.types.BlockType;
-import tenten.utils.ThemeUtils;
+import tenten.common.utils.ThemeUtils;
+import tenten.model.types.BlockType;
 
 /**
  * Class that extends Path, represent a draggable object that has to be place in

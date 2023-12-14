@@ -3,7 +3,7 @@ package tenten;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import tenten.types.ViewType;
+import tenten.model.types.ViewType;
 import tenten.view.ViewSwitcher;
 
 /**

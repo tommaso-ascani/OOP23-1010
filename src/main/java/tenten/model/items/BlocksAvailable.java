@@ -1,4 +1,4 @@
-package tenten.items;
+package tenten.model.items;
 
 import java.util.ArrayList;
 

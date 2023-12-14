@@ -1,4 +1,4 @@
-package tenten.items;
+package tenten.model.items;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -6,7 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import tenten.types.ThemeType;
+import tenten.model.types.ThemeType;
 import tenten.view.ViewImpl;
 
 /**

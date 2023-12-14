@@ -1,4 +1,4 @@
-package tenten.types;
+package tenten.model.types;
 
 /**
  * Class used to hold all the sound's path.

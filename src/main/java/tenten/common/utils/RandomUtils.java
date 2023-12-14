@@ -1,6 +1,6 @@
-package tenten.utils;
+package tenten.common.utils;
 
-import tenten.types.BlockType;
+import tenten.model.types.BlockType;
 
 /**
  * Class with random utility methods.

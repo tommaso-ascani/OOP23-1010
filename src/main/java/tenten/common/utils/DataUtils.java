@@ -1,11 +1,12 @@
-package tenten.utils;
+package tenten.common.utils;
 
 import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.util.Pair;
-import tenten.items.GameGrid;
-import tenten.items.GridBlock;
+import tenten.model.items.GameGrid;
+import tenten.model.items.GridBlock;
+
 import java.util.logging.Logger;
 
 /**

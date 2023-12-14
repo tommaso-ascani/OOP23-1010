@@ -1,10 +1,11 @@
-package tenten.language;
+package tenten.common.language;
 
 import java.io.IOException;
 
 import javafx.util.Pair;
-import tenten.types.LanguageType;
-import tenten.utils.JsonUtils;
+import tenten.common.utils.JsonUtils;
+import tenten.model.types.LanguageType;
+
 import java.util.logging.Logger;
 
 /**

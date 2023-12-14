@@ -1,11 +1,11 @@
-package tenten.utils;
+package tenten.common.utils;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javafx.util.Pair;
-import tenten.types.ThemeType;
+import tenten.model.types.ThemeType;
 
 /**
  * Class that implements methods usefull to manage themes.

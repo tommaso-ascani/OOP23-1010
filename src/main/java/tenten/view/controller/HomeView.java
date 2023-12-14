@@ -1,4 +1,4 @@
-package tenten.view.gameview;
+package tenten.view.controller;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -13,12 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
-import tenten.language.GameLanguageSystem;
-import tenten.types.ThemeType;
-import tenten.types.ViewType;
-import tenten.utils.DataUtils;
-import tenten.utils.JsonUtils;
-import tenten.utils.ThemeUtils;
+import tenten.common.language.GameLanguageSystem;
+import tenten.common.utils.DataUtils;
+import tenten.common.utils.JsonUtils;
+import tenten.common.utils.ThemeUtils;
+import tenten.model.types.ThemeType;
+import tenten.model.types.ViewType;
 import tenten.view.ViewImpl;
 import tenten.view.ViewSwitcher;
 
