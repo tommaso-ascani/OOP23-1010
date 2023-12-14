@@ -25,6 +25,7 @@ Windows
 
 Linux
 ```bash
+chmod +x gradlew
 ./gradlew build
 ```
 
