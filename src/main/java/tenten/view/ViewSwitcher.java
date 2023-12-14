@@ -43,7 +43,7 @@ public class ViewSwitcher {
      * @param viewType the view type to switch to.
      * @return the loaded view.
      */
-    private ViewImpl loadStyle(final Stage stage, final ViewType viewType) {
+    private void loadStyle(final Stage stage, final ViewType viewType) {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(viewType.getPath()));
         Parent root = null;
 
@@ -67,7 +67,8 @@ public class ViewSwitcher {
 
         view.setStage(stage);
         stage.setScene(newScene);
-        return view;
+        
+        view.init();
     }
 
     /**
@@ -77,9 +78,7 @@ public class ViewSwitcher {
      * @param type  the view type to switch to.
      */
     public void switchView(final Stage stage, final ViewType type) {
-        final ViewImpl currentView = this.loadStyle(stage, type);
-        currentView.setStage(stage);
-        currentView.init();
+        this.loadStyle(stage, type);
         stage.show();
     }
 }
