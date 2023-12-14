@@ -26,14 +26,14 @@ import tenten.utils.DataUtils;
 import tenten.utils.JsonUtils;
 import tenten.utils.RandomUtils;
 import tenten.utils.ThemeUtils;
-import tenten.view.View;
+import tenten.view.ViewImpl;
 import tenten.view.ViewSwitcher;
 import java.util.logging.Logger;
 
 /**
  * Class that implements all methods to use the game view.
  */
-public final class GameView extends View {
+public final class GameView extends ViewImpl {
 
     /**
      * Game grid object.
@@ -136,7 +136,7 @@ public final class GameView extends View {
     @Override
     public void init() {
 
-        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+        this.mainPane.setPrefSize(ViewImpl.WINDOW_WIDTH, ViewImpl.WINDOW_HEIGHT);
 
         GameLanguageSystem.getInstance().checkLanguageData();
 

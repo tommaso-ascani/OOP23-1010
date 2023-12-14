@@ -42,7 +42,7 @@ public class ViewSwitcher {
      * @param viewType the view type to switch to.
      * @return the loaded view.
      */
-    private View loadStyle(final Stage stage, final ViewType viewType) {
+    private ViewImpl loadStyle(final Stage stage, final ViewType viewType) {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(viewType.getPath()));
         Parent root = null;
 
@@ -53,14 +53,14 @@ public class ViewSwitcher {
             log.fine("View Switcher - Error on FXML loading!");
         }
 
-        final Scene newScene = new Scene(root, View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+        final Scene newScene = new Scene(root, ViewImpl.WINDOW_WIDTH, ViewImpl.WINDOW_HEIGHT);
 
         stage.setScene(newScene);
         stage.getScene().getStylesheets().clear();
-        final View view = loader.getController();
+        final ViewImpl view = loader.getController();
 
-        stage.setWidth(View.WINDOW_WIDTH);
-        stage.setHeight(View.WINDOW_HEIGHT);
+        stage.setWidth(ViewImpl.WINDOW_WIDTH);
+        stage.setHeight(ViewImpl.WINDOW_HEIGHT);
         stage.setResizable(false);
         stage.sizeToScene();
 
@@ -76,7 +76,7 @@ public class ViewSwitcher {
      * @param type  the view type to switch to.
      */
     public void switchView(final Stage stage, final ViewType type) {
-        final View currentView = this.loadStyle(stage, type);
+        final ViewImpl currentView = this.loadStyle(stage, type);
         currentView.setStage(stage);
         currentView.init();
         stage.show();

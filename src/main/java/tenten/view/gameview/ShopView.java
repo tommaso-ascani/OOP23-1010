@@ -18,13 +18,13 @@ import tenten.types.ViewType;
 import tenten.utils.DataUtils;
 import tenten.utils.JsonUtils;
 import tenten.utils.ThemeUtils;
-import tenten.view.View;
+import tenten.view.ViewImpl;
 import tenten.view.ViewSwitcher;
 
 /**
  * Class that implements all methods to use the shop view.
  */
-public final class ShopView extends View {
+public final class ShopView extends ViewImpl {
 
     private static final Logger LOG = Logger.getLogger(DataUtils.class.getName());
 
@@ -76,7 +76,7 @@ public final class ShopView extends View {
 
         // PrefSize
 
-        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+        this.mainPane.setPrefSize(ViewImpl.WINDOW_WIDTH, ViewImpl.WINDOW_HEIGHT);
         this.verticalBox.setPrefSize(this.mainPane.getPrefWidth() - ShopView.VBOX_LATERAL_SPACE,
                 this.mainPane.getPrefHeight() - (ShopView.VBOX_LATERAL_SPACE * 2));
 

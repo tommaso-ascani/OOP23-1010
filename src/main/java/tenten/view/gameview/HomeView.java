@@ -19,13 +19,13 @@ import tenten.types.ViewType;
 import tenten.utils.DataUtils;
 import tenten.utils.JsonUtils;
 import tenten.utils.ThemeUtils;
-import tenten.view.View;
+import tenten.view.ViewImpl;
 import tenten.view.ViewSwitcher;
 
 /**
  * Class that implements all methods to use the home view.
  */
-public final class HomeView extends View {
+public final class HomeView extends ViewImpl {
 
     private static final Logger LOG = Logger.getLogger(DataUtils.class.getName());
 
@@ -91,7 +91,7 @@ public final class HomeView extends View {
         this.dialogResumeBack.setText(GameLanguageSystem.getInstance().getLanguageType().getBack());
         this.dialogResumeLabel1.setText(GameLanguageSystem.getInstance().getLanguageType().getSavedGameLabel());
 
-        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+        this.mainPane.setPrefSize(ViewImpl.WINDOW_WIDTH, ViewImpl.WINDOW_HEIGHT);
 
         // Load saved Theme and save themes
         try {

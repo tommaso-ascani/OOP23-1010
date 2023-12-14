@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import tenten.types.ThemeType;
-import tenten.view.View;
+import tenten.view.ViewImpl;
 
 /**
  * Class that extend VBox, used to represent a theme item in the shop.
@@ -61,19 +61,19 @@ public final class ShopTheme extends VBox {
         this.setFillWidth(true);
 
         final HBox viewPane = new HBox();
-        viewPane.setPrefSize(View.WINDOW_WIDTH - ShopTheme.HEIGHT, ShopTheme.VIEW_PANE_HEIGHT);
+        viewPane.setPrefSize(ViewImpl.WINDOW_WIDTH - ShopTheme.HEIGHT, ShopTheme.VIEW_PANE_HEIGHT);
         viewPane.setSpacing(ShopTheme.SPACING_HBOX);
         viewPane.setAlignment(Pos.CENTER);
         viewPane.setStyle("-fx-padding: 15");
 
         this.costLabel = new Label();
         this.costLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
-        this.costLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3.0);
+        this.costLabel.setPrefSize(ViewImpl.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3.0);
         this.costLabel.setAlignment(Pos.CENTER);
         this.costLabel.setStyle("-fx-padding: 4,4,4,4");
 
         final Label descriptionLabel = new Label(this.theme.getName());
-        descriptionLabel.setPrefSize(View.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3.0);
+        descriptionLabel.setPrefSize(ViewImpl.WINDOW_WIDTH, ShopTheme.VIEW_PANE_HEIGHT / 3.0);
         descriptionLabel.setFont(new Font(ShopTheme.FONT_SIZE_LABEL));
         descriptionLabel.setAlignment(Pos.CENTER);
 

@@ -22,13 +22,13 @@ import tenten.types.ViewType;
 import tenten.utils.DataUtils;
 import tenten.utils.JsonUtils;
 import tenten.utils.ThemeUtils;
-import tenten.view.View;
+import tenten.view.ViewImpl;
 import tenten.view.ViewSwitcher;
 
 /**
  * Class that implements all methods to use the settings view.
  */
-public final class SettingsView extends View {
+public final class SettingsView extends ViewImpl {
 
     private static final Logger LOG = Logger.getLogger(DataUtils.class.getName());
 
@@ -82,11 +82,11 @@ public final class SettingsView extends View {
         this.buttonApply.setText(GameLanguageSystem.getInstance().getLanguageType().getApply());
         this.buttonBack.setText(GameLanguageSystem.getInstance().getLanguageType().getBack());
 
-        this.mainPane.setPrefSize(View.WINDOW_WIDTH, View.WINDOW_HEIGHT);
+        this.mainPane.setPrefSize(ViewImpl.WINDOW_WIDTH, ViewImpl.WINDOW_HEIGHT);
         this.mainPane.setStyle("-fx-background: " + ThemeUtils.getSelectedTheme().getColorBackground());
 
-        this.settingsPane.relocate((double) View.WINDOW_WIDTH / 2 - this.settingsPane.getPrefWidth() / 2,
-                (double) View.WINDOW_HEIGHT / 2 - this.settingsPane.getPrefHeight() / 2);
+        this.settingsPane.relocate((double) ViewImpl.WINDOW_WIDTH / 2 - this.settingsPane.getPrefWidth() / 2,
+                (double) ViewImpl.WINDOW_HEIGHT / 2 - this.settingsPane.getPrefHeight() / 2);
 
         GameSoundSystem.getInstance().checkSoundData();
         if (GameSoundSystem.getInstance().getVolume() != 0) {
