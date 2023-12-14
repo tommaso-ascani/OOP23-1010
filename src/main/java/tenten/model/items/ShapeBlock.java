@@ -5,7 +5,7 @@ import javafx.scene.shape.ClosePath;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import tenten.Movement;
+import tenten.common.Movement;
 import tenten.common.utils.ThemeUtils;
 import tenten.model.types.BlockType;
 

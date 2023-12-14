@@ -3,6 +3,7 @@ package tenten;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import javafx.scene.Node;
+import tenten.common.Movement;
 
 /**
  * Class that test the java class Movement.

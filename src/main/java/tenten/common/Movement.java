@@ -1,4 +1,4 @@
-package tenten;
+package tenten.common;
 
 import javafx.scene.Node;
 
