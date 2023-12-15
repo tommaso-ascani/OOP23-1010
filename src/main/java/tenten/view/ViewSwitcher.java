@@ -40,7 +40,6 @@ public class ViewSwitcher {
      * 
      * @param stage    to be set.
      * @param viewType indicates the view that will be showed.
-     * @return the loaded viewImpl.
      */
     private void loadStyle(final Stage stage, final ViewType viewType) {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(viewType.getPath()));
