@@ -15,14 +15,12 @@ import tenten.model.types.BlockType;
  */
 public final class ShapeBlock extends Path {
 
-    private static final Integer SIZE_CHECKSTYLE_ERROR = 5;
-
     private final BlockType type;
 
-    private final Integer width;
-    private final Integer height;
+    private final int width;
+    private final int height;
 
-    private final Integer gridCellSize;
+    private final int gridCellSize;
 
     private final String color;
 
@@ -34,75 +32,15 @@ public final class ShapeBlock extends Path {
      * @param type BlockType
      * @param gridCellSize gridCellSize
      */
-    public ShapeBlock(final BlockType type,
-                      final Integer gridCellSize) {
+    public ShapeBlock(final BlockType type, final int gridCellSize) {
 
         this.bounds = this.localToScene(this.getBoundsInLocal());
         this.type = type;
         this.gridCellSize = gridCellSize;
 
-        switch (type) {
-            case BLOCK_1_1:
-                this.width = 1;
-                this.height = 1;
-                this.color = ThemeUtils.getSelectedTheme().getColor1x1();
-                break;
-            case BLOCK_1_2:
-                this.width = 1;
-                this.height = 2;
-                this.color = ThemeUtils.getSelectedTheme().getColor2x1or1x2();
-                break;
-            case BLOCK_1_3:
-                this.width = 1;
-                this.height = 3;
-                this.color = ThemeUtils.getSelectedTheme().getColor3x1or1x3();
-                break;
-            case BLOCK_1_4:
-                this.width = 1;
-                this.height = 4;
-                this.color = ThemeUtils.getSelectedTheme().getColor4x1or1x4();
-                break;
-            case BLOCK_1_5:
-                this.width = 1;
-                this.height = ShapeBlock.SIZE_CHECKSTYLE_ERROR;
-                this.color = ThemeUtils.getSelectedTheme().getColor5x1or1x5();
-                break;
-            case BLOCK_2_1:
-                this.width = 2;
-                this.height = 1;
-                this.color = ThemeUtils.getSelectedTheme().getColor2x1or1x2();
-                break;
-            case BLOCK_2_2:
-                this.width = 2;
-                this.height = 2;
-                this.color = ThemeUtils.getSelectedTheme().getColor2x2();
-                break;
-            case BLOCK_3_1:
-                this.width = 3;
-                this.height = 1;
-                this.color = ThemeUtils.getSelectedTheme().getColor3x1or1x3();
-                break;
-            case BLOCK_3_3:
-                this.width = 3;
-                this.height = 3;
-                this.color = ThemeUtils.getSelectedTheme().getColor3x3();
-                break;
-            case BLOCK_4_1:
-                this.width = 4;
-                this.height = 1;
-                this.color = ThemeUtils.getSelectedTheme().getColor4x1or1x4();
-                break;
-            case BLOCK_5_1:
-                this.width = ShapeBlock.SIZE_CHECKSTYLE_ERROR;
-                this.height = 1;
-                this.color = ThemeUtils.getSelectedTheme().getColor5x1or1x5();
-                break;
-            default:
-                this.height = 0;
-                this.width = 0;
-                this.color = "white";
-                break;
-        }
+        this.width = type.getWidth();
+        this.height = type.getHeight();
+        this.color = ThemeUtils.getSelectedTheme().getColor(this.width, this.height);
 
         this.generateBlock();
     }
@@ -121,7 +59,7 @@ public final class ShapeBlock extends Path {
      * 
      * @return Width.
      */
-    public Integer getWidth() {
+    public int getWidth() {
         return this.width;
     }
 
@@ -130,7 +68,7 @@ public final class ShapeBlock extends Path {
      * 
      * @return Height.
      */
-    public Integer getHeight() {
+    public int getHeight() {
         return this.height;
     }
 
@@ -148,7 +86,7 @@ public final class ShapeBlock extends Path {
      * 
      * @return Center X coordinate.
      */
-    public Integer getTriggerX() {
+    public int getTriggerX() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
         final Double tempX = this.bounds.getMinX();
         return tempX.intValue() + (this.gridCellSize / 2);
@@ -159,7 +97,7 @@ public final class ShapeBlock extends Path {
      * 
      * @return Center Y coordinate.
      */
-    public Integer getTriggerY() {
+    public int getTriggerY() {
         this.bounds = this.localToScene(this.getBoundsInLocal());
         final Double tempY = this.bounds.getMinY();
         return tempY.intValue() + (this.gridCellSize / 2);
@@ -169,8 +107,8 @@ public final class ShapeBlock extends Path {
      * Method to generate the new block.
      */
     private void generateBlock() {
-        Integer x;
-        Integer y;
+        int x;
+        int y;
 
         for (x = 0; x < this.width; x++) {
             for (y = 0; y < this.height; y++) {

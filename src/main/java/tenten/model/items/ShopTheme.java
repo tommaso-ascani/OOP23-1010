@@ -85,23 +85,23 @@ public final class ShopTheme extends VBox {
             } else if (i.equals(ShopTheme.PANE_NUMBER_2)) {
                 pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColorGrid());
             } else if (i.equals(ShopTheme.PANE_NUMBER_3)) {
-                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor1x1());
+                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor(1, 1));
             } else if (i.equals(ShopTheme.PANE_NUMBER_4)) {
-                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor2x2());
+                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor(2, 2));
             } else if (i.equals(ShopTheme.PANE_NUMBER_5)) {
-                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor3x3());
+                pane.setStyle(ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor(3, 3));
             } else if (i.equals(ShopTheme.PANE_NUMBER_6)) {
                 pane.setStyle(
-                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor2x1or1x2());
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor(2, 1));
             } else if (i.equals(ShopTheme.PANE_NUMBER_7)) {
                 pane.setStyle(
-                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor3x1or1x3());
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor(3,1));
             } else if (i.equals(ShopTheme.PANE_NUMBER_8)) {
                 pane.setStyle(
-                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor4x1or1x4());
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor(4, 1));
             } else if (i.equals(ShopTheme.PANE_NUMBER_9)) {
                 pane.setStyle(
-                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor5x1or1x5());
+                        ShopTheme.STATIC_STYLE_ATTRIBUTES + this.theme.getColor(5, 1));
             }
             pane.setPrefWidth(ShopTheme.WIDTH_PANE_COLORS);
             viewPane.getChildren().add(pane);
