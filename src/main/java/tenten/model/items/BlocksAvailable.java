@@ -38,11 +38,11 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
                 toBeFilled = new ArrayList<>();
 
                 toBeFilled.clear();
-                for (int y = targetY; y < targetY + block.getHeight(); y++) {
+                for (int y = targetY; y < targetY + block.getType().getHeight(); y++) {
                     if (y >= grid.getGridSize()) {
                         break;
                     }
-                    for (int x = targetX; x < targetX + block.getWidth(); x++) {
+                    for (int x = targetX; x < targetX + block.getType().getWidth(); x++) {
                         if (x >= grid.getGridSize()) {
                             break;
                         }
@@ -54,12 +54,12 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
                         }
                     }
                 }
-                if (toBeFilled.size() == block.getWidth() * block.getHeight()) {
+                if (toBeFilled.size() == block.getType().getWidth() * block.getType().getHeight()) {
                     break;
                 }
             }
 
-            if (toBeFilled.size() == block.getWidth() * block.getHeight()) {
+            if (toBeFilled.size() == block.getType().getWidth() * block.getType().getHeight()) {
                 return true;
             }
         }

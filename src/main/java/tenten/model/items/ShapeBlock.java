@@ -1,10 +1,8 @@
 package tenten.model.items;
 
 import javafx.geometry.Bounds;
-import javafx.scene.shape.ClosePath;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import tenten.common.Movement;
 import tenten.common.utils.ThemeUtils;
 import tenten.model.types.BlockType;
@@ -13,34 +11,30 @@ import tenten.model.types.BlockType;
  * Class that extends Path, represent a draggable object that has to be place in
  * the grid.
  */
-public final class ShapeBlock extends Path {
+public final class ShapeBlock extends GridPane {
 
     private final BlockType type;
 
-    private final int width;
-    private final int height;
-
     private final int gridCellSize;
 
-    private final String color;
-
     private Bounds bounds;
+
+    private double gridWidth;
+
+    private double gridHeight;
 
     /**
      * Initialize new ShapeBlock object.
      * 
-     * @param type BlockType
+     * @param type         BlockType
      * @param gridCellSize gridCellSize
      */
     public ShapeBlock(final BlockType type, final int gridCellSize) {
-
-        this.bounds = this.localToScene(this.getBoundsInLocal());
         this.type = type;
         this.gridCellSize = gridCellSize;
 
-        this.width = type.getWidth();
-        this.height = type.getHeight();
-        this.color = ThemeUtils.getSelectedTheme().getColor(this.width, this.height);
+        this.gridWidth = 0;
+        this.gridHeight = 0;
 
         this.generateBlock();
     }
@@ -55,30 +49,12 @@ public final class ShapeBlock extends Path {
     }
 
     /**
-     * Method to get the width.
-     * 
-     * @return Width.
-     */
-    public int getWidth() {
-        return this.width;
-    }
-
-    /**
-     * Method to get the height.
-     * 
-     * @return Height.
-     */
-    public int getHeight() {
-        return this.height;
-    }
-
-    /**
      * Method to get the ShapeBlock color.
      * 
      * @return ShapeBlock color.
      */
     public String getColor() {
-        return this.color;
+        return ThemeUtils.getSelectedTheme().getColor(type.getWidth(), type.getHeight());
     }
 
     /**
@@ -107,31 +83,27 @@ public final class ShapeBlock extends Path {
      * Method to generate the new block.
      */
     private void generateBlock() {
-        int x;
-        int y;
-
-        for (x = 0; x < this.width; x++) {
-            for (y = 0; y < this.height; y++) {
-                this.getElements().addAll(
-                        new MoveTo(x * (this.gridCellSize + 3) + this.gridCellSize,
-                                y * (this.gridCellSize + 3) + this.gridCellSize),
-
-                        new LineTo(x * (this.gridCellSize + 3) + this.gridCellSize,
-                                y * (this.gridCellSize + 3) + this.gridCellSize * 2),
-                        new LineTo(x * (this.gridCellSize + 3) + this.gridCellSize * 2,
-                                y * (this.gridCellSize + 3) + this.gridCellSize * 2),
-                        new LineTo(x * (this.gridCellSize + 3) + this.gridCellSize * 2,
-                                y * (this.gridCellSize + 3) + this.gridCellSize),
-                        new LineTo(x * (this.gridCellSize + 3) + this.gridCellSize,
-                                y * (this.gridCellSize + 3) + this.gridCellSize),
-
-                        new ClosePath());
+        for (int xx = 0; xx < type.getWidth(); xx++) {
+            for (int yy = 0; yy < type.getHeight(); yy++) {
+                GridBlock gridBlock = new GridBlock(xx, yy, null, ThemeUtils.getSelectedTheme().getColorGrid());
+                gridBlock.setPrefHeight(this.gridCellSize);
+                gridBlock.setPrefWidth(this.gridCellSize);
+                if (xx == 0) {
+                    this.gridHeight = this.gridHeight + this.gridCellSize;
+                }
+                gridBlock.setStyle(
+                        "-fx-background-color: "
+                                + ThemeUtils.getSelectedTheme().getColor(type.getWidth(), type.getHeight())
+                                + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
+                this.add(gridBlock, xx, yy);
             }
-        }
 
-        this.setStyle("-fx-fill: " + this.color + "; -fx-stroke-width: 0");
-        this.setAccessibleText(this.color);
+            this.gridWidth = this.gridWidth + this.gridCellSize;
+        }
+        this.setStyle("-fx-vgap: 5; -fx-hgap: 5; ");
         Movement.makeDraggable(this);
+        this.gridWidth = this.gridWidth + 5 * (this.type.getWidth() - 1);
+        this.gridHeight = this.gridHeight + 5 * (this.type.getHeight() - 1);
     }
 
     /**
@@ -140,5 +112,11 @@ public final class ShapeBlock extends Path {
     public void returnToStart() {
         this.setTranslateX(0);
         this.setTranslateY(0);
+    }
+
+    public void center(Pane pane) {
+        this.bounds = this.sceneToLocal(this.getBoundsInLocal());
+        System.out.println(this.bounds);
+        this.relocate((pane.getPrefWidth() - this.gridWidth) / 2, (pane.getPrefHeight() - this.gridHeight) / 2);
     }
 }

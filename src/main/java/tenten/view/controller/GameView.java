@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
-import tenten.common.Movement;
 import tenten.common.language.GameLanguageSystem;
 import tenten.common.sound.GameSoundSystem;
 import tenten.common.utils.DataUtils;
@@ -386,11 +385,11 @@ public final class GameView extends ViewImpl {
                 final ArrayList<GridBlock> toFill = new ArrayList<>();
 
                 toFill.clear();
-                for (int y = targetY; y < targetY + block.getHeight(); y++) {
+                for (int y = targetY; y < targetY + block.getType().getHeight(); y++) {
                     if (y >= grid.getGridSize()) {
                         break;
                     }
-                    for (int x = targetX; x < targetX + block.getWidth(); x++) {
+                    for (int x = targetX; x < targetX + block.getType().getWidth(); x++) {
                         if (x >= grid.getGridSize()) {
                             break;
                         }
@@ -403,7 +402,7 @@ public final class GameView extends ViewImpl {
                     }
                 }
 
-                if (toFill.size() == block.getWidth() * block.getHeight()) {
+                if (toFill.size() == block.getType().getWidth() * block.getType().getHeight()) {
                     for (final GridBlock x : toFill) {
                         x.setFill(block.getColor());
                         x.setStyle(GameView.BACKGROUND_COLOR_STRING + block.getColor());
@@ -588,7 +587,7 @@ public final class GameView extends ViewImpl {
      */
     private void setPanelsStyle() {
 
-        final String spawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10";
+        final String spawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10; -fx-border-color: green;";
 
         this.upLeftSpawn.setStyle(spawnPanlesStyle);
         this.downLeftSpawn.setStyle(spawnPanlesStyle);
@@ -723,37 +722,11 @@ public final class GameView extends ViewImpl {
                     break;
             }
 
-            // pane.getChildren().addAll(block);
-
-            // TODO try to use gridPane START TEST
-            GridPane gridPaneV2 = new GridPane();
-            for (int xx = 0; xx < 5; xx++) {
-                for (int yy = 0; yy < 5; yy++) {
-                    GridBlock gridBlock = new GridBlock(xx, yy, null, ThemeUtils.getSelectedTheme().getColorGrid());
-                    gridBlock.setPrefHeight(grid.getGridCellSize());
-                    gridBlock.setPrefWidth(grid.getGridCellSize());
-                    gridBlock.setStyle(
-                            GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorGrid()
-                                    + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
-
-                    gridPaneV2.add(gridBlock, xx, yy);
-
-                }
-            }
-            gridPaneV2.setStyle(
-                    "-fx-vgap: " + GAP_GRID_PANE + "; -fx-hgap: " + GAP_GRID_PANE
-                            + "; -fx-border-insets: 5; -fx-border-width: 5;");
-            Movement.makeDraggable(gridPaneV2);
-            pane.getChildren().add(gridPaneV2);
-
-            // END TEST
+            pane.getChildren().addAll(block);
 
             this.blocksAvalaible.add(block);
 
-            block.relocate((pane.getPrefWidth()
-                    - (block.getBoundsInParent().getMaxX() - block.getBoundsInParent().getMinX())) / 2,
-                    (pane.getPrefHeight()
-                            - (block.getBoundsInParent().getMaxY() - block.getBoundsInParent().getMinY())) / 2);
+            block.center(pane);
 
             this.setBlockReadyToBePlaced(block);
         }
