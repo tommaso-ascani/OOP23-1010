@@ -19,13 +19,15 @@ public final class RandomUtils {
      * @return Block type.
      */
     public static BlockType getRandomPuzzle() {
-        Integer index = 0;
+        int index = 0;
+        double temp = 0.0;
 
-        final Double temp = Math.floor(Math.random() * (BlockType.values().length - 1));
-        final Integer rand = temp.intValue();
+        while (temp == 0.0){
+            temp = Math.floor(Math.random() * (BlockType.values().length));
+        }
 
         for (final BlockType block : BlockType.values()) {
-            if (index.equals(rand)) {
+            if (index == (int)temp) {
                 return block;
             }
             index++;

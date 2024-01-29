@@ -49,15 +49,6 @@ public final class ShapeBlock extends GridPane {
     }
 
     /**
-     * Method to get the ShapeBlock color.
-     * 
-     * @return ShapeBlock color.
-     */
-    public String getColor() {
-        return ThemeUtils.getSelectedTheme().getColor(type.getWidth(), type.getHeight());
-    }
-
-    /**
      * Method to get center X coordinate.
      * 
      * @return Center X coordinate.
@@ -85,21 +76,23 @@ public final class ShapeBlock extends GridPane {
     private void generateBlock() {
         for (int xx = 0; xx < type.getWidth(); xx++) {
             for (int yy = 0; yy < type.getHeight(); yy++) {
-                GridBlock gridBlock = new GridBlock(xx, yy, null, ThemeUtils.getSelectedTheme().getColorGrid());
-                gridBlock.setPrefHeight(this.gridCellSize);
-                gridBlock.setPrefWidth(this.gridCellSize);
+                if(!type.getL_type() || (type.getL_type() && (xx == 0 || yy == type.getWidth()-1))){
+                    GridBlock gridBlock = new GridBlock(xx, yy, null, ThemeUtils.getSelectedTheme().getColorGrid());
+                    gridBlock.setPrefHeight(this.gridCellSize);
+                    gridBlock.setPrefWidth(this.gridCellSize);
+                    gridBlock.setStyle(
+                            "-fx-background-color: " + type.getColor()
+                                + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
+                    this.add(gridBlock, xx, yy);
+                }
                 if (xx == 0) {
                     this.gridHeight = this.gridHeight + this.gridCellSize;
                 }
-                gridBlock.setStyle(
-                        "-fx-background-color: "
-                                + ThemeUtils.getSelectedTheme().getColor(type.getWidth(), type.getHeight())
-                                + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
-                this.add(gridBlock, xx, yy);
             }
 
             this.gridWidth = this.gridWidth + this.gridCellSize;
         }
+
         this.setStyle("-fx-vgap: 5; -fx-hgap: 5; ");
         Movement.makeDraggable(this);
         this.gridWidth = this.gridWidth + 5 * (this.type.getWidth() - 1);
@@ -116,7 +109,6 @@ public final class ShapeBlock extends GridPane {
 
     public void center(Pane pane) {
         this.bounds = this.sceneToLocal(this.getBoundsInLocal());
-        System.out.println(this.bounds);
         this.relocate((pane.getPrefWidth() - this.gridWidth) / 2, (pane.getPrefHeight() - this.gridHeight) / 2);
     }
 }

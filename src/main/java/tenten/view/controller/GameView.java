@@ -404,8 +404,8 @@ public final class GameView extends ViewImpl {
 
                 if (toFill.size() == block.getType().getWidth() * block.getType().getHeight()) {
                     for (final GridBlock x : toFill) {
-                        x.setFill(block.getColor());
-                        x.setStyle(GameView.BACKGROUND_COLOR_STRING + block.getColor());
+                        x.setFill(block.getType().getColor());
+                        x.setStyle(GameView.BACKGROUND_COLOR_STRING + block.getType().getColor());
                         this.score++;
                     }
 
@@ -436,9 +436,13 @@ public final class GameView extends ViewImpl {
                 block.returnToStart();
             }
 
+            // New blocks are created when all blocks were placed.
+            
             if (blocksAvalaible.size() == 0) {
                 createNewPuzzles();
             }
+
+            // Check if almost one avalaible blocks can be placed, instead game over.
 
             if (!blocksAvalaible.checkIfBlocksCanBePlaced(grid)) {
                 GameSoundSystem.getInstance().setAudioClip(SoundType.GAME_OVER);

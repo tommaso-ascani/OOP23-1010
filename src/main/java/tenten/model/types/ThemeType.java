@@ -2,8 +2,6 @@ package tenten.model.types;
 
 import java.util.HashMap;
 
-import javafx.util.Pair;
-
 /**
  * Class used to hold all the themes.
  */
@@ -21,6 +19,8 @@ public enum ThemeType {
             "darkorange",
             "lightcoral",
             "firebrick",
+            "green",
+            "red",
             "Light",
             0,
             true),
@@ -37,6 +37,8 @@ public enum ThemeType {
             "darkorange",
             "lightcoral",
             "firebrick",
+            "green",
+            "red",
             "Dark",
             10,
             false),
@@ -53,6 +55,8 @@ public enum ThemeType {
             "sandybrown",
             "lightsteelblue",
             "palevioletred",
+            "green",
+            "red",
             "Soft",
             100,
             false);
@@ -62,7 +66,7 @@ public enum ThemeType {
     private String colorBackground;
     private String colorGrid;
 
-    private HashMap<Pair<Integer, Integer>, String> colors = new HashMap<>();
+    private HashMap<String, String> colors = new HashMap<>();
 
     private String name;
     private Integer cost;
@@ -77,26 +81,23 @@ public enum ThemeType {
             final String color3x1,
             final String color4x1,
             final String color5x1,
+            final String color_L2x2,
+            final String color_L3x3,
             final String name,
             final Integer cost,
             final Boolean purchased) {
 
         this.colorBackground = colorBackground;
         this.colorGrid = colorGrid;
-        this.colors.put(new Pair<Integer, Integer>(BlockType.BLOCK_1_1.getWidth(), BlockType.BLOCK_1_1.getHeight()),
-                color1x1);
-        this.colors.put(new Pair<Integer, Integer>(BlockType.BLOCK_2_2.getWidth(), BlockType.BLOCK_2_2.getHeight()),
-                color2x2);
-        this.colors.put(new Pair<Integer, Integer>(BlockType.BLOCK_3_3.getWidth(), BlockType.BLOCK_3_3.getHeight()),
-                color3x3);
-        this.colors.put(new Pair<Integer, Integer>(BlockType.BLOCK_2_1.getWidth(), BlockType.BLOCK_2_1.getHeight()),
-                color2x1);
-        this.colors.put(new Pair<Integer, Integer>(BlockType.BLOCK_3_1.getWidth(), BlockType.BLOCK_3_1.getHeight()),
-                color3x1);
-        this.colors.put(new Pair<Integer, Integer>(BlockType.BLOCK_4_1.getWidth(), BlockType.BLOCK_4_1.getHeight()),
-                color4x1);
-        this.colors.put(new Pair<Integer, Integer>(BlockType.BLOCK_5_1.getWidth(), BlockType.BLOCK_5_1.getHeight()),
-                color5x1);
+        this.colors.put("color1x1", color1x1);
+        this.colors.put("color2x2", color2x2);
+        this.colors.put("color3x3", color3x3);
+        this.colors.put("color2x1", color2x1);
+        this.colors.put("color3x1", color3x1);
+        this.colors.put("color4x1", color4x1);
+        this.colors.put("color5x1", color5x1);
+        this.colors.put("color_L2x2", color_L2x2);
+        this.colors.put("color_L3x3", color_L3x3);
         this.name = name;
         this.cost = cost;
         this.purchased = purchased;
@@ -165,11 +166,7 @@ public enum ThemeType {
         this.setPurchased(purch);
     }
 
-    public String getColor(int width, int height) {
-        if (width > height) {
-            return this.colors.get(new Pair<Integer, Integer>(width, height));
-        } else {
-            return this.colors.get(new Pair<Integer, Integer>(height, width));
-        }
+    public String getColor(final String color) {
+        return this.colors.get(color);
     }
 }
