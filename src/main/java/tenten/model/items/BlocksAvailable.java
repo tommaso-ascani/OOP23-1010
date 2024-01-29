@@ -27,42 +27,33 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
      */
     public Boolean checkIfBlocksCanBePlaced(final GameGrid<GridBlock> grid) {
 
-        Integer targetX;
-        Integer targetY;
         ArrayList<GridBlock> toBeFilled = new ArrayList<>();
 
-        for (final ShapeBlock block : this) {
+        for (final ShapeBlock shapeBlock : this) {            
             for (final GridBlock elem : grid) {
 
-                targetX = elem.getGridX();
-                targetY = elem.getGridY();
+                int targetX = elem.getGridX();
+                int targetY = elem.getGridY();
 
-                toBeFilled = new ArrayList<>();
+                for (GridBlock gridBlock : shapeBlock.getBlocks()) {
+                    int controlX = targetX + gridBlock.getGridX();
+                    int controlY = targetY + gridBlock.getGridY();
 
-                toBeFilled.clear();
-                for (int y = targetY; y < targetY + block.getType().getHeight(); y++) {
-                    if (y >= grid.getGridSize()) {
+                    if(controlX >= grid.getGridSize() || controlY >= grid.getGridSize() || controlX < 0 || controlY < 0){
+                        toBeFilled.clear();
                         break;
                     }
-                    for (int x = targetX; x < targetX + block.getType().getWidth(); x++) {
-                        if (x >= grid.getGridSize()) {
-                            break;
-                        }
-                        if (grid.getElement(x, y).getBackgroundColor() == ThemeUtils.getSelectedTheme().getColorGrid()) {
-                            toBeFilled.add(grid.getElement(x, y));
-                        } else {
-                            toBeFilled.clear();
-                            break;
-                        }
+
+                    if(grid.getElement(controlX, controlY).getBackgroundColor() == ThemeUtils.getSelectedTheme().getColorGrid()){
+                        toBeFilled.add(grid.getElement(controlX, controlY));
+                    }else{
+                        toBeFilled.clear();
+                        break;
                     }
                 }
-                if (toBeFilled.size() == block.getType().getWidth() * block.getType().getHeight()) {
-                    break;
+                if(!toBeFilled.isEmpty()){
+                    return true;
                 }
-            }
-
-            if (toBeFilled.size() == block.getType().getWidth() * block.getType().getHeight()) {
-                return true;
             }
         }
         return false;

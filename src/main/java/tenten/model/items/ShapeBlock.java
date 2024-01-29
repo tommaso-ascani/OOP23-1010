@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import tenten.common.Movement;
+import tenten.common.utils.RandomUtils;
 import tenten.model.types.BlockType;
 import java.util.ArrayList;
 
@@ -50,10 +51,24 @@ public final class ShapeBlock extends GridPane {
      * Method to generate the new block.
      */
     private void generateBlock() {
+        double rotation = RandomUtils.getRandomRotate();
+
         for (int xx = 0; xx < type.getWidth(); xx++) {
             for (int yy = 0; yy < type.getHeight(); yy++) {
-                if(!type.getL_type() || (type.getL_type() && (xx == 0 || yy == type.getWidth()-1))){
+                if(!type.getL_type() || (type.getL_type() && (xx == 0 || yy == type.getHeight()-1))){
                     GridBlock gridBlock = new GridBlock(xx, yy, type.getColor());
+
+                    if(rotation == 90){
+                        gridBlock.setGridX(-yy);
+                        gridBlock.setGridY(xx);
+                    }else if(rotation == 180){
+                        gridBlock.setGridX(-xx);
+                        gridBlock.setGridY(-yy);
+                    }else if(rotation == 270){
+                        gridBlock.setGridX(yy);
+                        gridBlock.setGridY(-xx);
+                    }
+
                     gridBlock.setPrefHeight(this.gridCellSize);
                     gridBlock.setPrefWidth(this.gridCellSize);
                     gridBlock.setStyle(
@@ -72,6 +87,8 @@ public final class ShapeBlock extends GridPane {
         Movement.makeDraggable(this);
         this.gridWidth = this.gridWidth + 5 * (this.type.getWidth() - 1);
         this.gridHeight = this.gridHeight + 5 * (this.type.getHeight() - 1);
+
+        this.setRotate(rotation);
     }
 
     /**

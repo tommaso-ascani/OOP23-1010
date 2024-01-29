@@ -12,37 +12,21 @@ public enum BlockType {
      */
     BLOCK_1_1(1,1,false, ThemeUtils.getSelectedTheme().getColor("color1x1")),
     /**
-     * Block 1x2.
+     * Block 2x2.
      */
-    BLOCK_1_2(1,2,false, ThemeUtils.getSelectedTheme().getColor("color2x1")),
+    BLOCK_2_2(2,2,false, ThemeUtils.getSelectedTheme().getColor("color2x2")),
     /**
-     * Block 1x3.
+     * Block 3x3.
      */
-    BLOCK_1_3(1,3,false, ThemeUtils.getSelectedTheme().getColor("color3x1")),
-    /**
-     * Block 1x4.
-     */
-    BLOCK_1_4(1,4,false, ThemeUtils.getSelectedTheme().getColor("color4x1")),
-    /**
-     * Block 1x5.
-     */
-    BLOCK_1_5(1,5,false, ThemeUtils.getSelectedTheme().getColor("color5x1")),
+    BLOCK_3_3(3,3,false, ThemeUtils.getSelectedTheme().getColor("color3x3")),
     /**
      * Block 2x1.
      */
     BLOCK_2_1(2,1,false, ThemeUtils.getSelectedTheme().getColor("color2x1")),
     /**
-     * Block 2x2.
-     */
-    BLOCK_2_2(2,2,false, ThemeUtils.getSelectedTheme().getColor("color2x2")),
-    /**
      * Block 3x1.
      */
     BLOCK_3_1(3,1,false, ThemeUtils.getSelectedTheme().getColor("color3x1")),
-    /**
-     * Block 3x3.
-     */
-    BLOCK_3_3(3,3,false, ThemeUtils.getSelectedTheme().getColor("color3x3")),
     /**
      * Block 4x1.
      */
@@ -58,7 +42,15 @@ public enum BlockType {
     /**
      * Block L 3x3.
      */
-    BLOCK_L_3_3(3,3,true, ThemeUtils.getSelectedTheme().getColor("color_L3x3"));
+    BLOCK_L_3_3(3,3,true, ThemeUtils.getSelectedTheme().getColor("color_L3x3")),
+    /**
+     * Block L 3x3.
+     */
+    BLOCK_L_3_2(3,2,true, ThemeUtils.getSelectedTheme().getColor("color_L2x2")),
+    /**
+     * Block L 3x3.
+     */
+    BLOCK_L_2_3(2,3,true, ThemeUtils.getSelectedTheme().getColor("color_L2x2"));
 
     private int width;
     private int height;

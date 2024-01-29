@@ -567,7 +567,7 @@ public final class GameView extends ViewImpl {
      */
     private void setPanelsStyle() {
 
-        final String spawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10; -fx-border-color: green;";
+        final String spawnPanlesStyle = "-fx-border-width: 5; -fx-border-radius: 10;";
 
         this.upLeftSpawn.setStyle(spawnPanlesStyle);
         this.downLeftSpawn.setStyle(spawnPanlesStyle);
