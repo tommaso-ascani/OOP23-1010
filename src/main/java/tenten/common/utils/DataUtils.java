@@ -77,8 +77,8 @@ public final class DataUtils {
                 final JSONObject block = new JSONObject();
                 block.put("X", gridBlock.getGridX());
                 block.put("Y", gridBlock.getGridY());
-                if (gridBlock.getFill() != null) {
-                    block.put(DataUtils.COLOR_STRING_KEY_JSON, gridBlock.getFill());
+                if (gridBlock.getBackgroundColor() != ThemeUtils.getSelectedTheme().getColorGrid()) {
+                    block.put(DataUtils.COLOR_STRING_KEY_JSON, gridBlock.getBackgroundColor());
                 } else {
                     block.put(DataUtils.COLOR_STRING_KEY_JSON, "null");
                 }
@@ -189,14 +189,14 @@ public final class DataUtils {
                     String color;
 
                     if ("null".equals(a.getJSONObject(i).get(DataUtils.COLOR_STRING_KEY_JSON))) {
-                        color = null;
+                        color = ThemeUtils.getSelectedTheme().getColorGrid();
                     } else {
                         color = (String) a.getJSONObject(i).get(DataUtils.COLOR_STRING_KEY_JSON);
                     }
 
                     final GridBlock aPane = new GridBlock((Integer) a.getJSONObject(i).get("X"),
                             (Integer) a.getJSONObject(i).get("Y"),
-                            color, ThemeUtils.getSelectedTheme().getColorGrid());
+                            color);
 
                     grid.add(aPane);
                 }

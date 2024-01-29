@@ -11,8 +11,7 @@ public class GridBlock extends AnchorPane {
     private final Integer x;
     private final Integer y;
 
-    private String color;
-    private final String backgroundColor;
+    private String backgroundColor;
 
     private Bounds bounds;
 
@@ -21,24 +20,22 @@ public class GridBlock extends AnchorPane {
      * 
      * @param x coordinate
      * @param y coordinate
-     * @param color of gridBlock
      * @param backgroundColor of gridBlock
      */
-    public GridBlock(final Integer x, final Integer y, final String color, final String backgroundColor) {
+    public GridBlock(final Integer x, final Integer y, final String backgroundColor) {
         this.x = x;
         this.y = y;
-        this.color = color;
         this.backgroundColor = backgroundColor;
     }
 
-    /**
-     * Method to set the field color.
-     * 
-     * @param color of block
-     */
-    public void setFill(final String color) {
-        this.color = color;
-    }
+    // /**
+    //  * Method to set the field color.
+    //  * 
+    //  * @param color of block
+    //  */
+    // public void setFill(final String color) {
+    //     this.color = color;
+    // }
 
     /**
      * Method to get the field x.
@@ -58,14 +55,14 @@ public class GridBlock extends AnchorPane {
         return this.y;
     }
 
-    /**
-     * Method to get the field color.
-     * 
-     * @return String.
-     */
-    public String getFill() {
-        return this.color;
-    }
+    // /**
+    //  * Method to get the field color.
+    //  * 
+    //  * @return String.
+    //  */
+    // public String getFill() {
+    //     return this.color;
+    // }
 
     /**
      * Method to get the field backgroundColor.
@@ -74,6 +71,15 @@ public class GridBlock extends AnchorPane {
      */
     public String getBackgroundColor() {
         return backgroundColor;
+    }
+
+    /**
+     * Method to get the field backgroundColor.
+     * 
+     * @return String.
+     */
+    public void setBackgroundColor(final String backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
     /**

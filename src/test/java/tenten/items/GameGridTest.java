@@ -24,8 +24,7 @@ class GameGridTest {
         gg = new GameGrid<>(GameGridTest.TEST_GRID_SIZE);
         for (int rowIndex = 0; rowIndex < gg.getGridSize(); rowIndex++) {
             for (int columnIndex = 0; columnIndex < gg.getGridSize(); columnIndex++) {
-                final GridBlock aPane = new GridBlock(columnIndex, rowIndex, null,
-                        null);
+                final GridBlock aPane = new GridBlock(columnIndex, rowIndex, null);
                 gg.add(aPane);
             }
         }

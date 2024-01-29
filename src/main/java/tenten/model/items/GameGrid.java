@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tenten.common.sound.GameSoundSystem;
+import tenten.common.utils.ThemeUtils;
 import tenten.model.types.SoundType;
 
 /**
@@ -92,8 +93,8 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
 
         for (final List<GridBlock> line : getNumFullLines()) {
             for (final GridBlock block : line) {
+                block.setBackgroundColor(ThemeUtils.getSelectedTheme().getColorGrid());
                 block.setStyle("-fx-background-color: " + block.getBackgroundColor());
-                block.setFill(null);
             }
             GameSoundSystem.getInstance().setAudioClip(SoundType.LINE_COMPLETED);
             GameSoundSystem.getInstance().playAudioClip();
@@ -136,7 +137,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
     public Boolean isFull(final List<GridBlock> list) {
 
         for (final GridBlock block : list) {
-            if (block.getFill() == null) {
+            if (block.getBackgroundColor() == ThemeUtils.getSelectedTheme().getColorGrid()) {
                 return false;
             }
         }

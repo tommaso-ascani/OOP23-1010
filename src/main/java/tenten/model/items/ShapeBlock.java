@@ -40,15 +40,6 @@ public final class ShapeBlock extends GridPane {
     }
 
     /**
-     * Method to get block type.
-     * 
-     * @return Block type.
-     */
-    public BlockType getType() {
-        return this.type;
-    }
-
-    /**
      * Method to get center X coordinate.
      * 
      * @return Center X coordinate.
@@ -71,13 +62,22 @@ public final class ShapeBlock extends GridPane {
     }
 
     /**
+     * Method to get block type.
+     * 
+     * @return Block type.
+     */
+    public BlockType getType() {
+        return this.type;
+    }
+
+    /**
      * Method to generate the new block.
      */
     private void generateBlock() {
         for (int xx = 0; xx < type.getWidth(); xx++) {
             for (int yy = 0; yy < type.getHeight(); yy++) {
                 if(!type.getL_type() || (type.getL_type() && (xx == 0 || yy == type.getWidth()-1))){
-                    GridBlock gridBlock = new GridBlock(xx, yy, null, ThemeUtils.getSelectedTheme().getColorGrid());
+                    GridBlock gridBlock = new GridBlock(xx, yy, ThemeUtils.getSelectedTheme().getColorGrid());
                     gridBlock.setPrefHeight(this.gridCellSize);
                     gridBlock.setPrefWidth(this.gridCellSize);
                     gridBlock.setStyle(
@@ -89,7 +89,6 @@ public final class ShapeBlock extends GridPane {
                     this.gridHeight = this.gridHeight + this.gridCellSize;
                 }
             }
-
             this.gridWidth = this.gridWidth + this.gridCellSize;
         }
 
@@ -108,7 +107,6 @@ public final class ShapeBlock extends GridPane {
     }
 
     public void center(Pane pane) {
-        this.bounds = this.sceneToLocal(this.getBoundsInLocal());
         this.relocate((pane.getPrefWidth() - this.gridWidth) / 2, (pane.getPrefHeight() - this.gridHeight) / 2);
     }
 }

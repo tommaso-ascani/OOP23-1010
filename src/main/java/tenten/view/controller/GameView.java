@@ -393,7 +393,7 @@ public final class GameView extends ViewImpl {
                         if (x >= grid.getGridSize()) {
                             break;
                         }
-                        if (grid.getElement(x, y).getFill() == null) {
+                        if (grid.getElement(x, y).getBackgroundColor() == ThemeUtils.getSelectedTheme().getColorGrid()) {
                             toFill.add(grid.getElement(x, y));
                         } else {
                             toFill.clear();
@@ -404,7 +404,7 @@ public final class GameView extends ViewImpl {
 
                 if (toFill.size() == block.getType().getWidth() * block.getType().getHeight()) {
                     for (final GridBlock x : toFill) {
-                        x.setFill(block.getType().getColor());
+                        x.setBackgroundColor(block.getType().getColor());
                         x.setStyle(GameView.BACKGROUND_COLOR_STRING + block.getType().getColor());
                         this.score++;
                     }
@@ -544,13 +544,13 @@ public final class GameView extends ViewImpl {
             for (final GridBlock gridBlock : this.grid) {
                 gridBlock.setPrefHeight(grid.getGridCellSize());
                 gridBlock.setPrefWidth(grid.getGridCellSize());
-                if (gridBlock.getFill() == null) {
+                if (gridBlock.getBackgroundColor() == ThemeUtils.getSelectedTheme().getColorGrid()) {
                     gridBlock.setStyle(
                             GameView.BACKGROUND_COLOR_STRING + ThemeUtils.getSelectedTheme().getColorGrid()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 } else {
                     gridBlock.setStyle(
-                            GameView.BACKGROUND_COLOR_STRING + gridBlock.getFill()
+                            GameView.BACKGROUND_COLOR_STRING + gridBlock.getBackgroundColor()
                                     + "; -fx-border-width: 2; -fx-border-radius: 3; -fx-border-insets: -2");
                 }
 
@@ -559,8 +559,7 @@ public final class GameView extends ViewImpl {
         } else {
             for (int rowIndex = 0; rowIndex < grid.getGridSize(); rowIndex++) {
                 for (int columnIndex = 0; columnIndex < grid.getGridSize(); columnIndex++) {
-                    final GridBlock aPane = new GridBlock(columnIndex, rowIndex, null,
-                            ThemeUtils.getSelectedTheme().getColorGrid());
+                    final GridBlock aPane = new GridBlock(columnIndex, rowIndex, ThemeUtils.getSelectedTheme().getColorGrid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());

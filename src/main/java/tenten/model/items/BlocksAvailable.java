@@ -2,6 +2,8 @@ package tenten.model.items;
 
 import java.util.ArrayList;
 
+import tenten.common.utils.ThemeUtils;
+
 /**
  * Class that extends ArrayList of type ShapeBlock, it contains the four
  * placeble blocks.
@@ -46,7 +48,7 @@ public class BlocksAvailable<E> extends ArrayList<ShapeBlock> {
                         if (x >= grid.getGridSize()) {
                             break;
                         }
-                        if (grid.getElement(x, y).getFill() == null) {
+                        if (grid.getElement(x, y).getBackgroundColor() == ThemeUtils.getSelectedTheme().getColorGrid()) {
                             toBeFilled.add(grid.getElement(x, y));
                         } else {
                             toBeFilled.clear();
