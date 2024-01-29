@@ -390,10 +390,10 @@ public final class GameView extends ViewImpl {
                 }
             }
 
-            if(!nodes.isEmpty()){
+            if (!nodes.isEmpty()) {
                 for (GridBlock gridNode : nodes) {
-                    // TODO controllare come prendere il background color
-                    gridNode.setStyle(GameView.BACKGROUND_COLOR_STRING + shapeBlock.getBlocks().get(0).getBackgroundColor());
+                    gridNode.setStyle(
+                            GameView.BACKGROUND_COLOR_STRING + shapeBlock.getBlocks().get(0).getBackgroundColor());
                     gridNode.setBackgroundColor(shapeBlock.getBlocks().get(0).getBackgroundColor());
                     this.score++;
                 }
@@ -407,14 +407,14 @@ public final class GameView extends ViewImpl {
 
                 this.labelScore.setText(String.valueOf(this.score));
                 this.labelCoin.setText(String.valueOf(this.coins));
-                
+
                 ((Pane) shapeBlock.getParent()).getChildren().remove(shapeBlock);
 
                 blocksAvalaible.remove(shapeBlock);
             }
 
             // New blocks are created when all blocks were placed.
-            
+
             if (blocksAvalaible.size() == 0) {
                 createNewPuzzles();
             }
@@ -502,8 +502,10 @@ public final class GameView extends ViewImpl {
      */
     private GridBlock getNodeIfTriggered(final GridBlock block) {
         for (final GridBlock node : this.grid) {
-            if (node.getMaxX() > block.getTriggerX(this.grid.getGridCellSize()) && block.getTriggerX(this.grid.getGridCellSize()) > node.getMinX()
-                    && node.getMaxY() > block.getTriggerY(this.grid.getGridCellSize()) && block.getTriggerY(this.grid.getGridCellSize()) > node.getMinY()) {
+            if (node.getMaxX() > block.getTriggerX(this.grid.getGridCellSize())
+                    && block.getTriggerX(this.grid.getGridCellSize()) > node.getMinX()
+                    && node.getMaxY() > block.getTriggerY(this.grid.getGridCellSize())
+                    && block.getTriggerY(this.grid.getGridCellSize()) > node.getMinY()) {
                 return node;
             }
         }
@@ -536,7 +538,8 @@ public final class GameView extends ViewImpl {
         } else {
             for (int rowIndex = 0; rowIndex < grid.getGridSize(); rowIndex++) {
                 for (int columnIndex = 0; columnIndex < grid.getGridSize(); columnIndex++) {
-                    final GridBlock aPane = new GridBlock(columnIndex, rowIndex, ThemeUtils.getSelectedTheme().getColorGrid());
+                    final GridBlock aPane = new GridBlock(columnIndex, rowIndex,
+                            ThemeUtils.getSelectedTheme().getColorGrid());
 
                     aPane.setPrefHeight(grid.getGridCellSize());
                     aPane.setPrefWidth(grid.getGridCellSize());
