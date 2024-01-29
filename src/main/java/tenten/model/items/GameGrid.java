@@ -96,10 +96,15 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
                 block.setBackgroundColor(ThemeUtils.getSelectedTheme().getColorGrid());
                 block.setStyle("-fx-background-color: " + block.getBackgroundColor());
             }
-            GameSoundSystem.getInstance().setAudioClip(SoundType.LINE_COMPLETED);
-            GameSoundSystem.getInstance().playAudioClip();
             lines++;
         }
+
+        if(lines == 0){
+            GameSoundSystem.getInstance().setAudioClip(SoundType.RIGHT_BLOCK_POSITION);
+        }else if (lines > 0){
+            GameSoundSystem.getInstance().setAudioClip(SoundType.LINE_COMPLETED);
+        }
+        GameSoundSystem.getInstance().playAudioClip();
 
         return lines;
     }
@@ -109,7 +114,7 @@ public class GameGrid<E> extends ArrayList<GridBlock> {
      * 
      * @return ArrayList
      */
-    public List<List<GridBlock>> getNumFullLines() {
+    private List<List<GridBlock>> getNumFullLines() {
 
         final List<List<GridBlock>> lines = new ArrayList<>();
 

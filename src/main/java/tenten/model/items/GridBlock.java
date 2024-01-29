@@ -28,15 +28,6 @@ public class GridBlock extends AnchorPane {
         this.backgroundColor = backgroundColor;
     }
 
-    // /**
-    //  * Method to set the field color.
-    //  * 
-    //  * @param color of block
-    //  */
-    // public void setFill(final String color) {
-    //     this.color = color;
-    // }
-
     /**
      * Method to get the field x.
      * 
@@ -54,15 +45,6 @@ public class GridBlock extends AnchorPane {
     public Integer getGridY() {
         return this.y;
     }
-
-    // /**
-    //  * Method to get the field color.
-    //  * 
-    //  * @return String.
-    //  */
-    // public String getFill() {
-    //     return this.color;
-    // }
 
     /**
      * Method to get the field backgroundColor.
@@ -120,5 +102,27 @@ public class GridBlock extends AnchorPane {
     public Double getMaxY() {
         bounds = this.localToScene(this.getBoundsInLocal());
         return bounds.getMaxY();
+    }
+
+    /**
+     * Method to get center X coordinate.
+     * 
+     * @return Center X coordinate.
+     */
+    public int getTriggerX(final int gridCellSize) {
+        this.bounds = this.localToScene(this.getBoundsInLocal());
+        final Double tempX = this.bounds.getMinX();
+        return tempX.intValue() + (gridCellSize / 2);
+    }
+
+    /**
+     * Method to get center Y coordinate.
+     * 
+     * @return Center Y coordinate.
+     */
+    public int getTriggerY(final int gridCellSize) {
+        this.bounds = this.localToScene(this.getBoundsInLocal());
+        final Double tempY = this.bounds.getMinY();
+        return tempY.intValue() + (gridCellSize / 2);
     }
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -372,68 +371,46 @@ public final class GameView extends ViewImpl {
      * 
      * @param block block on which set the listener.
      */
-    private void setBlockReadyToBePlaced(final ShapeBlock block) {
-        block.setOnMouseReleased(e -> {
+    private void setBlockReadyToBePlaced(final ShapeBlock shapeBlock) {
+        shapeBlock.setOnMouseReleased(e -> {
 
-            final GridBlock node = (GridBlock) this.getNodeIfTriggered(block);
+            ArrayList<GridBlock> nodes = new ArrayList<GridBlock>();
 
-            if (this.getNodeIfTriggered(block) != null) {
+            for (GridBlock gridBlock : shapeBlock.getBlocks()) {
+                GridBlock gridNode = getNodeIfTriggered(gridBlock);
 
-                final Integer targetX = node.getGridX();
-                final Integer targetY = node.getGridY();
-
-                final ArrayList<GridBlock> toFill = new ArrayList<>();
-
-                toFill.clear();
-                for (int y = targetY; y < targetY + block.getType().getHeight(); y++) {
-                    if (y >= grid.getGridSize()) {
-                        break;
-                    }
-                    for (int x = targetX; x < targetX + block.getType().getWidth(); x++) {
-                        if (x >= grid.getGridSize()) {
-                            break;
-                        }
-                        if (grid.getElement(x, y).getBackgroundColor() == ThemeUtils.getSelectedTheme().getColorGrid()) {
-                            toFill.add(grid.getElement(x, y));
-                        } else {
-                            toFill.clear();
-                            break;
-                        }
-                    }
-                }
-
-                if (toFill.size() == block.getType().getWidth() * block.getType().getHeight()) {
-                    for (final GridBlock x : toFill) {
-                        x.setBackgroundColor(block.getType().getColor());
-                        x.setStyle(GameView.BACKGROUND_COLOR_STRING + block.getType().getColor());
-                        this.score++;
-                    }
-
-                    for (int index = 1; index <= grid.getNumFullLines().size(); index++) {
-                        this.score = this.score + (this.grid.getGridSize() * index);
-                        this.coins++;
-                    }
-
-                    if (grid.controlIfLinesCompleted() == 0) {
-                        GameSoundSystem.getInstance().setAudioClip(SoundType.RIGHT_BLOCK_POSITION);
-                        GameSoundSystem.getInstance().playAudioClip();
-                    }
-                    blocksAvalaible.remove(block);
-                    ((Pane) block.getParent()).getChildren().remove(block);
-
-                    this.labelScore.setText(String.valueOf(this.score));
-                    this.labelCoin.setText(String.valueOf(this.coins));
-
+                if (gridNode != null) {
+                    nodes.add(gridNode);
                 } else {
+                    nodes.clear();
                     GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION);
                     GameSoundSystem.getInstance().playAudioClip();
-                    block.returnToStart();
+                    shapeBlock.returnToStart();
+                    break;
+                }
+            }
+
+            if(!nodes.isEmpty()){
+                for (GridBlock gridNode : nodes) {
+                    // TODO controllare come prendere il background color
+                    gridNode.setStyle(GameView.BACKGROUND_COLOR_STRING + shapeBlock.getBlocks().get(0).getBackgroundColor());
+                    gridNode.setBackgroundColor(shapeBlock.getBlocks().get(0).getBackgroundColor());
+                    this.score++;
                 }
 
-            } else {
-                GameSoundSystem.getInstance().setAudioClip(SoundType.WRONG_BLOCK_POSITION);
-                GameSoundSystem.getInstance().playAudioClip();
-                block.returnToStart();
+                int lines = grid.controlIfLinesCompleted();
+
+                for (int index = 1; index <= lines; index++) {
+                    this.score = this.score + (this.grid.getGridSize() * index);
+                    this.coins++;
+                }
+
+                this.labelScore.setText(String.valueOf(this.score));
+                this.labelCoin.setText(String.valueOf(this.coins));
+                
+                ((Pane) shapeBlock.getParent()).getChildren().remove(shapeBlock);
+
+                blocksAvalaible.remove(shapeBlock);
             }
 
             // New blocks are created when all blocks were placed.
@@ -523,10 +500,10 @@ public final class GameView extends ViewImpl {
      * @param block to check.
      * @return node triggered.
      */
-    private Node getNodeIfTriggered(final ShapeBlock block) {
+    private GridBlock getNodeIfTriggered(final GridBlock block) {
         for (final GridBlock node : this.grid) {
-            if (node.getMaxX() > block.getTriggerX() && block.getTriggerX() > node.getMinX()
-                    && node.getMaxY() > block.getTriggerY() && block.getTriggerY() > node.getMinY()) {
+            if (node.getMaxX() > block.getTriggerX(this.grid.getGridCellSize()) && block.getTriggerX(this.grid.getGridCellSize()) > node.getMinX()
+                    && node.getMaxY() > block.getTriggerY(this.grid.getGridCellSize()) && block.getTriggerY(this.grid.getGridCellSize()) > node.getMinY()) {
                 return node;
             }
         }
