@@ -379,7 +379,7 @@ public final class GameView extends ViewImpl {
             for (GridBlock gridBlock : shapeBlock.getBlocks()) {
                 GridBlock gridNode = getNodeIfTriggered(gridBlock);
 
-                if (gridNode != null) {
+                if (gridNode != null && gridNode.getBackgroundColor() == ThemeUtils.getSelectedTheme().getColorGrid()) {
                     nodes.add(gridNode);
                 } else {
                     nodes.clear();
